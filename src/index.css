@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background: #0a0a0a;
+    color: #ffffff;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer components {
+  /* Glass Card Effect - Purple/Pink */
+  .glass-card {
+    background: rgba(88, 28, 135, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .glass-card:hover {
+    background: rgba(88, 28, 135, 0.3);
+    border-color: rgba(236, 72, 153, 0.5);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+  }
+  
+  /* Purple-Pink Gradient Text */
+  .gradient-text {
+    background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradientShift 3s ease infinite;
+  }
+  
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  
+  /* Purple-Pink Gradient Button */
+  .btn-purple {
+    background: linear-gradient(135deg, #7c3aed 0%, #db2777 100%);
+    padding: 12px 32px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+  
+  .btn-purple:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.4);
+  }
+  
+  /* Outline Button */
+  .btn-outline {
+    background: transparent;
+    border: 2px solid rgba(139, 92, 246, 0.5);
+    padding: 12px 32px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+  
+  .btn-outline:hover {
+    background: rgba(139, 92, 246, 0.1);
+    transform: scale(1.05);
+    border-color: rgba(236, 72, 153, 0.8);
+  }
+}
+
+/* Custom Scrollbar - Purple/Pink Theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #7c3aed, #db2777);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+}
