@@ -5,30 +5,29 @@ import ResourceHub from '../components/ResourceHub';
 
 export default function HomePage() {
   return (
-    <div className="bg-[#FAF8F5] text-stone-800 min-h-screen font-sans antialiased selection:bg-pink-200">
+    <div className="bg-[#FAF8F5] text-stone-800 min-h-screen font-sans antialiased">
       
-      {/* 1. Kid Palace Navbar Theme Layout */}
+      {/* 1. Header Navigation */}
       <nav className="bg-[#A4C9FF] px-6 py-4 flex justify-between items-center sticky top-0 z-50 shadow-sm">
         <div className="flex items-center space-x-2">
           <div className="w-9 h-9 rounded-xl bg-[#FF6B8B] flex items-center justify-center text-white text-lg font-black shadow-sm">
             <span>🏰</span>
           </div>
-          <span className="text-xl font-black text-white tracking-tight drop-shadow-sm">forthefutures</span>
+          <span className="text-xl font-black text-white tracking-tight">forthefutures</span>
         </div>
-        <div className="hidden md:flex space-x-8 text-sm font-black text-white/90">
-          <a href="#about" className="hover:text-white transition drop-shadow-sm">About Us</a>
-          <a href="#calculator" className="hover:text-white transition drop-shadow-sm">Smart Calculator</a>
-          <a href="#videos" className="hover:text-white transition drop-shadow-sm">AI Hub</a>
-          <a href="#contact" className="hover:text-white transition drop-shadow-sm">Contact</a>
+        <div className="hidden md:flex space-x-8 text-sm font-black text-white">
+          <a href="#about" className="hover:text-stone-100 transition">About Us</a>
+          <a href="#calculator" className="hover:text-stone-100 transition">Smart Calculator</a>
+          <a href="#videos" className="hover:text-stone-100 transition">AI Hub</a>
+          <a href="#contact" className="hover:text-stone-100 transition">Contact</a>
         </div>
         <a href="#contact" className="bg-white text-purple-900 text-xs font-black px-5 py-2.5 rounded-full hover:scale-105 transition shadow-sm uppercase tracking-wider">
           Sign In
         </a>
       </nav>
 
-      {/* 2. Interactive Colorful Pastel Hero Section with Cartoon Characters */}
+      {/* 2. Three-Tone Pastel Hero Section with Cartoon Components */}
       <header className="relative overflow-hidden pt-12 pb-24 px-6 shadow-md bg-gradient-to-r from-[#A4C9FF] via-[#FFEB99] to-[#FF9EAF]">
-        {/* Playful Floating Accents */}
         <div className="absolute top-6 left-12 text-3xl opacity-30 animate-bounce">
           <span>🎈</span>
         </div>
@@ -38,7 +37,7 @@ export default function HomePage() {
 
         <div className="max-w-6xl mx-auto grid md:grid-cols-12 gap-8 items-center relative z-10">
           
-          {/* Main Left Headings */}
+          {/* Left Block */}
           <div className="md:col-span-7 text-left space-y-6">
             <h1 className="text-5xl md:text-7xl font-black tracking-tight text-white leading-none drop-shadow-md">
               Play, Learn, Enjoy and Repeat
@@ -56,7 +55,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Hero Right Column: High-interest character avatar container to engage children */}
+          {/* Right Column: 3D-Style Cartoon Character Frame */}
           <div className="md:col-span-5 flex flex-col items-center justify-center relative min-h-[320px]">
             <div className="relative w-full max-w-sm flex flex-col items-center justify-center animate-bounce">
               <div className="w-44 h-44 bg-white rounded-full p-2 shadow-2xl border-4 border-pink-400 flex items-center justify-center overflow-hidden">
@@ -72,7 +71,7 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* 3. Operational Feature Modules */}
+      {/* 3. Your Existing Live Project Features */}
       <main className="bg-[#EAF7F2] py-12 px-4 space-y-12 shadow-inner">
         
         <section id="about" className="max-w-6xl mx-auto text-center space-y-4 mb-8">
@@ -111,7 +110,7 @@ export default function HomePage() {
 
       </main>
 
-      {/* 4. Footer Layer */}
+      {/* 4. Footer */}
       <footer id="contact" className="bg-[#192428] text-white py-8 px-6 rounded-t-[2rem] flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-bold border-t-4 border-[#FF6B8B]">
         <div className="text-center md:text-left">
           <p className="text-[#FF6B8B]">📞 Contact: +971585417100 | ✉ Email: forthefuturenet@gmail.com</p>
