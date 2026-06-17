@@ -65,8 +65,8 @@ export default function HomePage() {
           {/* Left Side Column Block: Main Media Stream Box */}
           <div className="space-y-4">
             <div className="bg-stone-100 rounded-3xl overflow-hidden aspect-video shadow-inner border-4 border-purple-100 flex items-center justify-center text-stone-400 font-bold text-sm">
-              <!-- Interactive Interactive Video Player Shell -->
-              📺 [ Interactive Media Showcase Module ]
+              {/* Interactive Video Player Shell */}
+              重新 [ Interactive Media Showcase Module ]
             </div>
             <div className="bg-purple-50 p-4 rounded-2xl border border-purple-100 text-center">
               <h4 className="font-black text-purple-900 text-sm">Active Exploration Station</h4>
