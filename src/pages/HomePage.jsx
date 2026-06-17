@@ -1,5 +1,5 @@
 import React from 'react';
-// Preserving all your exact structural features and business components
+// Preserving your exact structural elements and business features intact
 import FinancialCalculator from '../components/FinancialCalculator'; 
 import VideoGrid from '../components/VideoGrid';
 import ResourceHub from '../components/ResourceHub';
@@ -8,7 +8,7 @@ export default function HomePage() {
   return (
     <div className="bg-[#FAF8F5] text-stone-800 min-h-screen font-sans antialiased selection:bg-pink-200">
       
-      {/* 1. Header Navigation Bar (Kid Palace Style from image_896658.jpg) */}
+      {/* 1. Header Navigation Bar (Kid Palace Header Style from image_896658.jpg) */}
       <nav className="bg-[#A4C9FF] px-6 py-4 flex justify-between items-center sticky top-0 z-50 shadow-sm">
         <div className="flex items-center space-x-2">
           <div className="w-9 h-9 rounded-xl bg-[#FF6B8B] flex items-center justify-center text-white text-lg font-black shadow-sm">
@@ -27,8 +27,12 @@ export default function HomePage() {
         </a>
       </nav>
 
-      {/* 2. Three-Tone Pastel Hero Section (Standard Tailwind Utilities from image_896658.jpg Layout) */}
+      {/* 2. Three-Tone Pastel Hero Section with 3D Cartoon Character Illustrations */}
       <header className="relative overflow-hidden pt-12 pb-24 px-6 shadow-md bg-gradient-to-br from-[#A4C9FF] via-[#FFEB99] to-[#FF9EAF]">
+        {/* Playful background decorative shapes */}
+        <div className="absolute top-6 left-12 text-3xl opacity-20 animate-bounce">🎈</div>
+        <div className="absolute bottom-6 left-1/3 text-3xl opacity-20">⭐</div>
+
         <div className="max-w-6xl mx-auto grid md:grid-cols-12 gap-8 items-center relative z-10">
           
           {/* Hero Left Content Column */}
@@ -49,14 +53,18 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Hero Right Column: 3D Animated Character Presentation Placeholder */}
-          <div className="md:col-span-5 flex justify-center relative min-h-[300px]">
-            <div className="absolute inset-0 flex flex-col items-center justify-center animate-bounce">
-              {/* 3D Girl Character & Gift Box Simulation Frame */}
-              <span className="text-[7rem] drop-shadow-xl select-none">👧</span>
-              <div className="bg-amber-100 border-2 border-amber-800/40 w-24 h-16 rounded-xl relative -mt-4 shadow-md flex items-center justify-center text-xl">
-                💝
-              </div>
+          {/* Hero Right Column: High Quality 3D Kid Cartoon Character to instantly grab attention */}
+          <div className="md:col-span-5 flex flex-col items-center justify-center relative min-h-[320px]">
+            <div className="relative w-full max-w-sm flex justify-center animate-bounce">
+              <img 
+                src="https://images.unsplash.com/photo-1607990283143-e81e7a2c93ab?auto=format&fit=crop&q=80&w=400" 
+                alt="3D Character Kid Illustration" 
+                className="w-48 h-48 rounded-full border-4 border-white shadow-2xl object-cover"
+              />
+            </div>
+            <div className="bg-amber-100 border-2 border-amber-500/40 px-4 py-2 rounded-2xl relative -mt-4 shadow-md flex items-center justify-center space-x-2">
+              <span className="text-xl">💝</span>
+              <span className="text-xs font-black text-amber-900 uppercase tracking-wider">Interactive Learning World</span>
             </div>
           </div>
 
@@ -79,10 +87,9 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* INTEGRATED FUNCTIONALITY: Financial Currency Tracking Module Grid Block */}
+        {/* INTEGRATED FUNCTIONALITY: Financial Currency Tracking Module Grid Block with playful icons */}
         <section id="calculator" className="max-w-6xl mx-auto bg-white rounded-[2rem] border-2 border-stone-100 p-6 md:p-10 shadow-lg relative overflow-hidden">
-          {/* Interactive Decorative Top Edge Badges */}
-          <div className="absolute top-4 right-6 text-2xl">🐠</div>
+          <div className="absolute top-4 right-6 text-2xl animate-spin">🐠</div>
           <div className="border-b-2 border-stone-100 pb-4 mb-6">
             <h3 className="text-xl font-black text-stone-900 uppercase">Interactive Asset Calculator</h3>
             <p className="text-xs text-stone-400 font-bold">Execution algorithms configured globally for tracking values in INR, USD, and AED structures.</p>
@@ -90,9 +97,9 @@ export default function HomePage() {
           <FinancialCalculator />
         </section>
 
-        {/* INTEGRATED FUNCTIONALITY: Video Content Mapping Block */}
+        {/* INTEGRATED FUNCTIONALITY: Video Content Mapping Block with playful icons */}
         <section id="videos" className="max-w-6xl mx-auto bg-white rounded-[2rem] border-2 border-stone-100 p-6 md:p-10 shadow-lg relative overflow-hidden">
-          <div className="absolute top-4 right-6 text-2xl">🧸</div>
+          <div className="absolute top-4 right-6 text-2xl animate-pulse">🧸</div>
           <div className="border-b-2 border-stone-100 pb-4 mb-6">
             <h3 className="text-xl font-black text-stone-900 uppercase">Educational Resource Hub</h3>
             <p className="text-xs text-stone-400 font-bold">Select any baseline structural knowledge module panel target card to execute learning views.</p>
