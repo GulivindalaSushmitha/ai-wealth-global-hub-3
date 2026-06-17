@@ -11,7 +11,7 @@ export default function HomePage() {
       <nav className="bg-[#A4C9FF] px-6 py-4 flex justify-between items-center sticky top-0 z-50 shadow-sm">
         <div className="flex items-center space-x-2">
           <div className="w-9 h-9 rounded-xl bg-[#FF6B8B] flex items-center justify-center text-white text-lg font-black shadow-sm">
-            <span role="img" aria-label="castle">🏰</span>
+            <span>🏰</span>
           </div>
           <span className="text-xl font-black text-white tracking-tight drop-shadow-sm">forthefutures</span>
         </div>
@@ -26,19 +26,18 @@ export default function HomePage() {
         </a>
       </nav>
 
-      {/* 2. Three-Tone Pastel Hero Section with Cartoon Character Elements */}
+      {/* 2. Three-Tone Pastel Hero Section */}
       <header className="relative overflow-hidden pt-12 pb-24 px-6 shadow-md bg-gradient-to-r from-[#A4C9FF] via-[#FFEB99] to-[#FF9EAF]">
-        {/* Playful Floating Background Decorations */}
         <div className="absolute top-6 left-12 text-3xl opacity-30 animate-bounce">
-          <span role="img" aria-label="balloon">🎈</span>
+          <span>🎈</span>
         </div>
         <div className="absolute bottom-6 left-1/3 text-3xl opacity-30">
-          <span role="img" aria-label="star">⭐</span>
+          <span>⭐</span>
         </div>
 
         <div className="max-w-6xl mx-auto grid md:grid-cols-12 gap-8 items-center relative z-10">
           
-          {/* Hero Left Typography Panel */}
+          {/* Hero Left Column */}
           <div className="md:col-span-7 text-left space-y-6">
             <h1 className="text-5xl md:text-7xl font-black tracking-tight text-white leading-none drop-shadow-md">
               Play, Learn<br />Enjoy &amp; Repeat
@@ -56,15 +55,14 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Hero Right Column: High-Interest 3D Cartoon Character Layout Layer */}
+          {/* Hero Right Column: Cartoon Character Layout Layout */}
           <div className="md:col-span-5 flex flex-col items-center justify-center relative min-h-[320px]">
-            <div className="relative w-full max-w-sm flex flex-col items-center justify-center className='animate-bounce'">
-              {/* Layered Character Avatar Block */}
+            <div className="relative w-full max-w-sm flex flex-col items-center justify-center animate-bounce">
               <div className="w-44 h-44 bg-white rounded-full p-2 shadow-2xl border-4 border-pink-400 flex items-center justify-center overflow-hidden">
-                <span className="text-[7rem] select-none" role="img" aria-label="kid">👧</span>
+                <span className="text-[7rem] select-none">👧</span>
               </div>
               <div className="bg-white border-2 border-amber-400 px-5 py-2 rounded-2xl -mt-4 shadow-md flex items-center space-x-2">
-                <span className="text-lg" role="img" aria-label="gift">💝</span>
+                <span className="text-lg">💝</span>
                 <span className="text-xs font-black text-purple-900 uppercase tracking-wider">Kids Learning Hub</span>
               </div>
             </div>
@@ -73,10 +71,9 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* 3. Original Feature Layout Containers */}
+      {/* 3. Operational Features Modules */}
       <main className="bg-[#EAF7F2] py-12 px-4 space-y-12 shadow-inner">
         
-        {/* About/Resource Section */}
         <section id="about" className="max-w-6xl mx-auto text-center space-y-4 mb-8">
           <h2 className="text-3xl md:text-4xl font-black text-stone-900 tracking-tight uppercase">
             How to Learn with forthefutures
@@ -89,10 +86,9 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Financial Calculator Asset Target Block */}
         <section id="calculator" className="max-w-6xl mx-auto bg-white rounded-[2rem] border-2 border-stone-100 p-6 md:p-10 shadow-lg relative overflow-hidden">
           <div className="absolute top-4 right-6 text-2xl">
-            <span role="img" aria-label="fish">🐠</span>
+            <span>🐠</span>
           </div>
           <div className="border-b-2 border-stone-100 pb-4 mb-6">
             <h3 className="text-xl font-black text-stone-900 uppercase">Interactive Asset Calculator</h3>
@@ -101,10 +97,9 @@ export default function HomePage() {
           <FinancialCalculator />
         </section>
 
-        {/* Video Grid Asset Target Block */}
         <section id="videos" className="max-w-6xl mx-auto bg-white rounded-[2rem] border-2 border-stone-100 p-6 md:p-10 shadow-lg relative overflow-hidden">
           <div className="absolute top-4 right-6 text-2xl">
-            <span role="img" aria-label="toy-bear">🧸</span>
+            <span>🧸</span>
           </div>
           <div className="border-b-2 border-stone-100 pb-4 mb-6">
             <h3 className="text-xl font-black text-stone-900 uppercase">Educational Resource Hub</h3>
