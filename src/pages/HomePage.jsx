@@ -1,5 +1,4 @@
 import React from 'react';
-// Preserving your exact structural elements and business features intact
 import FinancialCalculator from '../components/FinancialCalculator'; 
 import VideoGrid from '../components/VideoGrid';
 import ResourceHub from '../components/ResourceHub';
@@ -8,7 +7,7 @@ export default function HomePage() {
   return (
     <div className="bg-[#FAF8F5] text-stone-800 min-h-screen font-sans antialiased selection:bg-pink-200">
       
-      {/* 1. Header Navigation Bar (Kid Palace Header Style from image_896658.jpg) */}
+      {/* 1. Kid Palace Navbar Theme Layout */}
       <nav className="bg-[#A4C9FF] px-6 py-4 flex justify-between items-center sticky top-0 z-50 shadow-sm">
         <div className="flex items-center space-x-2">
           <div className="w-9 h-9 rounded-xl bg-[#FF6B8B] flex items-center justify-center text-white text-lg font-black shadow-sm">
@@ -27,15 +26,15 @@ export default function HomePage() {
         </a>
       </nav>
 
-      {/* 2. Three-Tone Pastel Hero Section with 3D Cartoon Character Illustrations */}
-      <header className="relative overflow-hidden pt-12 pb-24 px-6 shadow-md bg-gradient-to-br from-[#A4C9FF] via-[#FFEB99] to-[#FF9EAF]">
-        {/* Playful background decorative shapes */}
-        <div className="absolute top-6 left-12 text-3xl opacity-20 animate-bounce">🎈</div>
-        <div className="absolute bottom-6 left-1/3 text-3xl opacity-20">⭐</div>
+      {/* 2. Interactive Colorful Pastel Hero Section with 3D Cartoon Characters */}
+      <header className="relative overflow-hidden pt-12 pb-24 px-6 shadow-md bg-gradient-to-r from-[#A4C9FF] via-[#FFEB99] to-[#FF9EAF]">
+        {/* Playful Floating Accents */}
+        <div className="absolute top-6 left-12 text-3xl opacity-30 animate-bounce">🎈</div>
+        <div className="absolute bottom-6 left-1/3 text-3xl opacity-30">⭐</div>
 
         <div className="max-w-6xl mx-auto grid md:grid-cols-12 gap-8 items-center relative z-10">
           
-          {/* Hero Left Content Column */}
+          {/* Main Left Headings */}
           <div className="md:col-span-7 text-left space-y-6">
             <h1 className="text-5xl md:text-7xl font-black tracking-tight text-white leading-none drop-shadow-md">
               Play, Learn<br/>Enjoy & Repeat
@@ -53,28 +52,27 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Hero Right Column: High Quality 3D Kid Cartoon Character to instantly grab attention */}
+          {/* Hero Right Column: Safe high-interest 3D Character simulation frame for kids */}
           <div className="md:col-span-5 flex flex-col items-center justify-center relative min-h-[320px]">
-            <div className="relative w-full max-w-sm flex justify-center animate-bounce">
-              <img 
-                src="https://images.unsplash.com/photo-1607990283143-e81e7a2c93ab?auto=format&fit=crop&q=80&w=400" 
-                alt="3D Character Kid Illustration" 
-                className="w-48 h-48 rounded-full border-4 border-white shadow-2xl object-cover"
-              />
-            </div>
-            <div className="bg-amber-100 border-2 border-amber-500/40 px-4 py-2 rounded-2xl relative -mt-4 shadow-md flex items-center justify-center space-x-2">
-              <span className="text-xl">💝</span>
-              <span className="text-xs font-black text-amber-900 uppercase tracking-wider">Interactive Learning World</span>
+            <div className="relative w-full max-w-sm flex flex-col items-center justify-center animate-bounce">
+              {/* Layered Avatar Frame representing the cartoon profile from image_896658.jpg */}
+              <div className="w-44 h-44 bg-white rounded-full p-2 shadow-2xl border-4 border-pink-400 flex items-center justify-center overflow-hidden">
+                <span className="text-[7rem] select-none">👧</span>
+              </div>
+              <div className="bg-white border-2 border-amber-400 px-5 py-2 rounded-2xl -mt-4 shadow-md flex items-center space-x-2">
+                <span className="text-lg">💝</span>
+                <span className="text-xs font-black text-purple-900 uppercase tracking-wider">Kids Learning Hub</span>
+              </div>
             </div>
           </div>
 
         </div>
       </header>
 
-      {/* 3. Core Operational Content Body Cards Grid Layout Wrapper */}
+      {/* 3. Original Content Mappings Wrapped Inside Clean Grid Cards */}
       <main className="bg-[#EAF7F2] py-12 px-4 space-y-12 shadow-inner">
         
-        {/* Core Media/Presentation Element Box (Matches layout steps in image_896658.jpg) */}
+        {/* Resource Integration Platform */}
         <section id="about" className="max-w-6xl mx-auto text-center space-y-4 mb-8">
           <h2 className="text-3xl md:text-4xl font-black text-stone-900 tracking-tight uppercase">
             How to Learn with forthefutures
@@ -87,9 +85,9 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* INTEGRATED FUNCTIONALITY: Financial Currency Tracking Module Grid Block with playful icons */}
+        {/* Existing Application Financial Multi-Currency Calculator Component */}
         <section id="calculator" className="max-w-6xl mx-auto bg-white rounded-[2rem] border-2 border-stone-100 p-6 md:p-10 shadow-lg relative overflow-hidden">
-          <div className="absolute top-4 right-6 text-2xl animate-spin">🐠</div>
+          <div className="absolute top-4 right-6 text-2xl">🐠</div>
           <div className="border-b-2 border-stone-100 pb-4 mb-6">
             <h3 className="text-xl font-black text-stone-900 uppercase">Interactive Asset Calculator</h3>
             <p className="text-xs text-stone-400 font-bold">Execution algorithms configured globally for tracking values in INR, USD, and AED structures.</p>
@@ -97,9 +95,9 @@ export default function HomePage() {
           <FinancialCalculator />
         </section>
 
-        {/* INTEGRATED FUNCTIONALITY: Video Content Mapping Block with playful icons */}
+        {/* Existing Application Video Display Component */}
         <section id="videos" className="max-w-6xl mx-auto bg-white rounded-[2rem] border-2 border-stone-100 p-6 md:p-10 shadow-lg relative overflow-hidden">
-          <div className="absolute top-4 right-6 text-2xl animate-pulse">🧸</div>
+          <div className="absolute top-4 right-6 text-2xl">🧸</div>
           <div className="border-b-2 border-stone-100 pb-4 mb-6">
             <h3 className="text-xl font-black text-stone-900 uppercase">Educational Resource Hub</h3>
             <p className="text-xs text-stone-400 font-bold">Select any baseline structural knowledge module panel target card to execute learning views.</p>
@@ -109,7 +107,7 @@ export default function HomePage() {
 
       </main>
 
-      {/* 4. Brand Specific Application Anchor Footer */}
+      {/* 4. Footer Infrastructure */}
       <footer id="contact" className="bg-[#192428] text-white py-8 px-6 rounded-t-[2rem] flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-bold border-t-4 border-[#FF6B8B]">
         <div className="text-center md:text-left">
           <p className="text-[#FF6B8B]">📞 Contact: +971585417100 | ✉ Email: forthefuturenet@gmail.com</p>
