@@ -16,10 +16,13 @@ const AIHubPage = () => {
         return [];
       }
 
+      // If "All" is selected, return ALL videos (English + Hindi)
       if (selectedLanguage === 'All') {
         return aiVideos;
       }
-      return aiVideos.filter(video => video.language === selectedLanguage);
+      
+      // If "Hindi" is selected, return ONLY Hindi videos
+      return aiVideos.filter(video => video.language === 'Hindi');
     } catch (error) {
       console.error('Error filtering videos:', error);
       return [];
@@ -40,9 +43,9 @@ const AIHubPage = () => {
           AI Learning Hub
         </h1>
         
-        {/* Language Filter */}
+        {/* Language Filter - Only All and Hindi */}
         <div className="flex justify-center gap-4 mb-8">
-          {['All', 'English', 'Hindi'].map((lang) => (
+          {['All', 'Hindi'].map((lang) => (
             <button
               key={lang}
               onClick={() => setSelectedLanguage(lang)}
@@ -52,7 +55,7 @@ const AIHubPage = () => {
                   : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
               }`}
             >
-              {lang}
+              {lang === 'All' ? '🌍 All Languages' : '🇮🇳 Hindi'}
             </button>
           ))}
         </div>
@@ -84,7 +87,7 @@ const AIHubPage = () => {
           </div>
         ) : (
           <div className="text-center py-12">
-            <p className="text-gray-400 text-lg">No videos found for {selectedLanguage}</p>
+            <p className="text-gray-400 text-lg">No videos found</p>
             <p className="text-gray-500 text-sm mt-2">Please check back later</p>
           </div>
         )}
