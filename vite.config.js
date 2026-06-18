@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/ai-wealth-global-hub-3/',
+  base: './',  // ← This is the fix!
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
