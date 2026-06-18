@@ -87,7 +87,7 @@ export default function HomePage() {
             </div>
           </motion.section>
 
-          {/* SECTION 2: MEET THE FOUNDER - PHOTO FIXED WITH ABSOLUTE URL */}
+          {/* SECTION 2: MEET THE FOUNDER */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -98,14 +98,12 @@ export default function HomePage() {
               Meet the Founder 🌟
             </h2>
             <div className="flex flex-col md:flex-row gap-8 items-center max-w-5xl mx-auto">
-              {/* PHOTO - USING FULL ABSOLUTE URL */}
               <div className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-purple-400 shadow-xl flex-shrink-0 bg-gradient-to-br from-purple-200 to-pink-200 flex items-center justify-center">
                 <img 
                   src="https://gulivindalasushmitha.github.io/ai-wealth-global-hub-3/images/samara.jpg" 
                   alt="Samara Mahajan - Founder"
                   className="w-full h-full object-cover"
                   onError={(e) => {
-                    console.log('Image failed to load, using fallback');
                     e.target.src = 'https://via.placeholder.com/400x400/7c3aed/ffffff?text=Samara';
                   }}
                 />
@@ -160,7 +158,7 @@ export default function HomePage() {
             </div>
           </motion.section>
 
-          {/* SECTION 4: CHUCK GARCIA WORKSHOP */}
+          {/* SECTION 4: CHUCK GARCIA WORKSHOP - TEXT ONLY */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -171,18 +169,8 @@ export default function HomePage() {
               Chuck Garcia Workshop 🎓
             </h2>
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-              <div>
-                <img 
-                  src="https://via.placeholder.com/600x400/7c3aed/ffffff?text=Workshop+Photos" 
-                  alt="Chuck Garcia Workshop"
-                  className="rounded-2xl shadow-lg w-full h-64 object-cover"
-                />
-                <div className="grid grid-cols-3 gap-2 mt-3">
-                  <img src="https://via.placeholder.com/200x150/7c3aed/ffffff?text=Photo+1" className="rounded-lg h-20 object-cover w-full" alt="Workshop 1" />
-                  <img src="https://via.placeholder.com/200x150/7c3aed/ffffff?text=Photo+2" className="rounded-lg h-20 object-cover w-full" alt="Workshop 2" />
-                  <img src="https://via.placeholder.com/200x150/7c3aed/ffffff?text=Photo+3" className="rounded-lg h-20 object-cover w-full" alt="Workshop 3" />
-                </div>
-              </div>
+              
+              {/* LEFT SIDE */}
               <div className="space-y-4">
                 <div className="bg-purple-50 rounded-xl p-4">
                   <h3 className="font-bold text-purple-700 text-lg">📊 Workshop Impact</h3>
@@ -201,12 +189,25 @@ export default function HomePage() {
                     in UAE, Saudi Arabia, and Egypt.
                   </p>
                 </div>
+              </div>
+
+              {/* RIGHT SIDE */}
+              <div className="space-y-4">
                 <div className="bg-blue-50 rounded-xl p-4">
                   <h3 className="font-bold text-blue-700 text-lg">🎯 What We Achieved</h3>
                   <p className="text-stone-700 text-sm">
                     Students learned budgeting, saving, investing basics, and developed 
                     practical money management skills they can use for life.
                   </p>
+                </div>
+                <div className="bg-green-50 rounded-xl p-4">
+                  <h3 className="font-bold text-green-700 text-lg">📚 Workshop Details</h3>
+                  <ul className="space-y-2 text-stone-700 text-sm">
+                    <li>✅ Interactive sessions with real-life examples</li>
+                    <li>✅ Hands-on activities and group discussions</li>
+                    <li>✅ Practical financial literacy skills</li>
+                    <li>✅ Q&A sessions with industry experts</li>
+                  </ul>
                 </div>
               </div>
             </div>
