@@ -87,7 +87,7 @@ export default function HomePage() {
             </div>
           </motion.section>
 
-          {/* SECTION 2: MEET THE FOUNDER - WITH YOUR PHOTO */}
+          {/* SECTION 2: MEET THE FOUNDER - WITH YOUR WHATSAPP IMAGE */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -98,12 +98,15 @@ export default function HomePage() {
               Meet the Founder 🌟
             </h2>
             <div className="flex flex-col md:flex-row gap-8 items-center max-w-5xl mx-auto">
-              {/* PHOTO - USING YOUR UPLOADED IMAGE */}
+              {/* PHOTO - USING YOUR WHATSAPP IMAGE */}
               <div className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-purple-400 shadow-xl flex-shrink-0 bg-gradient-to-br from-purple-200 to-pink-200 flex items-center justify-center">
                 <img 
-                  src="/images/founder.jpg" 
+                  src="/images/samara.jpg" 
                   alt="Samara Mahajan - Founder"
                   className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.src = 'https://via.placeholder.com/400x400/7c3aed/ffffff?text=Samara';
+                  }}
                 />
               </div>
               <div className="flex-1 text-center md:text-left">
