@@ -7,7 +7,7 @@ export const aiVideos = [
   { id: 1, title: "Artificial Intelligence Explained (Hindi + English)", url: "https://www.youtube.com/embed/DSsv9OV0K68", language: "Hindi", category: "AI Basics" },
   { id: 2, title: "What is AI? Explained in Simple Hindi", url: "https://www.youtube.com/embed/7ZEWeVYlRIw", language: "Hindi", category: "AI Basics" },
   
-  // More Hindi Videos with working URLs
+  // Hindi Videos with working URLs
   { id: 3, title: "What is AI? - Beginner Video 1", url: "https://www.youtube.com/embed/3NL7elWz_k4", language: "Hindi", category: "AI Basics" },
   { id: 4, title: "What is AI? - Beginner Video 2", url: "https://www.youtube.com/embed/wMostZGckpY", language: "Hindi", category: "AI Basics" },
   { id: 5, title: "AI Complete Course - Part 1", url: "https://www.youtube.com/embed/nsq4yKF0u0Q", language: "Hindi", category: "AI Course" },
