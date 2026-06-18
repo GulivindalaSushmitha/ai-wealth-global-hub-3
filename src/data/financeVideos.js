@@ -3,8 +3,6 @@ export const financeVideos = [
   // HINDI FINANCE VIDEOS (ONLY WORKING)
   // ============================================
   
-  // REMOVED: Zerodha Varsity videos (not working)
-  
   // Groww Videos - Working
   { id: 1, title: "Groww - Investment Tips", url: "https://www.youtube.com/embed/qjJf9MrRNmM", language: "Hindi", category: "Groww" },
   { id: 2, title: "Groww - Stock Market Basics", url: "https://www.youtube.com/embed/a0L5z4dtyhc", language: "Hindi", category: "Groww" },
