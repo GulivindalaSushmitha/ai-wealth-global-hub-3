@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { financeVideos } from '../data/financeVideos';
+import { financeVideos } from '../data/financeVideos?v=2';
 import { motion } from 'framer-motion';
 
 const FinanceHubPage = () => {
