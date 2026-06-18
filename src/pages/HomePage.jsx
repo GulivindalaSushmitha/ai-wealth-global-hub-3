@@ -10,6 +10,14 @@ export default function HomePage() {
   const [submissionText, setSubmissionText] = useState('');
   const [submissionFile, setSubmissionFile] = useState(null);
 
+  // Quiz States
+  const [quizStarted, setQuizStarted] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [score, setScore] = useState(0);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [feedbackMessage, setFeedbackMessage] = useState('');
+  const [quizFinished, setQuizFinished] = useState(false);
+
   const allVideos = [...aiVideos, ...financeVideos];
   
   const categories = {
@@ -20,6 +28,175 @@ export default function HomePage() {
     'Pranjal Kamra': allVideos.filter(v => v.category === 'Pranjal Kamra'),
     'Finance Tips': allVideos.filter(v => v.category === 'Finance Tips'),
     'Other': allVideos.filter(v => !['AI Basics', 'AI Course', 'Machine Learning', 'Groww', 'Pranjal Kamra', 'Finance Tips'].includes(v.category))
+  };
+
+  // Quiz Data
+  const quizData = [
+    {
+      question: "🤖 What does AI stand for?",
+      options: ["Artificial Intelligence", "Automated Internet", "Awesome Ideas"],
+      correct: 0
+    },
+    {
+      question: "💰 Which is a benefit of learning finance?",
+      options: ["Better video game skills", "Smart money choices", "Faster running"],
+      correct: 1
+    },
+    {
+      question: "🧠 AI can help us with:",
+      options: ["Cooking only", "Solving problems", "Making bed"],
+      correct: 1
+    },
+    {
+      question: "📈 What is a stock?",
+      options: ["A part of a company", "A type of fruit", "A video game"],
+      correct: 0
+    },
+    {
+      question: "🌟 Which is a cool AI tool?",
+      options: ["ChatGPT", "A pencil", "A bicycle"],
+      correct: 0
+    }
+  ];
+
+  // PPT Contents
+  const aiPPTContent = `AI: Why Learn & Benefits
+==========================
+🤖 Why learn AI?
+- AI is shaping every industry
+- High demand for AI skills
+- Creative problem solving
+
+✨ Benefits of AI:
+- Automates repetitive tasks
+- Enhances decision making
+- Powers innovation (healthcare, finance, art)
+- Personalized experiences
+
+🔮 Future with AI:
+- New job roles (AI ethicist, prompt engineer)
+- Augmented human intelligence
+- Endless possibilities
+
+👉 Start your AI journey today!`;
+
+  const financePPTContent = `Finance: Why Learn & Benefits
+==============================
+💰 Why learn Finance?
+- Money management is life skill
+- Understand investments & savings
+- Build wealth and security
+
+📈 Benefits of Finance:
+- Make informed spending decisions
+- Grow wealth through compounding
+- Plan for retirement & goals
+- Understand global economy
+
+🧠 Financial literacy:
+- Budgeting, stocks, bonds, crypto
+- Risk management
+- Passive income strategies
+
+👉 Take control of your financial future!`;
+
+  // Download Functions
+  const downloadPPT = (content, filename) => {
+    const blob = new Blob([content], { type: 'application/vnd.ms-powerpoint' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  const downloadWorksheet = (type) => {
+    let content = type === 'ai' 
+      ? `AI WORKSHEET\n----------------\n1. Define AI in your own words.\n2. List 3 real-world AI applications.\n3. Draw a simple AI chatbot.\n4. Fill in: AI stands for ________.\n5. Benefits of AI: (circle) speed, creativity, boredom, accuracy.\n6. Write one risk of AI.\n--- interactive exercises ---`
+      : `FINANCE WORKSHEET\n--------------------\n1. What is compound interest?\n2. List 3 ways to save money.\n3. Draw a piggy bank and label savings goal.\n4. Match: Stock | Bond | Crypto\n5. Budget exercise: income $100, expenses $40, savings ?\n6. Why is investing important?\n--- interactive exercises ---`;
+    
+    const blob = new Blob([content], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = type === 'ai' ? 'AI_Worksheet.pdf' : 'Finance_Worksheet.pdf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  const downloadVideoLinks = () => {
+    const content = `🎥 Free AI & Finance Video Courses / Links
+==========================================
+📺 YouTube Playlists:
+- AI for Beginners: https://youtu.be/... 
+- Finance 101: https://youtu.be/...
+
+📚 Free Courses:
+- Google AI: https://ai.google/education
+- Khan Academy Finance: https://www.khanacademy.org/... 
+- Coursera: AI For Everyone (audit)
+- edX: Finance for Everyone
+
+📱 Interactive:
+- AI experiments: https://experiments.withgoogle.com/ai
+- Stock market game: https://www.howthemarketworks.com/
+
+⭐ Bonus: daily quiz & kid-friendly materials`;
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'AI_Finance_Videos_Courses.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  // Quiz Functions
+  const startQuiz = () => {
+    setQuizStarted(true);
+    setCurrentQuestion(0);
+    setScore(0);
+    setQuizFinished(false);
+    setShowFeedback(false);
+    setFeedbackMessage('');
+  };
+
+  const handleAnswer = (selectedIdx) => {
+    const q = quizData[currentQuestion];
+    if (selectedIdx === q.correct) {
+      setScore(score + 1);
+      setFeedbackMessage('✅ Correct! Great job!');
+    } else {
+      setFeedbackMessage(`❌ Oops! The answer was: ${q.options[q.correct]}`);
+    }
+    setShowFeedback(true);
+    
+    setTimeout(() => {
+      if (currentQuestion + 1 < quizData.length) {
+        setCurrentQuestion(currentQuestion + 1);
+        setShowFeedback(false);
+        setFeedbackMessage('');
+      } else {
+        setQuizFinished(true);
+        setShowFeedback(false);
+      }
+    }, 1500);
+  };
+
+  const resetQuiz = () => {
+    setQuizStarted(false);
+    setCurrentQuestion(0);
+    setScore(0);
+    setQuizFinished(false);
+    setShowFeedback(false);
+    setFeedbackMessage('');
   };
 
   const handleSubmitWork = (e) => {
@@ -320,39 +497,168 @@ export default function HomePage() {
             </div>
           </motion.section>
 
-          {/* SECTION 7: RESOURCES */}
+          {/* SECTION 7: RESOURCES & ACTIVITIES - UPDATED WITH INTERACTIVE FEATURES */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
             className="bg-white rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-stone-100"
           >
-            <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-6">
+            <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-8">
               Resources & Activities 📚
             </h2>
-            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              <div className="bg-purple-50 rounded-xl p-6 text-center">
-                <span className="text-5xl">📊</span>
-                <h3 className="font-bold text-purple-700 mt-2">PowerPoints</h3>
-                <p className="text-sm text-stone-600 mt-2">Ready-to-use presentations on AI and Finance</p>
-                <button className="mt-4 px-4 py-2 bg-purple-600 text-white rounded-lg text-sm font-bold hover:bg-purple-700 transition-all">
-                  📥 Download
-                </button>
+            
+            <div className="max-w-5xl mx-auto space-y-6">
+              
+              {/* PowerPoints */}
+              <div className="bg-purple-50 rounded-2xl p-6 shadow-md border-2 border-purple-100">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-3xl">📊</span>
+                  <h3 className="text-2xl font-bold text-purple-700">PowerPoints</h3>
+                </div>
+                <p className="text-stone-600 mb-4">Ready-to-use presentations on AI and Finance</p>
+                <div className="flex flex-wrap gap-4">
+                  <button 
+                    onClick={() => downloadPPT(aiPPTContent, 'AI_Why_Benefits.ppt')} 
+                    className="bg-purple-600 text-white px-6 py-2.5 rounded-full hover:bg-purple-700 transition flex items-center gap-2 shadow-md hover:shadow-lg text-sm font-bold"
+                  >
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 3a1 1 0 011 1v9.586l3.293-3.293a1 1 0 011.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5a1 1 0 011.414-1.414L9 13.586V4a1 1 0 011-1z"/>
+                    </svg>
+                    Download AI PPT
+                  </button>
+                  <button 
+                    onClick={() => downloadPPT(financePPTContent, 'Finance_Why_Benefits.ppt')} 
+                    className="bg-green-600 text-white px-6 py-2.5 rounded-full hover:bg-green-700 transition flex items-center gap-2 shadow-md hover:shadow-lg text-sm font-bold"
+                  >
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 3a1 1 0 011 1v9.586l3.293-3.293a1 1 0 011.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5a1 1 0 011.414-1.414L9 13.586V4a1 1 0 011-1z"/>
+                    </svg>
+                    Download Finance PPT
+                  </button>
+                </div>
               </div>
-              <div className="bg-pink-50 rounded-xl p-6 text-center">
-                <span className="text-5xl">📝</span>
-                <h3 className="font-bold text-pink-700 mt-2">Worksheets</h3>
-                <p className="text-sm text-stone-600 mt-2">Interactive exercises to reinforce learning</p>
-                <button className="mt-4 px-4 py-2 bg-pink-600 text-white rounded-lg text-sm font-bold hover:bg-pink-700 transition-all">
-                  📥 Download
-                </button>
+
+              {/* Worksheets */}
+              <div className="bg-pink-50 rounded-2xl p-6 shadow-md border-2 border-pink-100">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-3xl">📝</span>
+                  <h3 className="text-2xl font-bold text-pink-700">Worksheets</h3>
+                </div>
+                <p className="text-stone-600 mb-4">Interactive exercises to reinforce learning</p>
+                <div className="flex flex-wrap gap-3">
+                  <button 
+                    onClick={() => downloadWorksheet('ai')} 
+                    className="bg-pink-600 text-white px-6 py-2.5 rounded-full hover:bg-pink-700 transition shadow-md hover:shadow-lg text-sm font-bold"
+                  >
+                    AI Worksheet
+                  </button>
+                  <button 
+                    onClick={() => downloadWorksheet('finance')} 
+                    className="bg-pink-600 text-white px-6 py-2.5 rounded-full hover:bg-pink-700 transition shadow-md hover:shadow-lg text-sm font-bold"
+                  >
+                    Finance Worksheet
+                  </button>
+                  <button 
+                    onClick={downloadVideoLinks} 
+                    className="bg-blue-600 text-white px-6 py-2.5 rounded-full hover:bg-blue-700 transition shadow-md hover:shadow-lg text-sm font-bold"
+                  >
+                    🎬 Videos & Courses
+                  </button>
+                </div>
               </div>
-              <div className="bg-green-50 rounded-xl p-6 text-center">
-                <span className="text-5xl">🎯</span>
-                <h3 className="font-bold text-green-700 mt-2">Activities</h3>
-                <p className="text-sm text-stone-600 mt-2">Fun quizzes and interactive exercises</p>
-                <button className="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-bold hover:bg-green-700 transition-all">
-                  🚀 Start Now
+
+              {/* Activities / Quiz */}
+              <div className="bg-green-50 rounded-2xl p-6 shadow-md border-2 border-green-100">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-3xl">🎮</span>
+                  <h3 className="text-2xl font-bold text-green-700">Activities</h3>
+                </div>
+                <p className="text-stone-600 mb-4">Fun quizzes and interactive exercises</p>
+                
+                {!quizStarted ? (
+                  <button 
+                    onClick={startQuiz} 
+                    className="bg-yellow-500 text-gray-800 px-8 py-3 rounded-full hover:bg-yellow-600 transition flex items-center gap-2 text-lg font-bold shadow-md hover:shadow-lg"
+                  >
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 3a1 1 0 011 1v9.586l3.293-3.293a1 1 0 011.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5a1 1 0 011.414-1.414L9 13.586V4a1 1 0 011-1z"/>
+                    </svg>
+                    Start Now 🚀
+                  </button>
+                ) : (
+                  <div className="bg-white rounded-xl p-6 shadow-inner">
+                    {!quizFinished ? (
+                      <div>
+                        <h4 className="text-xl font-bold mb-4 text-gray-800">{quizData[currentQuestion].question}</h4>
+                        <div className="space-y-3">
+                          {quizData[currentQuestion].options.map((opt, idx) => (
+                            <button
+                              key={idx}
+                              onClick={() => !showFeedback && handleAnswer(idx)}
+                              className={`block w-full text-left px-4 py-3 rounded-xl border-2 transition ${
+                                showFeedback 
+                                  ? 'cursor-default opacity-70' 
+                                  : 'hover:bg-green-100 hover:border-green-400 bg-white'
+                              }`}
+                            >
+                              <span className="font-medium">{String.fromCharCode(65 + idx)}. </span>
+                              {opt}
+                            </button>
+                          ))}
+                        </div>
+                        {showFeedback && (
+                          <div className={`mt-4 p-4 rounded-lg border-2 ${
+                            feedbackMessage.includes('Correct') 
+                              ? 'bg-green-100 border-green-400 text-green-700' 
+                              : 'bg-red-100 border-red-400 text-red-700'
+                          }`}>
+                            <p className="font-semibold">{feedbackMessage}</p>
+                          </div>
+                        )}
+                        <div className="mt-4 flex justify-between items-center">
+                          <span className="text-sm text-gray-500">
+                            Question {currentQuestion + 1} of {quizData.length}
+                          </span>
+                          <span className="text-sm font-semibold text-green-600">
+                            ⭐ Score: {score}
+                          </span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="text-center py-6">
+                        <div className="text-6xl mb-4">🎉</div>
+                        <h4 className="text-2xl font-bold mb-2 text-gray-800">Quiz Complete!</h4>
+                        <p className="text-xl font-semibold text-green-600">Score: {score} / {quizData.length}</p>
+                        <p className="text-gray-600 mt-2 text-lg">
+                          {score === quizData.length ? '🌟 Perfect! AI & Finance star!' : '👍 Keep learning! You\'re doing great!'}
+                        </p>
+                        <button 
+                          onClick={resetQuiz} 
+                          className="mt-6 bg-purple-600 text-white px-8 py-3 rounded-full hover:bg-purple-700 transition shadow-md hover:shadow-lg font-bold"
+                        >
+                          🔄 Try Again
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* Share Your Work - Updated to match design */}
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-dashed border-blue-400 rounded-2xl p-6 flex flex-wrap items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <span className="text-3xl">📤</span>
+                  <div>
+                    <p className="font-semibold text-blue-800 text-lg">Share Your Work</p>
+                    <p className="text-gray-600 text-sm">Submit your projects, worksheets, or creative work and get featured on our platform!</p>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => document.getElementById('shareSection')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="bg-white text-blue-600 px-8 py-3 rounded-full border-2 border-blue-400 hover:bg-blue-50 transition shadow-sm font-bold"
+                >
+                  ✏️ Submit Now
                 </button>
               </div>
             </div>
@@ -360,6 +666,7 @@ export default function HomePage() {
 
           {/* SECTION 8: STUDENT SUBMISSION */}
           <motion.section 
+            id="shareSection"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
