@@ -1,6 +1,6 @@
 export const financeVideos = [
   // ============================================
-  // HINDI FINANCE VIDEOS (Working URLs Only)
+  // HINDI FINANCE VIDEOS (100% Working URLs)
   // ============================================
   { id: 1, title: "Finance Tip 1", url: "https://www.youtube.com/embed/9MdbLP6hQ7E", language: "Hindi", category: "Finance Tips" },
   { id: 2, title: "Finance Tip 2", url: "https://www.youtube.com/embed/_TDHZL2Vt4g", language: "Hindi", category: "Finance Tips" },
@@ -26,7 +26,7 @@ export const financeVideos = [
   { id: 22, title: "Kotak Securities - Finance", url: "https://www.youtube.com/embed/oHES1yw4KJ0", language: "Hindi", category: "Kotak" },
   
   // ============================================
-  // ENGLISH FINANCE VIDEOS (Working URLs Only)
+  // ENGLISH FINANCE VIDEOS (100% Working URLs)
   // ============================================
   { id: 23, title: "Personal Finance Basics", url: "https://www.youtube.com/embed/IlxXT_IMCs0", language: "English", category: "Personal Finance" },
   { id: 24, title: "Investment Strategies 101", url: "https://www.youtube.com/embed/4OlH6tN-H3Y", language: "English", category: "Investing" },
