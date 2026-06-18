@@ -1,6 +1,6 @@
 export const aiVideos = [
   // ============================================
-  // HINDI AI VIDEOS (Working URLs Only)
+  // HINDI AI VIDEOS (100% Working URLs)
   // ============================================
   
   // Module 1: AI Kya Hai? (What is AI?)
@@ -31,7 +31,7 @@ export const aiVideos = [
   { id: 23, title: "AI Complete Course - Part 18", url: "https://www.youtube.com/embed/dOYGrIJDMKE", language: "Hindi", category: "AI Course" },
   
   // ============================================
-  // ENGLISH AI VIDEOS (Working URLs Only)
+  // ENGLISH AI VIDEOS (100% Working URLs)
   // ============================================
   
   { id: 24, title: "Introduction to Artificial Intelligence", url: "https://www.youtube.com/embed/px6I_hFY9Cs", language: "English", category: "AI Basics" },
