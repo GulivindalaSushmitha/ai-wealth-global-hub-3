@@ -24,28 +24,20 @@ export const financeVideos = [
   { id: 20, title: "NSE India - Market Basics", url: "https://www.youtube.com/embed/MXgtjtiLtq0", language: "Hindi", category: "NSE" },
   { id: 21, title: "BSE India - Stock Market", url: "https://www.youtube.com/embed/wUNGYuEhBiU", language: "Hindi", category: "BSE" },
   { id: 22, title: "Kotak Securities - Finance", url: "https://www.youtube.com/embed/oHES1yw4KJ0", language: "Hindi", category: "Kotak" },
-  { id: 23, title: "What is Compounding? - Hindi", url: "https://www.youtube.com/embed/?search_query=What+is+Compounding+Hindi+Varsity+Junior", language: "Hindi", category: "Compounding" },
-  { id: 24, title: "Budget for Kids - Hindi", url: "https://www.youtube.com/embed/?search_query=Budget+for+Kids+Hindi+Varsity+Junior", language: "Hindi", category: "Budget" },
-  { id: 25, title: "Money Management for Kids - Hindi", url: "https://www.youtube.com/embed/?search_query=Money+Management+for+Kids+Hindi", language: "Hindi", category: "Money Management" },
-  { id: 26, title: "Saving Money for Kids - Hindi", url: "https://www.youtube.com/embed/?search_query=Saving+Money+for+Kids+Hindi", language: "Hindi", category: "Saving" },
-  { id: 27, title: "Investing for Kids - Hindi", url: "https://www.youtube.com/embed/?search_query=Investing+for+Kids+Hindi", language: "Hindi", category: "Investing" },
-  { id: 28, title: "Mutual Fund for Kids - Hindi", url: "https://www.youtube.com/embed/?search_query=Mutual+Fund+for+Kids+Hindi", language: "Hindi", category: "Mutual Funds" },
-  { id: 29, title: "Stock Market Basics - Hindi", url: "https://www.youtube.com/embed/?search_query=Stock+Market+Basics+Hindi+Kids", language: "Hindi", category: "Stock Market" },
-  { id: 30, title: "Personal Finance for Students - Hindi", url: "https://www.youtube.com/embed/?search_query=Personal+Finance+for+Students+Hindi", language: "Hindi", category: "Personal Finance" },
   
   // ============================================
   // ENGLISH FINANCE VIDEOS (Working URLs Only)
   // ============================================
-  { id: 31, title: "Personal Finance Basics", url: "https://www.youtube.com/embed/IlxXT_IMCs0", language: "English", category: "Personal Finance" },
-  { id: 32, title: "Investment Strategies 101", url: "https://www.youtube.com/embed/4OlH6tN-H3Y", language: "English", category: "Investing" },
-  { id: 33, title: "Stock Market Fundamentals", url: "https://www.youtube.com/embed/efdvCJmzf9k", language: "English", category: "Stocks" },
-  { id: 34, title: "Mutual Funds Explained", url: "https://www.youtube.com/embed/p5ORIeMULIg", language: "English", category: "Mutual Funds" },
-  { id: 35, title: "Retirement Planning Guide", url: "https://www.youtube.com/embed/0IROrEDig_Y", language: "English", category: "Retirement" },
-  { id: 36, title: "Tax Saving Tips", url: "https://www.youtube.com/embed/6c8tF_R5Wv4", language: "English", category: "Tax" },
-  { id: 37, title: "SIP Investment Guide", url: "https://www.youtube.com/embed/vhlSKYV5D_4", language: "English", category: "SIP" },
-  { id: 38, title: "Cryptocurrency Basics", url: "https://www.youtube.com/embed/oEqJAFBCCow", language: "English", category: "Crypto" },
-  { id: 39, title: "Real Estate Investment", url: "https://www.youtube.com/embed/-2VvHOm6QQ8", language: "English", category: "Real Estate" },
-  { id: 40, title: "Financial Freedom Steps", url: "https://www.youtube.com/embed/QyKqd9XFCTY", language: "English", category: "Financial Freedom" },
+  { id: 23, title: "Personal Finance Basics", url: "https://www.youtube.com/embed/IlxXT_IMCs0", language: "English", category: "Personal Finance" },
+  { id: 24, title: "Investment Strategies 101", url: "https://www.youtube.com/embed/4OlH6tN-H3Y", language: "English", category: "Investing" },
+  { id: 25, title: "Stock Market Fundamentals", url: "https://www.youtube.com/embed/efdvCJmzf9k", language: "English", category: "Stocks" },
+  { id: 26, title: "Mutual Funds Explained", url: "https://www.youtube.com/embed/p5ORIeMULIg", language: "English", category: "Mutual Funds" },
+  { id: 27, title: "Retirement Planning Guide", url: "https://www.youtube.com/embed/0IROrEDig_Y", language: "English", category: "Retirement" },
+  { id: 28, title: "Tax Saving Tips", url: "https://www.youtube.com/embed/6c8tF_R5Wv4", language: "English", category: "Tax" },
+  { id: 29, title: "SIP Investment Guide", url: "https://www.youtube.com/embed/vhlSKYV5D_4", language: "English", category: "SIP" },
+  { id: 30, title: "Cryptocurrency Basics", url: "https://www.youtube.com/embed/oEqJAFBCCow", language: "English", category: "Crypto" },
+  { id: 31, title: "Real Estate Investment", url: "https://www.youtube.com/embed/-2VvHOm6QQ8", language: "English", category: "Real Estate" },
+  { id: 32, title: "Financial Freedom Steps", url: "https://www.youtube.com/embed/QyKqd9XFCTY", language: "English", category: "Financial Freedom" },
 ];
 
 export default financeVideos;
