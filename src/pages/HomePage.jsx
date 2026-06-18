@@ -10,10 +10,8 @@ export default function HomePage() {
   const [submissionText, setSubmissionText] = useState('');
   const [submissionFile, setSubmissionFile] = useState(null);
 
-  // Combined videos for organization
   const allVideos = [...aiVideos, ...financeVideos];
   
-  // Group videos by category
   const categories = {
     'AI Basics': allVideos.filter(v => v.category === 'AI Basics'),
     'AI Course': allVideos.filter(v => v.category === 'AI Course'),
@@ -34,9 +32,7 @@ export default function HomePage() {
   return (
     <div className="bg-[#FAF8F5] text-stone-800 min-h-screen font-sans antialiased">
       
-      {/* ============================================
-      HERO SECTION
-      ============================================ */}
+      {/* HERO SECTION */}
       <header className="relative overflow-hidden pt-12 pb-24 px-6 shadow-md bg-gradient-to-r from-[#A4C9FF] via-[#FFEB99] to-[#FF9EAF]">
         <div className="max-w-6xl mx-auto grid md:grid-cols-12 gap-8 items-center relative z-10">
           <div className="md:col-span-7 text-left space-y-6">
@@ -61,15 +57,11 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* ============================================
-      MAIN CONTENT
-      ============================================ */}
+      {/* MAIN CONTENT */}
       <main className="bg-[#EAF7F2] py-12 px-4 shadow-inner">
         <div className="max-w-6xl mx-auto space-y-16">
 
-          {/* ============================================
-          SECTION 1: MISSION STATEMENT
-          ============================================ */}
+          {/* SECTION 1: MISSION STATEMENT */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -95,9 +87,7 @@ export default function HomePage() {
             </div>
           </motion.section>
 
-          {/* ============================================
-          SECTION 2: MEET THE FOUNDER
-          ============================================ */}
+          {/* SECTION 2: MEET THE FOUNDER - WITH YOUR PHOTO */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -108,16 +98,12 @@ export default function HomePage() {
               Meet the Founder 🌟
             </h2>
             <div className="flex flex-col md:flex-row gap-8 items-center max-w-5xl mx-auto">
-              {/* Photo Placeholder - Replace with actual image */}
+              {/* PHOTO - USING YOUR UPLOADED IMAGE */}
               <div className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-purple-400 shadow-xl flex-shrink-0 bg-gradient-to-br from-purple-200 to-pink-200 flex items-center justify-center">
-                {/* Replace the src below with your actual image path */}
                 <img 
                   src="/images/founder.jpg" 
                   alt="Samara Mahajan - Founder"
                   className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.target.src = 'https://via.placeholder.com/400x400/7c3aed/ffffff?text=Samara';
-                  }}
                 />
               </div>
               <div className="flex-1 text-center md:text-left">
@@ -140,9 +126,7 @@ export default function HomePage() {
             </div>
           </motion.section>
 
-          {/* ============================================
-          SECTION 3: THE TEAM
-          ============================================ */}
+          {/* SECTION 3: THE TEAM */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -172,9 +156,7 @@ export default function HomePage() {
             </div>
           </motion.section>
 
-          {/* ============================================
-          SECTION 4: CHUCK GARCIA WORKSHOP
-          ============================================ */}
+          {/* SECTION 4: CHUCK GARCIA WORKSHOP */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -190,7 +172,6 @@ export default function HomePage() {
                   src="https://via.placeholder.com/600x400/7c3aed/ffffff?text=Workshop+Photos" 
                   alt="Chuck Garcia Workshop"
                   className="rounded-2xl shadow-lg w-full h-64 object-cover"
-                  onError={(e) => { e.target.src = 'https://via.placeholder.com/600x400/7c3aed/ffffff?text=Workshop+Photos'; }}
                 />
                 <div className="grid grid-cols-3 gap-2 mt-3">
                   <img src="https://via.placeholder.com/200x150/7c3aed/ffffff?text=Photo+1" className="rounded-lg h-20 object-cover w-full" alt="Workshop 1" />
@@ -227,9 +208,7 @@ export default function HomePage() {
             </div>
           </motion.section>
 
-          {/* ============================================
-          SECTION 5: IMPORTANCE OF AI & FINANCIAL LITERACY
-          ============================================ */}
+          {/* SECTION 5: IMPORTANCE OF AI & FINANCIAL LITERACY */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -270,9 +249,7 @@ export default function HomePage() {
             </p>
           </motion.section>
 
-          {/* ============================================
-          SECTION 6: ORGANIZED VIDEOS WITH CATEGORIES
-          ============================================ */}
+          {/* SECTION 6: ORGANIZED VIDEOS */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -286,7 +263,6 @@ export default function HomePage() {
               Browse our organized video library by category
             </p>
 
-            {/* Category Navigation */}
             <div className="flex flex-wrap gap-2 justify-center mb-8">
               {Object.keys(categories).map(cat => (
                 <button
@@ -303,7 +279,6 @@ export default function HomePage() {
               ))}
             </div>
 
-            {/* Video Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {categories[activeTab] && categories[activeTab].length > 0 ? (
                 categories[activeTab].slice(0, 9).map((video) => (
@@ -340,9 +315,7 @@ export default function HomePage() {
             </div>
           </motion.section>
 
-          {/* ============================================
-          SECTION 7: POWERPOINTS & WORKSHEETS
-          ============================================ */}
+          {/* SECTION 7: RESOURCES */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -380,9 +353,7 @@ export default function HomePage() {
             </div>
           </motion.section>
 
-          {/* ============================================
-          SECTION 8: STUDENT SUBMISSION PORTAL
-          ============================================ */}
+          {/* SECTION 8: STUDENT SUBMISSION */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -437,9 +408,7 @@ export default function HomePage() {
             </p>
           </motion.section>
 
-          {/* ============================================
-          SECTION 9: CERTIFICATES
-          ============================================ */}
+          {/* SECTION 9: CERTIFICATES */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -484,9 +453,7 @@ export default function HomePage() {
         </div>
       </main>
 
-      {/* ============================================
-      FOOTER
-      ============================================ */}
+      {/* FOOTER */}
       <footer id="contact" className="bg-[#192428] text-white py-8 px-6 rounded-t-[2rem] flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-bold border-t-4 border-[#FF6B8B]">
         <div className="text-center md:text-left">
           <p className="text-[#FF6B8B]">📞 Contact: +971585417100 | ✉ Email: forthefuturenet@gmail.com</p>
