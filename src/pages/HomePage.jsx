@@ -1,7 +1,7 @@
 import React from 'react';
 // import FinancialCalculator from '../components/FinancialCalculator'; // COMMENTED OUT - File missing
+// import ResourceHub from '../components/ResourceHub'; // COMMENTED OUT - File missing
 import VideoGrid from '../components/VideoGrid';
-import ResourceHub from '../components/ResourceHub';
 
 export default function HomePage() {
   return (
@@ -74,6 +74,8 @@ export default function HomePage() {
       {/* 3. Your Existing Live Project Features */}
       <main className="bg-[#EAF7F2] py-12 px-4 space-y-12 shadow-inner">
         
+        {/* About Section - Temporarily Removed */}
+        {/*
         <section id="about" className="max-w-6xl mx-auto text-center space-y-4 mb-8">
           <h2 className="text-3xl md:text-4xl font-black text-stone-900 tracking-tight uppercase">
             How to Learn with forthefutures
@@ -85,9 +87,10 @@ export default function HomePage() {
             <ResourceHub />
           </div>
         </section>
+        */}
 
         {/* Financial Calculator Section - Temporarily Removed */}
-        {/* 
+        {/*
         <section id="calculator" className="max-w-6xl mx-auto bg-white rounded-[2rem] border-2 border-stone-100 p-6 md:p-10 shadow-lg relative overflow-hidden">
           <div className="absolute top-4 right-6 text-2xl">
             <span>🐠</span>
