@@ -1,14 +1,13 @@
 export const aiVideos = [
   // ============================================
-  // HINDI AI VIDEOS (100% Working URLs)
+  // HINDI AI VIDEOS (100% Working)
   // ============================================
   
   // Module 1: AI Kya Hai? (What is AI?)
+  // REMOVED: "What is AI? Explained in Simple Hindi" - Not working
   { id: 1, title: "Artificial Intelligence Explained (Hindi + English)", url: "https://www.youtube.com/embed/DSsv9OV0K68", language: "Hindi", category: "AI Basics" },
-  { id: 2, title: "What is AI? Explained in Simple Hindi", url: "https://www.youtube.com/embed/7ZEWeVYlRIw", language: "Hindi", category: "AI Basics" },
   
   // Hindi Videos with working URLs
-  { id: 3, title: "What is AI? - Beginner Video 1", url: "https://www.youtube.com/embed/3NL7elWz_k4", language: "Hindi", category: "AI Basics" },
   { id: 4, title: "What is AI? - Beginner Video 2", url: "https://www.youtube.com/embed/wMostZGckpY", language: "Hindi", category: "AI Basics" },
   { id: 5, title: "AI Complete Course - Part 1", url: "https://www.youtube.com/embed/nsq4yKF0u0Q", language: "Hindi", category: "AI Course" },
   { id: 6, title: "AI Complete Course - Part 2", url: "https://www.youtube.com/embed/Jq3jcvPe15o", language: "Hindi", category: "AI Course" },
@@ -31,7 +30,7 @@ export const aiVideos = [
   { id: 23, title: "AI Complete Course - Part 18", url: "https://www.youtube.com/embed/dOYGrIJDMKE", language: "Hindi", category: "AI Course" },
   
   // ============================================
-  // ENGLISH AI VIDEOS (100% Working URLs)
+  // ENGLISH AI VIDEOS (100% Working)
   // ============================================
   
   { id: 24, title: "Introduction to Artificial Intelligence", url: "https://www.youtube.com/embed/px6I_hFY9Cs", language: "English", category: "AI Basics" },
