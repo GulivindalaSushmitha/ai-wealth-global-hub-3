@@ -89,3 +89,10 @@
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(135deg, #8b5cf6, #ec4899);
 }
+
+/* Important: Ensure Tailwind loads properly */
+@layer utilities {
+  .min-h-screen {
+    min-height: 100vh;
+  }
+}
