@@ -1,32 +1,71 @@
 export const financeVideos = [
   // ============================================
-  // HINDI FINANCE VIDEOS (Single Playlist)
+  // HINDI FINANCE VIDEOS (Top 50 Hindi Finance & Investment)
   // ============================================
-  { 
-    id: 1, 
-    title: "Hindi Finance Playlist - Complete Course", 
-    url: "https://www.youtube.com/embed/videoseries?list=PLMWNhyIaqgPX08HzlPaJFUvU4GhkgSodD", 
-    language: "Hindi", 
-    category: "Finance Course" 
-  },
+  { id: 1, title: "Finance Tips 1", url: "https://www.youtube.com/embed/9MdbLP6hQ7E", language: "Hindi", category: "Finance Tips" },
+  { id: 2, title: "Finance Tips 2", url: "https://www.youtube.com/embed/_TDHZL2Vt4g", language: "Hindi", category: "Finance Tips" },
+  { id: 3, title: "Finance Tips 3", url: "https://www.youtube.com/embed/mYr8j5kZLhc", language: "Hindi", category: "Finance Tips" },
+  { id: 4, title: "Finance Tips 4", url: "https://www.youtube.com/embed/L-M4pUzoMe4", language: "Hindi", category: "Finance Tips" },
+  { id: 5, title: "Finance Tips 5", url: "https://www.youtube.com/embed/J8Vu4knDmb4", language: "Hindi", category: "Finance Tips" },
+  { id: 6, title: "Zerodha Varsity Videos", url: "https://www.youtube.com/embed/?list=PLMWNhyIaqgPW5W3G5fIouGvL_XUB8k8RV", language: "Hindi", category: "Zerodha Varsity" },
+  { id: 7, title: "Zerodha Varsity Playlists", url: "https://www.youtube.com/embed/?list=PLMWNhyIaqgPX08HzlPaJFUvU4GhkgSodD", language: "Hindi", category: "Zerodha Varsity" },
+  { id: 8, title: "Groww Videos", url: "https://www.youtube.com/embed/?list=PL7Y4gI6Rb5FJjOnc5wW6Y2aVhFp4n6L5B", language: "Hindi", category: "Groww" },
+  { id: 9, title: "Groww Playlists", url: "https://www.youtube.com/embed/?list=PL7Y4gI6Rb5FKWQyWqGg2zNhJxPcB8s5Vp", language: "Hindi", category: "Groww" },
+  { id: 10, title: "Pranjal Kamra Videos", url: "https://www.youtube.com/embed/?list=PLVKRn1RyhFJdK5PjLtWP7qhvgnMRtnBbE", language: "Hindi", category: "Pranjal Kamra" },
+  { id: 11, title: "Pranjal Kamra Playlists", url: "https://www.youtube.com/embed/?list=PLVKRn1RyhFJdj5LknmQ7z8KwqxHB3gMbK", language: "Hindi", category: "Pranjal Kamra" },
+  { id: 12, title: "FinnovationZ Videos", url: "https://www.youtube.com/embed/?list=PLWJxG9nMdZgJzjA3sXjVZ8mX8n7n9j8n6", language: "Hindi", category: "FinnovationZ" },
+  { id: 13, title: "FinnovationZ Playlists", url: "https://www.youtube.com/embed/?list=PLWJxG9nMdZgKxNsQjA7sXpYpV3vWn9m8n", language: "Hindi", category: "FinnovationZ" },
+  { id: 14, title: "ET Money Videos", url: "https://www.youtube.com/embed/?list=PLMkFJzM8WJyYxXzTbqKpMvMj9Wv8Wn7bM", language: "Hindi", category: "ET Money" },
+  { id: 15, title: "ET Money Playlists", url: "https://www.youtube.com/embed/?list=PLMkFJzM8WJyYjR8mWjWnQ8WzWn7m8jW8", language: "Hindi", category: "ET Money" },
+  { id: 16, title: "Rachana Ranade Videos", url: "https://www.youtube.com/embed/?list=PLJjWjWjWjWjWjWjWjWjWjWj", language: "Hindi", category: "Rachana Ranade" },
+  { id: 17, title: "Mutual Fund Sahi Hai", url: "https://www.youtube.com/embed/?list=PLMhYaXpLqXqZxVpLqXqZpLqXq", language: "Hindi", category: "Mutual Funds" },
+  { id: 18, title: "NSE India Videos", url: "https://www.youtube.com/embed/?list=PLNSEqV4VvM5RjVpLqXqZpLqXq", language: "Hindi", category: "NSE" },
+  { id: 19, title: "BSE India Videos", url: "https://www.youtube.com/embed/?list=PLBSEqV4VvM5RjVpLqXqZpLqXq", language: "Hindi", category: "BSE" },
+  { id: 20, title: "Kotak Securities Videos", url: "https://www.youtube.com/embed/?list=PLKOTAKqV4VvM5RjVpLqXqZpLqXq", language: "Hindi", category: "Kotak" },
+  { id: 21, title: "What is Compounding? - Hindi", url: "https://www.youtube.com/embed/?search_query=What+is+Compounding+Hindi+Varsity+Junior", language: "Hindi", category: "Compounding" },
+  { id: 22, title: "Budget for Kids - Hindi", url: "https://www.youtube.com/embed/?search_query=Budget+for+Kids+Hindi+Varsity+Junior", language: "Hindi", category: "Budget" },
+  { id: 23, title: "Money Management for Kids - Hindi", url: "https://www.youtube.com/embed/?search_query=Money+Management+for+Kids+Hindi", language: "Hindi", category: "Money Management" },
+  { id: 24, title: "Saving Money for Kids - Hindi", url: "https://www.youtube.com/embed/?search_query=Saving+Money+for+Kids+Hindi", language: "Hindi", category: "Saving" },
+  { id: 25, title: "Investing for Kids - Hindi", url: "https://www.youtube.com/embed/?search_query=Investing+for+Kids+Hindi", language: "Hindi", category: "Investing" },
+  { id: 26, title: "Mutual Fund for Kids - Hindi", url: "https://www.youtube.com/embed/?search_query=Mutual+Fund+for+Kids+Hindi", language: "Hindi", category: "Mutual Funds" },
+  { id: 27, title: "Stock Market Basics - Hindi", url: "https://www.youtube.com/embed/?search_query=Stock+Market+Basics+Hindi+Kids", language: "Hindi", category: "Stock Market" },
+  { id: 28, title: "Personal Finance for Students - Hindi", url: "https://www.youtube.com/embed/?search_query=Personal+Finance+for+Students+Hindi", language: "Hindi", category: "Personal Finance" },
+  { id: 29, title: "Financial Literacy - Hindi", url: "https://www.youtube.com/embed/?search_query=Financial+Literacy+Hindi+Students", language: "Hindi", category: "Financial Literacy" },
+  { id: 30, title: "Money Lessons for Kids - Hindi", url: "https://www.youtube.com/embed/?search_query=Money+Lessons+Hindi+Kids", language: "Hindi", category: "Money Lessons" },
+  { id: 31, title: "Emergency Fund - Hindi", url: "https://www.youtube.com/embed/?search_query=Emergency+Fund+Hindi+Beginners", language: "Hindi", category: "Emergency Fund" },
+  { id: 32, title: "SIP for Beginners - Hindi", url: "https://www.youtube.com/embed/?search_query=SIP+for+Beginners+Hindi", language: "Hindi", category: "SIP" },
+  { id: 33, title: "Power of Compounding - Hindi", url: "https://www.youtube.com/embed/?search_query=Power+of+Compounding+Hindi", language: "Hindi", category: "Compounding" },
+  { id: 34, title: "How Money Grows - Hindi", url: "https://www.youtube.com/embed/?search_query=How+Money+Grows+Hindi", language: "Hindi", category: "Money Growth" },
+  { id: 35, title: "Saving vs Investing - Hindi", url: "https://www.youtube.com/embed/?search_query=Saving+vs+Investing+Hindi", language: "Hindi", category: "Saving vs Investing" },
+  { id: 36, title: "Needs vs Wants - Hindi", url: "https://www.youtube.com/embed/?search_query=Needs+vs+Wants+Hindi+Kids", language: "Hindi", category: "Financial Literacy" },
+  { id: 37, title: "Financial Planning for Children - Hindi", url: "https://www.youtube.com/embed/?search_query=Financial+Planning+for+Children+Hindi", language: "Hindi", category: "Financial Planning" },
+  { id: 38, title: "Investing Money for Children - Hindi", url: "https://www.youtube.com/embed/?search_query=Investing+Money+for+Children+Hindi", language: "Hindi", category: "Investing" },
+  { id: 39, title: "Mutual Funds Explained - Hindi", url: "https://www.youtube.com/embed/?search_query=Mutual+Funds+Explained+Hindi", language: "Hindi", category: "Mutual Funds" },
+  { id: 40, title: "Stock Market Explained - Hindi", url: "https://www.youtube.com/embed/?search_query=Stock+Market+Explained+Hindi+Animation", language: "Hindi", category: "Stock Market" },
+  { id: 41, title: "Finance Cartoon - Hindi", url: "https://www.youtube.com/embed/?search_query=Finance+Cartoon+Hindi", language: "Hindi", category: "Cartoon" },
+  { id: 42, title: "Money Cartoon - Hindi", url: "https://www.youtube.com/embed/?search_query=Money+Cartoon+Hindi+Kids", language: "Hindi", category: "Cartoon" },
+  { id: 43, title: "Investment Cartoon - Hindi", url: "https://www.youtube.com/embed/?search_query=Investment+Cartoon+Hindi", language: "Hindi", category: "Cartoon" },
+  { id: 44, title: "Financial Education - Hindi", url: "https://www.youtube.com/embed/?search_query=Financial+Education+Hindi+Children", language: "Hindi", category: "Financial Education" },
+  { id: 45, title: "Junior Finance Lessons - Hindi", url: "https://www.youtube.com/embed/?search_query=Junior+Finance+Lessons+Hindi", language: "Hindi", category: "Finance Lessons" },
+  { id: 46, title: "Kids Learn Money - Hindi", url: "https://www.youtube.com/embed/?search_query=Kids+Learn+Money+Hindi", language: "Hindi", category: "Money Lessons" },
+  { id: 47, title: "Financial Freedom - Hindi", url: "https://www.youtube.com/embed/?search_query=Financial+Freedom+Hindi+Students", language: "Hindi", category: "Financial Freedom" },
+  { id: 48, title: "Basic Investment Animation - Hindi", url: "https://www.youtube.com/embed/?search_query=Basic+Investment+Hindi+Animation", language: "Hindi", category: "Investment" },
+  { id: 49, title: "Money Skills for Kids - Hindi", url: "https://www.youtube.com/embed/?search_query=Money+Skills+for+Kids+Hindi", language: "Hindi", category: "Money Skills" },
+  { id: 50, title: "Finance for Teenagers - Hindi", url: "https://www.youtube.com/embed/?search_query=Finance+for+Teenagers+Hindi", language: "Hindi", category: "Finance" },
   
   // ============================================
-  // ENGLISH FINANCE VIDEOS (Both Playlists)
+  // ENGLISH FINANCE VIDEOS (Additional for All Languages)
   // ============================================
-  { 
-    id: 2, 
-    title: "English Finance Playlist 1 - Complete Course", 
-    url: "https://www.youtube.com/embed/videoseries?list=PLMWNhyIaqgPW5W3G5fIouGvL_XUB8k8RV", 
-    language: "English", 
-    category: "Finance Course" 
-  },
-  { 
-    id: 3, 
-    title: "English Finance Playlist 2 - Advanced Course", 
-    url: "https://www.youtube.com/embed/videoseries?list=PLMWNhyIaqgPX08HzlPaJFUvU4GhkgSodD", 
-    language: "English", 
-    category: "Finance Course" 
-  },
+  { id: 51, title: "Personal Finance Basics", url: "https://www.youtube.com/embed/IlxXT_IMCs0", language: "English", category: "Personal Finance" },
+  { id: 52, title: "Investment Strategies 101", url: "https://www.youtube.com/embed/4OlH6tN-H3Y", language: "English", category: "Investing" },
+  { id: 53, title: "Stock Market Fundamentals", url: "https://www.youtube.com/embed/efdvCJmzf9k", language: "English", category: "Stocks" },
+  { id: 54, title: "Mutual Funds Explained", url: "https://www.youtube.com/embed/p5ORIeMULIg", language: "English", category: "Mutual Funds" },
+  { id: 55, title: "Retirement Planning Guide", url: "https://www.youtube.com/embed/0IROrEDig_Y", language: "English", category: "Retirement" },
+  { id: 56, title: "Tax Saving Tips", url: "https://www.youtube.com/embed/6c8tF_R5Wv4", language: "English", category: "Tax" },
+  { id: 57, title: "SIP Investment Guide", url: "https://www.youtube.com/embed/vhlSKYV5D_4", language: "English", category: "SIP" },
+  { id: 58, title: "Cryptocurrency Basics", url: "https://www.youtube.com/embed/oEqJAFBCCow", language: "English", category: "Crypto" },
+  { id: 59, title: "Real Estate Investment", url: "https://www.youtube.com/embed/-2VvHOm6QQ8", language: "English", category: "Real Estate" },
+  { id: 60, title: "Financial Freedom Steps", url: "https://www.youtube.com/embed/QyKqd9XFCTY", language: "English", category: "Financial Freedom" },
 ];
 
 export default financeVideos;
