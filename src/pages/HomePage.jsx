@@ -87,7 +87,7 @@ export default function HomePage() {
             </div>
           </motion.section>
 
-          {/* SECTION 2: MEET THE FOUNDER - FIXED PHOTO */}
+          {/* SECTION 2: MEET THE FOUNDER - PHOTO FIXED WITH ABSOLUTE URL */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -98,10 +98,10 @@ export default function HomePage() {
               Meet the Founder 🌟
             </h2>
             <div className="flex flex-col md:flex-row gap-8 items-center max-w-5xl mx-auto">
-              {/* PHOTO - USING samara.jpg */}
+              {/* PHOTO - USING FULL ABSOLUTE URL */}
               <div className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-purple-400 shadow-xl flex-shrink-0 bg-gradient-to-br from-purple-200 to-pink-200 flex items-center justify-center">
                 <img 
-                  src="/images/samara.jpg" 
+                  src="https://gulivindalasushmitha.github.io/ai-wealth-global-hub-3/images/samara.jpg" 
                   alt="Samara Mahajan - Founder"
                   className="w-full h-full object-cover"
                   onError={(e) => {
