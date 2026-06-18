@@ -1,57 +1,67 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaFacebook, FaInstagram, FaYoutube, FaGlobe } from 'react-icons/fa';
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
-  const socialLinks = [
-    { icon: FaFacebook, href: 'https://www.facebook.com/FuturesAbroad?mibextid=rS40aB7S9Ucbxw6v', label: 'Facebook', color: 'hover:bg-blue-600' },
-    { icon: FaInstagram, href: 'https://www.instagram.com/futuresabroad/?utm_source=ig_web_button_share_sheet', label: 'Instagram', color: 'hover:bg-pink-600' },
-    { icon: FaYoutube, href: 'https://youtube.com/@futuresabroad5453?si=HGyi2jUVjqGVoZDP', label: 'YouTube', color: 'hover:bg-red-600' },
-    { icon: FaGlobe, href: 'https://futuresabroad.com/', label: 'Website', color: 'hover:bg-green-600' },
-  ];
-
   return (
-    <footer className="bg-black/90 backdrop-blur-md border-t border-purple-500/30 text-white mt-auto py-8">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+    <footer className="bg-[#192428] text-white py-8 px-6 rounded-t-[2rem] border-t-4 border-[#FF6B8B]">
+      <div className="max-w-6xl mx-auto">
+        
+        {/* Main Footer Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
+          
+          {/* Column 1: Brand */}
           <div>
-            <h3 className="text-2xl font-bold gradient-text mb-4">AI Wealth Hub</h3>
-            <p className="text-gray-400 text-sm">Premium learning platform for AI and Financial Management with videos in Hindi & English.</p>
+            <h3 className="text-xl font-bold text-white mb-3">🏰 forthefutures</h3>
+            <p className="text-stone-400 text-sm">
+              Empowering youth with interactive lessons in AI and Financial Literacy.
+            </p>
           </div>
+
+          {/* Column 2: Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-purple-300">Quick Links</h4>
-            <ul className="space-y-2">
-              <li><Link to="/ai-hub" className="text-gray-400 hover:text-purple-400 transition-colors">🤖 AI Hub</Link></li>
-              <li><Link to="/finance-hub" className="text-gray-400 hover:text-purple-400 transition-colors">💰 Finance Hub</Link></li>
-              <li><Link to="/calculators" className="text-gray-400 hover:text-purple-400 transition-colors">📊 Calculators</Link></li>
-              <li><Link to="/dashboard" className="text-gray-400 hover:text-purple-400 transition-colors">📈 Dashboard</Link></li>
+            <h4 className="text-sm font-bold text-[#FF6B8B] uppercase tracking-wider mb-3">Quick Links</h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link to="/" className="text-stone-400 hover:text-white transition-colors">Home</Link></li>
+              <li><Link to="/ai-hub" className="text-stone-400 hover:text-white transition-colors">AI Hub</Link></li>
+              <li><Link to="/finance-hub" className="text-stone-400 hover:text-white transition-colors">Finance Hub</Link></li>
+              <li><Link to="/calculators" className="text-stone-400 hover:text-white transition-colors">Calculators</Link></li>
+              <li><Link to="/contact" className="text-stone-400 hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
+
+          {/* Column 3: Contact Details - UPDATED */}
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-purple-300">Contact Us</h4>
-            <div className="space-y-2 text-gray-400 text-sm">
-              <p className="flex items-center gap-2">📞 Dubai: <span className="text-white">+971 45512620</span></p>
-              <p className="flex items-center gap-2">📞 India: <span className="text-white">+91 9321741138</span></p>
-              <p className="flex items-center gap-2">✉️ Email: <span className="text-white">info@futuresabroad.com</span></p>
-            </div>
-          </div>
-          <div>
-            <h4 className="text-lg font-semibold mb-4 text-purple-300">Follow Us</h4>
-            <div className="flex space-x-4">
-              {socialLinks.map((social, index) => (
-                <a key={index} href={social.href} target="_blank" rel="noopener noreferrer" className={`w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center ${social.color} transition-all duration-300`}>
-                  <social.icon className="w-5 h-5" />
+            <h4 className="text-sm font-bold text-[#FF6B8B] uppercase tracking-wider mb-3">Contact Us</h4>
+            <ul className="space-y-2 text-sm">
+              <li className="text-stone-400">
+                <span className="text-[#FF6B8B]">📞</span> Phone: +971585417100
+              </li>
+              <li className="text-stone-400">
+                <span className="text-[#FF6B8B]">✉</span> Email: forthefuturenet@gmail.com
+              </li>
+              <li className="text-stone-400">
+                <span className="text-[#FF6B8B]">📸</span> Instagram: 
+                <a 
+                  href="https://www.instagram.com/samspr1v09?igsh=ZDVjYXg0Y21vYTIw" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-[#FF6B8B] hover:underline ml-1"
+                >
+                  @samspr1v09
                 </a>
-              ))}
-            </div>
-            <p className="text-gray-400 text-sm mt-4">Other Offices: Doha, Saudi Arabia, Qatar</p>
+              </li>
+            </ul>
           </div>
+
         </div>
-        <div className="border-t border-purple-500/30 pt-8 text-center text-gray-400 text-sm">
-          <p>&copy; {currentYear} AI Wealth Global Hub | <span className="text-purple-400">Futures Abroad DMCC</span></p>
+
+        {/* Bottom Bar */}
+        <div className="border-t border-stone-700 pt-4 text-center">
+          <p className="text-stone-500 text-[10px] font-medium">
+            © 2026 forthefutures. All rights reserved.
+          </p>
         </div>
+
       </div>
     </footer>
   );
