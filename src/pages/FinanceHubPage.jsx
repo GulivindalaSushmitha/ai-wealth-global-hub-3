@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { financeVideos } from '../data/financeVideos?v=2';
+// Force cache refresh with version parameter
+import { financeVideos } from '../data/financeVideos?v=3';
 import { motion } from 'framer-motion';
 
 const FinanceHubPage = () => {
@@ -75,7 +76,7 @@ const FinanceHubPage = () => {
               }`}
             >
               {lang === 'All' ? '🌍 All Languages' : '🇮🇳 Hindi'}
-            </button>
+            </motion.button>
           ))}
         </motion.div>
 
