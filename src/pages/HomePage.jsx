@@ -286,98 +286,94 @@ export default function HomePage() {
     }
   ];
 
-  // Improved AI PPT Content with 5 attractive slides
+  // Improved AI PPT Content - Clean formatting with proper bullet points
   const aiPPTContent = `AI: What, Why & Benefits 🤖
-============================
-Slide 1: What is AI?
-✨ Artificial Intelligence (AI) is when machines think and learn like humans!
-✨ AI can see, hear, speak, and make decisions
-✨ Examples: Siri, Alexa, ChatGPT, self-driving cars
-✨ AI is like a smart robot brain!
+==================================================
 
----
+Slide 1: What is AI?
+--------------------
+⭐ Artificial Intelligence (AI) is when machines think and learn like humans!
+⭐ AI can see, hear, speak, and make decisions
+⭐ Examples: Siri, Alexa, ChatGPT, self-driving cars
+⭐ AI is like a smart robot brain!
 
 Slide 2: What are the benefits of AI?
-🚀 Makes our lives easier and faster
-🎮 Helps in video games and entertainment
-🏥 Assists doctors in saving lives
-📚 Helps students learn better
-🌍 Solves big problems like climate change
-
----
+-------------------------------------
+⭐ Makes our lives easier and faster
+⭐ Helps in video games and entertainment
+⭐ Assists doctors in saving lives
+⭐ Helps students learn better
+⭐ Solves big problems like climate change
 
 Slide 3: Why learn AI?
-🔮 AI is the future - 85% of jobs in 2030 don't exist yet!
-💡 Learn AI = Better career opportunities
-🧠 Develops critical thinking skills
-🌟 Be part of the technology revolution
-💪 Create amazing things with technology
-
----
+-----------------------
+⭐ AI is the future - 85% of jobs in 2030 don't exist yet!
+⭐ Learn AI = Better career opportunities
+⭐ Develops critical thinking skills
+⭐ Be part of the technology revolution
+⭐ Create amazing things with technology
 
 Slide 4: What is the use of AI?
-🤖 Healthcare - Diagnose diseases faster
-🏦 Banking - Detect fraud and manage money
-📱 Social media - Smart recommendations
-🎓 Education - Personalized learning
-🚗 Self-driving cars - Safer transportation
-
----
+-------------------------------
+⭐ Healthcare - Diagnose diseases faster
+⭐ Banking - Detect fraud and manage money
+⭐ Social media - Smart recommendations
+⭐ Education - Personalized learning
+⭐ Self-driving cars - Safer transportation
 
 Slide 5: What about AI in the future?
-🌟 AI will be everywhere!
-🚀 Space exploration with AI robots
-🌍 Solve climate change and pollution
-💊 Cure diseases with AI research
-🤝 AI will help humans, not replace them
-💪 The future is bright with AI!`;
+-------------------------------------
+⭐ AI will be everywhere!
+⭐ Space exploration with AI robots
+⭐ Solve climate change and pollution
+⭐ Cure diseases with AI research
+⭐ AI will help humans, not replace them
+⭐ The future is bright with AI!`;
 
-  // Improved Finance PPT Content with 5 attractive slides
+  // Improved Finance PPT Content - Clean formatting with proper bullet points
   const financePPTContent = `Finance: What, Why & Benefits 💰
-=================================
-Slide 1: What is Finance?
-💰 Finance is all about managing money!
-💳 It's how people earn, save, invest, and spend
-🏦 Finance helps us make smart money decisions
-📊 Understanding finance = Financial freedom
-💪 Money is a tool to build your dreams!
+====================================================
 
----
+Slide 1: What is Finance?
+--------------------------
+⭐ Finance is all about managing money!
+⭐ It's how people earn, save, invest, and spend
+⭐ Finance helps us make smart money decisions
+⭐ Understanding finance = Financial freedom
+⭐ Money is a tool to build your dreams!
 
 Slide 2: What are the benefits of Finance?
-📈 Grow your money through investing
-🏠 Buy a house and build wealth
-🎓 Pay for education and learning
-🌍 Travel and explore the world
-😌 Reduce stress about money
-
----
+------------------------------------------
+⭐ Grow your money through investing
+⭐ Buy a house and build wealth
+⭐ Pay for education and learning
+⭐ Travel and explore the world
+⭐ Reduce stress about money
 
 Slide 3: Why learn Finance?
-🔑 Financial literacy is a life skill
-💡 78% of adults wish they learned finance earlier
-🚀 Break the cycle of poverty
-💪 Build financial independence
-🌟 Create generational wealth
-
----
+---------------------------
+⭐ Financial literacy is a life skill
+⭐ 78% of adults wish they learned finance earlier
+⭐ Break the cycle of poverty
+⭐ Build financial independence
+⭐ Create generational wealth
 
 Slide 4: What is the use of Finance?
-📊 Budgeting - Plan your spending
-📈 Investing - Make your money grow
-🏦 Banking - Keep your money safe
-💳 Credit - Build a good credit score
-📚 Financial planning - Achieve your goals
-
----
+------------------------------------
+⭐ Budgeting - Plan your spending
+⭐ Investing - Make your money grow
+⭐ Banking - Keep your money safe
+⭐ Credit - Build a good credit score
+⭐ Financial planning - Achieve your goals
 
 Slide 5: What about Finance in the future?
-🌍 Global economy is connected
-💻 Digital currencies like Bitcoin are new
-🚀 AI will help with financial decisions
-💡 Financial literacy will be taught everywhere
-💰 You can become a millionaire with smart money!
-💪 Start learning finance today!`;
+------------------------------------------
+⭐ Global economy is connected
+⭐ Digital currencies like Bitcoin are new
+⭐ AI will help with financial decisions
+⭐ Financial literacy will be taught everywhere
+⭐ You can become a millionaire with smart money!
+⭐ Start learning finance today!`;
 
   // Download Functions
   const downloadPPT = (content, filename) => {
@@ -393,33 +389,33 @@ Slide 5: What about Finance in the future?
   };
 
   const downloadVideoLinks = () => {
-    const content = `🎥 Free AI & Finance Video Courses / Links
-==========================================
+    const content = `🎥 FREE AI & FINANCE VIDEO COURSES / LINKS
+===============================================================
 
 📺 YouTube Playlists:
-- AI for Beginners: https://www.youtube.com/results?search_query=ai+for+beginners
-- Finance 101: https://www.youtube.com/results?search_query=finance+101
-- Machine Learning Basics: https://www.youtube.com/results?search_query=machine+learning+basics
-- Investing for Kids: https://www.youtube.com/results?search_query=investing+for+kids
+• AI for Beginners: https://www.youtube.com/results?search_query=ai+for+beginners
+• Finance 101: https://www.youtube.com/results?search_query=finance+101
+• Machine Learning Basics: https://www.youtube.com/results?search_query=machine+learning+basics
+• Investing for Kids: https://www.youtube.com/results?search_query=investing+for+kids
 
 📚 Free Courses:
-- Google AI Education: https://ai.google/education
-- Khan Academy Financial Literacy: https://www.khanacademy.org/college-careers-more/financial-literacy
-- Coursera AI For Everyone (audit): https://www.coursera.org/learn/ai-for-everyone
-- edX Finance for Everyone: https://www.edx.org/learn/finance
-- Harvard CS50 AI: https://cs50.harvard.edu/ai/
-- Stanford Financial Literacy: https://www.stanford.edu/
+• Google AI Education: https://ai.google/education
+• Khan Academy Financial Literacy: https://www.khanacademy.org/college-careers-more/financial-literacy
+• Coursera AI For Everyone (audit): https://www.coursera.org/learn/ai-for-everyone
+• edX Finance for Everyone: https://www.edx.org/learn/finance
+• Harvard CS50 AI: https://cs50.harvard.edu/ai/
+• Stanford Financial Literacy: https://www.stanford.edu/
 
 📱 Interactive Tools:
-- AI Experiments: https://experiments.withgoogle.com/ai
-- Stock Market Game: https://www.howthemarketworks.com/
-- Interactive Finance Games: https://www.practicalmoneyskills.com/
-- AI for Kids: https://www.tynker.com/ai
+• AI Experiments: https://experiments.withgoogle.com/ai
+• Stock Market Game: https://www.howthemarketworks.com/
+• Interactive Finance Games: https://www.practicalmoneyskills.com/
+• AI for Kids: https://www.tynker.com/ai
 
 📖 Educational Resources:
-- Investopedia for Kids: https://www.investopedia.com/financial-literacy-for-kids-5112941
-- AI Ethics: https://www.unesco.org/en/artificial-intelligence
-- Future of Work: https://www.weforum.org/
+• Investopedia for Kids: https://www.investopedia.com/financial-literacy-for-kids-5112941
+• AI Ethics: https://www.unesco.org/en/artificial-intelligence
+• Future of Work: https://www.weforum.org/
 
 ⭐ Bonus: Daily quizzes and interactive activities available on our platform!`;
 
