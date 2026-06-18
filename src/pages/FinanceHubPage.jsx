@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// Force cache refresh with version parameter
+// Force cache refresh with version parameter - this ensures new videos load
 import { financeVideos } from '../data/financeVideos?v=3';
 import { motion } from 'framer-motion';
 
@@ -76,7 +76,7 @@ const FinanceHubPage = () => {
               }`}
             >
               {lang === 'All' ? '🌍 All Languages' : '🇮🇳 Hindi'}
-            </motion.button>
+            </button>
           ))}
         </motion.div>
 
