@@ -1,5 +1,5 @@
 import React from 'react';
-import FinancialCalculator from '../components/FinancialCalculator'; 
+// import FinancialCalculator from '../components/FinancialCalculator'; // COMMENTED OUT - File missing
 import VideoGrid from '../components/VideoGrid';
 import ResourceHub from '../components/ResourceHub';
 
@@ -86,6 +86,8 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Financial Calculator Section - Temporarily Removed */}
+        {/* 
         <section id="calculator" className="max-w-6xl mx-auto bg-white rounded-[2rem] border-2 border-stone-100 p-6 md:p-10 shadow-lg relative overflow-hidden">
           <div className="absolute top-4 right-6 text-2xl">
             <span>🐠</span>
@@ -96,6 +98,7 @@ export default function HomePage() {
           </div>
           <FinancialCalculator />
         </section>
+        */}
 
         <section id="videos" className="max-w-6xl mx-auto bg-white rounded-[2rem] border-2 border-stone-100 p-6 md:p-10 shadow-lg relative overflow-hidden">
           <div className="absolute top-4 right-6 text-2xl">
