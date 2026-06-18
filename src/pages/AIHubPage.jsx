@@ -10,18 +10,14 @@ const AIHubPage = () => {
   // Filter videos with error handling
   const getFilteredVideos = () => {
     try {
-      // Check if aiVideos exists and is an array
       if (!aiVideos || !Array.isArray(aiVideos)) {
         console.warn('aiVideos is not an array or is undefined');
         return [];
       }
 
-      // If "All" is selected, return ALL videos (English + Hindi)
       if (selectedLanguage === 'All') {
         return aiVideos;
       }
-      
-      // If "Hindi" is selected, return ONLY Hindi videos
       return aiVideos.filter(video => video.language === 'Hindi');
     } catch (error) {
       console.error('Error filtering videos:', error);
@@ -31,64 +27,126 @@ const AIHubPage = () => {
 
   const filteredVideos = getFilteredVideos();
 
+  // Get YouTube thumbnail from URL
+  const getThumbnail = (url) => {
+    if (!url) return 'https://img.youtube.com/vi/default/mqdefault.jpg';
+    
+    // Extract video ID from various URL formats
+    let videoId = null;
+    
+    if (url.includes('embed/')) {
+      videoId = url.split('embed/')[1]?.split('?')[0];
+    } else if (url.includes('watch?v=')) {
+      videoId = url.split('v=')[1]?.split('&')[0];
+    } else if (url.includes('youtu.be/')) {
+      videoId = url.split('youtu.be/')[1]?.split('?')[0];
+    } else if (url.includes('shorts/')) {
+      videoId = url.split('shorts/')[1]?.split('?')[0];
+    } else if (url.includes('videoseries')) {
+      return 'https://img.youtube.com/vi/default/mqdefault.jpg';
+    }
+    
+    return videoId ? `https://img.youtube.com/vi/${videoId}/mqdefault.jpg` : 'https://img.youtube.com/vi/default/mqdefault.jpg';
+  };
+
+  // Get random emoji for each video card
+  const getEmoji = (index) => {
+    const emojis = ['🤖', '🚀', '🧠', '💡', '🎯', '🌟', '⭐', '🌈', '🎈', '✨', '💫', '🔥'];
+    return emojis[index % emojis.length];
+  };
+
   // Handle video click
   const handleVideoClick = (video) => {
     navigate(`/video/${video.id}`, { state: { video } });
   };
 
   return (
-    <div className="min-h-screen bg-black py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0a0a] to-[#1a0a2e] py-12 px-4">
       <div className="container mx-auto">
-        <h1 className="text-4xl font-bold text-white mb-8 text-center gradient-text">
-          AI Learning Hub
+        <h1 className="text-5xl md:text-6xl font-bold text-center mb-4">
+          <span className="gradient-text">AI Learning Hub</span>
         </h1>
+        <p className="text-center text-gray-400 mb-8 text-lg">Explore the amazing world of Artificial Intelligence! 🚀</p>
         
-        {/* Language Filter - Only All and Hindi */}
-        <div className="flex justify-center gap-4 mb-8">
+        {/* Language Filter - Kid-Friendly */}
+        <div className="flex justify-center gap-4 mb-10">
           {['All', 'Hindi'].map((lang) => (
-            <button
+            <motion.button
               key={lang}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setSelectedLanguage(lang)}
-              className={`px-6 py-2 rounded-full transition-all ${
+              className={`px-8 py-3 rounded-full transition-all text-lg font-bold ${
                 selectedLanguage === lang
-                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
-                  : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg shadow-purple-500/50'
+                  : 'bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white'
               }`}
             >
               {lang === 'All' ? '🌍 All Languages' : '🇮🇳 Hindi'}
-            </button>
+            </motion.button>
           ))}
         </div>
 
-        {/* Video Grid */}
+        {/* Video Grid - Kid-Friendly Cards */}
         {filteredVideos && filteredVideos.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredVideos.map((video) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredVideos.map((video, index) => (
               <motion.div
                 key={video.id}
-                whileHover={{ y: -5 }}
-                className="bg-gray-900 rounded-xl overflow-hidden cursor-pointer border border-gray-800 hover:border-purple-500 transition-all"
+                whileHover={{ y: -10, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+                className="bg-gradient-to-br from-gray-900 to-purple-900/30 rounded-2xl overflow-hidden cursor-pointer border-2 border-purple-500/20 hover:border-purple-500/60 transition-all shadow-lg hover:shadow-purple-500/20"
                 onClick={() => handleVideoClick(video)}
               >
-                <div className="aspect-video bg-gray-800 flex items-center justify-center">
-                  <span className="text-6xl">🎬</span>
+                {/* Thumbnail with Play Button Overlay */}
+                <div className="relative aspect-video bg-gray-800">
+                  <img 
+                    src={getThumbnail(video.url)} 
+                    alt={video.title}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.src = 'https://img.youtube.com/vi/default/mqdefault.jpg';
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-center justify-center">
+                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border-2 border-white/30 hover:bg-white/30 transition-all">
+                      <span className="text-3xl">▶️</span>
+                    </div>
+                  </div>
+                  {/* Language Badge */}
+                  <div className="absolute top-2 right-2 bg-black/70 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-white">
+                    {video.language === 'Hindi' ? '🇮🇳' : '🌍'}
+                  </div>
                 </div>
+                
+                {/* Video Info */}
                 <div className="p-4">
-                  <h3 className="text-white font-semibold text-sm mb-2 line-clamp-2">
-                    {video.title || 'Untitled Video'}
-                  </h3>
-                  <div className="flex justify-between items-center">
-                    <span className="text-xs text-purple-400">{video.language || 'Unknown'}</span>
-                    <span className="text-xs text-gray-500">{video.category || 'General'}</span>
+                  <div className="flex items-start gap-2 mb-2">
+                    <span className="text-2xl">{getEmoji(index)}</span>
+                    <h3 className="text-white font-semibold text-sm line-clamp-2 flex-1">
+                      {video.title || 'Untitled Video'}
+                    </h3>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-2 mt-2">
+                    <span className="px-2 py-1 bg-purple-500/20 rounded-full text-purple-300 text-xs">
+                      {video.category || 'General'}
+                    </span>
+                    <span className="px-2 py-1 bg-pink-500/20 rounded-full text-pink-300 text-xs">
+                      {video.language || 'Unknown'}
+                    </span>
                   </div>
                 </div>
               </motion.div>
             ))}
           </div>
         ) : (
-          <div className="text-center py-12">
-            <p className="text-gray-400 text-lg">No videos found</p>
-            <p className="text-gray-500 text-sm mt-2">Please check back later</p>
+          <div className="text-center py-16">
+            <div className="text-6xl mb-4">🎯</div>
+            <p className="text-gray-400 text-xl">No videos found</p>
+            <p className="text-gray-500 text-sm mt-2">Check back later for more amazing content!</p>
           </div>
         )}
       </div>
