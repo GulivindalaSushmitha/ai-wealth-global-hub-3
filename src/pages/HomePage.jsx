@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { aiVideos } from '../data/aiVideos';
 import { financeVideos } from '../data/financeVideos';
-import PptxGenJS from 'pptxgenjs';
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -55,56 +54,18 @@ export default function HomePage() {
     'Other': allVideos.filter(v => !['AI Basics', 'AI Course', 'Machine Learning', 'Groww', 'Pranjal Kamra', 'Finance Tips'].includes(v.category))
   };
 
-  // ===== AI PPT SLIDES DATA =====
-  const aiSlides = [
-    { title: "🤖 What is AI?", content: ["• AI stands for ARTIFICIAL INTELLIGENCE", "• It's like giving a computer a BRAIN!", "• AI helps machines THINK, LEARN, and DECIDE", "• Think of it as a SMART ROBOT FRIEND!", "• Examples: Siri, Alexa, ChatGPT, Self-driving cars", "• AI is everywhere around us!"] },
-    { title: "📍 Where is AI used?", content: ["• Smartphones - Face unlock, Voice assistants", "• Video Games - Smart enemies that learn", "• Self-driving Cars - Drive themselves!", "• Hospitals - Help doctors save lives", "• Online Shopping - Recommend products", "• Education - Personalized learning"] },
-    { title: "❓ Why is AI important?", content: ["• AI helps us do things FASTER and BETTER!", "• It solves problems humans find too hard", "• It helps us discover NEW things", "• AI never gets tired - works 24/7!", "• Helps in SPACE EXPLORATION!", "• Fun Fact: AI can beat humans at chess!"] },
-    { title: "✨ Benefits of AI", content: ["• SAVES TIME - AI does tasks quickly", "• HELPS WITH DIFFICULT TASKS", "• WORKS 24/7 - Never needs sleep!", "• MAKES FEWER MISTAKES - Very accurate", "• HELPS CREATE NEW INVENTIONS - Like robots!", "• SAVES LIVES - Helps doctors diagnose diseases"] },
-    { title: "🚀 AI in the Future", content: ["• AI will be EVERYWHERE!", "• Robots will help with household chores", "• AI teachers will personalize learning", "• AI will help SOLVE CLIMATE CHANGE!", "• AI will CURE DISEASES!", "• THE FUTURE IS BRIGHT WITH AI!"] }
-  ];
-
-  // ===== FINANCE PPT SLIDES DATA =====
-  const financeSlides = [
-    { title: "💰 What is Finance?", content: ["• Finance is all about MONEY!", "• It's how we EARN, SAVE, SPEND, and GROW money", "• Think of it as the SUPERPOWER of managing money!", "• A piggy bank with a cape - that's finance!", "• Finance helps us achieve our DREAMS!", "• Everyone can learn to be a money expert!"] },
-    { title: "❓ Why is Finance important?", content: ["• To buy things we WANT and things we NEED", "• To SAVE money for the future", "• To avoid running out of money", "• To help our families and communities", "• To have FREEDOM to do what we love!", "• To be PREPARED for emergencies"] },
-    { title: "🏦 How to Save Money", content: ["• Save a little bit EVERY DAY", "• Use a piggy bank or savings jar", "• Set a savings goal (like a new video game!)", "• Watch your money GROW like a plant!", "• Keep track of your spending", "• Fun Fact: Even Rs 10 a day = Rs 3650 a year!"] },
-    { title: "🛍️ Smart Spending", content: ["• Think before you buy: NEED it or WANT it?", "• Compare prices before buying", "• Wait for sales and discounts", "• Save up for BIG purchases", "• Budget your money - plan your spending!", "• Remember: Every rupee counts!"] },
-    { title: "🌟 Your Financial Future", content: ["• You can become a MONEY EXPERT!", "• Learn to invest, save, and grow your wealth", "• Financial freedom = You can do what you LOVE", "• Start learning about money TODAY!", "• Remember: Every millionaire started with one coin!", "• The future is YOURS to build!"] }
-  ];
-
-  // ===== GENERATE AND DOWNLOAD PPT AS .pptx =====
-  const downloadPPTX = (slides, filename, title) => {
+  // ===== DOWNLOAD PPT FROM PUBLIC/PPTS FOLDER =====
+  const downloadPPT = (filename, displayName) => {
     try {
-      const pptx = new PptxGenJS();
-      pptx.defineLayout({ name: 'WIDE', width: 13.33, height: 7.5 });
-      pptx.layout = 'WIDE';
-
-      const slide1 = pptx.addSlide();
-      slide1.background = { color: '5A6ED8' };
-      slide1.addText(title, { x: 0.5, y: 1.5, w: '90%', h: 2, fontSize: 44, fontFace: 'Arial', color: 'FFFFFF', bold: true, align: 'center' });
-      slide1.addText('5 Slides - Fun Learning for Kids!', { x: 0.5, y: 4, w: '90%', h: 1, fontSize: 28, fontFace: 'Arial', color: 'FFE66D', align: 'center' });
-      slide1.addText('🎓 Presented by AI Wealth Hub', { x: 0.5, y: 5.5, w: '90%', h: 1, fontSize: 20, fontFace: 'Arial', color: 'FFFFFF', align: 'center' });
-
-      slides.forEach((slideData, index) => {
-        const slide = pptx.addSlide();
-        slide.background = { color: 'F5F5F5' };
-        slide.addText(slideData.title, { x: 0.5, y: 0.3, w: '90%', h: 1.2, fontSize: 32, fontFace: 'Arial', color: '5A6ED8', bold: true, align: 'center' });
-        slide.addShape(pptx.ShapeType.rect, { x: 1, y: 1.6, w: '80%', h: 0.08, fill: { color: '5A6ED8' } });
-        let yPos = 2.2;
-        slideData.content.forEach((bullet) => {
-          slide.addText(bullet, { x: 1.5, y: yPos, w: '80%', h: 0.7, fontSize: 20, fontFace: 'Arial', color: '333333', align: 'left', valign: 'middle' });
-          yPos += 0.9;
-        });
-        slide.addText(`Slide ${index + 2} of ${slides.length + 1}`, { x: 0.5, y: 6.8, w: '90%', h: 0.5, fontSize: 12, fontFace: 'Arial', color: '999999', align: 'center' });
-      });
-
-      pptx.writeFile({ fileName: filename })
-        .then(() => console.log('PPT downloaded successfully!'))
-        .catch((err) => { console.error('Error downloading PPT:', err); alert('Failed to download PPT. Please try again.'); });
+      const link = document.createElement('a');
+      link.href = `/ppts/${filename}`;
+      link.download = displayName || filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     } catch (error) {
-      console.error('Error generating PPT:', error);
-      alert('Failed to generate PPT. Please try again.');
+      console.error('Download failed:', error);
+      alert('Failed to download file. Please try again.');
     }
   };
 
@@ -479,11 +440,17 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
 
   return (
     <div className="bg-[#FAF8F5] text-stone-800 min-h-screen font-sans antialiased">
+      
+      {/* ===== HERO SECTION ===== */}
       <header className="relative overflow-hidden pt-12 pb-24 px-6 shadow-md bg-gradient-to-r from-[#FF6B6B] via-[#FFE66D] to-[#4ECDC4]">
         <div className="max-w-6xl mx-auto grid md:grid-cols-12 gap-8 items-center relative z-10">
           <div className="md:col-span-7 text-left space-y-6">
-            <h1 className="text-5xl md:text-7xl font-black tracking-tight text-white leading-none drop-shadow-md">🚀 Play, Learn, <br />Enjoy & Repeat</h1>
-            <p className="text-white/90 text-sm md:text-base max-w-md font-bold leading-relaxed">Empowering youth with interactive lessons, global financial literacy metrics, and cross-border analytics tools that fit your everyday routine seamlessly.</p>
+            <h1 className="text-5xl md:text-7xl font-black tracking-tight text-white leading-none drop-shadow-md">
+              🚀 Play, Learn, <br />Enjoy & Repeat
+            </h1>
+            <p className="text-white/90 text-sm md:text-base max-w-md font-bold leading-relaxed">
+              Empowering youth with interactive lessons, global financial literacy metrics, and cross-border analytics tools that fit your everyday routine seamlessly.
+            </p>
           </div>
           <div className="md:col-span-5 flex flex-col items-center justify-center relative min-h-[320px]">
             <div className="relative w-full max-w-sm flex flex-col items-center justify-center">
@@ -493,8 +460,12 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
                 <div className="w-20 h-20 bg-blue-400 rounded-full shadow-2xl border-4 border-white flex items-center justify-center text-4xl transform -rotate-6">💰</div>
               </div>
               <div className="flex items-center justify-center gap-6 mt-2">
-                <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg flex items-center gap-2 text-sm font-bold text-purple-700"><span className="text-xl">⭐</span> 1000+ Kids</div>
-                <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg flex items-center gap-2 text-sm font-bold text-pink-700"><span className="text-xl">🏆</span> 2 Certificates</div>
+                <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg flex items-center gap-2 text-sm font-bold text-purple-700">
+                  <span className="text-xl">⭐</span> 1000+ Kids
+                </div>
+                <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg flex items-center gap-2 text-sm font-bold text-pink-700">
+                  <span className="text-xl">🏆</span> 2 Certificates
+                </div>
               </div>
               <div className="bg-white border-2 border-yellow-400 px-5 py-2 rounded-2xl -mt-2 shadow-lg flex items-center space-x-2">
                 <span className="text-lg">🎮</span>
@@ -509,14 +480,28 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
         <div className="absolute top-20 right-20 text-3xl animate-bounce delay-200 opacity-30">🎈</div>
       </header>
 
+      {/* ===== MAIN CONTENT ===== */}
       <main className="bg-[#EAF7F2] py-12 px-4 shadow-inner">
         <div className="max-w-6xl mx-auto space-y-16">
 
-          {/* SECTION 1: MISSION STATEMENT */}
-          <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="bg-white rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-stone-100">
-            <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-6">Our Mission 🎯</h2>
+          {/* ===== SECTION 1: MISSION STATEMENT ===== */}
+          <motion.section 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="bg-white rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-stone-100"
+          >
+            <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-6">
+              Our Mission 🎯
+            </h2>
             <div className="max-w-4xl mx-auto text-center">
-              <p className="text-lg md:text-xl text-stone-700 leading-relaxed"><span className="font-bold text-purple-700">forthefutures</span> is a student-run organization founded by <span className="font-bold text-pink-600"> Samara Mahajan</span>. It began with teaching students from Indian slums financial literacy and has grown into a network and a hub for education on life skills for the kids who deserve it most, to increase social mobility.</p>
+              <p className="text-lg md:text-xl text-stone-700 leading-relaxed">
+                <span className="font-bold text-purple-700">forthefutures</span> is a student-run organization founded by 
+                <span className="font-bold text-pink-600"> Samara Mahajan</span>. 
+                It began with teaching students from Indian slums financial literacy and has grown into 
+                a network and a hub for education on life skills for the kids who deserve it most, 
+                to increase social mobility.
+              </p>
               <div className="mt-6 flex justify-center gap-4 flex-wrap">
                 <span className="px-4 py-2 bg-purple-100 rounded-full text-purple-700 font-bold">🌍 Social Impact</span>
                 <span className="px-4 py-2 bg-pink-100 rounded-full text-pink-700 font-bold">📚 Education</span>
@@ -525,17 +510,37 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
             </div>
           </motion.section>
 
-          {/* SECTION 2: MEET THE FOUNDER */}
-          <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="bg-white rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-stone-100">
-            <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-8">Meet the Founder 🌟</h2>
+          {/* ===== SECTION 2: MEET THE FOUNDER ===== */}
+          <motion.section 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="bg-white rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-stone-100"
+          >
+            <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-8">
+              Meet the Founder 🌟
+            </h2>
             <div className="flex flex-col md:flex-row gap-8 items-center max-w-5xl mx-auto">
               <div className="w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-purple-400 shadow-xl flex-shrink-0 bg-gradient-to-br from-purple-200 to-pink-200 flex items-center justify-center">
-                <img src="https://gulivindalasushmitha.github.io/ai-wealth-global-hub-3/images/samara.jpg" alt="Samara Mahajan - Founder" className="w-full h-full object-cover" onError={(e) => { e.target.src = 'https://via.placeholder.com/400x400/7c3aed/ffffff?text=Samara'; }} />
+                <img 
+                  src="https://gulivindalasushmitha.github.io/ai-wealth-global-hub-3/images/samara.jpg" 
+                  alt="Samara Mahajan - Founder"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.src = 'https://via.placeholder.com/400x400/7c3aed/ffffff?text=Samara';
+                  }}
+                />
               </div>
               <div className="flex-1 text-center md:text-left">
                 <h3 className="text-2xl font-bold text-purple-700">Samara Mahajan</h3>
                 <p className="text-sm text-stone-500 mb-3">Founder & President, forthefutures</p>
-                <p className="text-stone-700 leading-relaxed">Samara is a <span className="font-bold">16-year-old student</span> at <span className="font-bold text-purple-700"> North London Collegiate School Dubai</span>. Ethnically from India but raised in Toronto and Dubai, she has been working with NGOs for <span className="font-bold text-pink-600">3 years</span> to provide financial literacy education to <span className="font-bold text-purple-700"> 300+ kids</span>.</p>
+                <p className="text-stone-700 leading-relaxed">
+                  Samara is a <span className="font-bold">16-year-old student</span> at 
+                  <span className="font-bold text-purple-700"> North London Collegiate School Dubai</span>. 
+                  Ethnically from India but raised in Toronto and Dubai, she has been working with NGOs 
+                  for <span className="font-bold text-pink-600">3 years</span> to provide financial literacy education to 
+                  <span className="font-bold text-purple-700"> 300+ kids</span>.
+                </p>
                 <div className="mt-4 flex flex-wrap gap-3">
                   <span className="px-3 py-1 bg-purple-100 rounded-full text-purple-700 text-sm font-bold">🇮🇳 Indian Origin</span>
                   <span className="px-3 py-1 bg-pink-100 rounded-full text-pink-700 text-sm font-bold">🇨🇦 Toronto</span>
@@ -546,11 +551,22 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
             </div>
           </motion.section>
 
-          {/* SECTION 3: THE TEAM */}
-          <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-purple-100">
-            <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-6">The Team Behind It All 👥</h2>
+          {/* ===== SECTION 3: THE TEAM ===== */}
+          <motion.section 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-purple-100"
+          >
+            <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-6">
+              The Team Behind It All 👥
+            </h2>
             <div className="max-w-4xl mx-auto text-center">
-              <p className="text-lg text-stone-700 leading-relaxed">Our team consists of <span className="font-bold text-purple-700">10 kids in the tenth grade</span> who have been trained for over <span className="font-bold text-pink-600">a year</span> to deliver quality education to these kids. Together, we are building a brighter future.</p>
+              <p className="text-lg text-stone-700 leading-relaxed">
+                Our team consists of <span className="font-bold text-purple-700">10 kids in the tenth grade</span> 
+                who have been trained for over <span className="font-bold text-pink-600">a year</span> to deliver 
+                quality education to these kids. Together, we are building a brighter future.
+              </p>
               <div className="mt-6 grid grid-cols-2 md:grid-cols-5 gap-4 max-w-2xl mx-auto">
                 {['👩‍🏫', '👨‍🏫', '👩‍💻', '👨‍💻', '🧑‍🎓'].map((emoji, i) => (
                   <div key={i} className="bg-white rounded-xl p-4 shadow-md text-center">
@@ -559,13 +575,22 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
                   </div>
                 ))}
               </div>
-              <p className="text-sm text-stone-500 mt-4">🌟 Trained for 1+ years • 📚 10 dedicated students • 💪 Making a difference</p>
+              <p className="text-sm text-stone-500 mt-4">
+                🌟 Trained for 1+ years • 📚 10 dedicated students • 💪 Making a difference
+              </p>
             </div>
           </motion.section>
 
-          {/* SECTION 4: CHUCK GARCIA WORKSHOP */}
-          <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} className="bg-white rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-stone-100">
-            <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-6">Chuck Garcia Workshop 🎓</h2>
+          {/* ===== SECTION 4: CHUCK GARCIA WORKSHOP ===== */}
+          <motion.section 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="bg-white rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-stone-100"
+          >
+            <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-6">
+              Chuck Garcia Workshop 🎓
+            </h2>
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               <div className="space-y-4">
                 <div className="bg-purple-50 rounded-xl p-4">
@@ -579,13 +604,20 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
                 </div>
                 <div className="bg-pink-50 rounded-xl p-4">
                   <h3 className="font-bold text-pink-700 text-lg">🌍 Expanding to MENA</h3>
-                  <p className="text-stone-700 text-sm">We are actively working to bring financial literacy education to schools across the <span className="font-bold">MENA region</span>, starting with partnerships in UAE, Saudi Arabia, and Egypt.</p>
+                  <p className="text-stone-700 text-sm">
+                    We are actively working to bring financial literacy education to schools 
+                    across the <span className="font-bold">MENA region</span>, starting with partnerships 
+                    in UAE, Saudi Arabia, and Egypt.
+                  </p>
                 </div>
               </div>
               <div className="space-y-4">
                 <div className="bg-blue-50 rounded-xl p-4">
                   <h3 className="font-bold text-blue-700 text-lg">🎯 What We Achieved</h3>
-                  <p className="text-stone-700 text-sm">Students learned budgeting, saving, investing basics, and developed practical money management skills they can use for life.</p>
+                  <p className="text-stone-700 text-sm">
+                    Students learned budgeting, saving, investing basics, and developed 
+                    practical money management skills they can use for life.
+                  </p>
                 </div>
                 <div className="bg-green-50 rounded-xl p-4">
                   <h3 className="font-bold text-green-700 text-lg">📚 Workshop Details</h3>
@@ -600,9 +632,16 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
             </div>
           </motion.section>
 
-          {/* SECTION 5: IMPORTANCE OF AI & FINANCIAL LITERACY */}
-          <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }} className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-blue-100">
-            <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-6">Why AI & Financial Literacy Matter 🤖💰</h2>
+          {/* ===== SECTION 5: IMPORTANCE OF AI & FINANCIAL LITERACY ===== */}
+          <motion.section 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-blue-100"
+          >
+            <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-6">
+              Why AI & Financial Literacy Matter 🤖💰
+            </h2>
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               <div className="bg-white rounded-xl p-6 shadow-md">
                 <span className="text-4xl">🤖</span>
@@ -628,26 +667,54 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
               </div>
             </div>
             <p className="text-center text-stone-600 text-sm mt-6 max-w-2xl mx-auto">
-              <span className="font-bold text-purple-700">Together</span>, AI and financial literacy empower the next generation to <span className="font-bold text-pink-600">break the cycle of poverty</span> and build a <span className="font-bold text-blue-700">brighter future</span>.
+              <span className="font-bold text-purple-700">Together</span>, AI and financial literacy 
+              empower the next generation to <span className="font-bold text-pink-600">break the cycle of poverty</span> 
+              and build a <span className="font-bold text-blue-700">brighter future</span>.
             </p>
           </motion.section>
 
-          {/* SECTION 6: EDUCATIONAL VIDEOS */}
-          <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.6 }} className="bg-white rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-stone-100">
-            <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-6">Educational Videos 📺</h2>
-            <p className="text-center text-stone-600 mb-8">Browse our organized video library by category</p>
+          {/* ===== SECTION 6: EDUCATIONAL VIDEOS ===== */}
+          <motion.section 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="bg-white rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-stone-100"
+          >
+            <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-6">
+              Educational Videos 📺
+            </h2>
+            <p className="text-center text-stone-600 mb-8">
+              Browse our organized video library by category
+            </p>
+
             <div className="flex flex-wrap gap-2 justify-center mb-8">
               {Object.keys(categories).map(cat => (
-                <button key={cat} onClick={() => setActiveTab(cat)} className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${activeTab === cat ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/30' : 'bg-gray-100 text-stone-600 hover:bg-purple-100'}`}>
+                <button
+                  key={cat}
+                  onClick={() => setActiveTab(cat)}
+                  className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${
+                    activeTab === cat 
+                      ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/30' 
+                      : 'bg-gray-100 text-stone-600 hover:bg-purple-100'
+                  }`}
+                >
                   {cat} ({categories[cat].length})
                 </button>
               ))}
             </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {categories[activeTab] && categories[activeTab].length > 0 ? (
                 categories[activeTab].slice(0, 9).map((video) => (
-                  <motion.div key={video.id} whileHover={{ y: -5 }} className="bg-gray-50 rounded-xl overflow-hidden cursor-pointer border-2 border-transparent hover:border-purple-400 transition-all shadow-md hover:shadow-xl" onClick={() => navigate(`/video/${video.id}`, { state: { video } })}>
-                    <div className="aspect-video bg-gray-200 flex items-center justify-center"><span className="text-4xl">🎬</span></div>
+                  <motion.div
+                    key={video.id}
+                    whileHover={{ y: -5 }}
+                    className="bg-gray-50 rounded-xl overflow-hidden cursor-pointer border-2 border-transparent hover:border-purple-400 transition-all shadow-md hover:shadow-xl"
+                    onClick={() => navigate(`/video/${video.id}`, { state: { video } })}
+                  >
+                    <div className="aspect-video bg-gray-200 flex items-center justify-center">
+                      <span className="text-4xl">🎬</span>
+                    </div>
                     <div className="p-4">
                       <h4 className="font-bold text-sm text-stone-800 line-clamp-2">{video.title}</h4>
                       <div className="flex justify-between mt-2">
@@ -661,23 +728,38 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
                 <p className="text-stone-400 text-center col-span-3">No videos in this category yet.</p>
               )}
             </div>
+            
             <div className="text-center mt-6">
-              <button onClick={() => navigate('/ai-hub')} className="px-6 py-3 bg-purple-600 text-white rounded-full font-bold hover:bg-purple-700 transition-all shadow-lg shadow-purple-500/30">View All Videos 🚀</button>
+              <button 
+                onClick={() => navigate('/ai-hub')}
+                className="px-6 py-3 bg-purple-600 text-white rounded-full font-bold hover:bg-purple-700 transition-all shadow-lg shadow-purple-500/30"
+              >
+                View All Videos 🚀
+              </button>
             </div>
           </motion.section>
 
-          {/* SECTION 7: RESOURCES & ACTIVITIES */}
-          <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.7 }} className="bg-white rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-stone-100">
-            <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-8">Resources & Activities 📚</h2>
+          {/* ===== SECTION 7: RESOURCES & ACTIVITIES ===== */}
+          <motion.section 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="bg-white rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-stone-100"
+          >
+            <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-8">
+              Resources & Activities 📚
+            </h2>
+            
             <div className="max-w-5xl mx-auto space-y-6">
               
-              {/* POWERPOINTS - GENERATES REAL .pptx FILES */}
+              {/* ===== POWERPOINTS - DIRECT DOWNLOAD FROM PUBLIC/PPTS ===== */}
               <div className="bg-gradient-to-r from-purple-100 via-pink-100 to-rose-100 rounded-2xl p-6 shadow-lg border-2 border-purple-300">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-4xl animate-bounce">📊</span>
                   <h3 className="text-2xl font-bold text-purple-700">Beautiful PowerPoints</h3>
                 </div>
                 <p className="text-stone-700 mb-4 font-medium">✨ 5 attractive slides each - perfect for kids!</p>
+                
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="bg-white/90 rounded-xl p-4 border-2 border-purple-200">
                     <div className="flex items-center gap-2 mb-2">
@@ -691,8 +773,14 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
                       <div className="bg-purple-50 p-1 rounded text-center font-bold">4. Benefits of AI</div>
                       <div className="bg-purple-50 p-1 rounded text-center font-bold">5. AI in the Future</div>
                     </div>
-                    <button onClick={() => downloadPPTX(aiSlides, 'AI_Presentation.pptx', '🤖 AI: What, Why & Future')} className="mt-3 w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-full hover:scale-105 transition font-bold text-sm">⬇️ Download AI PPT (.pptx)</button>
+                    <button 
+                      onClick={() => downloadPPT('Meet-Your-New-Digital-Friend-What-is-AI.pptx', 'AI_Presentation.pptx')} 
+                      className="mt-3 w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-full hover:scale-105 transition font-bold text-sm"
+                    >
+                      ⬇️ Download AI PPT (.pptx)
+                    </button>
                   </div>
+
                   <div className="bg-white/90 rounded-xl p-4 border-2 border-green-200">
                     <div className="flex items-center gap-2 mb-2">
                       <span className="text-2xl">💰</span>
@@ -705,31 +793,50 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
                       <div className="bg-green-50 p-1 rounded text-center font-bold">4. Smart Spending</div>
                       <div className="bg-green-50 p-1 rounded text-center font-bold">5. Financial Future</div>
                     </div>
-                    <button onClick={() => downloadPPTX(financeSlides, 'Finance_Presentation.pptx', '💰 Finance: What, Why & Future')} className="mt-3 w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2 rounded-full hover:scale-105 transition font-bold text-sm">⬇️ Download Finance PPT (.pptx)</button>
+                    <button 
+                      onClick={() => downloadPPT('Money-Adventures-My-First-Financial-Quest.pptx', 'Finance_Presentation.pptx')} 
+                      className="mt-3 w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2 rounded-full hover:scale-105 transition font-bold text-sm"
+                    >
+                      ⬇️ Download Finance PPT (.pptx)
+                    </button>
                   </div>
                 </div>
               </div>
 
-              {/* VIDEOS & COURSES */}
+              {/* ===== VIDEOS & COURSES ===== */}
               <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-6 shadow-md border-2 border-blue-200">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">🎬</span>
                   <h3 className="text-2xl font-bold text-blue-700">Videos & Courses</h3>
                 </div>
                 <p className="text-stone-600 mb-4">Free video courses and educational links</p>
-                <button onClick={downloadVideoLinks} className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-6 py-2.5 rounded-full hover:scale-105 transition shadow-md hover:shadow-lg text-sm font-bold">📥 Download Videos & Courses (HTML with Blue Links)</button>
-                <div className="mt-3 text-xs text-stone-500">🔗 Includes YouTube playlists, free courses, interactive tools & more! <span className="text-blue-600 font-bold"> All links are blue and clickable!</span></div>
+                <button 
+                  onClick={downloadVideoLinks} 
+                  className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-6 py-2.5 rounded-full hover:scale-105 transition shadow-md hover:shadow-lg text-sm font-bold"
+                >
+                  📥 Download Videos & Courses (HTML with Blue Links)
+                </button>
+                <div className="mt-3 text-xs text-stone-500">
+                  🔗 Includes YouTube playlists, free courses, interactive tools & more! 
+                  <span className="text-blue-600 font-bold"> All links are blue and clickable!</span>
+                </div>
               </div>
 
-              {/* ACTIVITY 1: RABBIT RACING GAME */}
+              {/* ===== ACTIVITY 1: RABBIT RACING GAME ===== */}
               <div className="bg-gradient-to-r from-yellow-50 via-orange-50 to-amber-50 rounded-2xl p-6 shadow-lg border-2 border-yellow-300">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-4xl animate-bounce">🐇</span>
                   <h3 className="text-2xl font-bold text-orange-700">Activity 1: Race the Rabbit! 🏁</h3>
                 </div>
                 <p className="text-stone-700 mb-4 font-medium">Answer correctly to make the rabbit hop forward! 🐇</p>
+                
                 {!gameStarted ? (
-                  <button onClick={startGame} className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-8 py-3 rounded-full hover:scale-105 transition flex items-center gap-3 text-lg font-bold shadow-lg hover:shadow-xl mx-auto">🚀 Start Racing!</button>
+                  <button 
+                    onClick={startGame} 
+                    className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-8 py-3 rounded-full hover:scale-105 transition flex items-center gap-3 text-lg font-bold shadow-lg hover:shadow-xl mx-auto"
+                  >
+                    🚀 Start Racing!
+                  </button>
                 ) : (
                   <div className="bg-white rounded-xl p-6 shadow-inner">
                     <div className="mb-6 bg-gradient-to-r from-green-100 to-yellow-100 rounded-xl p-4 border-2 border-green-300">
@@ -738,8 +845,14 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
                         <span className="text-sm font-bold text-orange-700">🏆 Finish</span>
                       </div>
                       <div className="relative h-14 bg-white rounded-full border-2 border-gray-300 overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-yellow-400 via-orange-400 to-green-400 rounded-full transition-all duration-700 flex items-center" style={{ width: `${rabbitPosition}%` }}>
-                          <span className={`absolute text-4xl transition-all duration-700 ${showFeedback && feedbackMessage.includes('CORRECT') ? 'animate-bounce' : ''}`} style={{ left: `calc(${rabbitPosition}% - 20px)` }}>🐇</span>
+                        <div 
+                          className="h-full bg-gradient-to-r from-yellow-400 via-orange-400 to-green-400 rounded-full transition-all duration-700 flex items-center"
+                          style={{ width: `${rabbitPosition}%` }}
+                        >
+                          <span 
+                            className={`absolute text-4xl transition-all duration-700 ${showFeedback && feedbackMessage.includes('CORRECT') ? 'animate-bounce' : ''}`}
+                            style={{ left: `calc(${rabbitPosition}% - 20px)` }}
+                          >🐇</span>
                         </div>
                       </div>
                       <div className="flex justify-between mt-1 text-xs text-stone-500">
@@ -752,6 +865,7 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
                         <span className="text-sm font-bold text-green-600 bg-white px-4 py-1 rounded-full ml-2">✅ {correctAnswers}/{gameLevels.length} correct</span>
                       </div>
                     </div>
+
                     {!gameFinished ? (
                       <div>
                         <div className="mb-4">
@@ -761,8 +875,15 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
                         </div>
                         <div className="space-y-3">
                           {gameLevels[currentLevel].options.map((opt, idx) => (
-                            <button key={idx} onClick={() => !showFeedback && handleAnswer(idx)} className={`block w-full text-left px-4 py-3 rounded-xl border-2 transition-all ${showFeedback ? 'cursor-default opacity-70' : 'hover:bg-yellow-100 hover:border-yellow-400 bg-white hover:scale-[1.02]'} ${showFeedback && idx === gameLevels[currentLevel].correct ? 'border-green-500 bg-green-50' : ''}`}>
-                              <span className="font-bold">{String.fromCharCode(65 + idx)}. </span>{opt}{showFeedback && idx === gameLevels[currentLevel].correct && ' ✅'}
+                            <button
+                              key={idx}
+                              onClick={() => !showFeedback && handleAnswer(idx)}
+                              className={`block w-full text-left px-4 py-3 rounded-xl border-2 transition-all ${
+                                showFeedback ? 'cursor-default opacity-70' : 'hover:bg-yellow-100 hover:border-yellow-400 bg-white hover:scale-[1.02]'
+                              } ${showFeedback && idx === gameLevels[currentLevel].correct ? 'border-green-500 bg-green-50' : ''}`}
+                            >
+                              <span className="font-bold">{String.fromCharCode(65 + idx)}. </span>{opt}
+                              {showFeedback && idx === gameLevels[currentLevel].correct && ' ✅'}
                             </button>
                           ))}
                         </div>
@@ -779,7 +900,13 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
                         <p className="text-xl font-semibold text-gray-700">Final Score: {score} points</p>
                         <p className="text-lg text-gray-600">Correct Answers: {correctAnswers} / {gameLevels.length}</p>
                         <div className="mt-4 p-4 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl border-2 border-yellow-300">
-                          <p className="text-lg font-bold text-gray-700">{correctAnswers === gameLevels.length ? '🌟 PERFECT! You\'re a Genius!' : correctAnswers >= 8 ? '🌟 Excellent! Superstar Learner!' : correctAnswers >= 6 ? '💪 Great job! Keep learning!' : correctAnswers >= 4 ? '📖 Good effort! Try again!' : '🎯 Keep practicing! You\'ll improve!'}</p>
+                          <p className="text-lg font-bold text-gray-700">
+                            {correctAnswers === gameLevels.length ? '🌟 PERFECT! You\'re a Genius!' : 
+                             correctAnswers >= 8 ? '🌟 Excellent! Superstar Learner!' :
+                             correctAnswers >= 6 ? '💪 Great job! Keep learning!' :
+                             correctAnswers >= 4 ? '📖 Good effort! Try again!' :
+                             '🎯 Keep practicing! You\'ll improve!'}
+                          </p>
                         </div>
                         <div className="flex flex-wrap gap-4 justify-center mt-6">
                           <button onClick={resetGame} className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-8 py-3 rounded-full hover:scale-105 transition shadow-lg hover:shadow-xl font-bold">🔄 Play Again</button>
@@ -792,13 +919,14 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
                 <div className="mt-3 text-xs text-stone-500 text-center">🧠 10 fun levels about AI and Finance! Answer correctly to race the rabbit! 🐇</div>
               </div>
 
-              {/* ACTIVITY 2: MEMORY CARD GAME */}
+              {/* ===== ACTIVITY 2: MEMORY CARD GAME ===== */}
               <div className="bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 rounded-2xl p-6 shadow-lg border-2 border-indigo-300">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-4xl animate-pulse">🧠</span>
                   <h3 className="text-2xl font-bold text-indigo-700">Activity 2: Memory Match! 🃏</h3>
                 </div>
                 <p className="text-stone-700 mb-4 font-medium">Flip cards and match the AI & Finance pairs!</p>
+                
                 {!memoryGameStarted ? (
                   <button onClick={startMemoryGame} className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-8 py-3 rounded-full hover:scale-105 transition flex items-center gap-3 text-lg font-bold shadow-lg hover:shadow-xl mx-auto">🃏 Start Memory Game!</button>
                 ) : (
@@ -815,13 +943,25 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
                             const isFlipped = memoryFlipped.includes(index) || memoryMatched.includes(index);
                             const isMatched = memoryMatched.includes(index);
                             return (
-                              <div key={index} onClick={() => handleMemoryCardClick(index)} className={`aspect-square rounded-xl border-2 transition-all duration-300 cursor-pointer flex items-center justify-center text-3xl sm:text-4xl ${isFlipped ? isMatched ? 'bg-green-100 border-green-400' : 'bg-indigo-100 border-indigo-400' : 'bg-gradient-to-br from-indigo-500 to-purple-500 border-indigo-400 hover:scale-105'}`}>
+                              <div
+                                key={index}
+                                onClick={() => handleMemoryCardClick(index)}
+                                className={`aspect-square rounded-xl border-2 transition-all duration-300 cursor-pointer flex items-center justify-center text-3xl sm:text-4xl ${
+                                  isFlipped 
+                                    ? isMatched 
+                                      ? 'bg-green-100 border-green-400' 
+                                      : 'bg-indigo-100 border-indigo-400'
+                                    : 'bg-gradient-to-br from-indigo-500 to-purple-500 border-indigo-400 hover:scale-105'
+                                }`}
+                              >
                                 {isFlipped ? card.emoji : '❓'}
                               </div>
                             );
                           })}
                         </div>
-                        <div className="mt-4 text-center"><p className="text-xs text-stone-500">💡 Match each term with its pair to earn points!</p></div>
+                        <div className="mt-4 text-center">
+                          <p className="text-xs text-stone-500">💡 Match each term with its pair to earn points!</p>
+                        </div>
                       </div>
                     ) : (
                       <div className="text-center py-6">
@@ -831,7 +971,11 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
                         <p className="text-lg text-gray-600">Pairs Found: {memoryPairsFound}/6</p>
                         <p className="text-lg text-gray-600">Total Moves: {memoryMoves}</p>
                         <div className="mt-4 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl border-2 border-indigo-300">
-                          <p className="text-lg font-bold text-gray-700">{memoryPairsFound === 6 ? '🌟 PERFECT! You\'re a Memory Master!' : memoryPairsFound >= 4 ? '🌟 Great job! Keep practicing!' : '💪 Good effort! Try again to match them all!'}</p>
+                          <p className="text-lg font-bold text-gray-700">
+                            {memoryPairsFound === 6 ? '🌟 PERFECT! You\'re a Memory Master!' : 
+                             memoryPairsFound >= 4 ? '🌟 Great job! Keep practicing!' :
+                             '💪 Good effort! Try again to match them all!'}
+                          </p>
                         </div>
                         <button onClick={resetMemoryGame} className="mt-4 px-8 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-full hover:scale-105 transition font-bold">🔄 Play Again</button>
                       </div>
@@ -841,13 +985,14 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
                 <div className="mt-3 text-xs text-stone-500 text-center">🧠 Match 6 pairs of AI and Finance terms! Test your memory! 🃏</div>
               </div>
 
-              {/* ACTIVITY 3: DRAG & DROP MATCH */}
+              {/* ===== ACTIVITY 3: DRAG & DROP MATCH ===== */}
               <div className="bg-gradient-to-r from-teal-50 via-cyan-50 to-blue-50 rounded-2xl p-6 shadow-lg border-2 border-teal-300">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-4xl animate-bounce">🧩</span>
                   <h3 className="text-2xl font-bold text-teal-700">Activity 3: Match It! 🎯</h3>
                 </div>
                 <p className="text-stone-700 mb-4 font-medium">Match the term with its definition!</p>
+                
                 {!dragDropStarted ? (
                   <button onClick={startDragDrop} className="bg-gradient-to-r from-teal-500 to-cyan-500 text-white px-8 py-3 rounded-full hover:scale-105 transition flex items-center gap-3 text-lg font-bold shadow-lg hover:shadow-xl mx-auto">🧩 Start Matching!</button>
                 ) : (
@@ -856,6 +1001,7 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
                       <span className="text-sm font-bold text-teal-700">⭐ Score: {dragDropScore} points</span>
                       <span className="text-sm text-stone-500">Matched: {matchedItems.length}/{dragDropItems.length}</span>
                     </div>
+                    
                     {!dragDropComplete ? (
                       <div>
                         <div className="grid grid-cols-2 gap-4">
@@ -863,7 +1009,15 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
                             <h5 className="text-sm font-bold text-center text-stone-500 mb-2">📝 Terms</h5>
                             <div className="space-y-2">
                               {dragItems.map((item) => (
-                                <div key={item.id} draggable={!item.matched} onDragStart={() => handleDragStart(item)} className={`p-3 rounded-xl border-2 text-center font-bold transition-all ${item.matched ? 'bg-green-100 border-green-400 cursor-default opacity-60' : 'bg-blue-50 border-blue-200 cursor-grab hover:border-blue-500 hover:scale-105'}`}>
+                                <div
+                                  key={item.id}
+                                  draggable={!item.matched}
+                                  onDragStart={() => handleDragStart(item)}
+                                  className={`p-3 rounded-xl border-2 text-center font-bold transition-all ${
+                                    item.matched ? 'bg-green-100 border-green-400 cursor-default opacity-60' : 
+                                    'bg-blue-50 border-blue-200 cursor-grab hover:border-blue-500 hover:scale-105'
+                                  }`}
+                                >
                                   {item.matched ? '✅' : '🔲'} {item.emoji} {item.term}
                                 </div>
                               ))}
@@ -873,7 +1027,15 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
                             <h5 className="text-sm font-bold text-center text-stone-500 mb-2">📖 Definitions</h5>
                             <div className="space-y-2">
                               {dropTargets.map((item) => (
-                                <div key={item.id} onDrop={() => handleDrop(item.id)} onDragOver={(e) => e.preventDefault()} className={`p-3 rounded-xl border-2 text-center transition-all ${item.matched ? 'bg-green-100 border-green-400 cursor-default opacity-60' : 'bg-purple-50 border-purple-200'}`}>
+                                <div
+                                  key={item.id}
+                                  onDrop={() => handleDrop(item.id)}
+                                  onDragOver={(e) => e.preventDefault()}
+                                  className={`p-3 rounded-xl border-2 text-center transition-all ${
+                                    item.matched ? 'bg-green-100 border-green-400 cursor-default opacity-60' : 
+                                    'bg-purple-50 border-purple-200'
+                                  }`}
+                                >
                                   {item.matched ? '✅' : '🔲'} {item.definition}
                                 </div>
                               ))}
@@ -898,7 +1060,7 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
                 <div className="mt-3 text-xs text-stone-500 text-center">🧩 Match AI & Finance terms with their definitions! Drag and drop! 🎯</div>
               </div>
 
-              {/* SHARE YOUR WORK */}
+              {/* ===== SHARE YOUR WORK ===== */}
               <div className="bg-gradient-to-r from-indigo-50 to-purple-50 border-2 border-dashed border-indigo-400 rounded-2xl p-6 flex flex-wrap items-center justify-between">
                 <div className="flex items-center gap-4">
                   <span className="text-3xl">📤</span>
@@ -912,27 +1074,50 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
             </div>
           </motion.section>
 
-          {/* SECTION 8: STUDENT SUBMISSION */}
-          <motion.section id="shareSection" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.8 }} className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-yellow-200">
+          {/* ===== SECTION 8: STUDENT SUBMISSION ===== */}
+          <motion.section 
+            id="shareSection"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-yellow-200"
+          >
             <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-6">Share Your Work ✨</h2>
             <p className="text-center text-stone-600 max-w-2xl mx-auto mb-8">Submit your projects, worksheets, or creative work and get featured on our platform!</p>
             <form onSubmit={handleSubmitWork} className="max-w-2xl mx-auto space-y-4">
-              <div><label className="block text-sm font-bold text-stone-700 mb-1">Your Name</label><input type="text" placeholder="Enter your name" className="w-full px-4 py-3 rounded-xl border-2 border-stone-200 focus:border-purple-400 focus:outline-none transition-all" required /></div>
-              <div><label className="block text-sm font-bold text-stone-700 mb-1">What did you create?</label><textarea value={submissionText} onChange={(e) => setSubmissionText(e.target.value)} placeholder="Describe your project, worksheet, or activity..." className="w-full px-4 py-3 rounded-xl border-2 border-stone-200 focus:border-purple-400 focus:outline-none transition-all h-24" required /></div>
-              <div><label className="block text-sm font-bold text-stone-700 mb-1">Upload Your Work</label><input type="file" onChange={(e) => setSubmissionFile(e.target.files[0])} className="w-full px-4 py-3 rounded-xl border-2 border-stone-200 focus:border-purple-400 focus:outline-none transition-all bg-white" accept=".pdf,.doc,.docx,.jpg,.png,.ppt,.pptx" /><p className="text-xs text-stone-400 mt-1">Accepted: PDF, Word, Images, PowerPoint</p></div>
+              <div>
+                <label className="block text-sm font-bold text-stone-700 mb-1">Your Name</label>
+                <input type="text" placeholder="Enter your name" className="w-full px-4 py-3 rounded-xl border-2 border-stone-200 focus:border-purple-400 focus:outline-none transition-all" required />
+              </div>
+              <div>
+                <label className="block text-sm font-bold text-stone-700 mb-1">What did you create?</label>
+                <textarea value={submissionText} onChange={(e) => setSubmissionText(e.target.value)} placeholder="Describe your project, worksheet, or activity..." className="w-full px-4 py-3 rounded-xl border-2 border-stone-200 focus:border-purple-400 focus:outline-none transition-all h-24" required />
+              </div>
+              <div>
+                <label className="block text-sm font-bold text-stone-700 mb-1">Upload Your Work</label>
+                <input type="file" onChange={(e) => setSubmissionFile(e.target.files[0])} className="w-full px-4 py-3 rounded-xl border-2 border-stone-200 focus:border-purple-400 focus:outline-none transition-all bg-white" accept=".pdf,.doc,.docx,.jpg,.png,.ppt,.pptx" />
+                <p className="text-xs text-stone-400 mt-1">Accepted: PDF, Word, Images, PowerPoint</p>
+              </div>
               <button type="submit" className="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-bold hover:shadow-lg transition-all text-lg">🚀 Submit Your Work</button>
             </form>
             <p className="text-center text-sm text-stone-500 mt-4">💡 Your work could be featured on our platform! We'll review and post it soon.</p>
           </motion.section>
 
-          {/* SECTION 9: CERTIFICATES */}
-          <motion.section id="certificateSection" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.9 }} className="bg-white rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-stone-100">
+          {/* ===== SECTION 9: CERTIFICATES ===== */}
+          <motion.section 
+            id="certificateSection"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            className="bg-white rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-stone-100"
+          >
             <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-6">🎓 Earn Your Certificate</h2>
             <div className="max-w-4xl mx-auto">
               <div className="bg-gradient-to-r from-purple-100 via-pink-100 to-rose-100 rounded-3xl p-8 text-center border-4 border-dashed border-purple-400">
                 <span className="text-7xl animate-bounce inline-block">📜</span>
                 <h3 className="text-3xl font-bold text-purple-700 mt-3">🎉 Free Certificates for Kids! 🎉</h3>
                 <p className="text-stone-700 max-w-2xl mx-auto mt-2 text-lg">Complete our courses and earn <span className="font-bold text-purple-700">super cool certificates</span> with your name on them!</p>
+                
                 <div className="grid md:grid-cols-2 gap-4 mt-6 max-w-2xl mx-auto">
                   <div className="bg-white rounded-2xl p-5 shadow-lg border-2 border-purple-300 hover:scale-105 transition transform">
                     <div className="text-4xl">🤖</div>
@@ -947,17 +1132,34 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
                     <div className="mt-3 bg-green-100 rounded-full px-3 py-1 text-xs font-bold text-green-700 inline-block">🎯 5 Videos</div>
                   </div>
                 </div>
+
                 <div className="mt-6 p-6 bg-white/90 rounded-xl shadow-inner">
                   <p className="text-sm font-bold text-stone-700 mb-3">📝 Enter your name to download your certificate:</p>
                   <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
-                    <input type="text" value={certificateName} onChange={(e) => setCertificateName(e.target.value)} placeholder="Enter your full name" className="flex-1 px-4 py-2.5 rounded-full border-2 border-purple-300 focus:border-purple-500 focus:outline-none transition-all text-center sm:text-left" />
-                    <select value={certificateType} onChange={(e) => setCertificateType(e.target.value)} className="px-4 py-2.5 rounded-full border-2 border-purple-300 focus:border-purple-500 focus:outline-none transition-all bg-white">
+                    <input 
+                      type="text" 
+                      value={certificateName} 
+                      onChange={(e) => setCertificateName(e.target.value)} 
+                      placeholder="Enter your full name" 
+                      className="flex-1 px-4 py-2.5 rounded-full border-2 border-purple-300 focus:border-purple-500 focus:outline-none transition-all text-center sm:text-left" 
+                    />
+                    <select 
+                      value={certificateType} 
+                      onChange={(e) => setCertificateType(e.target.value)} 
+                      className="px-4 py-2.5 rounded-full border-2 border-purple-300 focus:border-purple-500 focus:outline-none transition-all bg-white"
+                    >
                       <option value="AI Explorer">🤖 AI Explorer</option>
                       <option value="Money Master">💰 Money Master</option>
                     </select>
-                    <button onClick={() => downloadCertificate(certificateName, certificateType)} className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-2.5 rounded-full font-bold hover:scale-105 transition shadow-lg hover:shadow-xl whitespace-nowrap">📥 Download Certificate</button>
+                    <button 
+                      onClick={() => downloadCertificate(certificateName, certificateType)} 
+                      className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-2.5 rounded-full font-bold hover:scale-105 transition shadow-lg hover:shadow-xl whitespace-nowrap"
+                    >
+                      📥 Download Certificate
+                    </button>
                   </div>
                 </div>
+
                 <div className="mt-4 p-4 bg-green-50 rounded-xl border-2 border-green-200">
                   <p className="text-sm text-green-700">✅ <span className="font-bold">Your progress:</span> You have completed {correctAnswers} of {gameLevels.length} levels!</p>
                 </div>
@@ -968,7 +1170,7 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
         </div>
       </main>
 
-      {/* FOOTER */}
+      {/* ===== FOOTER ===== */}
       <footer id="contact" className="bg-[#192428] text-white py-8 px-6 rounded-t-[2rem] flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-bold border-t-4 border-[#FF6B8B]">
         <div className="text-center md:text-left">
           <p className="text-[#FF6B8B]">📞 Phone: +971585417100</p>
