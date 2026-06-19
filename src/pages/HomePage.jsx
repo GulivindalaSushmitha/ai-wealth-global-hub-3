@@ -54,143 +54,14 @@ export default function HomePage() {
     'Other': allVideos.filter(v => !['AI Basics', 'AI Course', 'Machine Learning', 'Groww', 'Pranjal Kamra', 'Finance Tips'].includes(v.category))
   };
 
-  // ===== AI PPT CONTENT - EXACTLY AS PROVIDED =====
-  const aiPPTContent = `🤖 AI: WHAT, WHY & FUTURE - KID'S EDITION
-
-============================================================
-SLIDE 1: WHAT IS AI?
-============================================================
-
-* AI stands for ARTIFICIAL INTELLIGENCE
-* It's like giving a computer a BRAIN! 
-* AI helps machines THINK, LEARN, and DECIDE
-* Think of it as a SMART ROBOT FRIEND!
-* Examples: Siri, Alexa, ChatGPT, Self-driving cars
-* AI is everywhere around us!
-
-============================================================
-SLIDE 2: WHERE IS AI USED?
-============================================================
-
-* Smartphones - Face unlock, Voice assistants
-* Video Games - Smart enemies that learn
-* Self-driving Cars - Drive themselves!
-* Hospitals - Help doctors save lives
-* Online Shopping - Recommend products
-* Education - Personalized learning
-
-============================================================
-SLIDE 3: WHY IS AI IMPORTANT?
-============================================================
-
-* AI helps us do things FASTER and BETTER!
-* It solves problems humans find too hard
-* It helps us discover NEW things
-* AI never gets tired - works 24/7!
-* Helps in SPACE EXPLORATION!
-* Fun Fact: AI can beat humans at chess!
-
-============================================================
-SLIDE 4: BENEFITS OF AI
-============================================================
-
-* SAVES TIME - AI does tasks quickly
-* HELPS WITH DIFFICULT TASKS - Like solving puzzles
-* WORKS 24/7 - Never needs sleep!
-* MAKES FEWER MISTAKES - Very accurate
-* HELPS CREATE NEW INVENTIONS - Like robots!
-* SAVES LIVES - Helps doctors diagnose diseases
-
-============================================================
-SLIDE 5: AI IN THE FUTURE
-============================================================
-
-* AI will be EVERYWHERE!
-* Robots will help with household chores
-* AI teachers will personalize learning
-* We'll explore space with AI assistants
-* AI will help SOLVE CLIMATE CHANGE!
-* AI will CURE DISEASES!
-* AI will help humans, not replace them!
-* THE FUTURE IS BRIGHT WITH AI!
-
-============================================================
-Remember: You can be part of the AI revolution!
-============================================================`;
-
-  // ===== FINANCE PPT CONTENT - EXACTLY AS PROVIDED =====
-  const financePPTContent = `💰 FINANCE: WHAT, WHY & FUTURE - KID'S EDITION
-
-============================================================
-SLIDE 1: WHAT IS FINANCE?
-============================================================
-
-* Finance is all about MONEY!
-* It's how we EARN, SAVE, SPEND, and GROW money
-* Think of it as the SUPERPOWER of managing money!
-* A piggy bank with a cape - that's finance!
-* Finance helps us achieve our DREAMS!
-* Everyone can learn to be a money expert!
-
-============================================================
-SLIDE 2: WHY IS FINANCE IMPORTANT?
-============================================================
-
-* To buy things we WANT and things we NEED
-* To SAVE money for the future
-* To avoid running out of money
-* To help our families and communities
-* To have FREEDOM to do what we love!
-* To be PREPARED for emergencies
-
-============================================================
-SLIDE 3: HOW TO SAVE MONEY
-============================================================
-
-* Save a little bit EVERY DAY
-* Use a piggy bank or savings jar
-* Set a savings goal (like a new video game!)
-* Watch your money GROW like a plant!
-* Keep track of your spending
-* Fun Fact: Even Rs 10 a day = Rs 3650 a year!
-
-============================================================
-SLIDE 4: SMART SPENDING
-============================================================
-
-* Think before you buy: NEED it or WANT it?
-* Compare prices before buying
-* Wait for sales and discounts
-* Save up for BIG purchases
-* Budget your money - plan your spending!
-* Remember: Every rupee counts!
-
-============================================================
-SLIDE 5: YOUR FINANCIAL FUTURE
-============================================================
-
-* You can become a MONEY EXPERT!
-* Learn to invest, save, and grow your wealth
-* Financial freedom = You can do what you LOVE
-* Start learning about money TODAY!
-* Remember: Every millionaire started with one coin!
-* The future is YOURS to build!
-
-============================================================
-Be smart with money and you'll have a bright future!
-============================================================`;
-
-  // ===== DOWNLOAD FUNCTIONS =====
-  const downloadPPT = (content, filename) => {
-    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+  // ===== DOWNLOAD PPT FILES FROM PUBLIC/PPTS FOLDER =====
+  const downloadPPTFile = (filename, displayName) => {
+    const link = document.createElement('a');
+    link.href = `/ppts/${filename}`;
+    link.download = displayName || filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   // ===== VIDEOS & COURSES DOWNLOAD =====
@@ -588,14 +459,13 @@ Be smart with money and you'll have a bright future!
     setDropTargets([...dragDropItems]);
   };
 
-  // ===== CERTIFICATE DOWNLOAD - UPDATED (REMOVED GLOBAL CITIZEN & HEALTH ADVOCATE) =====
+  // ===== CERTIFICATE DOWNLOAD =====
   const downloadCertificate = (name, type) => {
     if (!name || name.trim() === '') {
       alert('Please enter your name first!');
       return;
     }
 
-    // Use selected type or default
     const certType = type || 'AI Explorer';
     const date = new Date().toLocaleDateString('en-US', { 
       year: 'numeric', 
@@ -1090,7 +960,7 @@ Be smart with money and you'll have a bright future!
             
             <div className="max-w-5xl mx-auto space-y-6">
               
-              {/* ===== POWERPOINTS - WITH CORRECT DOWNLOADS ===== */}
+              {/* ===== POWERPOINTS - WITH ACTUAL PPT DOWNLOADS ===== */}
               <div className="bg-gradient-to-r from-purple-100 via-pink-100 to-rose-100 rounded-2xl p-6 shadow-lg border-2 border-purple-300">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-4xl animate-bounce">📊</span>
@@ -1112,7 +982,7 @@ Be smart with money and you'll have a bright future!
                       <div className="bg-purple-50 p-1 rounded text-center font-bold">5. AI in the Future</div>
                     </div>
                     <button 
-                      onClick={() => downloadPPT(aiPPTContent, 'AI_5_Slides.txt')} 
+                      onClick={() => downloadPPTFile('Meet-Your-New-Digital-Friend-What-is-AI.pptx', 'AI_Presentation.pptx')} 
                       className="mt-3 w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-full hover:scale-105 transition font-bold text-sm"
                     >
                       ⬇️ Download AI PPT
@@ -1132,7 +1002,7 @@ Be smart with money and you'll have a bright future!
                       <div className="bg-green-50 p-1 rounded text-center font-bold">5. Financial Future</div>
                     </div>
                     <button 
-                      onClick={() => downloadPPT(financePPTContent, 'Finance_5_Slides.txt')} 
+                      onClick={() => downloadPPTFile('Money-Adventures-My-First-Financial-Quest.pptx', 'Finance_Presentation.pptx')} 
                       className="mt-3 w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2 rounded-full hover:scale-105 transition font-bold text-sm"
                     >
                       ⬇️ Download Finance PPT
@@ -1441,7 +1311,7 @@ Be smart with money and you'll have a bright future!
             <p className="text-center text-sm text-stone-500 mt-4">💡 Your work could be featured on our platform! We'll review and post it soon.</p>
           </motion.section>
 
-          {/* ===== SECTION 9: CERTIFICATES - UPDATED (REMOVED GLOBAL CITIZEN & HEALTH ADVOCATE) ===== */}
+          {/* ===== SECTION 9: CERTIFICATES ===== */}
           <motion.section 
             id="certificateSection"
             initial={{ opacity: 0, y: 20 }}
@@ -1456,7 +1326,7 @@ Be smart with money and you'll have a bright future!
                 <h3 className="text-3xl font-bold text-purple-700 mt-3">🎉 Free Certificates for Kids! 🎉</h3>
                 <p className="text-stone-700 max-w-2xl mx-auto mt-2 text-lg">Complete our courses and earn <span className="font-bold text-purple-700">super cool certificates</span> with your name on them!</p>
                 
-                {/* UPDATED: Only 2 certificates - AI Explorer and Money Master */}
+                {/* Only 2 certificates - AI Explorer and Money Master */}
                 <div className="grid md:grid-cols-2 gap-4 mt-6 max-w-2xl mx-auto">
                   <div className="bg-white rounded-2xl p-5 shadow-lg border-2 border-purple-300 hover:scale-105 transition transform">
                     <div className="text-4xl">🤖</div>
@@ -1472,7 +1342,7 @@ Be smart with money and you'll have a bright future!
                   </div>
                 </div>
 
-                {/* UPDATED: Removed AI Wealth Global Health Explorer and other options */}
+                {/* Certificate Download - Only 2 options */}
                 <div className="mt-6 p-6 bg-white/90 rounded-xl shadow-inner">
                   <p className="text-sm font-bold text-stone-700 mb-3">📝 Enter your name to download your certificate:</p>
                   <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
