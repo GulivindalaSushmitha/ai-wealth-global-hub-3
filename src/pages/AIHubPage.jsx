@@ -107,9 +107,6 @@ const AIHubPage = () => {
                       <span className="text-4xl">▶️</span>
                     </div>
                   </div>
-                  <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold text-white border border-white/20">
-                    {video.language === 'Hindi' ? '🇮🇳 Hindi' : '🌍 English'}
-                  </div>
                 </div>
                 
                 <div className="p-4 relative z-10">
