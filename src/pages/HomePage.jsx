@@ -22,13 +22,18 @@ export default function HomePage() {
   const [certificateName, setCertificateName] = useState('');
   const [certificateType, setCertificateType] = useState('');
 
-  // ===== QUIZ SHOW GAME STATES =====
-  const [quizShowStarted, setQuizShowStarted] = useState(false);
-  const [quizShowComplete, setQuizShowComplete] = useState(false);
-  const [quizShowIndex, setQuizShowIndex] = useState(0);
-  const [quizShowScore, setQuizShowScore] = useState(0);
-  const [quizShowSelected, setQuizShowSelected] = useState(null);
-  const [quizShowFeedback, setQuizShowFeedback] = useState('');
+  // ===== MEMORY CARD GAME STATES (NEW - REPLACES QUIZ SHOW) =====
+  const [memoryGameStarted, setMemoryGameStarted] = useState(false);
+  const [memoryGameComplete, setMemoryGameComplete] = useState(false);
+  const [memoryCards, setMemoryCards] = useState([]);
+  const [memoryFlipped, setMemoryFlipped] = useState([]);
+  const [memoryMatched, setMemoryMatched] = useState([]);
+  const [memoryMoves, setMemoryMoves] = useState(0);
+  const [memoryPairsFound, setMemoryPairsFound] = useState(0);
+  const [memoryGameScore, setMemoryGameScore] = useState(0);
+  const [memoryFirstCard, setMemoryFirstCard] = useState(null);
+  const [memorySecondCard, setMemorySecondCard] = useState(null);
+  const [memoryLockBoard, setMemoryLockBoard] = useState(false);
 
   // ===== DRAG & DROP MATCH STATES =====
   const [dragDropStarted, setDragDropStarted] = useState(false);
@@ -49,7 +54,7 @@ export default function HomePage() {
     'Other': allVideos.filter(v => !['AI Basics', 'AI Course', 'Machine Learning', 'Groww', 'Pranjal Kamra', 'Finance Tips'].includes(v.category))
   };
 
-  // ===== CLEAN AI PPT CONTENT - 5 SLIDES =====
+  // ===== AI PPT CONTENT - EXACTLY AS PROVIDED =====
   const aiPPTContent = `🤖 AI: WHAT, WHY & FUTURE - KID'S EDITION
 
 ============================================================
@@ -113,7 +118,7 @@ SLIDE 5: AI IN THE FUTURE
 Remember: You can be part of the AI revolution!
 ============================================================`;
 
-  // ===== CLEAN FINANCE PPT CONTENT - 5 SLIDES =====
+  // ===== FINANCE PPT CONTENT - EXACTLY AS PROVIDED =====
   const financePPTContent = `💰 FINANCE: WHAT, WHY & FUTURE - KID'S EDITION
 
 ============================================================
@@ -188,7 +193,7 @@ Be smart with money and you'll have a bright future!
     URL.revokeObjectURL(url);
   };
 
-  // ===== VIDEOS & COURSES - BEAUTIFUL WITH BLUE LINKS =====
+  // ===== VIDEOS & COURSES DOWNLOAD =====
   const downloadVideoLinks = () => {
     const htmlContent = `<!DOCTYPE html>
 <html>
@@ -422,58 +427,100 @@ Be smart with money and you'll have a bright future!
     setFeedbackMessage('');
   };
 
-  // ===== QUIZ SHOW GAME FUNCTIONS =====
-  const quizShowQuestions = [
-    { q: "What is AI?", options: ["Artificial Intelligence", "Automated Ideas", "Advanced Internet", "Awesome Input"], correct: 0 },
-    { q: "What is a budget?", options: ["Plan for money", "A game", "A food", "A book"], correct: 0 },
-    { q: "Where is AI used?", options: ["Smartphones", "Only in movies", "Only in books", "Only in games"], correct: 0 },
-    { q: "Why save money?", options: ["For future needs", "To waste it", "To hide it", "To forget it"], correct: 0 },
-    { q: "What does AI help with?", options: ["Solving problems", "Only sleeping", "Only eating", "Only playing"], correct: 0 },
-    { q: "What is finance?", options: ["Managing money", "Playing games", "Cooking food", "Building houses"], correct: 0 },
-    { q: "What is a piggy bank for?", options: ["Saving money", "Playing games", "Eating food", "Reading books"], correct: 0 },
-    { q: "AI can help doctors:", options: ["Diagnose diseases", "Cook food", "Build houses", "Play games"], correct: 0 },
-    { q: "What is investing?", options: ["Growing money", "Spending all", "Hiding money", "Forgetting money"], correct: 0 },
-    { q: "Future of AI is:", options: ["Bright and helpful", "Scary", "Boring", "Not useful"], correct: 0 }
+  // ===== MEMORY CARD GAME FUNCTIONS (NEW) =====
+  const memoryCardData = [
+    { id: 1, term: 'AI', emoji: '🤖', definition: 'Artificial Intelligence' },
+    { id: 2, term: 'AI', emoji: '🤖', definition: 'Artificial Intelligence' },
+    { id: 3, term: 'Budget', emoji: '📊', definition: 'Money Plan' },
+    { id: 4, term: 'Budget', emoji: '📊', definition: 'Money Plan' },
+    { id: 5, term: 'Savings', emoji: '🏦', definition: 'Money Put Aside' },
+    { id: 6, term: 'Savings', emoji: '🏦', definition: 'Money Put Aside' },
+    { id: 7, term: 'Investing', emoji: '💰', definition: 'Growing Money' },
+    { id: 8, term: 'Investing', emoji: '💰', definition: 'Growing Money' },
+    { id: 9, term: 'Robot', emoji: '🤖', definition: 'Machine Helper' },
+    { id: 10, term: 'Robot', emoji: '🤖', definition: 'Machine Helper' },
+    { id: 11, term: 'Finance', emoji: '💳', definition: 'Money Management' },
+    { id: 12, term: 'Finance', emoji: '💳', definition: 'Money Management' },
   ];
 
-  const startQuizShow = () => {
-    setQuizShowStarted(true);
-    setQuizShowComplete(false);
-    setQuizShowIndex(0);
-    setQuizShowScore(0);
-    setQuizShowSelected(null);
-    setQuizShowFeedback('');
-  };
-
-  const handleQuizShowAnswer = (selectedIdx) => {
-    if (quizShowSelected !== null) return;
-    setQuizShowSelected(selectedIdx);
-    const q = quizShowQuestions[quizShowIndex];
-    if (selectedIdx === q.correct) {
-      setQuizShowScore(quizShowScore + 10);
-      setQuizShowFeedback(' Correct! Great job!');
-    } else {
-      setQuizShowFeedback(` The correct answer was: ${q.options[q.correct]}`);
+  const shuffleArray = (array) => {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
     }
-
-    setTimeout(() => {
-      if (quizShowIndex + 1 < quizShowQuestions.length) {
-        setQuizShowIndex(quizShowIndex + 1);
-        setQuizShowSelected(null);
-        setQuizShowFeedback('');
-      } else {
-        setQuizShowComplete(true);
-      }
-    }, 2000);
+    return newArray;
   };
 
-  const resetQuizShow = () => {
-    setQuizShowStarted(false);
-    setQuizShowComplete(false);
-    setQuizShowIndex(0);
-    setQuizShowScore(0);
-    setQuizShowSelected(null);
-    setQuizShowFeedback('');
+  const startMemoryGame = () => {
+    const shuffled = shuffleArray(memoryCardData);
+    setMemoryCards(shuffled.map((card, index) => ({ ...card, index })));
+    setMemoryFlipped([]);
+    setMemoryMatched([]);
+    setMemoryMoves(0);
+    setMemoryPairsFound(0);
+    setMemoryGameScore(0);
+    setMemoryFirstCard(null);
+    setMemorySecondCard(null);
+    setMemoryLockBoard(false);
+    setMemoryGameStarted(true);
+    setMemoryGameComplete(false);
+  };
+
+  const handleMemoryCardClick = (cardIndex) => {
+    if (memoryLockBoard) return;
+    if (memoryFlipped.includes(cardIndex)) return;
+    if (memoryMatched.includes(cardIndex)) return;
+
+    const newFlipped = [...memoryFlipped, cardIndex];
+    setMemoryFlipped(newFlipped);
+
+    if (newFlipped.length === 1) {
+      setMemoryFirstCard(memoryCards[cardIndex]);
+    } else if (newFlipped.length === 2) {
+      setMemorySecondCard(memoryCards[cardIndex]);
+      setMemoryLockBoard(true);
+      setMemoryMoves(memoryMoves + 1);
+
+      const card1 = memoryCards[newFlipped[0]];
+      const card2 = memoryCards[newFlipped[1]];
+
+      if (card1.term === card2.term && newFlipped[0] !== newFlipped[1]) {
+        // Match found
+        setMemoryMatched([...memoryMatched, newFlipped[0], newFlipped[1]]);
+        setMemoryPairsFound(memoryPairsFound + 1);
+        setMemoryGameScore(memoryGameScore + 10);
+        setMemoryFirstCard(null);
+        setMemorySecondCard(null);
+        setMemoryLockBoard(false);
+        setMemoryFlipped([]);
+
+        if (memoryPairsFound + 1 === 6) {
+          setMemoryGameComplete(true);
+        }
+      } else {
+        setTimeout(() => {
+          setMemoryFlipped([]);
+          setMemoryFirstCard(null);
+          setMemorySecondCard(null);
+          setMemoryLockBoard(false);
+        }, 1000);
+      }
+    }
+  };
+
+  const resetMemoryGame = () => {
+    setMemoryGameStarted(false);
+    setMemoryGameComplete(false);
+    setMemoryCards([]);
+    setMemoryFlipped([]);
+    setMemoryMatched([]);
+    setMemoryMoves(0);
+    setMemoryPairsFound(0);
+    setMemoryGameScore(0);
+    setMemoryFirstCard(null);
+    setMemorySecondCard(null);
+    setMemoryLockBoard(false);
   };
 
   // ===== DRAG & DROP MATCH GAME FUNCTIONS =====
@@ -495,7 +542,6 @@ Be smart with money and you'll have a bright future!
     setDragDropScore(0);
     setMatchedItems([]);
     setDraggedItem(null);
-    // Shuffle items
     const shuffled = [...dragDropItems].sort(() => Math.random() - 0.5);
     setDragItems(shuffled);
     setDropTargets([...dragDropItems]);
@@ -512,12 +558,10 @@ Be smart with money and you'll have a bright future!
     if (!target || target.matched) return;
 
     if (draggedItem.id === target.id) {
-      // Match found!
       const newMatched = [...matchedItems, draggedItem.id];
       setMatchedItems(newMatched);
       setDragDropScore(dragDropScore + 10);
       
-      // Update items
       setDragItems(dragItems.map(item => 
         item.id === draggedItem.id ? { ...item, matched: true } : item
       ));
@@ -691,7 +735,7 @@ Be smart with money and you'll have a bright future!
     <div class="stars" style="bottom:10px;right:10px;">⭐</div>
     <div class="badge">🏅</div>
     <div class="deco-top">✨🌟✨🌟✨</div>
-    <h1>🎓 AI WEALTH HUB</h1>
+    <h1>🎓 AI WEALTH GLOBAL HEALTH</h1>
     <div class="subtitle">🌟 Certificate of Achievement 🌟</div>
     <div class="seal">🏆</div>
     <div class="name">${name.toUpperCase()}</div>
@@ -703,7 +747,8 @@ Be smart with money and you'll have a bright future!
     <div class="footer">
       <span>🤖 AI Explorer</span>
       <span>💰 Money Master</span>
-      <span>🚀 Future Leader</span>
+      <span>🌍 Global Citizen</span>
+      <span>❤️ Health Advocate</span>
     </div>
     <div class="deco-bottom">✨🌟✨🌟✨</div>
     <div style="margin-top:10px;font-size:12px;color:#aaa;">
@@ -717,7 +762,7 @@ Be smart with money and you'll have a bright future!
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `Certificate_${name}_AI_Wealth_Hub.html`;
+    a.download = `Certificate_${name}_AI_Wealth_Global_Health.html`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -1034,7 +1079,7 @@ Be smart with money and you'll have a bright future!
             </div>
           </motion.section>
 
-          {/* ===== SECTION 7: RESOURCES & ACTIVITIES ===== */}
+          {/* ===== SECTION 7: RESOURCES & ACTIVITIES - UPDATED ===== */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -1047,7 +1092,7 @@ Be smart with money and you'll have a bright future!
             
             <div className="max-w-5xl mx-auto space-y-6">
               
-              {/* ===== POWERPOINTS - CLEAN VERSION ===== */}
+              {/* ===== POWERPOINTS - UPDATED WITH CORRECT DOWNLOADS ===== */}
               <div className="bg-gradient-to-r from-purple-100 via-pink-100 to-rose-100 rounded-2xl p-6 shadow-lg border-2 border-purple-300">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-4xl animate-bounce">📊</span>
@@ -1214,69 +1259,70 @@ Be smart with money and you'll have a bright future!
                 <div className="mt-3 text-xs text-stone-500 text-center">🧠 10 fun levels about AI and Finance! Answer correctly to race the rabbit! 🐇</div>
               </div>
 
-              {/* ===== ACTIVITY 2: QUIZ SHOW GAME ===== */}
+              {/* ===== ACTIVITY 2: MEMORY CARD GAME (NEW - REPLACES QUIZ SHOW) ===== */}
               <div className="bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 rounded-2xl p-6 shadow-lg border-2 border-indigo-300">
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="text-4xl animate-pulse">🎯</span>
-                  <h3 className="text-2xl font-bold text-indigo-700">Activity 2: Quiz Show! 🧠</h3>
+                  <span className="text-4xl animate-pulse">🧠</span>
+                  <h3 className="text-2xl font-bold text-indigo-700">Activity 2: Memory Match! 🃏</h3>
                 </div>
-                <p className="text-stone-700 mb-4 font-medium">Test your knowledge with 10 fun questions!</p>
+                <p className="text-stone-700 mb-4 font-medium">Flip cards and match the AI & Finance pairs!</p>
                 
-                {!quizShowStarted ? (
-                  <button onClick={startQuizShow} className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-8 py-3 rounded-full hover:scale-105 transition flex items-center gap-3 text-lg font-bold shadow-lg hover:shadow-xl mx-auto">🎯 Start Quiz Show!</button>
+                {!memoryGameStarted ? (
+                  <button onClick={startMemoryGame} className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-8 py-3 rounded-full hover:scale-105 transition flex items-center gap-3 text-lg font-bold shadow-lg hover:shadow-xl mx-auto">🃏 Start Memory Game!</button>
                 ) : (
                   <div className="bg-white rounded-xl p-6 shadow-inner">
-                    {!quizShowComplete ? (
+                    {!memoryGameComplete ? (
                       <div>
-                        <div className="flex justify-between items-center mb-4">
-                          <span className="text-sm font-bold text-indigo-700">Question {quizShowIndex + 1} of {quizShowQuestions.length}</span>
-                          <span className="text-sm font-bold text-green-700">⭐ Score: {quizShowScore} points</span>
+                        <div className="flex justify-between items-center mb-4 flex-wrap gap-2">
+                          <span className="text-sm font-bold text-indigo-700">⭐ Score: {memoryGameScore} points</span>
+                          <span className="text-sm font-bold text-purple-700">Moves: {memoryMoves}</span>
+                          <span className="text-sm font-bold text-green-700">Pairs: {memoryPairsFound}/6</span>
                         </div>
-                        <h4 className="text-xl font-bold text-gray-800 mb-4">{quizShowQuestions[quizShowIndex].q}</h4>
-                        <div className="space-y-3">
-                          {quizShowQuestions[quizShowIndex].options.map((opt, idx) => (
-                            <button
-                              key={idx}
-                              onClick={() => handleQuizShowAnswer(idx)}
-                              disabled={quizShowSelected !== null}
-                              className={`block w-full text-left px-4 py-3 rounded-xl border-2 transition-all ${
-                                quizShowSelected !== null ? 'cursor-default opacity-70' : 'hover:bg-indigo-100 hover:border-indigo-400 bg-white hover:scale-[1.02]'
-                              } ${quizShowSelected === idx && idx === quizShowQuestions[quizShowIndex].correct ? 'border-green-500 bg-green-50' : ''}
-                                ${quizShowSelected === idx && idx !== quizShowQuestions[quizShowIndex].correct ? 'border-red-500 bg-red-50' : ''}
-                                ${quizShowSelected !== null && idx === quizShowQuestions[quizShowIndex].correct ? 'border-green-500 bg-green-50' : ''}`}
-                            >
-                              <span className="font-bold">{String.fromCharCode(65 + idx)}. </span>{opt}
-                              {quizShowSelected !== null && idx === quizShowQuestions[quizShowIndex].correct && ' ✅'}
-                              {quizShowSelected === idx && idx !== quizShowQuestions[quizShowIndex].correct && ' ❌'}
-                            </button>
-                          ))}
+                        <div className="grid grid-cols-4 gap-2 sm:gap-3">
+                          {memoryCards.map((card, index) => {
+                            const isFlipped = memoryFlipped.includes(index) || memoryMatched.includes(index);
+                            const isMatched = memoryMatched.includes(index);
+                            return (
+                              <div
+                                key={index}
+                                onClick={() => handleMemoryCardClick(index)}
+                                className={`aspect-square rounded-xl border-2 transition-all duration-300 cursor-pointer flex items-center justify-center text-3xl sm:text-4xl ${
+                                  isFlipped 
+                                    ? isMatched 
+                                      ? 'bg-green-100 border-green-400' 
+                                      : 'bg-indigo-100 border-indigo-400'
+                                    : 'bg-gradient-to-br from-indigo-500 to-purple-500 border-indigo-400 hover:scale-105'
+                                }`}
+                              >
+                                {isFlipped ? card.emoji : '❓'}
+                              </div>
+                            );
+                          })}
                         </div>
-                        {quizShowFeedback && (
-                          <div className={`mt-4 p-4 rounded-lg border-2 ${quizShowFeedback.includes('Correct') ? 'bg-green-100 border-green-400 text-green-700' : 'bg-red-100 border-red-400 text-red-700'}`}>
-                            <p className="font-bold text-lg">{quizShowFeedback}</p>
-                          </div>
-                        )}
+                        <div className="mt-4 text-center">
+                          <p className="text-xs text-stone-500">💡 Match each term with its pair to earn points!</p>
+                        </div>
                       </div>
                     ) : (
                       <div className="text-center py-6">
-                        <div className="text-6xl mb-4">🏆</div>
-                        <h4 className="text-2xl font-bold text-indigo-700">🎉 QUIZ COMPLETE! 🎉</h4>
-                        <p className="text-xl font-semibold text-gray-700">Final Score: {quizShowScore} points</p>
+                        <div className="text-6xl mb-4 animate-bounce">🏆</div>
+                        <h4 className="text-2xl font-bold text-indigo-700">🎉 MEMORY MASTER! 🎉</h4>
+                        <p className="text-xl font-semibold text-gray-700">Final Score: {memoryGameScore} points</p>
+                        <p className="text-lg text-gray-600">Pairs Found: {memoryPairsFound}/6</p>
+                        <p className="text-lg text-gray-600">Total Moves: {memoryMoves}</p>
                         <div className="mt-4 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl border-2 border-indigo-300">
                           <p className="text-lg font-bold text-gray-700">
-                            {quizShowScore === 100 ? '🌟 PERFECT! You\'re a Genius!' : 
-                             quizShowScore >= 80 ? '🌟 Excellent! Superstar Learner!' :
-                             quizShowScore >= 60 ? '💪 Great job! Keep learning!' :
-                             quizShowScore >= 40 ? '📖 Good effort! Try again!' :
-                             '🎯 Keep practicing! You\'ll improve!'}
+                            {memoryPairsFound === 6 ? '🌟 PERFECT! You\'re a Memory Master!' : 
+                             memoryPairsFound >= 4 ? '🌟 Great job! Keep practicing!' :
+                             '💪 Good effort! Try again to match them all!'}
                           </p>
                         </div>
-                        <button onClick={resetQuizShow} className="mt-4 px-8 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-full hover:scale-105 transition font-bold">🔄 Play Again</button>
+                        <button onClick={resetMemoryGame} className="mt-4 px-8 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-full hover:scale-105 transition font-bold">🔄 Play Again</button>
                       </div>
                     )}
                   </div>
                 )}
-                <div className="mt-3 text-xs text-stone-500 text-center">🧠 10 questions about AI and Finance! Test your knowledge! 🎯</div>
+                <div className="mt-3 text-xs text-stone-500 text-center">🧠 Match 6 pairs of AI and Finance terms! Test your memory! 🃏</div>
               </div>
 
               {/* ===== ACTIVITY 3: DRAG & DROP MATCH ===== */}
@@ -1397,7 +1443,7 @@ Be smart with money and you'll have a bright future!
             <p className="text-center text-sm text-stone-500 mt-4">💡 Your work could be featured on our platform! We'll review and post it soon.</p>
           </motion.section>
 
-          {/* ===== SECTION 9: CERTIFICATES ===== */}
+          {/* ===== SECTION 9: CERTIFICATES - UPDATED WITH AI WEALTH GLOBAL HEALTH ===== */}
           <motion.section 
             id="certificateSection"
             initial={{ opacity: 0, y: 20 }}
@@ -1412,7 +1458,7 @@ Be smart with money and you'll have a bright future!
                 <h3 className="text-3xl font-bold text-purple-700 mt-3">🎉 Free Certificates for Kids! 🎉</h3>
                 <p className="text-stone-700 max-w-2xl mx-auto mt-2 text-lg">Complete our courses and earn <span className="font-bold text-purple-700">super cool certificates</span> with your name on them!</p>
                 
-                <div className="grid md:grid-cols-3 gap-4 mt-6">
+                <div className="grid md:grid-cols-4 gap-4 mt-6">
                   <div className="bg-white rounded-2xl p-5 shadow-lg border-2 border-purple-300 hover:scale-105 transition transform">
                     <div className="text-4xl">🤖</div>
                     <h4 className="font-bold text-lg text-purple-700 mt-2">AI Explorer</h4>
@@ -1425,11 +1471,17 @@ Be smart with money and you'll have a bright future!
                     <p className="text-sm text-stone-500">Complete 5 Finance lessons</p>
                     <div className="mt-3 bg-green-100 rounded-full px-3 py-1 text-xs font-bold text-green-700 inline-block">🎯 5 Videos</div>
                   </div>
-                  <div className="bg-white rounded-2xl p-5 shadow-lg border-2 border-yellow-300 hover:scale-105 transition transform">
-                    <div className="text-4xl">🌟</div>
-                    <h4 className="font-bold text-lg text-orange-700 mt-2">AI & Finance Pro</h4>
-                    <p className="text-sm text-stone-500">Complete 10 combined lessons</p>
-                    <div className="mt-3 bg-orange-100 rounded-full px-3 py-1 text-xs font-bold text-orange-700 inline-block">🎯 10 Videos</div>
+                  <div className="bg-white rounded-2xl p-5 shadow-lg border-2 border-blue-300 hover:scale-105 transition transform">
+                    <div className="text-4xl">🌍</div>
+                    <h4 className="font-bold text-lg text-blue-700 mt-2">Global Citizen</h4>
+                    <p className="text-sm text-stone-500">Complete 5 Global lessons</p>
+                    <div className="mt-3 bg-blue-100 rounded-full px-3 py-1 text-xs font-bold text-blue-700 inline-block">🎯 5 Videos</div>
+                  </div>
+                  <div className="bg-white rounded-2xl p-5 shadow-lg border-2 border-rose-300 hover:scale-105 transition transform">
+                    <div className="text-4xl">❤️</div>
+                    <h4 className="font-bold text-lg text-rose-700 mt-2">Health Advocate</h4>
+                    <p className="text-sm text-stone-500">Complete 5 Health lessons</p>
+                    <div className="mt-3 bg-rose-100 rounded-full px-3 py-1 text-xs font-bold text-rose-700 inline-block">🎯 5 Videos</div>
                   </div>
                 </div>
 
@@ -1438,10 +1490,11 @@ Be smart with money and you'll have a bright future!
                   <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
                     <input type="text" value={certificateName} onChange={(e) => setCertificateName(e.target.value)} placeholder="Enter your full name" className="flex-1 px-4 py-2.5 rounded-full border-2 border-purple-300 focus:border-purple-500 focus:outline-none transition-all text-center sm:text-left" />
                     <select value={certificateType} onChange={(e) => setCertificateType(e.target.value)} className="px-4 py-2.5 rounded-full border-2 border-purple-300 focus:border-purple-500 focus:outline-none transition-all bg-white">
-                      <option value="AI & Finance Explorer">AI & Finance Explorer</option>
+                      <option value="AI Wealth Global Health Explorer">AI Wealth Global Health Explorer</option>
                       <option value="AI Explorer">AI Explorer</option>
                       <option value="Money Master">Money Master</option>
-                      <option value="AI & Finance Pro">AI & Finance Pro</option>
+                      <option value="Global Citizen">Global Citizen</option>
+                      <option value="Health Advocate">Health Advocate</option>
                     </select>
                     <button onClick={() => downloadCertificate(certificateName, certificateType)} className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-2.5 rounded-full font-bold hover:scale-105 transition shadow-lg hover:shadow-xl whitespace-nowrap">📥 Download Certificate</button>
                   </div>
