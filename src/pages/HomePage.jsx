@@ -22,7 +22,354 @@ export default function HomePage() {
   const [certificateName, setCertificateName] = useState('');
   const [certificateType, setCertificateType] = useState('');
 
-  // ===== LEARNING GAME LEVELS (10 levels) =====
+  // ===== WORD SEARCH ACTIVITY STATES =====
+  const [wordSearchStarted, setWordSearchStarted] = useState(false);
+  const [wordSearchComplete, setWordSearchComplete] = useState(false);
+  const [foundWords, setFoundWords] = useState([]);
+  const [wordSearchScore, setWordSearchScore] = useState(0);
+
+  // ===== MATCHING GAME STATES =====
+  const [matchingStarted, setMatchingStarted] = useState(false);
+  const [matchingComplete, setMatchingComplete] = useState(false);
+  const [selectedCards, setSelectedCards] = useState([]);
+  const [matchedPairs, setMatchedPairs] = useState([]);
+  const [matchingScore, setMatchingScore] = useState(0);
+
+  // ===== WORD SEARCH WORDS =====
+  const wordSearchWords = [
+    { word: 'AI', found: false, emoji: '🤖' },
+    { word: 'MONEY', found: false, emoji: '💰' },
+    { word: 'FINANCE', found: false, emoji: '💳' },
+    { word: 'BUDGET', found: false, emoji: '📊' },
+    { word: 'SAVINGS', found: false, emoji: '🏦' },
+    { word: 'SMART', found: false, emoji: '🧠' },
+    { word: 'ROBOT', found: false, emoji: '🤖' },
+    { word: 'FUTURE', found: false, emoji: '🚀' }
+  ];
+
+  // ===== MATCHING PAIRS =====
+  const matchingPairs = [
+    { id: 1, term: 'AI', definition: 'Artificial Intelligence', emoji: '🤖' },
+    { id: 2, term: 'Budget', definition: 'Plan for your money', emoji: '📊' },
+    { id: 3, term: 'Savings', definition: 'Money put aside', emoji: '🏦' },
+    { id: 4, term: 'Robot', definition: 'Machine that helps', emoji: '🤖' },
+    { id: 5, term: 'Finance', definition: 'Managing money', emoji: '💰' },
+    { id: 6, term: 'Future', definition: 'What\'s coming next', emoji: '🚀' }
+  ];
+
+  const allVideos = [...aiVideos, ...financeVideos];
+  
+  const categories = {
+    'AI Basics': allVideos.filter(v => v.category === 'AI Basics'),
+    'AI Course': allVideos.filter(v => v.category === 'AI Course'),
+    'Machine Learning': allVideos.filter(v => v.category === 'Machine Learning'),
+    'Groww': allVideos.filter(v => v.category === 'Groww'),
+    'Pranjal Kamra': allVideos.filter(v => v.category === 'Pranjal Kamra'),
+    'Finance Tips': allVideos.filter(v => v.category === 'Finance Tips'),
+    'Other': allVideos.filter(v => !['AI Basics', 'AI Course', 'Machine Learning', 'Groww', 'Pranjal Kamra', 'Finance Tips'].includes(v.category))
+  };
+
+  // ===== BEAUTIFUL AI PPT CONTENT - 5 SLIDES =====
+  const aiPPTContent = `🌟🤖 AI: WHAT, WHY & FUTURE - KID'S EDITION 🤖🌟
+==============================================================
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎨 SLIDE 1: WHAT IS AI? 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✨ AI stands for ARTIFICIAL INTELLIGENCE
+✨ It's like giving a computer a BRAIN! 🧠
+✨ AI helps machines THINK, LEARN, and DECIDE
+✨ Think of it as a SMART ROBOT FRIEND! 🤖
+✨ Examples: Siri, Alexa, ChatGPT, Self-driving cars
+✨ AI is everywhere around us!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎨 SLIDE 2: WHERE IS AI USED? 🌍
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📱 Smartphones - Face unlock, Voice assistants
+🎮 Video Games - Smart enemies that learn
+🚗 Self-driving Cars - Drive themselves!
+🏥 Hospitals - Help doctors save lives
+🛒 Online Shopping - Recommend products
+📚 Education - Personalized learning
+🎵 Music Apps - Suggest songs you like
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎨 SLIDE 3: WHY IS AI IMPORTANT? ❓
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚡ AI helps us do things FASTER and BETTER!
+⚡ It solves problems humans find too hard
+⚡ It helps us discover NEW things
+⚡ AI never gets tired - works 24/7! 🕐
+⚡ It helps in SPACE EXPLORATION! 🚀
+⚡ AI can predict the weather! 🌤️
+⚡ Fun Fact: AI can beat humans at chess! ♟️
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎨 SLIDE 4: BENEFITS OF AI ✨
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⭐ SAVES TIME - AI does tasks quickly
+⭐ HELPS WITH DIFFICULT TASKS - Like solving puzzles
+⭐ WORKS 24/7 - Never needs sleep!
+⭐ MAKES FEWER MISTAKES - Very accurate
+⭐ HELPS CREATE NEW INVENTIONS - Like robots! 
+⭐ SAVES LIVES - Helps doctors diagnose diseases
+⭐ MAKES LEARNING FUN - Interactive and engaging
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎨 SLIDE 5: AI IN THE FUTURE 🚀
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 AI will be EVERYWHERE!
+🚀 Robots will help with household chores
+🚀 AI teachers will personalize learning
+🚀 We'll explore space with AI assistants
+🚀 AI will help SOLVE CLIMATE CHANGE! 🌍
+🚀 AI will CURE DISEASES! 💊
+🚀 AI will help humans, not replace them!
+🚀 THE FUTURE IS BRIGHT WITH AI! 🌟
+
+🌈 Remember: You can be part of the AI revolution!
+   Start learning today! 🎓`;
+
+  // ===== BEAUTIFUL FINANCE PPT CONTENT - 5 SLIDES =====
+  const financePPTContent = `🌟💰 FINANCE: WHAT, WHY & FUTURE - KID'S EDITION 💰🌟
+==============================================================
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎨 SLIDE 1: WHAT IS FINANCE? 💰
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✨ Finance is all about MONEY! 💵
+✨ It's how we EARN, SAVE, SPEND, and GROW money
+✨ Think of it as the SUPERPOWER of managing money! 💪
+✨ A piggy bank with a cape - that's finance! 🦸
+✨ Finance helps us achieve our DREAMS! 🌟
+✨ Everyone can learn to be a money expert!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎨 SLIDE 2: WHY IS FINANCE IMPORTANT? ❓
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✨ To buy things we WANT and things we NEED
+✨ To SAVE money for the future 🏦
+✨ To avoid running out of money
+✨ To help our families and communities
+✨ To have FREEDOM to do what we love! 🎈
+✨ To be PREPARED for emergencies
+✨ To BUILD WEALTH for the future
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎨 SLIDE 3: HOW TO SAVE MONEY 🐷
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💰 Save a little bit EVERY DAY
+💰 Use a piggy bank or savings jar 🏺
+💰 Set a savings goal (like a new video game!) 🎮
+💰 Watch your money GROW like a plant! 🌱
+💰 Keep track of your spending
+💰 Ask yourself: "Do I really need this?"
+💰 Fun Fact: Even ₹10 a day = ₹3650 a year!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎨 SLIDE 4: SMART SPENDING 🛒
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🧠 Think before you buy: NEED it or WANT it?
+🧠 Compare prices before buying
+🧠 Wait for sales and discounts
+🧠 Save up for BIG purchases
+🧠 Budget your money - plan your spending!
+🧠 Avoid impulse buying
+🧠 Remember: Every rupee counts!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎨 SLIDE 5: YOUR FINANCIAL FUTURE 🌟
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🌟 You can become a MONEY EXPERT!
+🌟 Learn to invest, save, and grow your wealth
+🌟 Financial freedom = You can do what you LOVE
+🌟 Start learning about money TODAY!
+🌟 Remember: Every millionaire started with one coin! 💰
+🌟 Be SMART with money from a young age
+🌟 The future is YOURS to build!
+
+🌈 Be smart with money and you'll have a bright future!
+   Start your financial journey today! 🎓`;
+
+  // ===== DOWNLOAD FUNCTIONS =====
+  const downloadPPT = (content, filename) => {
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  // ===== VIDEOS & COURSES - BEAUTIFUL WITH BLUE LINKS =====
+  const downloadVideoLinks = () => {
+    const htmlContent = `<!DOCTYPE html>
+<html>
+<head>
+  <title>🎥 AI & Finance Resources</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Segoe UI', Arial, sans-serif; 
+      padding: 40px; 
+      max-width: 900px; 
+      margin: auto; 
+      background: linear-gradient(135deg, #f0f7ff, #e8f0fe);
+      min-height: 100vh;
+    }
+    .container { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+    h1 { color: #ff6b35; text-align: center; font-size: 36px; margin-bottom: 10px; }
+    .subtitle { text-align: center; color: #888; margin-bottom: 30px; font-size: 16px; }
+    .section { 
+      background: #f8f9fa; 
+      padding: 20px 25px; 
+      border-radius: 15px; 
+      margin: 20px 0; 
+      border-left: 5px solid #ff6b35;
+    }
+    .section h2 { color: #2d3436; margin-bottom: 15px; font-size: 22px; }
+    .section a { 
+      display: block; 
+      color: #0066cc; 
+      text-decoration: none; 
+      padding: 8px 12px; 
+      font-weight: 600; 
+      border-radius: 8px;
+      transition: all 0.3s;
+    }
+    .section a:hover { 
+      background: #e8f0fe; 
+      text-decoration: underline; 
+      color: #ff6b35;
+      padding-left: 18px;
+    }
+    .section a .emoji { margin-right: 8px; }
+    .footer { 
+      text-align: center; 
+      margin-top: 30px; 
+      color: #888; 
+      border-top: 2px solid #eee; 
+      padding-top: 20px;
+      font-size: 14px;
+    }
+    .badge { 
+      display: inline-block; 
+      background: #ff6b35; 
+      color: white; 
+      padding: 4px 12px; 
+      border-radius: 20px; 
+      font-size: 12px;
+      margin-left: 10px;
+    }
+    .blue-link { color: #0066cc; font-weight: bold; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>🎥 FREE AI & FINANCE RESOURCES</h1>
+  <p class="subtitle">📌 Click any <span class="blue-link">blue link</span> below to visit the website</p>
+
+  <div class="section">
+    <h2>📺 YouTube Playlists</h2>
+    <a href="https://www.youtube.com/results?search_query=ai+for+beginners" target="_blank">
+      <span class="emoji">🎬</span> AI for Beginners
+    </a>
+    <a href="https://www.youtube.com/results?search_query=finance+101" target="_blank">
+      <span class="emoji">🎬</span> Finance 101
+    </a>
+    <a href="https://www.youtube.com/results?search_query=machine+learning+basics" target="_blank">
+      <span class="emoji">🎬</span> Machine Learning Basics
+    </a>
+    <a href="https://www.youtube.com/results?search_query=investing+for+kids" target="_blank">
+      <span class="emoji">🎬</span> Investing for Kids
+    </a>
+  </div>
+
+  <div class="section" style="border-left-color: #4ECDC4;">
+    <h2>📚 Free Courses</h2>
+    <a href="https://ai.google/education" target="_blank">
+      <span class="emoji">📖</span> Google AI Education
+    </a>
+    <a href="https://www.khanacademy.org/college-careers-more/financial-literacy" target="_blank">
+      <span class="emoji">📖</span> Khan Academy Financial Literacy
+    </a>
+    <a href="https://www.coursera.org/learn/ai-for-everyone" target="_blank">
+      <span class="emoji">📖</span> Coursera AI For Everyone
+    </a>
+    <a href="https://www.edx.org/learn/finance" target="_blank">
+      <span class="emoji">📖</span> edX Finance for Everyone
+    </a>
+    <a href="https://cs50.harvard.edu/ai/" target="_blank">
+      <span class="emoji">📖</span> Harvard CS50 AI
+    </a>
+    <a href="https://www.stanford.edu/" target="_blank">
+      <span class="emoji">📖</span> Stanford Financial Literacy
+    </a>
+  </div>
+
+  <div class="section" style="border-left-color: #ffe66d;">
+    <h2>📱 Interactive Tools</h2>
+    <a href="https://experiments.withgoogle.com/ai" target="_blank">
+      <span class="emoji">🧪</span> AI Experiments
+    </a>
+    <a href="https://www.howthemarketworks.com/" target="_blank">
+      <span class="emoji">📊</span> Stock Market Game
+    </a>
+    <a href="https://www.practicalmoneyskills.com/" target="_blank">
+      <span class="emoji">💵</span> Practical Money Skills
+    </a>
+    <a href="https://www.tynker.com/ai" target="_blank">
+      <span class="emoji">🤖</span> AI for Kids
+    </a>
+  </div>
+
+  <div class="section" style="border-left-color: #6c5ce7;">
+    <h2>📖 Educational Resources</h2>
+    <a href="https://www.investopedia.com/financial-literacy-for-kids-5112941" target="_blank">
+      <span class="emoji">📚</span> Investopedia for Kids
+    </a>
+    <a href="https://www.unesco.org/en/artificial-intelligence" target="_blank">
+      <span class="emoji">🌍</span> AI Ethics - UNESCO
+    </a>
+    <a href="https://www.weforum.org/" target="_blank">
+      <span class="emoji">💼</span> Future of Work - WEF
+    </a>
+  </div>
+
+  <div class="footer">
+    <p>⭐ Bonus: Daily quizzes and interactive activities available on our platform!</p>
+    <p style="font-size:12px; margin-top:10px;">© 2026 AI Wealth Hub - All resources are free to use</p>
+  </div>
+</div>
+</body>
+</html>`;
+
+    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'AI_Finance_Resources.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  // ===== RABBIT RACING GAME FUNCTIONS =====
   const gameLevels = [
     {
       question: "🤖 What does AI stand for?",
@@ -96,238 +443,6 @@ export default function HomePage() {
     }
   ];
 
-  const allVideos = [...aiVideos, ...financeVideos];
-  
-  const categories = {
-    'AI Basics': allVideos.filter(v => v.category === 'AI Basics'),
-    'AI Course': allVideos.filter(v => v.category === 'AI Course'),
-    'Machine Learning': allVideos.filter(v => v.category === 'Machine Learning'),
-    'Groww': allVideos.filter(v => v.category === 'Groww'),
-    'Pranjal Kamra': allVideos.filter(v => v.category === 'Pranjal Kamra'),
-    'Finance Tips': allVideos.filter(v => v.category === 'Finance Tips'),
-    'Other': allVideos.filter(v => !['AI Basics', 'AI Course', 'Machine Learning', 'Groww', 'Pranjal Kamra', 'Finance Tips'].includes(v.category))
-  };
-
-  // ===== BEAUTIFUL AI PPT CONTENT - FIXED =====
-  const aiPPTContent = `🌟 AI: What, Why & Future - Kid's Edition 🌟
-=========================================================
-
-🎨 SLIDE 1: What is AI? 🤖
---------------------------
-✨ AI stands for ARTIFICIAL INTELLIGENCE
-✨ It's like giving a computer a BRAIN! 🧠
-✨ AI helps machines think, learn, and make decisions
-✨ Think of it as a SMART ROBOT FRIEND! 🤖
-✨ Examples: Siri, Alexa, ChatGPT, Self-driving cars
-
-
-🎨 SLIDE 2: Where is AI Used? 🌍
---------------------------------
-📱 Smartphones - Face unlock, Voice assistants
-🎮 Video Games - Smart enemies that learn
-🚗 Self-driving Cars - Drive themselves!
-🏥 Hospitals - Help doctors save lives
-🛒 Online Shopping - Recommend products you might like
-
-
-🎨 SLIDE 3: Why is AI Important? ❓
------------------------------------
-⚡ AI helps us do things FASTER and BETTER!
-⚡ It solves problems humans find too hard
-⚡ It helps us discover NEW things
-⚡ AI never gets tired - works 24/7! 🕐
-⚡ Fun Fact: AI can beat humans at chess! ♟️
-
-
-🎨 SLIDE 4: Benefits of AI ✨
------------------------------
-⭐ SAVES TIME - AI does tasks quickly
-⭐ HELPS WITH DIFFICULT TASKS - Like solving puzzles
-⭐ WORKS 24/7 - Never needs sleep!
-⭐ MAKES FEWER MISTAKES - Very accurate
-⭐ HELPS CREATE NEW INVENTIONS - Like robots!
-
-
-🎨 SLIDE 5: AI in the Future 🚀
--------------------------------
-🚀 AI will be EVERYWHERE!
-🚀 Robots will help with household chores
-🚀 AI teachers will personalize learning for each student
-🚀 We'll explore space with AI assistants
-🚀 AI will help humans, not replace them!
-🚀 THE FUTURE IS BRIGHT WITH AI! 🌟
-
-
-🌈 Remember: You can be part of the AI revolution! Start learning today! 🎓`;
-
-  // ===== BEAUTIFUL FINANCE PPT CONTENT - FIXED =====
-  const financePPTContent = `💰 Finance: What, Why & Future - Kid's Edition 💰
-===========================================================
-
-🎨 SLIDE 1: What is Finance? 💰
---------------------------------
-✨ Finance is all about MONEY! 💵
-✨ It's how we earn, save, spend, and grow money
-✨ Think of it as the SUPERPOWER of managing money! 💪
-✨ A piggy bank with a cape - that's finance! 🦸
-✨ Finance helps us achieve our DREAMS! 🌟
-
-
-🎨 SLIDE 2: Why is Finance Important? ❓
-----------------------------------------
-✨ To buy things we WANT and things we NEED
-✨ To SAVE money for the future 🏦
-✨ To avoid running out of money
-✨ To help our families and communities
-✨ To have FREEDOM to do what we love! 🎈
-
-
-🎨 SLIDE 3: How to Save Money 🐷
---------------------------------
-💰 Save a little bit EVERY DAY
-💰 Use a piggy bank or savings jar 🏺
-💰 Set a savings goal (like a new video game!) 🎮
-💰 Watch your money GROW like a plant! 🌱
-💰 Fun Fact: Even ₹10 a day adds up to ₹3650 a year!
-
-
-🎨 SLIDE 4: Smart Spending 🛒
------------------------------
-🧠 Think before you buy: Do I NEED it or WANT it?
-🧠 Compare prices before buying
-🧠 Wait for sales and discounts
-🧠 Save up for BIG purchases
-🧠 Budget your money - plan your spending!
-
-
-🎨 SLIDE 5: Your Financial Future 🌟
-------------------------------------
-🌟 You can become a MONEY EXPERT!
-🌟 Learn to invest, save, and grow your wealth
-🌟 Financial freedom = You can do what you LOVE
-🌟 Start learning about money TODAY!
-🌟 Remember: Every millionaire started with one coin! 💰
-
-
-🌈 Be smart with money and you'll have a bright future! Start today! 🎓`;
-
-  // ===== DOWNLOAD FUNCTIONS =====
-  const downloadPPT = (content, filename) => {
-    const blob = new Blob([content], { type: 'application/vnd.ms-powerpoint' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  };
-
-  // ===== FIXED: DOWNLOAD VIDEOS WITH BLUE CLICKABLE LINKS =====
-  const downloadVideoLinks = () => {
-    const content = `🎥 FREE AI & FINANCE VIDEO COURSES / LINKS
-===============================================================
-
-📺 YOUTUBE PLAYLISTS (Click the links below):
-• AI for Beginners: https://www.youtube.com/results?search_query=ai+for+beginners
-• Finance 101: https://www.youtube.com/results?search_query=finance+101
-• Machine Learning Basics: https://www.youtube.com/results?search_query=machine+learning+basics
-• Investing for Kids: https://www.youtube.com/results?search_query=investing+for+kids
-
-📚 FREE COURSES:
-• Google AI Education: https://ai.google/education
-• Khan Academy Financial Literacy: https://www.khanacademy.org/college-careers-more/financial-literacy
-• Coursera AI For Everyone: https://www.coursera.org/learn/ai-for-everyone
-• edX Finance for Everyone: https://www.edx.org/learn/finance
-• Harvard CS50 AI: https://cs50.harvard.edu/ai/
-• Stanford Financial Literacy: https://www.stanford.edu/
-
-📱 INTERACTIVE TOOLS:
-• AI Experiments: https://experiments.withgoogle.com/ai
-• Stock Market Game: https://www.howthemarketworks.com/
-• Interactive Finance Games: https://www.practicalmoneyskills.com/
-• AI for Kids: https://www.tynker.com/ai
-
-📖 EDUCATIONAL RESOURCES:
-• Investopedia for Kids: https://www.investopedia.com/financial-literacy-for-kids-5112941
-• AI Ethics: https://www.unesco.org/en/artificial-intelligence
-• Future of Work: https://www.weforum.org/
-
-⭐ Bonus: Daily quizzes and interactive activities available on our platform!`;
-
-    // Create HTML file with BLUE clickable links
-    const htmlContent = `<!DOCTYPE html>
-<html>
-<head>
-<style>
-  body { font-family: Arial, sans-serif; padding: 40px; max-width: 800px; margin: auto; background: #f5f5f5; }
-  h1 { color: #ff6b35; text-align: center; }
-  .section { background: white; padding: 20px; border-radius: 10px; margin: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-  h2 { color: #2d3436; border-bottom: 2px solid #ff6b35; padding-bottom: 10px; }
-  a { display: block; color: #0066cc; text-decoration: none; padding: 8px 0; font-weight: 600; }
-  a:hover { text-decoration: underline; color: #ff6b35; }
-  .emoji { font-size: 20px; }
-  .footer { text-align: center; margin-top: 30px; color: #888; border-top: 2px solid #eee; padding-top: 20px; }
-  .blue-link { color: #0066cc; font-weight: bold; }
-</style>
-</head>
-<body>
-  <h1>🎥 FREE AI & FINANCE VIDEO COURSES / LINKS</h1>
-  <p style="text-align:center; color:#888;">📌 Click any blue link below to visit the website</p>
-
-  <div class="section">
-    <h2>📺 YouTube Playlists</h2>
-    <a href="https://www.youtube.com/results?search_query=ai+for+beginners" target="_blank">🎬 AI for Beginners</a>
-    <a href="https://www.youtube.com/results?search_query=finance+101" target="_blank">🎬 Finance 101</a>
-    <a href="https://www.youtube.com/results?search_query=machine+learning+basics" target="_blank">🎬 Machine Learning Basics</a>
-    <a href="https://www.youtube.com/results?search_query=investing+for+kids" target="_blank">🎬 Investing for Kids</a>
-  </div>
-
-  <div class="section">
-    <h2>📚 Free Courses</h2>
-    <a href="https://ai.google/education" target="_blank">📖 Google AI Education</a>
-    <a href="https://www.khanacademy.org/college-careers-more/financial-literacy" target="_blank">📖 Khan Academy Financial Literacy</a>
-    <a href="https://www.coursera.org/learn/ai-for-everyone" target="_blank">📖 Coursera AI For Everyone</a>
-    <a href="https://www.edx.org/learn/finance" target="_blank">📖 edX Finance for Everyone</a>
-    <a href="https://cs50.harvard.edu/ai/" target="_blank">📖 Harvard CS50 AI</a>
-    <a href="https://www.stanford.edu/" target="_blank">📖 Stanford Financial Literacy</a>
-  </div>
-
-  <div class="section">
-    <h2>📱 Interactive Tools</h2>
-    <a href="https://experiments.withgoogle.com/ai" target="_blank">🧪 AI Experiments</a>
-    <a href="https://www.howthemarketworks.com/" target="_blank">📊 Stock Market Game</a>
-    <a href="https://www.practicalmoneyskills.com/" target="_blank">💵 Practical Money Skills</a>
-    <a href="https://www.tynker.com/ai" target="_blank">🤖 AI for Kids</a>
-  </div>
-
-  <div class="section">
-    <h2>📖 Educational Resources</h2>
-    <a href="https://www.investopedia.com/financial-literacy-for-kids-5112941" target="_blank">📚 Investopedia for Kids</a>
-    <a href="https://www.unesco.org/en/artificial-intelligence" target="_blank">🌍 AI Ethics - UNESCO</a>
-    <a href="https://www.weforum.org/" target="_blank">💼 Future of Work - WEF</a>
-  </div>
-
-  <div class="footer">
-    <p>⭐ Bonus: Daily quizzes and interactive activities available on our platform!</p>
-    <p style="font-size:12px;">© 2026 AI Wealth Hub - All resources are free to use</p>
-  </div>
-</body>
-</html>`;
-
-    const blob = new Blob([htmlContent], { type: 'text/html' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'AI_Finance_Resources.html';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  };
-
-  // ===== RABBIT RACING GAME FUNCTIONS =====
   const startGame = () => {
     setGameStarted(true);
     setCurrentLevel(0);
@@ -378,7 +493,93 @@ export default function HomePage() {
     setFeedbackMessage('');
   };
 
-  // ===== FIXED: CERTIFICATE DOWNLOAD =====
+  // ===== WORD SEARCH FUNCTIONS =====
+  const startWordSearch = () => {
+    setWordSearchStarted(true);
+    setWordSearchComplete(false);
+    setFoundWords([]);
+    setWordSearchScore(0);
+    // Reset words
+    wordSearchWords.forEach(w => w.found = false);
+  };
+
+  const findWord = (wordIndex) => {
+    if (!wordSearchWords[wordIndex].found) {
+      wordSearchWords[wordIndex].found = true;
+      setFoundWords([...foundWords, wordSearchWords[wordIndex].word]);
+      setWordSearchScore(wordSearchScore + 10);
+      
+      // Check if all words found
+      const allFound = wordSearchWords.every(w => w.found);
+      if (allFound) {
+        setWordSearchComplete(true);
+        setTimeout(() => {
+          alert('🎉 You found ALL the words! You\'re a Word Search Champion! 🏆');
+        }, 500);
+      }
+    }
+  };
+
+  const resetWordSearch = () => {
+    setWordSearchStarted(false);
+    setWordSearchComplete(false);
+    setFoundWords([]);
+    setWordSearchScore(0);
+    wordSearchWords.forEach(w => w.found = false);
+  };
+
+  // ===== MATCHING GAME FUNCTIONS =====
+  const startMatching = () => {
+    setMatchingStarted(true);
+    setMatchingComplete(false);
+    setSelectedCards([]);
+    setMatchedPairs([]);
+    setMatchingScore(0);
+  };
+
+  const handleCardClick = (cardId, isTerm) => {
+    if (selectedCards.length === 2) return;
+    if (selectedCards.some(c => c.id === cardId && c.isTerm === isTerm)) return;
+    if (matchedPairs.some(p => p.id === cardId)) return;
+
+    const newSelected = [...selectedCards, { id: cardId, isTerm: isTerm }];
+    setSelectedCards(newSelected);
+
+    if (newSelected.length === 2) {
+      const first = newSelected[0];
+      const second = newSelected[1];
+      const pair = matchingPairs.find(p => p.id === first.id || p.id === second.id);
+
+      if (first.id === second.id && first.isTerm !== second.isTerm) {
+        // Match found!
+        setMatchedPairs([...matchedPairs, pair]);
+        setMatchingScore(matchingScore + 10);
+        setSelectedCards([]);
+
+        if (matchedPairs.length + 1 === matchingPairs.length) {
+          setMatchingComplete(true);
+          setTimeout(() => {
+            alert('🎉 You matched ALL pairs! You\'re a Matching Master! 🏆');
+          }, 500);
+        }
+      } else {
+        // No match
+        setTimeout(() => {
+          setSelectedCards([]);
+        }, 1000);
+      }
+    }
+  };
+
+  const resetMatching = () => {
+    setMatchingStarted(false);
+    setMatchingComplete(false);
+    setSelectedCards([]);
+    setMatchedPairs([]);
+    setMatchingScore(0);
+  };
+
+  // ===== CERTIFICATE DOWNLOAD =====
   const downloadCertificate = (name, type) => {
     if (!name || name.trim() === '') {
       alert('🎓 Please enter your name first!');
@@ -556,7 +757,6 @@ export default function HomePage() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 
-    // Show success message
     alert(`🎉 Certificate for "${name}" downloaded successfully! 🎉\n\n📂 Check your downloads folder.\n🖨️ You can open the HTML file and print it!`);
   };
 
@@ -566,6 +766,28 @@ export default function HomePage() {
     setSubmissionText('');
     setSubmissionFile(null);
   };
+
+  // ===== RENDER MATCHING CARDS =====
+  const renderMatchingCards = () => {
+    const allCards = [];
+    matchingPairs.forEach(pair => {
+      allCards.push({ id: pair.id, text: pair.term, emoji: pair.emoji, isTerm: true });
+      allCards.push({ id: pair.id, text: pair.definition, emoji: pair.emoji, isTerm: false });
+    });
+    // Shuffle
+    for (let i = allCards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [allCards[i], allCards[j]] = [allCards[j], allCards[i]];
+    }
+    return allCards;
+  };
+
+  const [matchingCards, setMatchingCards] = useState([]);
+
+  // Initialize matching cards when game starts
+  if (matchingStarted && matchingCards.length === 0) {
+    setMatchingCards(renderMatchingCards());
+  }
 
   return (
     <div className="bg-[#FAF8F5] text-stone-800 min-h-screen font-sans antialiased">
@@ -887,59 +1109,98 @@ export default function HomePage() {
             
             <div className="max-w-5xl mx-auto space-y-6">
               
-              {/* ===== POWERPOINTS - BEAUTIFUL VERSION ===== */}
+              {/* ===== POWERPOINTS - BEAUTIFUL VERSION WITH 5 SLIDES ===== */}
               <div className="bg-gradient-to-r from-purple-100 via-pink-100 to-rose-100 rounded-2xl p-6 shadow-lg border-2 border-purple-300">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-4xl animate-bounce">📊</span>
                   <h3 className="text-2xl font-bold text-purple-700">Beautiful PowerPoints</h3>
                 </div>
                 <p className="text-stone-700 mb-4 font-medium">✨ 5 attractive slides each with emojis - perfect for kids!</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {/* AI PPT Card */}
-                  <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-md border-2 border-purple-200 hover:shadow-xl transition">
-                    <div className="flex items-center gap-3 mb-2">
-                      <span className="text-3xl">🤖</span>
-                      <span className="font-bold text-purple-700 text-lg">AI Presentation</span>
-                    </div>
-                    <div className="text-xs text-stone-500 space-y-1 mb-3">
-                      <p>📌 Slide 1: What is AI?</p>
-                      <p>📌 Slide 2: Where is AI used?</p>
-                      <p>📌 Slide 3: Why learn AI?</p>
-                      <p>📌 Slide 4: Benefits of AI</p>
-                      <p>📌 Slide 5: AI in the Future</p>
-                    </div>
-                    <button 
-                      onClick={() => downloadPPT(aiPPTContent, 'AI_What_Why_Benefits.ppt')} 
-                      className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2.5 rounded-full hover:scale-105 transition flex items-center justify-center gap-2 shadow-md hover:shadow-lg text-sm font-bold"
-                    >
-                      ⬇️ Download AI PPT
-                    </button>
+                
+                {/* AI PPT Preview */}
+                <div className="bg-white/90 rounded-xl p-4 mb-4 border-2 border-purple-200">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-2xl">🤖</span>
+                    <span className="font-bold text-purple-700">AI Presentation - 5 Slides</span>
                   </div>
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-xs">
+                    <div className="bg-purple-50 p-2 rounded text-center">
+                      <span className="block text-lg">🤖</span>
+                      <span className="font-bold">Slide 1</span>
+                      <p className="text-[10px] text-stone-500">What is AI?</p>
+                    </div>
+                    <div className="bg-purple-50 p-2 rounded text-center">
+                      <span className="block text-lg">🌍</span>
+                      <span className="font-bold">Slide 2</span>
+                      <p className="text-[10px] text-stone-500">Where is AI used?</p>
+                    </div>
+                    <div className="bg-purple-50 p-2 rounded text-center">
+                      <span className="block text-lg">❓</span>
+                      <span className="font-bold">Slide 3</span>
+                      <p className="text-[10px] text-stone-500">Why is AI important?</p>
+                    </div>
+                    <div className="bg-purple-50 p-2 rounded text-center">
+                      <span className="block text-lg">✨</span>
+                      <span className="font-bold">Slide 4</span>
+                      <p className="text-[10px] text-stone-500">Benefits of AI</p>
+                    </div>
+                    <div className="bg-purple-50 p-2 rounded text-center">
+                      <span className="block text-lg">🚀</span>
+                      <span className="font-bold">Slide 5</span>
+                      <p className="text-[10px] text-stone-500">AI in the Future</p>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={() => downloadPPT(aiPPTContent, 'AI_5_Slides_Kid_Edition.txt')} 
+                    className="mt-3 w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-full hover:scale-105 transition flex items-center justify-center gap-2 shadow-md hover:shadow-lg text-sm font-bold"
+                  >
+                    ⬇️ Download AI PPT (5 Slides)
+                  </button>
+                </div>
 
-                  {/* Finance PPT Card */}
-                  <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-md border-2 border-green-200 hover:shadow-xl transition">
-                    <div className="flex items-center gap-3 mb-2">
-                      <span className="text-3xl">💰</span>
-                      <span className="font-bold text-green-700 text-lg">Finance Presentation</span>
-                    </div>
-                    <div className="text-xs text-stone-500 space-y-1 mb-3">
-                      <p>📌 Slide 1: What is Finance?</p>
-                      <p>📌 Slide 2: Why learn Finance?</p>
-                      <p>📌 Slide 3: How to Save Money</p>
-                      <p>📌 Slide 4: Smart Spending</p>
-                      <p>📌 Slide 5: Financial Future</p>
-                    </div>
-                    <button 
-                      onClick={() => downloadPPT(financePPTContent, 'Finance_What_Why_Benefits.ppt')} 
-                      className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2.5 rounded-full hover:scale-105 transition flex items-center justify-center gap-2 shadow-md hover:shadow-lg text-sm font-bold"
-                    >
-                      ⬇️ Download Finance PPT
-                    </button>
+                {/* Finance PPT Preview */}
+                <div className="bg-white/90 rounded-xl p-4 border-2 border-green-200">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-2xl">💰</span>
+                    <span className="font-bold text-green-700">Finance Presentation - 5 Slides</span>
                   </div>
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-xs">
+                    <div className="bg-green-50 p-2 rounded text-center">
+                      <span className="block text-lg">💰</span>
+                      <span className="font-bold">Slide 1</span>
+                      <p className="text-[10px] text-stone-500">What is Finance?</p>
+                    </div>
+                    <div className="bg-green-50 p-2 rounded text-center">
+                      <span className="block text-lg">❓</span>
+                      <span className="font-bold">Slide 2</span>
+                      <p className="text-[10px] text-stone-500">Why is Finance important?</p>
+                    </div>
+                    <div className="bg-green-50 p-2 rounded text-center">
+                      <span className="block text-lg">🐷</span>
+                      <span className="font-bold">Slide 3</span>
+                      <p className="text-[10px] text-stone-500">How to Save Money</p>
+                    </div>
+                    <div className="bg-green-50 p-2 rounded text-center">
+                      <span className="block text-lg">🛒</span>
+                      <span className="font-bold">Slide 4</span>
+                      <p className="text-[10px] text-stone-500">Smart Spending</p>
+                    </div>
+                    <div className="bg-green-50 p-2 rounded text-center">
+                      <span className="block text-lg">🌟</span>
+                      <span className="font-bold">Slide 5</span>
+                      <p className="text-[10px] text-stone-500">Financial Future</p>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={() => downloadPPT(financePPTContent, 'Finance_5_Slides_Kid_Edition.txt')} 
+                    className="mt-3 w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2 rounded-full hover:scale-105 transition flex items-center justify-center gap-2 shadow-md hover:shadow-lg text-sm font-bold"
+                  >
+                    ⬇️ Download Finance PPT (5 Slides)
+                  </button>
                 </div>
               </div>
 
-              {/* ===== VIDEOS & COURSES - FIXED WITH BLUE LINKS ===== */}
+              {/* ===== VIDEOS & COURSES - KEPT BEAUTIFUL ===== */}
               <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-6 shadow-md border-2 border-blue-200">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">🎬</span>
@@ -960,11 +1221,11 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* ===== RABBIT RACING GAME ===== */}
+              {/* ===== ACTIVITY 1: RABBIT RACING GAME ===== */}
               <div className="bg-gradient-to-r from-yellow-50 via-orange-50 to-amber-50 rounded-2xl p-6 shadow-lg border-2 border-yellow-300">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-4xl animate-bounce">🐇</span>
-                  <h3 className="text-2xl font-bold text-orange-700">Race the Rabbit! 🏁</h3>
+                  <h3 className="text-2xl font-bold text-orange-700">Activity 1: Race the Rabbit! 🏁</h3>
                 </div>
                 <p className="text-stone-700 mb-4 font-medium">Answer correctly to make the rabbit hop forward! 🐇</p>
                 
@@ -1094,6 +1355,138 @@ export default function HomePage() {
                 </div>
               </div>
 
+              {/* ===== ACTIVITY 2: WORD SEARCH ===== */}
+              <div className="bg-gradient-to-r from-green-50 via-teal-50 to-cyan-50 rounded-2xl p-6 shadow-lg border-2 border-green-300">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-4xl animate-bounce">🔍</span>
+                  <h3 className="text-2xl font-bold text-green-700">Activity 2: Word Search! 📝</h3>
+                </div>
+                <p className="text-stone-700 mb-4 font-medium">Find all the AI & Finance words! Click a word to find it!</p>
+                
+                {!wordSearchStarted ? (
+                  <button 
+                    onClick={startWordSearch} 
+                    className="bg-gradient-to-r from-green-500 to-teal-500 text-white px-8 py-3 rounded-full hover:scale-105 transition flex items-center gap-3 text-lg font-bold shadow-lg hover:shadow-xl mx-auto"
+                  >
+                    🔍 Start Word Search!
+                  </button>
+                ) : (
+                  <div className="bg-white rounded-xl p-6 shadow-inner">
+                    <div className="mb-4">
+                      <div className="flex justify-between items-center">
+                        <span className="font-bold text-green-700">⭐ Score: {wordSearchScore} points</span>
+                        <span className="text-sm text-stone-500">Found: {foundWords.length}/{wordSearchWords.length}</span>
+                      </div>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {wordSearchWords.map((w, idx) => (
+                          <button
+                            key={idx}
+                            onClick={() => findWord(idx)}
+                            disabled={w.found}
+                            className={`px-4 py-2 rounded-full text-sm font-bold transition ${
+                              w.found 
+                                ? 'bg-green-200 text-green-700 cursor-default' 
+                                : 'bg-gray-100 hover:bg-green-100 hover:scale-105'
+                            }`}
+                          >
+                            {w.found ? '✅' : '🔲'} {w.emoji} {w.word}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    {wordSearchComplete && (
+                      <div className="text-center py-4 bg-green-50 rounded-xl border-2 border-green-300">
+                        <div className="text-5xl mb-2">🎉</div>
+                        <h4 className="text-xl font-bold text-green-700">ALL WORDS FOUND! 🏆</h4>
+                        <p className="text-stone-600">You're a Word Search Champion!</p>
+                      </div>
+                    )}
+                    
+                    <div className="mt-4 flex gap-3 justify-center">
+                      <button 
+                        onClick={resetWordSearch} 
+                        className="bg-gradient-to-r from-green-500 to-teal-500 text-white px-6 py-2 rounded-full hover:scale-105 transition font-bold"
+                      >
+                        🔄 Reset
+                      </button>
+                    </div>
+                  </div>
+                )}
+                <div className="mt-3 text-xs text-stone-500 text-center">
+                  📚 Find words like AI, MONEY, FINANCE, BUDGET, SAVINGS, SMART, ROBOT, FUTURE!
+                </div>
+              </div>
+
+              {/* ===== ACTIVITY 3: MATCHING GAME ===== */}
+              <div className="bg-gradient-to-r from-purple-50 via-pink-50 to-rose-50 rounded-2xl p-6 shadow-lg border-2 border-purple-300">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-4xl animate-bounce">🧩</span>
+                  <h3 className="text-2xl font-bold text-purple-700">Activity 3: Match the Pairs! 🎯</h3>
+                </div>
+                <p className="text-stone-700 mb-4 font-medium">Match the term with its definition! Click two cards to match!</p>
+                
+                {!matchingStarted ? (
+                  <button 
+                    onClick={startMatching} 
+                    className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-full hover:scale-105 transition flex items-center gap-3 text-lg font-bold shadow-lg hover:shadow-xl mx-auto"
+                  >
+                    🧩 Start Matching!
+                  </button>
+                ) : (
+                  <div className="bg-white rounded-xl p-6 shadow-inner">
+                    <div className="mb-4 flex justify-between items-center">
+                      <span className="font-bold text-purple-700">⭐ Score: {matchingScore} points</span>
+                      <span className="text-sm text-stone-500">Matched: {matchedPairs.length}/{matchingPairs.length}</span>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                      {matchingCards.map((card, idx) => {
+                        const isMatched = matchedPairs.some(p => p.id === card.id);
+                        const isSelected = selectedCards.some(c => c.id === card.id && c.isTerm === card.isTerm);
+                        return (
+                          <button
+                            key={idx}
+                            onClick={() => !isMatched && handleCardClick(card.id, card.isTerm)}
+                            disabled={isMatched}
+                            className={`p-3 rounded-xl border-2 transition-all min-h-[80px] flex flex-col items-center justify-center text-center ${
+                              isMatched 
+                                ? 'bg-green-100 border-green-400 cursor-default opacity-60' 
+                                : isSelected 
+                                  ? 'bg-yellow-200 border-yellow-500 scale-105' 
+                                  : 'bg-gray-50 border-gray-200 hover:border-purple-400 hover:scale-105'
+                            }`}
+                          >
+                            <span className="text-2xl">{card.emoji}</span>
+                            <span className="text-xs font-bold mt-1">{card.text}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                    
+                    {matchingComplete && (
+                      <div className="text-center py-4 bg-purple-50 rounded-xl border-2 border-purple-300 mt-4">
+                        <div className="text-5xl mb-2">🎉</div>
+                        <h4 className="text-xl font-bold text-purple-700">ALL PAIRS MATCHED! 🏆</h4>
+                        <p className="text-stone-600">You're a Matching Master!</p>
+                      </div>
+                    )}
+                    
+                    <div className="mt-4 flex gap-3 justify-center">
+                      <button 
+                        onClick={resetMatching} 
+                        className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-2 rounded-full hover:scale-105 transition font-bold"
+                      >
+                        🔄 Reset
+                      </button>
+                    </div>
+                  </div>
+                )}
+                <div className="mt-3 text-xs text-stone-500 text-center">
+                  🧠 Match terms like AI → Artificial Intelligence, Budget → Plan for your money, and more!
+                </div>
+              </div>
+
               {/* ===== SHARE YOUR WORK ===== */}
               <div className="bg-gradient-to-r from-indigo-50 to-purple-50 border-2 border-dashed border-indigo-400 rounded-2xl p-6 flex flex-wrap items-center justify-between">
                 <div className="flex items-center gap-4">
@@ -1169,7 +1562,7 @@ export default function HomePage() {
             </p>
           </motion.section>
 
-          {/* ===== SECTION 9: CERTIFICATES - FIXED WITH DOWNLOAD ===== */}
+          {/* ===== SECTION 9: CERTIFICATES ===== */}
           <motion.section 
             id="certificateSection"
             initial={{ opacity: 0, y: 20 }}
