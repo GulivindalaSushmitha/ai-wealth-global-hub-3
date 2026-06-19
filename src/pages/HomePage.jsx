@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { aiVideos } from '../data/aiVideos';
 import { financeVideos } from '../data/financeVideos';
+import PptxGenJS from 'pptxgenjs';
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -54,14 +55,239 @@ export default function HomePage() {
     'Other': allVideos.filter(v => !['AI Basics', 'AI Course', 'Machine Learning', 'Groww', 'Pranjal Kamra', 'Finance Tips'].includes(v.category))
   };
 
-  // ===== DOWNLOAD PPT FILES FROM PUBLIC/PPTS FOLDER =====
-  const downloadPPTFile = (filename, displayName) => {
-    const link = document.createElement('a');
-    link.href = `/ppts/${filename}`;
-    link.download = displayName || filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  // ===== AI PPT SLIDES DATA =====
+  const aiSlides = [
+    {
+      title: "🤖 What is AI?",
+      content: [
+        "• AI stands for ARTIFICIAL INTELLIGENCE",
+        "• It's like giving a computer a BRAIN!",
+        "• AI helps machines THINK, LEARN, and DECIDE",
+        "• Think of it as a SMART ROBOT FRIEND!",
+        "• Examples: Siri, Alexa, ChatGPT, Self-driving cars",
+        "• AI is everywhere around us!"
+      ]
+    },
+    {
+      title: "📍 Where is AI used?",
+      content: [
+        "• Smartphones - Face unlock, Voice assistants",
+        "• Video Games - Smart enemies that learn",
+        "• Self-driving Cars - Drive themselves!",
+        "• Hospitals - Help doctors save lives",
+        "• Online Shopping - Recommend products",
+        "• Education - Personalized learning"
+      ]
+    },
+    {
+      title: "❓ Why is AI important?",
+      content: [
+        "• AI helps us do things FASTER and BETTER!",
+        "• It solves problems humans find too hard",
+        "• It helps us discover NEW things",
+        "• AI never gets tired - works 24/7!",
+        "• Helps in SPACE EXPLORATION!",
+        "• Fun Fact: AI can beat humans at chess!"
+      ]
+    },
+    {
+      title: "✨ Benefits of AI",
+      content: [
+        "• SAVES TIME - AI does tasks quickly",
+        "• HELPS WITH DIFFICULT TASKS",
+        "• WORKS 24/7 - Never needs sleep!",
+        "• MAKES FEWER MISTAKES - Very accurate",
+        "• HELPS CREATE NEW INVENTIONS - Like robots!",
+        "• SAVES LIVES - Helps doctors diagnose diseases"
+      ]
+    },
+    {
+      title: "🚀 AI in the Future",
+      content: [
+        "• AI will be EVERYWHERE!",
+        "• Robots will help with household chores",
+        "• AI teachers will personalize learning",
+        "• AI will help SOLVE CLIMATE CHANGE!",
+        "• AI will CURE DISEASES!",
+        "• THE FUTURE IS BRIGHT WITH AI!"
+      ]
+    }
+  ];
+
+  // ===== FINANCE PPT SLIDES DATA =====
+  const financeSlides = [
+    {
+      title: "💰 What is Finance?",
+      content: [
+        "• Finance is all about MONEY!",
+        "• It's how we EARN, SAVE, SPEND, and GROW money",
+        "• Think of it as the SUPERPOWER of managing money!",
+        "• A piggy bank with a cape - that's finance!",
+        "• Finance helps us achieve our DREAMS!",
+        "• Everyone can learn to be a money expert!"
+      ]
+    },
+    {
+      title: "❓ Why is Finance important?",
+      content: [
+        "• To buy things we WANT and things we NEED",
+        "• To SAVE money for the future",
+        "• To avoid running out of money",
+        "• To help our families and communities",
+        "• To have FREEDOM to do what we love!",
+        "• To be PREPARED for emergencies"
+      ]
+    },
+    {
+      title: "🏦 How to Save Money",
+      content: [
+        "• Save a little bit EVERY DAY",
+        "• Use a piggy bank or savings jar",
+        "• Set a savings goal (like a new video game!)",
+        "• Watch your money GROW like a plant!",
+        "• Keep track of your spending",
+        "• Fun Fact: Even Rs 10 a day = Rs 3650 a year!"
+      ]
+    },
+    {
+      title: "🛍️ Smart Spending",
+      content: [
+        "• Think before you buy: NEED it or WANT it?",
+        "• Compare prices before buying",
+        "• Wait for sales and discounts",
+        "• Save up for BIG purchases",
+        "• Budget your money - plan your spending!",
+        "• Remember: Every rupee counts!"
+      ]
+    },
+    {
+      title: "🌟 Your Financial Future",
+      content: [
+        "• You can become a MONEY EXPERT!",
+        "• Learn to invest, save, and grow your wealth",
+        "• Financial freedom = You can do what you LOVE",
+        "• Start learning about money TODAY!",
+        "• Remember: Every millionaire started with one coin!",
+        "• The future is YOURS to build!"
+      ]
+    }
+  ];
+
+  // ===== GENERATE AND DOWNLOAD PPT AS .pptx =====
+  const downloadPPTX = (slides, filename, title) => {
+    try {
+      const pptx = new PptxGenJS();
+      
+      // Set document properties
+      pptx.defineLayout({ name: 'WIDE', width: 13.33, height: 7.5 });
+      pptx.layout = 'WIDE';
+
+      // Title Slide
+      const slide1 = pptx.addSlide();
+      slide1.background = { color: '5A6ED8' };
+      slide1.addText(title, {
+        x: 0.5,
+        y: 1.5,
+        w: '90%',
+        h: 2,
+        fontSize: 44,
+        fontFace: 'Arial',
+        color: 'FFFFFF',
+        bold: true,
+        align: 'center'
+      });
+      slide1.addText('5 Slides - Fun Learning for Kids!', {
+        x: 0.5,
+        y: 4,
+        w: '90%',
+        h: 1,
+        fontSize: 28,
+        fontFace: 'Arial',
+        color: 'FFE66D',
+        align: 'center'
+      });
+      slide1.addText('🎓 Presented by AI Wealth Hub', {
+        x: 0.5,
+        y: 5.5,
+        w: '90%',
+        h: 1,
+        fontSize: 20,
+        fontFace: 'Arial',
+        color: 'FFFFFF',
+        align: 'center'
+      });
+
+      // Content Slides
+      slides.forEach((slideData, index) => {
+        const slide = pptx.addSlide();
+        slide.background = { color: 'F5F5F5' };
+        
+        // Title
+        slide.addText(slideData.title, {
+          x: 0.5,
+          y: 0.3,
+          w: '90%',
+          h: 1.2,
+          fontSize: 32,
+          fontFace: 'Arial',
+          color: '5A6ED8',
+          bold: true,
+          align: 'center'
+        });
+        
+        // Divider line
+        slide.addShape(pptx.ShapeType.rect, {
+          x: 1,
+          y: 1.6,
+          w: '80%',
+          h: 0.08,
+          fill: { color: '5A6ED8' }
+        });
+
+        // Content - bullet points
+        let yPos = 2.2;
+        slideData.content.forEach((bullet) => {
+          slide.addText(bullet, {
+            x: 1.5,
+            y: yPos,
+            w: '80%',
+            h: 0.7,
+            fontSize: 20,
+            fontFace: 'Arial',
+            color: '333333',
+            align: 'left',
+            valign: 'middle'
+          });
+          yPos += 0.9;
+        });
+
+        // Slide number
+        slide.addText(`Slide ${index + 2} of ${slides.length + 1}`, {
+          x: 0.5,
+          y: 6.8,
+          w: '90%',
+          h: 0.5,
+          fontSize: 12,
+          fontFace: 'Arial',
+          color: '999999',
+          align: 'center'
+        });
+      });
+
+      // Generate and download
+      pptx.writeFile({ fileName: filename })
+        .then(() => {
+          console.log('PPT downloaded successfully!');
+        })
+        .catch((err) => {
+          console.error('Error downloading PPT:', err);
+          alert('Failed to download PPT. Please try again.');
+        });
+
+    } catch (error) {
+      console.error('Error generating PPT:', error);
+      alert('Failed to generate PPT. Please try again.');
+    }
   };
 
   // ===== VIDEOS & COURSES DOWNLOAD =====
@@ -947,7 +1173,7 @@ export default function HomePage() {
             </div>
           </motion.section>
 
-          {/* ===== SECTION 7: RESOURCES & ACTIVITIES - UPDATED ===== */}
+          {/* ===== SECTION 7: RESOURCES & ACTIVITIES ===== */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -960,7 +1186,7 @@ export default function HomePage() {
             
             <div className="max-w-5xl mx-auto space-y-6">
               
-              {/* ===== POWERPOINTS - WITH ACTUAL PPT DOWNLOADS ===== */}
+              {/* ===== POWERPOINTS - GENERATES REAL .pptx FILES ===== */}
               <div className="bg-gradient-to-r from-purple-100 via-pink-100 to-rose-100 rounded-2xl p-6 shadow-lg border-2 border-purple-300">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-4xl animate-bounce">📊</span>
@@ -982,10 +1208,10 @@ export default function HomePage() {
                       <div className="bg-purple-50 p-1 rounded text-center font-bold">5. AI in the Future</div>
                     </div>
                     <button 
-                      onClick={() => downloadPPTFile('Meet-Your-New-Digital-Friend-What-is-AI.pptx', 'AI_Presentation.pptx')} 
+                      onClick={() => downloadPPTX(aiSlides, 'AI_Presentation.pptx', '🤖 AI: What, Why & Future')} 
                       className="mt-3 w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-full hover:scale-105 transition font-bold text-sm"
                     >
-                      ⬇️ Download AI PPT
+                      ⬇️ Download AI PPT (.pptx)
                     </button>
                   </div>
 
@@ -1002,10 +1228,10 @@ export default function HomePage() {
                       <div className="bg-green-50 p-1 rounded text-center font-bold">5. Financial Future</div>
                     </div>
                     <button 
-                      onClick={() => downloadPPTFile('Money-Adventures-My-First-Financial-Quest.pptx', 'Finance_Presentation.pptx')} 
+                      onClick={() => downloadPPTX(financeSlides, 'Finance_Presentation.pptx', '💰 Finance: What, Why & Future')} 
                       className="mt-3 w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2 rounded-full hover:scale-105 transition font-bold text-sm"
                     >
-                      ⬇️ Download Finance PPT
+                      ⬇️ Download Finance PPT (.pptx)
                     </button>
                   </div>
                 </div>
@@ -1326,7 +1552,6 @@ export default function HomePage() {
                 <h3 className="text-3xl font-bold text-purple-700 mt-3">🎉 Free Certificates for Kids! 🎉</h3>
                 <p className="text-stone-700 max-w-2xl mx-auto mt-2 text-lg">Complete our courses and earn <span className="font-bold text-purple-700">super cool certificates</span> with your name on them!</p>
                 
-                {/* Only 2 certificates - AI Explorer and Money Master */}
                 <div className="grid md:grid-cols-2 gap-4 mt-6 max-w-2xl mx-auto">
                   <div className="bg-white rounded-2xl p-5 shadow-lg border-2 border-purple-300 hover:scale-105 transition transform">
                     <div className="text-4xl">🤖</div>
@@ -1342,7 +1567,6 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                {/* Certificate Download - Only 2 options */}
                 <div className="mt-6 p-6 bg-white/90 rounded-xl shadow-inner">
                   <p className="text-sm font-bold text-stone-700 mb-3">📝 Enter your name to download your certificate:</p>
                   <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
