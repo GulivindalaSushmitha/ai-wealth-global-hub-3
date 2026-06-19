@@ -19,10 +19,11 @@ export default function HomePage() {
   const [gameFinished, setGameFinished] = useState(false);
   const [rabbitPosition, setRabbitPosition] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [certificateName, setCertificateName] = useState('');
+  const [certificateType, setCertificateType] = useState('');
 
   // ===== LEARNING GAME LEVELS (10 levels) =====
   const gameLevels = [
-    // Level 1
     {
       question: "🤖 What does AI stand for?",
       options: ["Artificial Intelligence", "Automated Internet", "Awesome Ideas", "Advanced Integration"],
@@ -30,7 +31,6 @@ export default function HomePage() {
       hint: "💡 Think about what makes computers smart!",
       funFact: "✨ AI was first talked about in 1956!"
     },
-    // Level 2
     {
       question: "🧠 Which of these is an example of AI?",
       options: ["ChatGPT", "A pencil", "A bicycle", "A book"],
@@ -38,7 +38,6 @@ export default function HomePage() {
       hint: "💡 It's something that can talk to you!",
       funFact: "✨ ChatGPT can write stories and poems!"
     },
-    // Level 3
     {
       question: "🤖 What can AI help us with?",
       options: ["Solving problems", "Cooking only", "Making bed", "Watching TV"],
@@ -46,7 +45,6 @@ export default function HomePage() {
       hint: "💡 AI is like a smart helper!",
       funFact: "✨ AI helps doctors find diseases faster!"
     },
-    // Level 4
     {
       question: "💰 What is financial literacy?",
       options: ["Managing money wisely", "Only spending", "Only saving", "Only earning"],
@@ -54,7 +52,6 @@ export default function HomePage() {
       hint: "💡 It's about being smart with money!",
       funFact: "✨ People who learn finance early save more money!"
     },
-    // Level 5
     {
       question: "💳 What is a budget?",
       options: ["A plan for your money", "A type of card", "A game", "A book"],
@@ -62,7 +59,6 @@ export default function HomePage() {
       hint: "💡 It's like a map for your money!",
       funFact: "✨ A budget helps you buy what you really want!"
     },
-    // Level 6
     {
       question: "📱 Which device uses AI?",
       options: ["Smartphone", "Rock", "Tree", "Water bottle"],
@@ -70,7 +66,6 @@ export default function HomePage() {
       hint: "💡 It's something you use every day!",
       funFact: "✨ Your phone uses AI to understand your voice!"
     },
-    // Level 7
     {
       question: "🏦 What is a bank?",
       options: ["A place to keep money", "A restaurant", "A school", "A park"],
@@ -78,7 +73,6 @@ export default function HomePage() {
       hint: "💡 It's where money is safe!",
       funFact: "✨ The first bank was in Italy in 1400s!"
     },
-    // Level 8
     {
       question: "🤖 Self-driving cars use:",
       options: ["AI technology", "Magic", "Only wheels", "Only mirrors"],
@@ -86,7 +80,6 @@ export default function HomePage() {
       hint: "💡 It's the same thing that makes computers smart!",
       funFact: "✨ Self-driving cars can see better than humans!"
     },
-    // Level 9
     {
       question: "💰 Why is saving important?",
       options: ["For future needs", "Only for buying candy", "Only for games", "Only for fun"],
@@ -94,7 +87,6 @@ export default function HomePage() {
       hint: "💡 Think about tomorrow!",
       funFact: "✨ Saving just ₹10 a day = ₹3650 a year!"
     },
-    // Level 10
     {
       question: "🚀 AI will help us in the future by:",
       options: ["Solving big problems", "Only playing games", "Only sleeping", "Only eating"],
@@ -116,7 +108,7 @@ export default function HomePage() {
     'Other': allVideos.filter(v => !['AI Basics', 'AI Course', 'Machine Learning', 'Groww', 'Pranjal Kamra', 'Finance Tips'].includes(v.category))
   };
 
-  // ===== BEAUTIFUL AI PPT CONTENT =====
+  // ===== BEAUTIFUL AI PPT CONTENT - FIXED =====
   const aiPPTContent = `🌟 AI: What, Why & Future - Kid's Edition 🌟
 =========================================================
 
@@ -153,7 +145,7 @@ export default function HomePage() {
 ⭐ HELPS WITH DIFFICULT TASKS - Like solving puzzles
 ⭐ WORKS 24/7 - Never needs sleep!
 ⭐ MAKES FEWER MISTAKES - Very accurate
-⭐ HELPS CREATE NEW INVENTIONS - Like robots! 
+⭐ HELPS CREATE NEW INVENTIONS - Like robots!
 
 
 🎨 SLIDE 5: AI in the Future 🚀
@@ -168,7 +160,7 @@ export default function HomePage() {
 
 🌈 Remember: You can be part of the AI revolution! Start learning today! 🎓`;
 
-  // ===== BEAUTIFUL FINANCE PPT CONTENT =====
+  // ===== BEAUTIFUL FINANCE PPT CONTENT - FIXED =====
   const financePPTContent = `💰 Finance: What, Why & Future - Kid's Edition 💰
 ===========================================================
 
@@ -232,17 +224,18 @@ export default function HomePage() {
     URL.revokeObjectURL(url);
   };
 
+  // ===== FIXED: DOWNLOAD VIDEOS WITH BLUE CLICKABLE LINKS =====
   const downloadVideoLinks = () => {
     const content = `🎥 FREE AI & FINANCE VIDEO COURSES / LINKS
 ===============================================================
 
-📺 YouTube Playlists:
+📺 YOUTUBE PLAYLISTS (Click the links below):
 • AI for Beginners: https://www.youtube.com/results?search_query=ai+for+beginners
 • Finance 101: https://www.youtube.com/results?search_query=finance+101
 • Machine Learning Basics: https://www.youtube.com/results?search_query=machine+learning+basics
 • Investing for Kids: https://www.youtube.com/results?search_query=investing+for+kids
 
-📚 Free Courses:
+📚 FREE COURSES:
 • Google AI Education: https://ai.google/education
 • Khan Academy Financial Literacy: https://www.khanacademy.org/college-careers-more/financial-literacy
 • Coursera AI For Everyone: https://www.coursera.org/learn/ai-for-everyone
@@ -250,24 +243,84 @@ export default function HomePage() {
 • Harvard CS50 AI: https://cs50.harvard.edu/ai/
 • Stanford Financial Literacy: https://www.stanford.edu/
 
-📱 Interactive Tools:
+📱 INTERACTIVE TOOLS:
 • AI Experiments: https://experiments.withgoogle.com/ai
 • Stock Market Game: https://www.howthemarketworks.com/
 • Interactive Finance Games: https://www.practicalmoneyskills.com/
 • AI for Kids: https://www.tynker.com/ai
 
-📖 Educational Resources:
+📖 EDUCATIONAL RESOURCES:
 • Investopedia for Kids: https://www.investopedia.com/financial-literacy-for-kids-5112941
 • AI Ethics: https://www.unesco.org/en/artificial-intelligence
 • Future of Work: https://www.weforum.org/
 
 ⭐ Bonus: Daily quizzes and interactive activities available on our platform!`;
 
-    const blob = new Blob([content], { type: 'text/plain' });
+    // Create HTML file with BLUE clickable links
+    const htmlContent = `<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: Arial, sans-serif; padding: 40px; max-width: 800px; margin: auto; background: #f5f5f5; }
+  h1 { color: #ff6b35; text-align: center; }
+  .section { background: white; padding: 20px; border-radius: 10px; margin: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+  h2 { color: #2d3436; border-bottom: 2px solid #ff6b35; padding-bottom: 10px; }
+  a { display: block; color: #0066cc; text-decoration: none; padding: 8px 0; font-weight: 600; }
+  a:hover { text-decoration: underline; color: #ff6b35; }
+  .emoji { font-size: 20px; }
+  .footer { text-align: center; margin-top: 30px; color: #888; border-top: 2px solid #eee; padding-top: 20px; }
+  .blue-link { color: #0066cc; font-weight: bold; }
+</style>
+</head>
+<body>
+  <h1>🎥 FREE AI & FINANCE VIDEO COURSES / LINKS</h1>
+  <p style="text-align:center; color:#888;">📌 Click any blue link below to visit the website</p>
+
+  <div class="section">
+    <h2>📺 YouTube Playlists</h2>
+    <a href="https://www.youtube.com/results?search_query=ai+for+beginners" target="_blank">🎬 AI for Beginners</a>
+    <a href="https://www.youtube.com/results?search_query=finance+101" target="_blank">🎬 Finance 101</a>
+    <a href="https://www.youtube.com/results?search_query=machine+learning+basics" target="_blank">🎬 Machine Learning Basics</a>
+    <a href="https://www.youtube.com/results?search_query=investing+for+kids" target="_blank">🎬 Investing for Kids</a>
+  </div>
+
+  <div class="section">
+    <h2>📚 Free Courses</h2>
+    <a href="https://ai.google/education" target="_blank">📖 Google AI Education</a>
+    <a href="https://www.khanacademy.org/college-careers-more/financial-literacy" target="_blank">📖 Khan Academy Financial Literacy</a>
+    <a href="https://www.coursera.org/learn/ai-for-everyone" target="_blank">📖 Coursera AI For Everyone</a>
+    <a href="https://www.edx.org/learn/finance" target="_blank">📖 edX Finance for Everyone</a>
+    <a href="https://cs50.harvard.edu/ai/" target="_blank">📖 Harvard CS50 AI</a>
+    <a href="https://www.stanford.edu/" target="_blank">📖 Stanford Financial Literacy</a>
+  </div>
+
+  <div class="section">
+    <h2>📱 Interactive Tools</h2>
+    <a href="https://experiments.withgoogle.com/ai" target="_blank">🧪 AI Experiments</a>
+    <a href="https://www.howthemarketworks.com/" target="_blank">📊 Stock Market Game</a>
+    <a href="https://www.practicalmoneyskills.com/" target="_blank">💵 Practical Money Skills</a>
+    <a href="https://www.tynker.com/ai" target="_blank">🤖 AI for Kids</a>
+  </div>
+
+  <div class="section">
+    <h2>📖 Educational Resources</h2>
+    <a href="https://www.investopedia.com/financial-literacy-for-kids-5112941" target="_blank">📚 Investopedia for Kids</a>
+    <a href="https://www.unesco.org/en/artificial-intelligence" target="_blank">🌍 AI Ethics - UNESCO</a>
+    <a href="https://www.weforum.org/" target="_blank">💼 Future of Work - WEF</a>
+  </div>
+
+  <div class="footer">
+    <p>⭐ Bonus: Daily quizzes and interactive activities available on our platform!</p>
+    <p style="font-size:12px;">© 2026 AI Wealth Hub - All resources are free to use</p>
+  </div>
+</body>
+</html>`;
+
+    const blob = new Blob([htmlContent], { type: 'text/html' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'AI_Finance_Videos_Courses.txt';
+    a.download = 'AI_Finance_Resources.html';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -293,7 +346,6 @@ export default function HomePage() {
       const newCorrect = correctAnswers + 1;
       setScore(newScore);
       setCorrectAnswers(newCorrect);
-      // Rabbit jumps forward (10% per correct answer)
       const newPosition = Math.min((newCorrect / gameLevels.length) * 100, 100);
       setRabbitPosition(newPosition);
       setFeedbackMessage(`🎉 CORRECT! +10 points! ${level.funFact}`);
@@ -326,6 +378,188 @@ export default function HomePage() {
     setFeedbackMessage('');
   };
 
+  // ===== FIXED: CERTIFICATE DOWNLOAD =====
+  const downloadCertificate = (name, type) => {
+    if (!name || name.trim() === '') {
+      alert('🎓 Please enter your name first!');
+      return;
+    }
+
+    const certType = type || 'AI & Finance Explorer';
+    const date = new Date().toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+
+    const certHTML = `<!DOCTYPE html>
+<html>
+<head>
+  <title>Certificate - ${name}</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;600;700&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      min-height: 100vh; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      background: #f0f7ff; 
+      font-family: 'Quicksand', sans-serif;
+      padding: 20px;
+    }
+    .certificate {
+      max-width: 850px;
+      width: 100%;
+      background: linear-gradient(135deg, #fff8e7, #fff3d6, #fff8e7);
+      border: 12px double #ff6b35;
+      border-radius: 30px;
+      padding: 50px 40px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(255,107,53,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    .certificate::before {
+      content: '🌟✨🌟✨🌟✨🌟✨🌟';
+      position: absolute;
+      top: 5px;
+      left: 0;
+      width: 100%;
+      font-size: 20px;
+      letter-spacing: 10px;
+      opacity: 0.3;
+    }
+    .certificate::after {
+      content: '🌟✨🌟✨🌟✨🌟✨🌟';
+      position: absolute;
+      bottom: 5px;
+      left: 0;
+      width: 100%;
+      font-size: 20px;
+      letter-spacing: 10px;
+      opacity: 0.3;
+    }
+    .deco-top { font-size: 35px; letter-spacing: 12px; margin-bottom: 5px; }
+    .deco-bottom { font-size: 35px; letter-spacing: 12px; margin-top: 5px; }
+    h1 { 
+      font-family: 'Fredoka One', cursive;
+      font-size: 38px; 
+      color: #ff6b35; 
+      margin: 5px 0;
+      text-shadow: 2px 2px 0 rgba(255,107,53,0.1);
+    }
+    .subtitle { 
+      font-size: 20px; 
+      color: #666; 
+      margin: 5px 0 15px;
+      font-weight: 600;
+    }
+    .seal { font-size: 70px; margin: 5px 0; }
+    .name {
+      font-family: 'Fredoka One', cursive;
+      font-size: 52px;
+      font-weight: 900;
+      color: #2d3436;
+      background: #ffe66d;
+      padding: 8px 40px;
+      border-radius: 20px;
+      display: inline-block;
+      margin: 10px 0;
+      border: 4px dashed #ff6b35;
+      box-shadow: 0 5px 20px rgba(255,107,53,0.15);
+    }
+    .desc { 
+      font-size: 22px; 
+      color: #555; 
+      margin: 10px 0;
+      font-weight: 600;
+    }
+    .date { 
+      font-size: 18px; 
+      color: #888; 
+      margin-top: 15px;
+      font-weight: 600;
+    }
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 3px dashed #ddd;
+      color: #888;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .footer span { 
+      background: #f0f7ff; 
+      padding: 5px 15px; 
+      border-radius: 20px; 
+    }
+    .badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 40px;
+      animation: spin 4s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .stars {
+      position: absolute;
+      font-size: 30px;
+      opacity: 0.2;
+    }
+    @media print {
+      body { background: white; padding: 0; }
+      .certificate { box-shadow: none; border-color: #333; }
+    }
+  </style>
+</head>
+<body>
+  <div class="certificate">
+    <div class="stars" style="top:10px;left:10px;">⭐</div>
+    <div class="stars" style="bottom:10px;right:10px;">⭐</div>
+    <div class="badge">🏅</div>
+    <div class="deco-top">✨🌟✨🌟✨</div>
+    <h1>🎓 AI WEALTH HUB</h1>
+    <div class="subtitle">🌟 Certificate of Achievement 🌟</div>
+    <div class="seal">🏆</div>
+    <div class="name">${name.toUpperCase()}</div>
+    <div class="desc">🎯 For completing the ${certType} Course!</div>
+    <div style="font-size:16px;color:#666;margin:5px 0;">
+      ⭐ ${correctAnswers >= 8 ? '🌟 EXCELLENT PERFORMANCE!' : correctAnswers >= 6 ? '💪 GREAT EFFORT!' : '📚 GOOD START!'}
+    </div>
+    <div class="date">📅 Date: ${date}</div>
+    <div class="footer">
+      <span>🤖 AI Explorer</span>
+      <span>💰 Money Master</span>
+      <span>🚀 Future Leader</span>
+    </div>
+    <div class="deco-bottom">✨🌟✨🌟✨</div>
+    <div style="margin-top:10px;font-size:12px;color:#aaa;">
+      This certificate is proudly awarded by forthefutures
+    </div>
+  </div>
+</body>
+</html>`;
+
+    const blob = new Blob([certHTML], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `Certificate_${name}_AI_Wealth_Hub.html`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    // Show success message
+    alert(`🎉 Certificate for "${name}" downloaded successfully! 🎉\n\n📂 Check your downloads folder.\n🖨️ You can open the HTML file and print it!`);
+  };
+
   const handleSubmitWork = (e) => {
     e.preventDefault();
     alert('Thank you! Your work has been submitted. We will review and post it soon! 🎉');
@@ -349,7 +583,6 @@ export default function HomePage() {
           </div>
           <div className="md:col-span-5 flex flex-col items-center justify-center relative min-h-[320px]">
             <div className="relative w-full max-w-sm flex flex-col items-center justify-center">
-              {/* NEW KID-FRIENDLY ANIMATED CHARACTERS */}
               <div className="flex items-center justify-center gap-4 animate-bounce">
                 <div className="w-20 h-20 bg-yellow-400 rounded-full shadow-2xl border-4 border-white flex items-center justify-center text-4xl transform -rotate-12">
                   🤖
@@ -377,7 +610,6 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        {/* Floating decorations */}
         <div className="absolute top-10 left-10 text-4xl animate-bounce opacity-50">🌟</div>
         <div className="absolute bottom-10 right-10 text-4xl animate-bounce delay-100 opacity-50">✨</div>
         <div className="absolute top-20 right-20 text-3xl animate-bounce delay-200 opacity-30">🎈</div>
@@ -413,7 +645,7 @@ export default function HomePage() {
             </div>
           </motion.section>
 
-          {/* ===== SECTION 2: MEET THE FOUNDER ===== */}
+          {/* ===== SECTION 2: MEET THE FOUNDER - UNCHANGED ===== */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -707,7 +939,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* ===== VIDEOS & COURSES ===== */}
+              {/* ===== VIDEOS & COURSES - FIXED WITH BLUE LINKS ===== */}
               <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-6 shadow-md border-2 border-blue-200">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">🎬</span>
@@ -719,15 +951,16 @@ export default function HomePage() {
                     onClick={downloadVideoLinks} 
                     className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-6 py-2.5 rounded-full hover:scale-105 transition shadow-md hover:shadow-lg text-sm font-bold"
                   >
-                    📥 Download Videos & Courses
+                    📥 Download Videos & Courses (HTML with Blue Links)
                   </button>
                 </div>
                 <div className="mt-3 text-xs text-stone-500">
-                  🔗 Includes YouTube playlists, free courses, interactive tools & more!
+                  🔗 Includes YouTube playlists, free courses, interactive tools & more! 
+                  <span className="text-blue-600 font-bold"> All links are blue and clickable!</span>
                 </div>
               </div>
 
-              {/* ===== RABBIT RACING GAME - KID FRIENDLY ===== */}
+              {/* ===== RABBIT RACING GAME ===== */}
               <div className="bg-gradient-to-r from-yellow-50 via-orange-50 to-amber-50 rounded-2xl p-6 shadow-lg border-2 border-yellow-300">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-4xl animate-bounce">🐇</span>
@@ -936,7 +1169,7 @@ export default function HomePage() {
             </p>
           </motion.section>
 
-          {/* ===== SECTION 9: CERTIFICATES - KID FRIENDLY ===== */}
+          {/* ===== SECTION 9: CERTIFICATES - FIXED WITH DOWNLOAD ===== */}
           <motion.section 
             id="certificateSection"
             initial={{ opacity: 0, y: 20 }}
@@ -986,14 +1219,53 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                <div className="mt-6 p-4 bg-white/80 rounded-xl">
-                  <p className="text-sm text-stone-600">
-                    💡 <span className="font-bold">How to earn:</span> Complete 5 AI videos + 5 Finance videos = Get your certificate with your name!
+                {/* Certificate Download Form */}
+                <div className="mt-6 p-6 bg-white/90 rounded-xl shadow-inner">
+                  <p className="text-sm font-bold text-stone-700 mb-3">📝 Enter your name to download your certificate:</p>
+                  <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
+                    <input
+                      type="text"
+                      value={certificateName}
+                      onChange={(e) => setCertificateName(e.target.value)}
+                      placeholder="Enter your full name"
+                      className="flex-1 px-4 py-2.5 rounded-full border-2 border-purple-300 focus:border-purple-500 focus:outline-none transition-all text-center sm:text-left"
+                    />
+                    <select
+                      value={certificateType}
+                      onChange={(e) => setCertificateType(e.target.value)}
+                      className="px-4 py-2.5 rounded-full border-2 border-purple-300 focus:border-purple-500 focus:outline-none transition-all bg-white"
+                    >
+                      <option value="AI & Finance Explorer">AI & Finance Explorer</option>
+                      <option value="AI Explorer">AI Explorer</option>
+                      <option value="Money Master">Money Master</option>
+                      <option value="AI & Finance Pro">AI & Finance Pro</option>
+                    </select>
+                    <button
+                      onClick={() => downloadCertificate(certificateName, certificateType)}
+                      className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-2.5 rounded-full font-bold hover:scale-105 transition shadow-lg hover:shadow-xl whitespace-nowrap"
+                    >
+                      📥 Download Certificate
+                    </button>
+                  </div>
+                  <p className="text-xs text-stone-400 mt-3">
+                    💡 Tip: Complete all 10 game levels to unlock all certificates!
                   </p>
                 </div>
 
-                <button className="mt-6 px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full font-bold hover:shadow-lg transition-all text-sm hover:scale-105">
-                  📥 Start Learning & Earn Certificate
+                <div className="mt-4 p-4 bg-green-50 rounded-xl border-2 border-green-200">
+                  <p className="text-sm text-green-700">
+                    ✅ <span className="font-bold">Your progress:</span> You have completed {correctAnswers} of {gameLevels.length} levels!
+                    {correctAnswers === gameLevels.length ? ' 🎉 You can download all certificates!' : 
+                     correctAnswers >= 5 ? ' 💪 Keep going! You\'re almost there!' :
+                     ' 🚀 Start the game above to earn your certificate!'}
+                  </p>
+                </div>
+
+                <button 
+                  onClick={() => startGame()}
+                  className="mt-4 px-8 py-3 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-full font-bold hover:shadow-lg transition-all text-sm hover:scale-105"
+                >
+                  🎮 Play the Game to Earn Certificate
                 </button>
               </div>
             </div>
