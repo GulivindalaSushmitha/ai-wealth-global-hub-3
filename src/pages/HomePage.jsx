@@ -774,7 +774,7 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
                       <div className="bg-purple-50 p-1 rounded text-center font-bold">5. AI in the Future</div>
                     </div>
                     <button 
-                      onClick={() => downloadPPT('Meet-Your-New-Digital-Friend-What-is-AI.pptx', 'AI_Presentation.pptx')} 
+                      onClick={() => downloadPPT('AI_Presentation website.pptx', 'AI_Presentation.pptx')} 
                       className="mt-3 w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-full hover:scale-105 transition font-bold text-sm"
                     >
                       ⬇️ Download AI PPT (.pptx)
@@ -794,7 +794,7 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
                       <div className="bg-green-50 p-1 rounded text-center font-bold">5. Financial Future</div>
                     </div>
                     <button 
-                      onClick={() => downloadPPT('Money-Adventures-My-First-Financial-Quest.pptx', 'Finance_Presentation.pptx')} 
+                      onClick={() => downloadPPT('Finance_Presentation website.pptx', 'Finance_Presentation.pptx')} 
                       className="mt-3 w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2 rounded-full hover:scale-105 transition font-bold text-sm"
                     >
                       ⬇️ Download Finance PPT (.pptx)
