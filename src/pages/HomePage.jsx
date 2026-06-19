@@ -10,13 +10,99 @@ export default function HomePage() {
   const [submissionText, setSubmissionText] = useState('');
   const [submissionFile, setSubmissionFile] = useState(null);
 
-  // Quiz States
-  const [quizStarted, setQuizStarted] = useState(false);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+  // ===== RABBIT RACING GAME STATES =====
+  const [gameStarted, setGameStarted] = useState(false);
+  const [currentLevel, setCurrentLevel] = useState(0);
   const [score, setScore] = useState(0);
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState('');
-  const [quizFinished, setQuizFinished] = useState(false);
+  const [gameFinished, setGameFinished] = useState(false);
+  const [rabbitPosition, setRabbitPosition] = useState(0);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+
+  // ===== LEARNING GAME LEVELS (10 levels) =====
+  const gameLevels = [
+    // Level 1
+    {
+      question: "🤖 What does AI stand for?",
+      options: ["Artificial Intelligence", "Automated Internet", "Awesome Ideas", "Advanced Integration"],
+      correct: 0,
+      hint: "💡 Think about what makes computers smart!",
+      funFact: "✨ AI was first talked about in 1956!"
+    },
+    // Level 2
+    {
+      question: "🧠 Which of these is an example of AI?",
+      options: ["ChatGPT", "A pencil", "A bicycle", "A book"],
+      correct: 0,
+      hint: "💡 It's something that can talk to you!",
+      funFact: "✨ ChatGPT can write stories and poems!"
+    },
+    // Level 3
+    {
+      question: "🤖 What can AI help us with?",
+      options: ["Solving problems", "Cooking only", "Making bed", "Watching TV"],
+      correct: 0,
+      hint: "💡 AI is like a smart helper!",
+      funFact: "✨ AI helps doctors find diseases faster!"
+    },
+    // Level 4
+    {
+      question: "💰 What is financial literacy?",
+      options: ["Managing money wisely", "Only spending", "Only saving", "Only earning"],
+      correct: 0,
+      hint: "💡 It's about being smart with money!",
+      funFact: "✨ People who learn finance early save more money!"
+    },
+    // Level 5
+    {
+      question: "💳 What is a budget?",
+      options: ["A plan for your money", "A type of card", "A game", "A book"],
+      correct: 0,
+      hint: "💡 It's like a map for your money!",
+      funFact: "✨ A budget helps you buy what you really want!"
+    },
+    // Level 6
+    {
+      question: "📱 Which device uses AI?",
+      options: ["Smartphone", "Rock", "Tree", "Water bottle"],
+      correct: 0,
+      hint: "💡 It's something you use every day!",
+      funFact: "✨ Your phone uses AI to understand your voice!"
+    },
+    // Level 7
+    {
+      question: "🏦 What is a bank?",
+      options: ["A place to keep money", "A restaurant", "A school", "A park"],
+      correct: 0,
+      hint: "💡 It's where money is safe!",
+      funFact: "✨ The first bank was in Italy in 1400s!"
+    },
+    // Level 8
+    {
+      question: "🤖 Self-driving cars use:",
+      options: ["AI technology", "Magic", "Only wheels", "Only mirrors"],
+      correct: 0,
+      hint: "💡 It's the same thing that makes computers smart!",
+      funFact: "✨ Self-driving cars can see better than humans!"
+    },
+    // Level 9
+    {
+      question: "💰 Why is saving important?",
+      options: ["For future needs", "Only for buying candy", "Only for games", "Only for fun"],
+      correct: 0,
+      hint: "💡 Think about tomorrow!",
+      funFact: "✨ Saving just ₹10 a day = ₹3650 a year!"
+    },
+    // Level 10
+    {
+      question: "🚀 AI will help us in the future by:",
+      options: ["Solving big problems", "Only playing games", "Only sleeping", "Only eating"],
+      correct: 0,
+      hint: "💡 AI makes the world better!",
+      funFact: "✨ AI will help us explore space and cure diseases!"
+    }
+  ];
 
   const allVideos = [...aiVideos, ...financeVideos];
   
@@ -30,352 +116,110 @@ export default function HomePage() {
     'Other': allVideos.filter(v => !['AI Basics', 'AI Course', 'Machine Learning', 'Groww', 'Pranjal Kamra', 'Finance Tips'].includes(v.category))
   };
 
-  // 50 Quiz Questions
-  const quizData = [
-    // AI Questions (1-25)
-    {
-      question: "🤖 What does AI stand for?",
-      options: ["Artificial Intelligence", "Automated Internet", "Awesome Ideas", "Advanced Integration"],
-      correct: 0
-    },
-    {
-      question: "🧠 Which of these is an example of AI?",
-      options: ["ChatGPT", "A pencil", "A bicycle", "A book"],
-      correct: 0
-    },
-    {
-      question: "🤖 What can AI help us with?",
-      options: ["Solving problems", "Cooking only", "Making bed", "Watching TV"],
-      correct: 0
-    },
-    {
-      question: "📱 Which device uses AI?",
-      options: ["Smartphone", "Rock", "Tree", "Water bottle"],
-      correct: 0
-    },
-    {
-      question: "🎮 AI is used in:",
-      options: ["Video games", "Only cooking", "Only sleeping", "Only eating"],
-      correct: 0
-    },
-    {
-      question: "🤖 What is machine learning?",
-      options: ["AI that learns from data", "A type of car", "A game", "A food"],
-      correct: 0
-    },
-    {
-      question: "🧠 AI can recognize:",
-      options: ["Faces and speech", "Only numbers", "Only colors", "Only sounds"],
-      correct: 0
-    },
-    {
-      question: "🤖 Self-driving cars use:",
-      options: ["AI technology", "Magic", "Only wheels", "Only mirrors"],
-      correct: 0
-    },
-    {
-      question: "📊 AI can help in:",
-      options: ["Healthcare and finance", "Only playing", "Only sleeping", "Only eating"],
-      correct: 0
-    },
-    {
-      question: "🧠 AI stands for:",
-      options: ["Artificial Intelligence", "Automated Information", "Awesome Ideas", "Advanced Internet"],
-      correct: 0
-    },
-    {
-      question: "🤖 Which company uses AI in their products?",
-      options: ["Google", "A bakery", "A farm", "A bookstore"],
-      correct: 0
-    },
-    {
-      question: "📱 Voice assistants like Siri use:",
-      options: ["AI", "Only buttons", "Only touch", "Only sound"],
-      correct: 0
-    },
-    {
-      question: "🧠 AI can help doctors:",
-      options: ["Diagnose diseases", "Only cook", "Only clean", "Only sleep"],
-      correct: 0
-    },
-    {
-      question: "🤖 What is a chatbot?",
-      options: ["AI that talks to you", "A robot that cooks", "A machine that cleans", "A game"],
-      correct: 0
-    },
-    {
-      question: "📊 AI is used in:",
-      options: ["Banking and finance", "Only farming", "Only fishing", "Only swimming"],
-      correct: 0
-    },
-    {
-      question: "🧠 Can AI learn from mistakes?",
-      options: ["Yes", "No", "Maybe", "Never"],
-      correct: 0
-    },
-    {
-      question: "🤖 What is deep learning?",
-      options: ["Advanced AI", "A type of swimming", "A game", "A food"],
-      correct: 0
-    },
-    {
-      question: "📱 AI helps in:",
-      options: ["Social media recommendations", "Only sleeping", "Only eating", "Only running"],
-      correct: 0
-    },
-    {
-      question: "🧠 AI can:",
-      options: ["Process large amounts of data", "Only count", "Only jump", "Only sing"],
-      correct: 0
-    },
-    {
-      question: "🤖 What is computer vision?",
-      options: ["AI that can see", "A type of camera", "A game", "A book"],
-      correct: 0
-    },
-    {
-      question: "📊 AI is the future of:",
-      options: ["Many industries", "Only cooking", "Only painting", "Only dancing"],
-      correct: 0
-    },
-    {
-      question: "🧠 Can AI understand emotions?",
-      options: ["Yes, to some extent", "No", "Never", "Maybe not"],
-      correct: 0
-    },
-    {
-      question: "🤖 Which is an AI tool?",
-      options: ["ChatGPT", "A pencil", "A rock", "A chair"],
-      correct: 0
-    },
-    {
-      question: "📱 AI makes our lives:",
-      options: ["Easier and smarter", "Only harder", "Only slower", "Only boring"],
-      correct: 0
-    },
-    {
-      question: "🧠 AI can help in:",
-      options: ["Education", "Only playing", "Only sleeping", "Only eating"],
-      correct: 0
-    },
-    // Finance Questions (26-50)
-    {
-      question: "💰 What is financial literacy?",
-      options: ["Managing money wisely", "Only spending", "Only saving", "Only earning"],
-      correct: 0
-    },
-    {
-      question: "💳 What is a budget?",
-      options: ["A plan for your money", "A type of card", "A game", "A book"],
-      correct: 0
-    },
-    {
-      question: "🏦 What is a bank?",
-      options: ["A place to keep money", "A restaurant", "A school", "A park"],
-      correct: 0
-    },
-    {
-      question: "💰 Why is saving important?",
-      options: ["For future needs", "Only for buying candy", "Only for games", "Only for fun"],
-      correct: 0
-    },
-    {
-      question: "💳 What is a credit card?",
-      options: ["Borrow money to pay later", "Free money", "A game", "A toy"],
-      correct: 0
-    },
-    {
-      question: "🏦 What is interest?",
-      options: ["Money earned on savings", "A type of game", "A food", "A book"],
-      correct: 0
-    },
-    {
-      question: "💰 What is a stock?",
-      options: ["A part of a company", "A type of food", "A game", "A book"],
-      correct: 0
-    },
-    {
-      question: "💳 What does investing mean?",
-      options: ["Putting money to grow", "Only spending", "Only saving", "Only wasting"],
-      correct: 0
-    },
-    {
-      question: "🏦 What is a savings account?",
-      options: ["An account to save money", "A type of game", "A food", "A book"],
-      correct: 0
-    },
-    {
-      question: "💰 Why learn about money?",
-      options: ["To be financially secure", "Only to buy toys", "Only for games", "Only for fun"],
-      correct: 0
-    },
-    {
-      question: "💳 What is a loan?",
-      options: ["Borrowing money to pay back", "Free money", "A game", "A toy"],
-      correct: 0
-    },
-    {
-      question: "🏦 What is compound interest?",
-      options: ["Earning interest on interest", "A type of food", "A game", "A book"],
-      correct: 0
-    },
-    {
-      question: "💰 What is financial freedom?",
-      options: ["Having enough money", "Only spending", "Only saving", "Only earning"],
-      correct: 0
-    },
-    {
-      question: "💳 What is a debit card?",
-      options: ["Spending your own money", "Free money", "A game", "A toy"],
-      correct: 0
-    },
-    {
-      question: "🏦 What is inflation?",
-      options: ["Prices going up over time", "Prices going down", "No change", "A game"],
-      correct: 0
-    },
-    {
-      question: "💰 What is an asset?",
-      options: ["Something that makes money", "Something that costs money", "A toy", "A game"],
-      correct: 0
-    },
-    {
-      question: "💳 What is a liability?",
-      options: ["Something that costs money", "Something that makes money", "A game", "A toy"],
-      correct: 0
-    },
-    {
-      question: "🏦 What is a mutual fund?",
-      options: ["Money invested together", "A type of food", "A game", "A book"],
-      correct: 0
-    },
-    {
-      question: "💰 Why is investing in stocks good?",
-      options: ["Your money can grow", "Only safe", "Only quick", "Only easy"],
-      correct: 0
-    },
-    {
-      question: "💳 What is a mortgage?",
-      options: ["A loan to buy a house", "A type of food", "A game", "A book"],
-      correct: 0
-    },
-    {
-      question: "🏦 What is retirement planning?",
-      options: ["Saving money for later", "Only spending", "Only working", "Only playing"],
-      correct: 0
-    },
-    {
-      question: "💰 What is a budget?",
-      options: ["Plan for income and expenses", "A type of food", "A game", "A book"],
-      correct: 0
-    },
-    {
-      question: "💳 What is financial planning?",
-      options: ["Managing money for goals", "Only spending", "Only saving", "Only earning"],
-      correct: 0
-    },
-    {
-      question: "🏦 What is credit score?",
-      options: ["A number showing trustworthiness", "A type of game", "A food", "A book"],
-      correct: 0
-    },
-    {
-      question: "💰 What is wealth management?",
-      options: ["Managing money wisely", "Only spending", "Only saving", "Only earning"],
-      correct: 0
-    }
-  ];
+  // ===== BEAUTIFUL AI PPT CONTENT =====
+  const aiPPTContent = `🌟 AI: What, Why & Future - Kid's Edition 🌟
+=========================================================
 
-  // Improved AI PPT Content - Clean formatting with proper bullet points
-  const aiPPTContent = `AI: What, Why & Benefits 🤖
-==================================================
-
-Slide 1: What is AI?
---------------------
-⭐ Artificial Intelligence (AI) is when machines think and learn like humans!
-⭐ AI can see, hear, speak, and make decisions
-⭐ Examples: Siri, Alexa, ChatGPT, self-driving cars
-⭐ AI is like a smart robot brain!
-
-Slide 2: What are the benefits of AI?
--------------------------------------
-⭐ Makes our lives easier and faster
-⭐ Helps in video games and entertainment
-⭐ Assists doctors in saving lives
-⭐ Helps students learn better
-⭐ Solves big problems like climate change
-
-Slide 3: Why learn AI?
------------------------
-⭐ AI is the future - 85% of jobs in 2030 don't exist yet!
-⭐ Learn AI = Better career opportunities
-⭐ Develops critical thinking skills
-⭐ Be part of the technology revolution
-⭐ Create amazing things with technology
-
-Slide 4: What is the use of AI?
--------------------------------
-⭐ Healthcare - Diagnose diseases faster
-⭐ Banking - Detect fraud and manage money
-⭐ Social media - Smart recommendations
-⭐ Education - Personalized learning
-⭐ Self-driving cars - Safer transportation
-
-Slide 5: What about AI in the future?
--------------------------------------
-⭐ AI will be everywhere!
-⭐ Space exploration with AI robots
-⭐ Solve climate change and pollution
-⭐ Cure diseases with AI research
-⭐ AI will help humans, not replace them
-⭐ The future is bright with AI!`;
-
-  // Improved Finance PPT Content - Clean formatting with proper bullet points
-  const financePPTContent = `Finance: What, Why & Benefits 💰
-====================================================
-
-Slide 1: What is Finance?
+🎨 SLIDE 1: What is AI? 🤖
 --------------------------
-⭐ Finance is all about managing money!
-⭐ It's how people earn, save, invest, and spend
-⭐ Finance helps us make smart money decisions
-⭐ Understanding finance = Financial freedom
-⭐ Money is a tool to build your dreams!
+✨ AI stands for ARTIFICIAL INTELLIGENCE
+✨ It's like giving a computer a BRAIN! 🧠
+✨ AI helps machines think, learn, and make decisions
+✨ Think of it as a SMART ROBOT FRIEND! 🤖
+✨ Examples: Siri, Alexa, ChatGPT, Self-driving cars
 
-Slide 2: What are the benefits of Finance?
-------------------------------------------
-⭐ Grow your money through investing
-⭐ Buy a house and build wealth
-⭐ Pay for education and learning
-⭐ Travel and explore the world
-⭐ Reduce stress about money
 
-Slide 3: Why learn Finance?
----------------------------
-⭐ Financial literacy is a life skill
-⭐ 78% of adults wish they learned finance earlier
-⭐ Break the cycle of poverty
-⭐ Build financial independence
-⭐ Create generational wealth
+🎨 SLIDE 2: Where is AI Used? 🌍
+--------------------------------
+📱 Smartphones - Face unlock, Voice assistants
+🎮 Video Games - Smart enemies that learn
+🚗 Self-driving Cars - Drive themselves!
+🏥 Hospitals - Help doctors save lives
+🛒 Online Shopping - Recommend products you might like
 
-Slide 4: What is the use of Finance?
+
+🎨 SLIDE 3: Why is AI Important? ❓
+-----------------------------------
+⚡ AI helps us do things FASTER and BETTER!
+⚡ It solves problems humans find too hard
+⚡ It helps us discover NEW things
+⚡ AI never gets tired - works 24/7! 🕐
+⚡ Fun Fact: AI can beat humans at chess! ♟️
+
+
+🎨 SLIDE 4: Benefits of AI ✨
+-----------------------------
+⭐ SAVES TIME - AI does tasks quickly
+⭐ HELPS WITH DIFFICULT TASKS - Like solving puzzles
+⭐ WORKS 24/7 - Never needs sleep!
+⭐ MAKES FEWER MISTAKES - Very accurate
+⭐ HELPS CREATE NEW INVENTIONS - Like robots! 
+
+
+🎨 SLIDE 5: AI in the Future 🚀
+-------------------------------
+🚀 AI will be EVERYWHERE!
+🚀 Robots will help with household chores
+🚀 AI teachers will personalize learning for each student
+🚀 We'll explore space with AI assistants
+🚀 AI will help humans, not replace them!
+🚀 THE FUTURE IS BRIGHT WITH AI! 🌟
+
+
+🌈 Remember: You can be part of the AI revolution! Start learning today! 🎓`;
+
+  // ===== BEAUTIFUL FINANCE PPT CONTENT =====
+  const financePPTContent = `💰 Finance: What, Why & Future - Kid's Edition 💰
+===========================================================
+
+🎨 SLIDE 1: What is Finance? 💰
+--------------------------------
+✨ Finance is all about MONEY! 💵
+✨ It's how we earn, save, spend, and grow money
+✨ Think of it as the SUPERPOWER of managing money! 💪
+✨ A piggy bank with a cape - that's finance! 🦸
+✨ Finance helps us achieve our DREAMS! 🌟
+
+
+🎨 SLIDE 2: Why is Finance Important? ❓
+----------------------------------------
+✨ To buy things we WANT and things we NEED
+✨ To SAVE money for the future 🏦
+✨ To avoid running out of money
+✨ To help our families and communities
+✨ To have FREEDOM to do what we love! 🎈
+
+
+🎨 SLIDE 3: How to Save Money 🐷
+--------------------------------
+💰 Save a little bit EVERY DAY
+💰 Use a piggy bank or savings jar 🏺
+💰 Set a savings goal (like a new video game!) 🎮
+💰 Watch your money GROW like a plant! 🌱
+💰 Fun Fact: Even ₹10 a day adds up to ₹3650 a year!
+
+
+🎨 SLIDE 4: Smart Spending 🛒
+-----------------------------
+🧠 Think before you buy: Do I NEED it or WANT it?
+🧠 Compare prices before buying
+🧠 Wait for sales and discounts
+🧠 Save up for BIG purchases
+🧠 Budget your money - plan your spending!
+
+
+🎨 SLIDE 5: Your Financial Future 🌟
 ------------------------------------
-⭐ Budgeting - Plan your spending
-⭐ Investing - Make your money grow
-⭐ Banking - Keep your money safe
-⭐ Credit - Build a good credit score
-⭐ Financial planning - Achieve your goals
+🌟 You can become a MONEY EXPERT!
+🌟 Learn to invest, save, and grow your wealth
+🌟 Financial freedom = You can do what you LOVE
+🌟 Start learning about money TODAY!
+🌟 Remember: Every millionaire started with one coin! 💰
 
-Slide 5: What about Finance in the future?
-------------------------------------------
-⭐ Global economy is connected
-⭐ Digital currencies like Bitcoin are new
-⭐ AI will help with financial decisions
-⭐ Financial literacy will be taught everywhere
-⭐ You can become a millionaire with smart money!
-⭐ Start learning finance today!`;
 
-  // Download Functions
+🌈 Be smart with money and you'll have a bright future! Start today! 🎓`;
+
+  // ===== DOWNLOAD FUNCTIONS =====
   const downloadPPT = (content, filename) => {
     const blob = new Blob([content], { type: 'application/vnd.ms-powerpoint' });
     const url = URL.createObjectURL(blob);
@@ -401,7 +245,7 @@ Slide 5: What about Finance in the future?
 📚 Free Courses:
 • Google AI Education: https://ai.google/education
 • Khan Academy Financial Literacy: https://www.khanacademy.org/college-careers-more/financial-literacy
-• Coursera AI For Everyone (audit): https://www.coursera.org/learn/ai-for-everyone
+• Coursera AI For Everyone: https://www.coursera.org/learn/ai-for-everyone
 • edX Finance for Everyone: https://www.edx.org/learn/finance
 • Harvard CS50 AI: https://cs50.harvard.edu/ai/
 • Stanford Financial Literacy: https://www.stanford.edu/
@@ -430,43 +274,54 @@ Slide 5: What about Finance in the future?
     URL.revokeObjectURL(url);
   };
 
-  // Quiz Functions
-  const startQuiz = () => {
-    setQuizStarted(true);
-    setCurrentQuestion(0);
+  // ===== RABBIT RACING GAME FUNCTIONS =====
+  const startGame = () => {
+    setGameStarted(true);
+    setCurrentLevel(0);
     setScore(0);
-    setQuizFinished(false);
+    setCorrectAnswers(0);
+    setRabbitPosition(0);
+    setGameFinished(false);
     setShowFeedback(false);
     setFeedbackMessage('');
   };
 
   const handleAnswer = (selectedIdx) => {
-    const q = quizData[currentQuestion];
-    if (selectedIdx === q.correct) {
-      setScore(score + 1);
-      setFeedbackMessage('✅ Correct! Great job! 🌟');
+    const level = gameLevels[currentLevel];
+    if (selectedIdx === level.correct) {
+      const newScore = score + 10;
+      const newCorrect = correctAnswers + 1;
+      setScore(newScore);
+      setCorrectAnswers(newCorrect);
+      // Rabbit jumps forward (10% per correct answer)
+      const newPosition = Math.min((newCorrect / gameLevels.length) * 100, 100);
+      setRabbitPosition(newPosition);
+      setFeedbackMessage(`🎉 CORRECT! +10 points! ${level.funFact}`);
+      setShowFeedback(true);
     } else {
-      setFeedbackMessage(`❌ Oops! The answer was: ${q.options[q.correct]} 💡`);
+      setFeedbackMessage(`💪 Not quite! The answer is: ${level.options[level.correct]}. ${level.hint}`);
+      setShowFeedback(true);
     }
-    setShowFeedback(true);
     
     setTimeout(() => {
-      if (currentQuestion + 1 < quizData.length) {
-        setCurrentQuestion(currentQuestion + 1);
+      if (currentLevel + 1 < gameLevels.length) {
+        setCurrentLevel(currentLevel + 1);
         setShowFeedback(false);
         setFeedbackMessage('');
       } else {
-        setQuizFinished(true);
+        setGameFinished(true);
         setShowFeedback(false);
       }
-    }, 1500);
+    }, 2500);
   };
 
-  const resetQuiz = () => {
-    setQuizStarted(false);
-    setCurrentQuestion(0);
+  const resetGame = () => {
+    setGameStarted(false);
+    setCurrentLevel(0);
     setScore(0);
-    setQuizFinished(false);
+    setCorrectAnswers(0);
+    setRabbitPosition(0);
+    setGameFinished(false);
     setShowFeedback(false);
     setFeedbackMessage('');
   };
@@ -481,36 +336,58 @@ Slide 5: What about Finance in the future?
   return (
     <div className="bg-[#FAF8F5] text-stone-800 min-h-screen font-sans antialiased">
       
-      {/* HERO SECTION */}
-      <header className="relative overflow-hidden pt-12 pb-24 px-6 shadow-md bg-gradient-to-r from-[#A4C9FF] via-[#FFEB99] to-[#FF9EAF]">
+      {/* ===== HERO SECTION - KID FRIENDLY ===== */}
+      <header className="relative overflow-hidden pt-12 pb-24 px-6 shadow-md bg-gradient-to-r from-[#FF6B6B] via-[#FFE66D] to-[#4ECDC4]">
         <div className="max-w-6xl mx-auto grid md:grid-cols-12 gap-8 items-center relative z-10">
           <div className="md:col-span-7 text-left space-y-6">
             <h1 className="text-5xl md:text-7xl font-black tracking-tight text-white leading-none drop-shadow-md">
-              Play, Learn, Enjoy and Repeat
+              🚀 Play, Learn, <br />Enjoy & Repeat
             </h1>
-            <p className="text-purple-950/80 text-sm md:text-base max-w-md font-bold leading-relaxed">
+            <p className="text-white/90 text-sm md:text-base max-w-md font-bold leading-relaxed">
               Empowering youth with interactive lessons, global financial literacy metrics, and cross-border analytics tools that fit your everyday routine seamlessly.
             </p>
           </div>
           <div className="md:col-span-5 flex flex-col items-center justify-center relative min-h-[320px]">
-            <div className="relative w-full max-w-sm flex flex-col items-center justify-center animate-bounce">
-              <div className="w-44 h-44 bg-white rounded-full p-2 shadow-2xl border-4 border-pink-400 flex items-center justify-center overflow-hidden">
-                <span className="text-[7rem] select-none">👧</span>
+            <div className="relative w-full max-w-sm flex flex-col items-center justify-center">
+              {/* NEW KID-FRIENDLY ANIMATED CHARACTERS */}
+              <div className="flex items-center justify-center gap-4 animate-bounce">
+                <div className="w-20 h-20 bg-yellow-400 rounded-full shadow-2xl border-4 border-white flex items-center justify-center text-4xl transform -rotate-12">
+                  🤖
+                </div>
+                <div className="w-28 h-28 bg-pink-400 rounded-full shadow-2xl border-4 border-white flex items-center justify-center text-5xl transform rotate-6">
+                  🚀
+                </div>
+                <div className="w-20 h-20 bg-blue-400 rounded-full shadow-2xl border-4 border-white flex items-center justify-center text-4xl transform -rotate-6">
+                  💰
+                </div>
               </div>
-              <div className="bg-white border-2 border-amber-400 px-5 py-2 rounded-2xl -mt-4 shadow-md flex items-center space-x-2">
-                <span className="text-lg">💝</span>
+              <div className="flex items-center justify-center gap-6 mt-2">
+                <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg flex items-center gap-2 text-sm font-bold text-purple-700">
+                  <span className="text-xl">⭐</span> 1000+ Kids
+                </div>
+                <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg flex items-center gap-2 text-sm font-bold text-pink-700">
+                  <span className="text-xl">🏆</span> 5 Certificates
+                </div>
+              </div>
+              <div className="bg-white border-2 border-yellow-400 px-5 py-2 rounded-2xl -mt-2 shadow-lg flex items-center space-x-2">
+                <span className="text-lg">🎮</span>
                 <span className="text-xs font-black text-purple-900 uppercase tracking-wider">Kids Learning Hub</span>
+                <span className="text-lg">📚</span>
               </div>
             </div>
           </div>
         </div>
+        {/* Floating decorations */}
+        <div className="absolute top-10 left-10 text-4xl animate-bounce opacity-50">🌟</div>
+        <div className="absolute bottom-10 right-10 text-4xl animate-bounce delay-100 opacity-50">✨</div>
+        <div className="absolute top-20 right-20 text-3xl animate-bounce delay-200 opacity-30">🎈</div>
       </header>
 
-      {/* MAIN CONTENT */}
+      {/* ===== MAIN CONTENT ===== */}
       <main className="bg-[#EAF7F2] py-12 px-4 shadow-inner">
         <div className="max-w-6xl mx-auto space-y-16">
 
-          {/* SECTION 1: MISSION STATEMENT */}
+          {/* ===== SECTION 1: MISSION STATEMENT ===== */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -536,7 +413,7 @@ Slide 5: What about Finance in the future?
             </div>
           </motion.section>
 
-          {/* SECTION 2: MEET THE FOUNDER */}
+          {/* ===== SECTION 2: MEET THE FOUNDER ===== */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -577,7 +454,7 @@ Slide 5: What about Finance in the future?
             </div>
           </motion.section>
 
-          {/* SECTION 3: THE TEAM */}
+          {/* ===== SECTION 3: THE TEAM ===== */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -607,7 +484,7 @@ Slide 5: What about Finance in the future?
             </div>
           </motion.section>
 
-          {/* SECTION 4: CHUCK GARCIA WORKSHOP - TEXT ONLY */}
+          {/* ===== SECTION 4: CHUCK GARCIA WORKSHOP ===== */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -618,8 +495,6 @@ Slide 5: What about Finance in the future?
               Chuck Garcia Workshop 🎓
             </h2>
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-              
-              {/* LEFT SIDE */}
               <div className="space-y-4">
                 <div className="bg-purple-50 rounded-xl p-4">
                   <h3 className="font-bold text-purple-700 text-lg">📊 Workshop Impact</h3>
@@ -639,8 +514,6 @@ Slide 5: What about Finance in the future?
                   </p>
                 </div>
               </div>
-
-              {/* RIGHT SIDE */}
               <div className="space-y-4">
                 <div className="bg-blue-50 rounded-xl p-4">
                   <h3 className="font-bold text-blue-700 text-lg">🎯 What We Achieved</h3>
@@ -662,7 +535,7 @@ Slide 5: What about Finance in the future?
             </div>
           </motion.section>
 
-          {/* SECTION 5: IMPORTANCE OF AI & FINANCIAL LITERACY */}
+          {/* ===== SECTION 5: IMPORTANCE OF AI & FINANCIAL LITERACY ===== */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -703,7 +576,7 @@ Slide 5: What about Finance in the future?
             </p>
           </motion.section>
 
-          {/* SECTION 6: ORGANIZED VIDEOS */}
+          {/* ===== SECTION 6: EDUCATIONAL VIDEOS ===== */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -769,7 +642,7 @@ Slide 5: What about Finance in the future?
             </div>
           </motion.section>
 
-          {/* SECTION 7: RESOURCES & ACTIVITIES - UPDATED WITH INTERACTIVE FEATURES */}
+          {/* ===== SECTION 7: RESOURCES & ACTIVITIES ===== */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -782,39 +655,59 @@ Slide 5: What about Finance in the future?
             
             <div className="max-w-5xl mx-auto space-y-6">
               
-              {/* PowerPoints */}
-              <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-6 shadow-md border-2 border-purple-200">
+              {/* ===== POWERPOINTS - BEAUTIFUL VERSION ===== */}
+              <div className="bg-gradient-to-r from-purple-100 via-pink-100 to-rose-100 rounded-2xl p-6 shadow-lg border-2 border-purple-300">
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="text-3xl">📊</span>
-                  <h3 className="text-2xl font-bold text-purple-700">PowerPoints</h3>
+                  <span className="text-4xl animate-bounce">📊</span>
+                  <h3 className="text-2xl font-bold text-purple-700">Beautiful PowerPoints</h3>
                 </div>
-                <p className="text-stone-600 mb-4">Ready-to-use presentations on AI and Finance</p>
-                <div className="flex flex-wrap gap-4">
-                  <button 
-                    onClick={() => downloadPPT(aiPPTContent, 'AI_What_Why_Benefits.ppt')} 
-                    className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-2.5 rounded-full hover:scale-105 transition flex items-center gap-2 shadow-md hover:shadow-lg text-sm font-bold"
-                  >
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M10 3a1 1 0 011 1v9.586l3.293-3.293a1 1 0 011.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5a1 1 0 011.414-1.414L9 13.586V4a1 1 0 011-1z"/>
-                    </svg>
-                    Download AI PPT 🤖
-                  </button>
-                  <button 
-                    onClick={() => downloadPPT(financePPTContent, 'Finance_What_Why_Benefits.ppt')} 
-                    className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-2.5 rounded-full hover:scale-105 transition flex items-center gap-2 shadow-md hover:shadow-lg text-sm font-bold"
-                  >
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M10 3a1 1 0 011 1v9.586l3.293-3.293a1 1 0 011.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5a1 1 0 011.414-1.414L9 13.586V4a1 1 0 011-1z"/>
-                    </svg>
-                    Download Finance PPT 💰
-                  </button>
-                </div>
-                <div className="mt-3 text-xs text-stone-500">
-                  📌 5 attractive slides each with emojis - perfect for kids!
+                <p className="text-stone-700 mb-4 font-medium">✨ 5 attractive slides each with emojis - perfect for kids!</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {/* AI PPT Card */}
+                  <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-md border-2 border-purple-200 hover:shadow-xl transition">
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="text-3xl">🤖</span>
+                      <span className="font-bold text-purple-700 text-lg">AI Presentation</span>
+                    </div>
+                    <div className="text-xs text-stone-500 space-y-1 mb-3">
+                      <p>📌 Slide 1: What is AI?</p>
+                      <p>📌 Slide 2: Where is AI used?</p>
+                      <p>📌 Slide 3: Why learn AI?</p>
+                      <p>📌 Slide 4: Benefits of AI</p>
+                      <p>📌 Slide 5: AI in the Future</p>
+                    </div>
+                    <button 
+                      onClick={() => downloadPPT(aiPPTContent, 'AI_What_Why_Benefits.ppt')} 
+                      className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2.5 rounded-full hover:scale-105 transition flex items-center justify-center gap-2 shadow-md hover:shadow-lg text-sm font-bold"
+                    >
+                      ⬇️ Download AI PPT
+                    </button>
+                  </div>
+
+                  {/* Finance PPT Card */}
+                  <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-md border-2 border-green-200 hover:shadow-xl transition">
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="text-3xl">💰</span>
+                      <span className="font-bold text-green-700 text-lg">Finance Presentation</span>
+                    </div>
+                    <div className="text-xs text-stone-500 space-y-1 mb-3">
+                      <p>📌 Slide 1: What is Finance?</p>
+                      <p>📌 Slide 2: Why learn Finance?</p>
+                      <p>📌 Slide 3: How to Save Money</p>
+                      <p>📌 Slide 4: Smart Spending</p>
+                      <p>📌 Slide 5: Financial Future</p>
+                    </div>
+                    <button 
+                      onClick={() => downloadPPT(financePPTContent, 'Finance_What_Why_Benefits.ppt')} 
+                      className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2.5 rounded-full hover:scale-105 transition flex items-center justify-center gap-2 shadow-md hover:shadow-lg text-sm font-bold"
+                    >
+                      ⬇️ Download Finance PPT
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              {/* Videos & Courses - Only this remains */}
+              {/* ===== VIDEOS & COURSES ===== */}
               <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-6 shadow-md border-2 border-blue-200">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">🎬</span>
@@ -834,104 +727,141 @@ Slide 5: What about Finance in the future?
                 </div>
               </div>
 
-              {/* Activities / Quiz - 50 Questions */}
-              <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-2xl p-6 shadow-md border-2 border-yellow-200">
+              {/* ===== RABBIT RACING GAME - KID FRIENDLY ===== */}
+              <div className="bg-gradient-to-r from-yellow-50 via-orange-50 to-amber-50 rounded-2xl p-6 shadow-lg border-2 border-yellow-300">
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="text-3xl">🎮</span>
-                  <h3 className="text-2xl font-bold text-orange-700">Activities</h3>
+                  <span className="text-4xl animate-bounce">🐇</span>
+                  <h3 className="text-2xl font-bold text-orange-700">Race the Rabbit! 🏁</h3>
                 </div>
-                <p className="text-stone-600 mb-4">Fun quizzes and interactive exercises - 50 questions!</p>
+                <p className="text-stone-700 mb-4 font-medium">Answer correctly to make the rabbit hop forward! 🐇</p>
                 
-                {!quizStarted ? (
+                {!gameStarted ? (
                   <button 
-                    onClick={startQuiz} 
-                    className="bg-gradient-to-r from-yellow-500 to-orange-500 text-gray-800 px-8 py-3 rounded-full hover:scale-105 transition flex items-center gap-2 text-lg font-bold shadow-md hover:shadow-lg"
+                    onClick={startGame} 
+                    className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-8 py-3 rounded-full hover:scale-105 transition flex items-center gap-3 text-lg font-bold shadow-lg hover:shadow-xl mx-auto"
                   >
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M10 3a1 1 0 011 1v9.586l3.293-3.293a1 1 0 011.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5a1 1 0 011.414-1.414L9 13.586V4a1 1 0 011-1z"/>
-                    </svg>
-                    Start Now 🚀
+                    🚀 Start Racing!
                   </button>
                 ) : (
                   <div className="bg-white rounded-xl p-6 shadow-inner">
-                    {!quizFinished ? (
-                      <div>
-                        <div className="flex justify-between items-center mb-4">
-                          <h4 className="text-xl font-bold text-gray-800">{quizData[currentQuestion].question}</h4>
-                          <span className="text-sm font-semibold text-orange-600 bg-orange-100 px-3 py-1 rounded-full">
-                            ⭐ {score} points
+                    
+                    {/* RABBIT RACING TRACK */}
+                    <div className="mb-6 bg-gradient-to-r from-green-100 to-yellow-100 rounded-xl p-4 border-2 border-green-300">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-sm font-bold text-green-700">🏁 Start</span>
+                        <span className="text-sm font-bold text-orange-700">🏆 Finish</span>
+                      </div>
+                      <div className="relative h-14 bg-white rounded-full border-2 border-gray-300 overflow-hidden">
+                        <div 
+                          className="h-full bg-gradient-to-r from-yellow-400 via-orange-400 to-green-400 rounded-full transition-all duration-700 flex items-center"
+                          style={{ width: `${rabbitPosition}%` }}
+                        >
+                          <span 
+                            className={`absolute text-4xl transition-all duration-700 ${showFeedback && feedbackMessage.includes('CORRECT') ? 'animate-bounce' : ''}`}
+                            style={{ left: `calc(${rabbitPosition}% - 20px)` }}
+                          >
+                            🐇
                           </span>
                         </div>
+                      </div>
+                      <div className="flex justify-between mt-1 text-xs text-stone-500">
+                        <span>0%</span>
+                        <span className="font-bold text-orange-600">
+                          {Math.round(rabbitPosition)}%
+                        </span>
+                        <span>100%</span>
+                      </div>
+                      <div className="text-center mt-2">
+                        <span className="text-sm font-bold text-stone-600 bg-white px-4 py-1 rounded-full">
+                          ⭐ Score: {score} points
+                        </span>
+                        <span className="text-sm font-bold text-green-600 bg-white px-4 py-1 rounded-full ml-2">
+                          ✅ {correctAnswers}/{gameLevels.length} correct
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* QUESTION */}
+                    {!gameFinished ? (
+                      <div>
+                        <div className="mb-4">
+                          <span className="text-sm font-semibold text-orange-600 bg-orange-100 px-3 py-1 rounded-full">
+                            Level {currentLevel + 1} of {gameLevels.length}
+                          </span>
+                          <h4 className="text-xl font-bold text-gray-800 mt-2">{gameLevels[currentLevel].question}</h4>
+                          <p className="text-xs text-stone-400 mt-1">{gameLevels[currentLevel].hint}</p>
+                        </div>
                         <div className="space-y-3">
-                          {quizData[currentQuestion].options.map((opt, idx) => (
+                          {gameLevels[currentLevel].options.map((opt, idx) => (
                             <button
                               key={idx}
                               onClick={() => !showFeedback && handleAnswer(idx)}
-                              className={`block w-full text-left px-4 py-3 rounded-xl border-2 transition ${
+                              className={`block w-full text-left px-4 py-3 rounded-xl border-2 transition-all ${
                                 showFeedback 
                                   ? 'cursor-default opacity-70' 
-                                  : 'hover:bg-yellow-100 hover:border-yellow-400 bg-white'
+                                  : 'hover:bg-yellow-100 hover:border-yellow-400 bg-white hover:scale-[1.02]'
+                              } ${
+                                showFeedback && idx === gameLevels[currentLevel].correct ? 'border-green-500 bg-green-50' : ''
                               }`}
                             >
-                              <span className="font-medium">{String.fromCharCode(65 + idx)}. </span>
+                              <span className="font-bold">{String.fromCharCode(65 + idx)}. </span>
                               {opt}
+                              {showFeedback && idx === gameLevels[currentLevel].correct && ' ✅'}
                             </button>
                           ))}
                         </div>
                         {showFeedback && (
                           <div className={`mt-4 p-4 rounded-lg border-2 ${
-                            feedbackMessage.includes('Correct') 
+                            feedbackMessage.includes('CORRECT') 
                               ? 'bg-green-100 border-green-400 text-green-700' 
                               : 'bg-red-100 border-red-400 text-red-700'
                           }`}>
-                            <p className="font-semibold">{feedbackMessage}</p>
+                            <p className="font-bold text-lg">{feedbackMessage}</p>
                           </div>
                         )}
-                        <div className="mt-4 flex justify-between items-center">
-                          <span className="text-sm text-gray-500">
-                            Question {currentQuestion + 1} of {quizData.length}
-                          </span>
-                          <div className="flex items-center gap-2">
-                            <span className="text-sm text-gray-500">Progress:</span>
-                            <div className="w-32 h-2 bg-gray-200 rounded-full">
-                              <div 
-                                className="h-2 bg-orange-500 rounded-full transition-all"
-                                style={{ width: `${((currentQuestion + 1) / quizData.length) * 100}%` }}
-                              ></div>
-                            </div>
-                          </div>
-                        </div>
                       </div>
                     ) : (
+                      /* COMPLETION SCREEN */
                       <div className="text-center py-6">
-                        <div className="text-6xl mb-4">🎉</div>
-                        <h4 className="text-2xl font-bold mb-2 text-gray-800">Quiz Complete!</h4>
-                        <p className="text-xl font-semibold text-orange-600">Score: {score} / {quizData.length}</p>
-                        <div className="mt-3 p-4 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl">
+                        <div className="text-7xl mb-4 animate-bounce">🏆</div>
+                        <h4 className="text-3xl font-bold mb-2 text-orange-600">🎉 RABBIT WINS! 🎉</h4>
+                        <p className="text-xl font-semibold text-gray-700">Final Score: {score} points</p>
+                        <p className="text-lg text-gray-600">Correct Answers: {correctAnswers} / {gameLevels.length}</p>
+                        <div className="mt-4 p-4 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl border-2 border-yellow-300">
                           <p className="text-lg font-bold text-gray-700">
-                            {score === quizData.length ? '🌟 PERFECT! You\'re an AI & Finance Genius!' : 
-                             score >= 40 ? '🌟 Excellent! You\'re a superstar learner!' :
-                             score >= 30 ? '💪 Great job! Keep learning and improving!' :
-                             score >= 20 ? '📚 Good effort! Review the materials and try again!' :
-                             '🎯 Keep practicing! You\'ll get better each time!'}
+                            {correctAnswers === gameLevels.length ? '🌟 PERFECT! You\'re a Genius! 🧠' : 
+                             correctAnswers >= 8 ? '🌟 Excellent! Superstar Learner! ⭐' :
+                             correctAnswers >= 6 ? '💪 Great job! Keep learning! 📚' :
+                             correctAnswers >= 4 ? '📖 Good effort! Try again! 💪' :
+                             '🎯 Keep practicing! You\'ll improve! 🌱'}
                           </p>
                         </div>
-                        <button 
-                          onClick={resetQuiz} 
-                          className="mt-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-3 rounded-full hover:scale-105 transition shadow-md hover:shadow-lg font-bold"
-                        >
-                          🔄 Try Again
-                        </button>
+                        <div className="flex flex-wrap gap-4 justify-center mt-6">
+                          <button 
+                            onClick={resetGame} 
+                            className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-8 py-3 rounded-full hover:scale-105 transition shadow-lg hover:shadow-xl font-bold"
+                          >
+                            🔄 Play Again
+                          </button>
+                          <button 
+                            onClick={() => {
+                              document.getElementById('certificateSection')?.scrollIntoView({ behavior: 'smooth' });
+                            }}
+                            className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-3 rounded-full hover:scale-105 transition shadow-lg hover:shadow-xl font-bold"
+                          >
+                            🏆 Get Certificate
+                          </button>
+                        </div>
                       </div>
                     )}
                   </div>
                 )}
-                <div className="mt-3 text-xs text-stone-500">
-                  🧠 50 fun questions about AI and Finance!
+                <div className="mt-3 text-xs text-stone-500 text-center">
+                  🧠 10 fun levels about AI and Finance! Answer correctly to race the rabbit! 🐇
                 </div>
               </div>
 
-              {/* Share Your Work */}
+              {/* ===== SHARE YOUR WORK ===== */}
               <div className="bg-gradient-to-r from-indigo-50 to-purple-50 border-2 border-dashed border-indigo-400 rounded-2xl p-6 flex flex-wrap items-center justify-between">
                 <div className="flex items-center gap-4">
                   <span className="text-3xl">📤</span>
@@ -950,7 +880,7 @@ Slide 5: What about Finance in the future?
             </div>
           </motion.section>
 
-          {/* SECTION 8: STUDENT SUBMISSION */}
+          {/* ===== SECTION 8: STUDENT SUBMISSION ===== */}
           <motion.section 
             id="shareSection"
             initial={{ opacity: 0, y: 20 }}
@@ -1006,42 +936,63 @@ Slide 5: What about Finance in the future?
             </p>
           </motion.section>
 
-          {/* SECTION 9: CERTIFICATES */}
+          {/* ===== SECTION 9: CERTIFICATES - KID FRIENDLY ===== */}
           <motion.section 
+            id="certificateSection"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.9 }}
             className="bg-white rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-stone-100"
           >
             <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-6">
-              Earn Your Certificate 🎓
+              🎓 Earn Your Certificate
             </h2>
             <div className="max-w-4xl mx-auto">
-              <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-2xl p-8 text-center">
-                <span className="text-6xl">📜</span>
-                <h3 className="text-2xl font-bold text-purple-700 mt-3">Free Certificates for Students</h3>
-                <p className="text-stone-700 max-w-2xl mx-auto mt-2">
-                  Complete our courses and earn <span className="font-bold">downloadable certificates</span> 
-                  to add to your portfolio, resume, or job applications!
+              <div className="bg-gradient-to-r from-purple-100 via-pink-100 to-rose-100 rounded-3xl p-8 text-center border-4 border-dashed border-purple-400">
+                <span className="text-7xl animate-bounce inline-block">📜</span>
+                <h3 className="text-3xl font-bold text-purple-700 mt-3">🎉 Free Certificates for Kids! 🎉</h3>
+                <p className="text-stone-700 max-w-2xl mx-auto mt-2 text-lg">
+                  Complete our courses and earn <span className="font-bold text-purple-700">super cool certificates</span> 
+                  with your name on them! Add to your portfolio, resume, or show your family! 🌟
                 </p>
+                
+                {/* Certificate Cards */}
                 <div className="grid md:grid-cols-3 gap-4 mt-6">
-                  <div className="bg-white rounded-xl p-4 shadow-md">
-                    <span className="text-2xl">🤖</span>
-                    <h4 className="font-bold text-sm text-purple-700">AI Basics</h4>
-                    <p className="text-xs text-stone-500">Complete 5 AI lessons</p>
+                  <div className="bg-white rounded-2xl p-5 shadow-lg border-2 border-purple-300 hover:scale-105 transition transform">
+                    <div className="text-4xl">🤖</div>
+                    <h4 className="font-bold text-lg text-purple-700 mt-2">AI Explorer</h4>
+                    <p className="text-sm text-stone-500">Complete 5 AI lessons</p>
+                    <div className="mt-3 bg-purple-100 rounded-full px-3 py-1 text-xs font-bold text-purple-700 inline-block">
+                      🎯 5 Videos
+                    </div>
                   </div>
-                  <div className="bg-white rounded-xl p-4 shadow-md">
-                    <span className="text-2xl">💰</span>
-                    <h4 className="font-bold text-sm text-purple-700">Financial Literacy</h4>
-                    <p className="text-xs text-stone-500">Complete 5 Finance lessons</p>
+                  
+                  <div className="bg-white rounded-2xl p-5 shadow-lg border-2 border-green-300 hover:scale-105 transition transform">
+                    <div className="text-4xl">💰</div>
+                    <h4 className="font-bold text-lg text-green-700 mt-2">Money Master</h4>
+                    <p className="text-sm text-stone-500">Complete 5 Finance lessons</p>
+                    <div className="mt-3 bg-green-100 rounded-full px-3 py-1 text-xs font-bold text-green-700 inline-block">
+                      🎯 5 Videos
+                    </div>
                   </div>
-                  <div className="bg-white rounded-xl p-4 shadow-md">
-                    <span className="text-2xl">🌟</span>
-                    <h4 className="font-bold text-sm text-purple-700">Advanced</h4>
-                    <p className="text-xs text-stone-500">Complete 10 combined lessons</p>
+                  
+                  <div className="bg-white rounded-2xl p-5 shadow-lg border-2 border-yellow-300 hover:scale-105 transition transform">
+                    <div className="text-4xl">🌟</div>
+                    <h4 className="font-bold text-lg text-orange-700 mt-2">AI & Finance Pro</h4>
+                    <p className="text-sm text-stone-500">Complete 10 combined lessons</p>
+                    <div className="mt-3 bg-orange-100 rounded-full px-3 py-1 text-xs font-bold text-orange-700 inline-block">
+                      🎯 10 Videos
+                    </div>
                   </div>
                 </div>
-                <button className="mt-6 px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full font-bold hover:shadow-lg transition-all text-sm">
+
+                <div className="mt-6 p-4 bg-white/80 rounded-xl">
+                  <p className="text-sm text-stone-600">
+                    💡 <span className="font-bold">How to earn:</span> Complete 5 AI videos + 5 Finance videos = Get your certificate with your name!
+                  </p>
+                </div>
+
+                <button className="mt-6 px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full font-bold hover:shadow-lg transition-all text-sm hover:scale-105">
                   📥 Start Learning & Earn Certificate
                 </button>
               </div>
@@ -1051,7 +1002,7 @@ Slide 5: What about Finance in the future?
         </div>
       </main>
 
-      {/* FOOTER - UPDATED CONTACT */}
+      {/* ===== FOOTER ===== */}
       <footer id="contact" className="bg-[#192428] text-white py-8 px-6 rounded-t-[2rem] flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-bold border-t-4 border-[#FF6B8B]">
         <div className="text-center md:text-left">
           <p className="text-[#FF6B8B]">📞 Phone: +971585417100</p>
