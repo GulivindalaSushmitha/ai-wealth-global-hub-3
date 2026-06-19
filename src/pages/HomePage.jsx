@@ -22,38 +22,20 @@ export default function HomePage() {
   const [certificateName, setCertificateName] = useState('');
   const [certificateType, setCertificateType] = useState('');
 
-  // ===== SPIN & LEARN WHEEL STATES =====
-  const [spinStarted, setSpinStarted] = useState(false);
-  const [spinResult, setSpinResult] = useState(null);
-  const [spinScore, setSpinScore] = useState(0);
-  const [isSpinning, setIsSpinning] = useState(false);
-  const [spinQuestions, setSpinQuestions] = useState([
-    { q: '🤖 What is AI?', a: 'Artificial Intelligence - making machines smart!' },
-    { q: '💰 What is a budget?', a: 'A plan for your money!' },
-    { q: '🧠 What can AI do?', a: 'Think, learn, and solve problems!' },
-    { q: '🏦 Why save money?', a: 'For future needs and emergencies!' },
-    { q: '🤖 Where is AI used?', a: 'Phones, cars, hospitals, games!' },
-    { q: '💰 What is investing?', a: 'Putting money to grow over time!' },
-    { q: '📱 What is machine learning?', a: 'AI that learns from data!' },
-    { q: '💳 What is a credit card?', a: 'Borrow money to pay later!' },
-  ]);
+  // ===== QUIZ SHOW GAME STATES =====
+  const [quizShowStarted, setQuizShowStarted] = useState(false);
+  const [quizShowComplete, setQuizShowComplete] = useState(false);
+  const [quizShowIndex, setQuizShowIndex] = useState(0);
+  const [quizShowScore, setQuizShowScore] = useState(0);
+  const [quizShowSelected, setQuizShowSelected] = useState(null);
+  const [quizShowFeedback, setQuizShowFeedback] = useState('');
 
-  // ===== FLASHCARD CHALLENGE STATES =====
-  const [flashcardStarted, setFlashcardStarted] = useState(false);
-  const [flashcardComplete, setFlashcardComplete] = useState(false);
-  const [flashcardIndex, setFlashcardIndex] = useState(0);
-  const [flashcardScore, setFlashcardScore] = useState(0);
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [flashcards, setFlashcards] = useState([
-    { term: '🤖 AI', definition: 'Artificial Intelligence - machines that think!' },
-    { term: '💰 Budget', definition: 'A plan for your money!' },
-    { term: '🧠 Machine Learning', definition: 'AI that learns from data!' },
-    { term: '🏦 Savings', definition: 'Money put aside for later!' },
-    { term: '📱 Smartphone AI', definition: 'Face unlock, voice assistants!' },
-    { term: '💳 Credit Card', definition: 'Borrow money to pay later!' },
-    { term: '🚀 Future AI', definition: 'AI will help us explore space!' },
-    { term: '💰 Investing', definition: 'Making money grow over time!' },
-  ]);
+  // ===== DRAG & DROP MATCH STATES =====
+  const [dragDropStarted, setDragDropStarted] = useState(false);
+  const [dragDropComplete, setDragDropComplete] = useState(false);
+  const [dragDropScore, setDragDropScore] = useState(0);
+  const [draggedItem, setDraggedItem] = useState(null);
+  const [matchedItems, setMatchedItems] = useState([]);
 
   const allVideos = [...aiVideos, ...financeVideos];
   
@@ -67,133 +49,135 @@ export default function HomePage() {
     'Other': allVideos.filter(v => !['AI Basics', 'AI Course', 'Machine Learning', 'Groww', 'Pranjal Kamra', 'Finance Tips'].includes(v.category))
   };
 
-  // ===== BEAUTIFUL AI PPT CONTENT - 5 SLIDES FOR PPT =====
-  const aiPPTContent = `🌟🤖 AI: WHAT, WHY & FUTURE - KID'S EDITION 🤖🌟
+  // ===== CLEAN AI PPT CONTENT - 5 SLIDES =====
+  const aiPPTContent = `🤖 AI: WHAT, WHY & FUTURE - KID'S EDITION
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🎨 SLIDE 1: WHAT IS AI? 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+============================================================
+SLIDE 1: WHAT IS AI?
+============================================================
 
-✨ AI stands for ARTIFICIAL INTELLIGENCE
-✨ It's like giving a computer a BRAIN! 🧠
-✨ AI helps machines THINK, LEARN, and DECIDE
-✨ Think of it as a SMART ROBOT FRIEND! 🤖
-✨ Examples: Siri, Alexa, ChatGPT, Self-driving cars
-✨ AI is everywhere around us!
+* AI stands for ARTIFICIAL INTELLIGENCE
+* It's like giving a computer a BRAIN! 
+* AI helps machines THINK, LEARN, and DECIDE
+* Think of it as a SMART ROBOT FRIEND!
+* Examples: Siri, Alexa, ChatGPT, Self-driving cars
+* AI is everywhere around us!
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🎨 SLIDE 2: WHERE IS AI USED? 🌍
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+============================================================
+SLIDE 2: WHERE IS AI USED?
+============================================================
 
-📱 Smartphones - Face unlock, Voice assistants
-🎮 Video Games - Smart enemies that learn
-🚗 Self-driving Cars - Drive themselves!
-🏥 Hospitals - Help doctors save lives
-🛒 Online Shopping - Recommend products
-📚 Education - Personalized learning
+* Smartphones - Face unlock, Voice assistants
+* Video Games - Smart enemies that learn
+* Self-driving Cars - Drive themselves!
+* Hospitals - Help doctors save lives
+* Online Shopping - Recommend products
+* Education - Personalized learning
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🎨 SLIDE 3: WHY IS AI IMPORTANT? ❓
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+============================================================
+SLIDE 3: WHY IS AI IMPORTANT?
+============================================================
 
-⚡ AI helps us do things FASTER and BETTER!
-⚡ It solves problems humans find too hard
-⚡ It helps us discover NEW things
-⚡ AI never gets tired - works 24/7! 🕐
-⚡ Helps in SPACE EXPLORATION! 🚀
-⚡ Fun Fact: AI can beat humans at chess! ♟️
+* AI helps us do things FASTER and BETTER!
+* It solves problems humans find too hard
+* It helps us discover NEW things
+* AI never gets tired - works 24/7!
+* Helps in SPACE EXPLORATION!
+* Fun Fact: AI can beat humans at chess!
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🎨 SLIDE 4: BENEFITS OF AI ✨
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+============================================================
+SLIDE 4: BENEFITS OF AI
+============================================================
 
-⭐ SAVES TIME - AI does tasks quickly
-⭐ HELPS WITH DIFFICULT TASKS - Like solving puzzles
-⭐ WORKS 24/7 - Never needs sleep!
-⭐ MAKES FEWER MISTAKES - Very accurate
-⭐ HELPS CREATE NEW INVENTIONS - Like robots! 
-⭐ SAVES LIVES - Helps doctors diagnose diseases
+* SAVES TIME - AI does tasks quickly
+* HELPS WITH DIFFICULT TASKS - Like solving puzzles
+* WORKS 24/7 - Never needs sleep!
+* MAKES FEWER MISTAKES - Very accurate
+* HELPS CREATE NEW INVENTIONS - Like robots!
+* SAVES LIVES - Helps doctors diagnose diseases
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🎨 SLIDE 5: AI IN THE FUTURE 🚀
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+============================================================
+SLIDE 5: AI IN THE FUTURE
+============================================================
 
-🚀 AI will be EVERYWHERE!
-🚀 Robots will help with household chores
-🚀 AI teachers will personalize learning
-🚀 We'll explore space with AI assistants
-🚀 AI will help SOLVE CLIMATE CHANGE! 🌍
-🚀 AI will CURE DISEASES! 💊
-🚀 AI will help humans, not replace them!
-🚀 THE FUTURE IS BRIGHT WITH AI! 🌟
+* AI will be EVERYWHERE!
+* Robots will help with household chores
+* AI teachers will personalize learning
+* We'll explore space with AI assistants
+* AI will help SOLVE CLIMATE CHANGE!
+* AI will CURE DISEASES!
+* AI will help humans, not replace them!
+* THE FUTURE IS BRIGHT WITH AI!
 
-🌈 Remember: You can be part of the AI revolution! 🎓`;
+============================================================
+Remember: You can be part of the AI revolution!
+============================================================`;
 
-  // ===== BEAUTIFUL FINANCE PPT CONTENT - 5 SLIDES FOR PPT =====
-  const financePPTContent = `🌟💰 FINANCE: WHAT, WHY & FUTURE - KID'S EDITION 💰🌟
+  // ===== CLEAN FINANCE PPT CONTENT - 5 SLIDES =====
+  const financePPTContent = `💰 FINANCE: WHAT, WHY & FUTURE - KID'S EDITION
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🎨 SLIDE 1: WHAT IS FINANCE? 💰
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+============================================================
+SLIDE 1: WHAT IS FINANCE?
+============================================================
 
-✨ Finance is all about MONEY! 💵
-✨ It's how we EARN, SAVE, SPEND, and GROW money
-✨ Think of it as the SUPERPOWER of managing money! 💪
-✨ A piggy bank with a cape - that's finance! 🦸
-✨ Finance helps us achieve our DREAMS! 🌟
-✨ Everyone can learn to be a money expert!
+* Finance is all about MONEY!
+* It's how we EARN, SAVE, SPEND, and GROW money
+* Think of it as the SUPERPOWER of managing money!
+* A piggy bank with a cape - that's finance!
+* Finance helps us achieve our DREAMS!
+* Everyone can learn to be a money expert!
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🎨 SLIDE 2: WHY IS FINANCE IMPORTANT? ❓
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+============================================================
+SLIDE 2: WHY IS FINANCE IMPORTANT?
+============================================================
 
-✨ To buy things we WANT and things we NEED
-✨ To SAVE money for the future 🏦
-✨ To avoid running out of money
-✨ To help our families and communities
-✨ To have FREEDOM to do what we love! 🎈
-✨ To be PREPARED for emergencies
+* To buy things we WANT and things we NEED
+* To SAVE money for the future
+* To avoid running out of money
+* To help our families and communities
+* To have FREEDOM to do what we love!
+* To be PREPARED for emergencies
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🎨 SLIDE 3: HOW TO SAVE MONEY 🐷
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+============================================================
+SLIDE 3: HOW TO SAVE MONEY
+============================================================
 
-💰 Save a little bit EVERY DAY
-💰 Use a piggy bank or savings jar 🏺
-💰 Set a savings goal (like a new video game!) 🎮
-💰 Watch your money GROW like a plant! 🌱
-💰 Keep track of your spending
-💰 Fun Fact: Even ₹10 a day = ₹3650 a year!
+* Save a little bit EVERY DAY
+* Use a piggy bank or savings jar
+* Set a savings goal (like a new video game!)
+* Watch your money GROW like a plant!
+* Keep track of your spending
+* Fun Fact: Even Rs 10 a day = Rs 3650 a year!
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🎨 SLIDE 4: SMART SPENDING 🛒
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+============================================================
+SLIDE 4: SMART SPENDING
+============================================================
 
-🧠 Think before you buy: NEED it or WANT it?
-🧠 Compare prices before buying
-🧠 Wait for sales and discounts
-🧠 Save up for BIG purchases
-🧠 Budget your money - plan your spending!
-🧠 Remember: Every rupee counts!
+* Think before you buy: NEED it or WANT it?
+* Compare prices before buying
+* Wait for sales and discounts
+* Save up for BIG purchases
+* Budget your money - plan your spending!
+* Remember: Every rupee counts!
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🎨 SLIDE 5: YOUR FINANCIAL FUTURE 🌟
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+============================================================
+SLIDE 5: YOUR FINANCIAL FUTURE
+============================================================
 
-🌟 You can become a MONEY EXPERT!
-🌟 Learn to invest, save, and grow your wealth
-🌟 Financial freedom = You can do what you LOVE
-🌟 Start learning about money TODAY!
-🌟 Remember: Every millionaire started with one coin! 💰
-🌟 The future is YOURS to build!
+* You can become a MONEY EXPERT!
+* Learn to invest, save, and grow your wealth
+* Financial freedom = You can do what you LOVE
+* Start learning about money TODAY!
+* Remember: Every millionaire started with one coin!
+* The future is YOURS to build!
 
-🌈 Be smart with money and you'll have a bright future! 🎓`;
+============================================================
+Be smart with money and you'll have a bright future!
+============================================================`;
 
-  // ===== DOWNLOAD FUNCTIONS - FIXED FOR PPT =====
+  // ===== DOWNLOAD FUNCTIONS =====
   const downloadPPT = (content, filename) => {
-    // Create a proper PPT format with the content
-    const pptContent = content;
-    const blob = new Blob([pptContent], { type: 'application/vnd.ms-powerpoint' });
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -246,7 +230,6 @@ export default function HomePage() {
       color: #ff6b35;
       padding-left: 18px;
     }
-    .section a .emoji { margin-right: 8px; }
     .footer { 
       text-align: center; 
       margin-top: 30px; 
@@ -265,69 +248,35 @@ export default function HomePage() {
 
   <div class="section">
     <h2>📺 YouTube Playlists</h2>
-    <a href="https://www.youtube.com/results?search_query=ai+for+beginners" target="_blank">
-      <span class="emoji">🎬</span> AI for Beginners
-    </a>
-    <a href="https://www.youtube.com/results?search_query=finance+101" target="_blank">
-      <span class="emoji">🎬</span> Finance 101
-    </a>
-    <a href="https://www.youtube.com/results?search_query=machine+learning+basics" target="_blank">
-      <span class="emoji">🎬</span> Machine Learning Basics
-    </a>
-    <a href="https://www.youtube.com/results?search_query=investing+for+kids" target="_blank">
-      <span class="emoji">🎬</span> Investing for Kids
-    </a>
+    <a href="https://www.youtube.com/results?search_query=ai+for+beginners" target="_blank">🎬 AI for Beginners</a>
+    <a href="https://www.youtube.com/results?search_query=finance+101" target="_blank">🎬 Finance 101</a>
+    <a href="https://www.youtube.com/results?search_query=machine+learning+basics" target="_blank">🎬 Machine Learning Basics</a>
+    <a href="https://www.youtube.com/results?search_query=investing+for+kids" target="_blank">🎬 Investing for Kids</a>
   </div>
 
   <div class="section" style="border-left-color: #4ECDC4;">
     <h2>📚 Free Courses</h2>
-    <a href="https://ai.google/education" target="_blank">
-      <span class="emoji">📖</span> Google AI Education
-    </a>
-    <a href="https://www.khanacademy.org/college-careers-more/financial-literacy" target="_blank">
-      <span class="emoji">📖</span> Khan Academy Financial Literacy
-    </a>
-    <a href="https://www.coursera.org/learn/ai-for-everyone" target="_blank">
-      <span class="emoji">📖</span> Coursera AI For Everyone
-    </a>
-    <a href="https://www.edx.org/learn/finance" target="_blank">
-      <span class="emoji">📖</span> edX Finance for Everyone
-    </a>
-    <a href="https://cs50.harvard.edu/ai/" target="_blank">
-      <span class="emoji">📖</span> Harvard CS50 AI
-    </a>
-    <a href="https://www.stanford.edu/" target="_blank">
-      <span class="emoji">📖</span> Stanford Financial Literacy
-    </a>
+    <a href="https://ai.google/education" target="_blank">📖 Google AI Education</a>
+    <a href="https://www.khanacademy.org/college-careers-more/financial-literacy" target="_blank">📖 Khan Academy Financial Literacy</a>
+    <a href="https://www.coursera.org/learn/ai-for-everyone" target="_blank">📖 Coursera AI For Everyone</a>
+    <a href="https://www.edx.org/learn/finance" target="_blank">📖 edX Finance for Everyone</a>
+    <a href="https://cs50.harvard.edu/ai/" target="_blank">📖 Harvard CS50 AI</a>
+    <a href="https://www.stanford.edu/" target="_blank">📖 Stanford Financial Literacy</a>
   </div>
 
   <div class="section" style="border-left-color: #ffe66d;">
     <h2>📱 Interactive Tools</h2>
-    <a href="https://experiments.withgoogle.com/ai" target="_blank">
-      <span class="emoji">🧪</span> AI Experiments
-    </a>
-    <a href="https://www.howthemarketworks.com/" target="_blank">
-      <span class="emoji">📊</span> Stock Market Game
-    </a>
-    <a href="https://www.practicalmoneyskills.com/" target="_blank">
-      <span class="emoji">💵</span> Practical Money Skills
-    </a>
-    <a href="https://www.tynker.com/ai" target="_blank">
-      <span class="emoji">🤖</span> AI for Kids
-    </a>
+    <a href="https://experiments.withgoogle.com/ai" target="_blank">🧪 AI Experiments</a>
+    <a href="https://www.howthemarketworks.com/" target="_blank">📊 Stock Market Game</a>
+    <a href="https://www.practicalmoneyskills.com/" target="_blank">💵 Practical Money Skills</a>
+    <a href="https://www.tynker.com/ai" target="_blank">🤖 AI for Kids</a>
   </div>
 
   <div class="section" style="border-left-color: #6c5ce7;">
     <h2>📖 Educational Resources</h2>
-    <a href="https://www.investopedia.com/financial-literacy-for-kids-5112941" target="_blank">
-      <span class="emoji">📚</span> Investopedia for Kids
-    </a>
-    <a href="https://www.unesco.org/en/artificial-intelligence" target="_blank">
-      <span class="emoji">🌍</span> AI Ethics - UNESCO
-    </a>
-    <a href="https://www.weforum.org/" target="_blank">
-      <span class="emoji">💼</span> Future of Work - WEF
-    </a>
+    <a href="https://www.investopedia.com/financial-literacy-for-kids-5112941" target="_blank">📚 Investopedia for Kids</a>
+    <a href="https://www.unesco.org/en/artificial-intelligence" target="_blank">🌍 AI Ethics - UNESCO</a>
+    <a href="https://www.weforum.org/" target="_blank">💼 Future of Work - WEF</a>
   </div>
 
   <div class="footer">
@@ -352,74 +301,74 @@ export default function HomePage() {
   // ===== RABBIT RACING GAME FUNCTIONS =====
   const gameLevels = [
     {
-      question: "🤖 What does AI stand for?",
+      question: "What does AI stand for?",
       options: ["Artificial Intelligence", "Automated Internet", "Awesome Ideas", "Advanced Integration"],
       correct: 0,
-      hint: "💡 Think about what makes computers smart!",
-      funFact: "✨ AI was first talked about in 1956!"
+      hint: "Think about what makes computers smart!",
+      funFact: "AI was first talked about in 1956!"
     },
     {
-      question: "🧠 Which of these is an example of AI?",
+      question: "Which of these is an example of AI?",
       options: ["ChatGPT", "A pencil", "A bicycle", "A book"],
       correct: 0,
-      hint: "💡 It's something that can talk to you!",
-      funFact: "✨ ChatGPT can write stories and poems!"
+      hint: "It's something that can talk to you!",
+      funFact: "ChatGPT can write stories and poems!"
     },
     {
-      question: "🤖 What can AI help us with?",
+      question: "What can AI help us with?",
       options: ["Solving problems", "Cooking only", "Making bed", "Watching TV"],
       correct: 0,
-      hint: "💡 AI is like a smart helper!",
-      funFact: "✨ AI helps doctors find diseases faster!"
+      hint: "AI is like a smart helper!",
+      funFact: "AI helps doctors find diseases faster!"
     },
     {
-      question: "💰 What is financial literacy?",
+      question: "What is financial literacy?",
       options: ["Managing money wisely", "Only spending", "Only saving", "Only earning"],
       correct: 0,
-      hint: "💡 It's about being smart with money!",
-      funFact: "✨ People who learn finance early save more money!"
+      hint: "It's about being smart with money!",
+      funFact: "People who learn finance early save more money!"
     },
     {
-      question: "💳 What is a budget?",
+      question: "What is a budget?",
       options: ["A plan for your money", "A type of card", "A game", "A book"],
       correct: 0,
-      hint: "💡 It's like a map for your money!",
-      funFact: "✨ A budget helps you buy what you really want!"
+      hint: "It's like a map for your money!",
+      funFact: "A budget helps you buy what you really want!"
     },
     {
-      question: "📱 Which device uses AI?",
+      question: "Which device uses AI?",
       options: ["Smartphone", "Rock", "Tree", "Water bottle"],
       correct: 0,
-      hint: "💡 It's something you use every day!",
-      funFact: "✨ Your phone uses AI to understand your voice!"
+      hint: "It's something you use every day!",
+      funFact: "Your phone uses AI to understand your voice!"
     },
     {
-      question: "🏦 What is a bank?",
+      question: "What is a bank?",
       options: ["A place to keep money", "A restaurant", "A school", "A park"],
       correct: 0,
-      hint: "💡 It's where money is safe!",
-      funFact: "✨ The first bank was in Italy in 1400s!"
+      hint: "It's where money is safe!",
+      funFact: "The first bank was in Italy in 1400s!"
     },
     {
-      question: "🤖 Self-driving cars use:",
+      question: "Self-driving cars use:",
       options: ["AI technology", "Magic", "Only wheels", "Only mirrors"],
       correct: 0,
-      hint: "💡 It's the same thing that makes computers smart!",
-      funFact: "✨ Self-driving cars can see better than humans!"
+      hint: "It's the same thing that makes computers smart!",
+      funFact: "Self-driving cars can see better than humans!"
     },
     {
-      question: "💰 Why is saving important?",
+      question: "Why is saving important?",
       options: ["For future needs", "Only for buying candy", "Only for games", "Only for fun"],
       correct: 0,
-      hint: "💡 Think about tomorrow!",
-      funFact: "✨ Saving just ₹10 a day = ₹3650 a year!"
+      hint: "Think about tomorrow!",
+      funFact: "Saving just Rs 10 a day = Rs 3650 a year!"
     },
     {
-      question: "🚀 AI will help us in the future by:",
+      question: "AI will help us in the future by:",
       options: ["Solving big problems", "Only playing games", "Only sleeping", "Only eating"],
       correct: 0,
-      hint: "💡 AI makes the world better!",
-      funFact: "✨ AI will help us explore space and cure diseases!"
+      hint: "AI makes the world better!",
+      funFact: "AI will help us explore space and cure diseases!"
     }
   ];
 
@@ -443,10 +392,10 @@ export default function HomePage() {
       setCorrectAnswers(newCorrect);
       const newPosition = Math.min((newCorrect / gameLevels.length) * 100, 100);
       setRabbitPosition(newPosition);
-      setFeedbackMessage(`🎉 CORRECT! +10 points! ${level.funFact}`);
+      setFeedbackMessage(`CORRECT! +10 points! ${level.funFact}`);
       setShowFeedback(true);
     } else {
-      setFeedbackMessage(`💪 Not quite! The answer is: ${level.options[level.correct]}. ${level.hint}`);
+      setFeedbackMessage(`Not quite! The answer is: ${level.options[level.correct]}. ${level.hint}`);
       setShowFeedback(true);
     }
     
@@ -473,73 +422,133 @@ export default function HomePage() {
     setFeedbackMessage('');
   };
 
-  // ===== SPIN & LEARN WHEEL FUNCTIONS =====
-  const startSpin = () => {
-    setSpinStarted(true);
-    setSpinResult(null);
-    setSpinScore(0);
+  // ===== QUIZ SHOW GAME FUNCTIONS =====
+  const quizShowQuestions = [
+    { q: "What is AI?", options: ["Artificial Intelligence", "Automated Ideas", "Advanced Internet", "Awesome Input"], correct: 0 },
+    { q: "What is a budget?", options: ["Plan for money", "A game", "A food", "A book"], correct: 0 },
+    { q: "Where is AI used?", options: ["Smartphones", "Only in movies", "Only in books", "Only in games"], correct: 0 },
+    { q: "Why save money?", options: ["For future needs", "To waste it", "To hide it", "To forget it"], correct: 0 },
+    { q: "What does AI help with?", options: ["Solving problems", "Only sleeping", "Only eating", "Only playing"], correct: 0 },
+    { q: "What is finance?", options: ["Managing money", "Playing games", "Cooking food", "Building houses"], correct: 0 },
+    { q: "What is a piggy bank for?", options: ["Saving money", "Playing games", "Eating food", "Reading books"], correct: 0 },
+    { q: "AI can help doctors:", options: ["Diagnose diseases", "Cook food", "Build houses", "Play games"], correct: 0 },
+    { q: "What is investing?", options: ["Growing money", "Spending all", "Hiding money", "Forgetting money"], correct: 0 },
+    { q: "Future of AI is:", options: ["Bright and helpful", "Scary", "Boring", "Not useful"], correct: 0 }
+  ];
+
+  const startQuizShow = () => {
+    setQuizShowStarted(true);
+    setQuizShowComplete(false);
+    setQuizShowIndex(0);
+    setQuizShowScore(0);
+    setQuizShowSelected(null);
+    setQuizShowFeedback('');
   };
 
-  const spinWheel = () => {
-    if (isSpinning) return;
-    setIsSpinning(true);
-    setSpinResult(null);
-
-    const randomIndex = Math.floor(Math.random() * spinQuestions.length);
-    const selected = spinQuestions[randomIndex];
-    
-    setTimeout(() => {
-      setSpinResult(selected);
-      setSpinScore(spinScore + 10);
-      setIsSpinning(false);
-    }, 1500);
-  };
-
-  const resetSpin = () => {
-    setSpinStarted(false);
-    setSpinResult(null);
-    setSpinScore(0);
-    setIsSpinning(false);
-  };
-
-  // ===== FLASHCARD CHALLENGE FUNCTIONS =====
-  const startFlashcard = () => {
-    setFlashcardStarted(true);
-    setFlashcardComplete(false);
-    setFlashcardIndex(0);
-    setFlashcardScore(0);
-    setIsFlipped(false);
-    // Shuffle flashcards
-    const shuffled = [...flashcards].sort(() => Math.random() - 0.5);
-    setFlashcards(shuffled);
-  };
-
-  const flipCard = () => {
-    setIsFlipped(!isFlipped);
-  };
-
-  const nextCard = () => {
-    setIsFlipped(false);
-    if (flashcardIndex + 1 < flashcards.length) {
-      setFlashcardIndex(flashcardIndex + 1);
-      setFlashcardScore(flashcardScore + 10);
+  const handleQuizShowAnswer = (selectedIdx) => {
+    if (quizShowSelected !== null) return;
+    setQuizShowSelected(selectedIdx);
+    const q = quizShowQuestions[quizShowIndex];
+    if (selectedIdx === q.correct) {
+      setQuizShowScore(quizShowScore + 10);
+      setQuizShowFeedback(' Correct! Great job!');
     } else {
-      setFlashcardComplete(true);
+      setQuizShowFeedback(` The correct answer was: ${q.options[q.correct]}`);
     }
+
+    setTimeout(() => {
+      if (quizShowIndex + 1 < quizShowQuestions.length) {
+        setQuizShowIndex(quizShowIndex + 1);
+        setQuizShowSelected(null);
+        setQuizShowFeedback('');
+      } else {
+        setQuizShowComplete(true);
+      }
+    }, 2000);
   };
 
-  const resetFlashcard = () => {
-    setFlashcardStarted(false);
-    setFlashcardComplete(false);
-    setFlashcardIndex(0);
-    setFlashcardScore(0);
-    setIsFlipped(false);
+  const resetQuizShow = () => {
+    setQuizShowStarted(false);
+    setQuizShowComplete(false);
+    setQuizShowIndex(0);
+    setQuizShowScore(0);
+    setQuizShowSelected(null);
+    setQuizShowFeedback('');
+  };
+
+  // ===== DRAG & DROP MATCH GAME FUNCTIONS =====
+  const dragDropItems = [
+    { id: 1, term: 'AI', definition: 'Artificial Intelligence', emoji: '🤖', matched: false },
+    { id: 2, term: 'Budget', definition: 'Plan for your money', emoji: '📊', matched: false },
+    { id: 3, term: 'Savings', definition: 'Money put aside', emoji: '🏦', matched: false },
+    { id: 4, term: 'Investing', definition: 'Growing your money', emoji: '💰', matched: false },
+    { id: 5, term: 'Finance', definition: 'Managing money', emoji: '💳', matched: false },
+    { id: 6, term: 'Robot', definition: 'Machine that helps', emoji: '🤖', matched: false },
+  ];
+
+  const [dragItems, setDragItems] = useState([...dragDropItems]);
+  const [dropTargets, setDropTargets] = useState([...dragDropItems]);
+
+  const startDragDrop = () => {
+    setDragDropStarted(true);
+    setDragDropComplete(false);
+    setDragDropScore(0);
+    setMatchedItems([]);
+    setDraggedItem(null);
+    // Shuffle items
+    const shuffled = [...dragDropItems].sort(() => Math.random() - 0.5);
+    setDragItems(shuffled);
+    setDropTargets([...dragDropItems]);
+  };
+
+  const handleDragStart = (item) => {
+    if (item.matched) return;
+    setDraggedItem(item);
+  };
+
+  const handleDrop = (targetId) => {
+    if (!draggedItem) return;
+    const target = dropTargets.find(t => t.id === targetId);
+    if (!target || target.matched) return;
+
+    if (draggedItem.id === target.id) {
+      // Match found!
+      const newMatched = [...matchedItems, draggedItem.id];
+      setMatchedItems(newMatched);
+      setDragDropScore(dragDropScore + 10);
+      
+      // Update items
+      setDragItems(dragItems.map(item => 
+        item.id === draggedItem.id ? { ...item, matched: true } : item
+      ));
+      setDropTargets(dropTargets.map(item => 
+        item.id === target.id ? { ...item, matched: true } : item
+      ));
+
+      if (newMatched.length === dragDropItems.length) {
+        setDragDropComplete(true);
+        setTimeout(() => {
+          alert('🎉 You matched ALL pairs! You\'re a Matching Master! 🏆');
+        }, 500);
+      }
+    }
+    setDraggedItem(null);
+  };
+
+  const resetDragDrop = () => {
+    setDragDropStarted(false);
+    setDragDropComplete(false);
+    setDragDropScore(0);
+    setMatchedItems([]);
+    setDraggedItem(null);
+    setDragItems([...dragDropItems]);
+    setDropTargets([...dragDropItems]);
   };
 
   // ===== CERTIFICATE DOWNLOAD =====
   const downloadCertificate = (name, type) => {
     if (!name || name.trim() === '') {
-      alert('🎓 Please enter your name first!');
+      alert('Please enter your name first!');
       return;
     }
 
@@ -714,7 +723,7 @@ export default function HomePage() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 
-    alert(`🎉 Certificate for "${name}" downloaded successfully! 🎉\n\n📂 Check your downloads folder.\n🖨️ You can open the HTML file and print it!`);
+    alert(`🎉 Certificate for "${name}" downloaded successfully! 🎉`);
   };
 
   const handleSubmitWork = (e) => {
@@ -727,7 +736,7 @@ export default function HomePage() {
   return (
     <div className="bg-[#FAF8F5] text-stone-800 min-h-screen font-sans antialiased">
       
-      {/* ===== HERO SECTION - KID FRIENDLY ===== */}
+      {/* ===== HERO SECTION ===== */}
       <header className="relative overflow-hidden pt-12 pb-24 px-6 shadow-md bg-gradient-to-r from-[#FF6B6B] via-[#FFE66D] to-[#4ECDC4]">
         <div className="max-w-6xl mx-auto grid md:grid-cols-12 gap-8 items-center relative z-10">
           <div className="md:col-span-7 text-left space-y-6">
@@ -741,15 +750,9 @@ export default function HomePage() {
           <div className="md:col-span-5 flex flex-col items-center justify-center relative min-h-[320px]">
             <div className="relative w-full max-w-sm flex flex-col items-center justify-center">
               <div className="flex items-center justify-center gap-4 animate-bounce">
-                <div className="w-20 h-20 bg-yellow-400 rounded-full shadow-2xl border-4 border-white flex items-center justify-center text-4xl transform -rotate-12">
-                  🤖
-                </div>
-                <div className="w-28 h-28 bg-pink-400 rounded-full shadow-2xl border-4 border-white flex items-center justify-center text-5xl transform rotate-6">
-                  🚀
-                </div>
-                <div className="w-20 h-20 bg-blue-400 rounded-full shadow-2xl border-4 border-white flex items-center justify-center text-4xl transform -rotate-6">
-                  💰
-                </div>
+                <div className="w-20 h-20 bg-yellow-400 rounded-full shadow-2xl border-4 border-white flex items-center justify-center text-4xl transform -rotate-12">🤖</div>
+                <div className="w-28 h-28 bg-pink-400 rounded-full shadow-2xl border-4 border-white flex items-center justify-center text-5xl transform rotate-6">🚀</div>
+                <div className="w-20 h-20 bg-blue-400 rounded-full shadow-2xl border-4 border-white flex items-center justify-center text-4xl transform -rotate-6">💰</div>
               </div>
               <div className="flex items-center justify-center gap-6 mt-2">
                 <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg flex items-center gap-2 text-sm font-bold text-purple-700">
@@ -1044,112 +1047,70 @@ export default function HomePage() {
             
             <div className="max-w-5xl mx-auto space-y-6">
               
-              {/* ===== POWERPOINTS - 5 SLIDES EACH ===== */}
+              {/* ===== POWERPOINTS - CLEAN VERSION ===== */}
               <div className="bg-gradient-to-r from-purple-100 via-pink-100 to-rose-100 rounded-2xl p-6 shadow-lg border-2 border-purple-300">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-4xl animate-bounce">📊</span>
                   <h3 className="text-2xl font-bold text-purple-700">Beautiful PowerPoints</h3>
                 </div>
-                <p className="text-stone-700 mb-4 font-medium">✨ 5 attractive slides each with emojis - perfect for kids!</p>
+                <p className="text-stone-700 mb-4 font-medium">✨ 5 attractive slides each - perfect for kids!</p>
                 
-                {/* AI PPT Preview */}
-                <div className="bg-white/90 rounded-xl p-4 mb-4 border-2 border-purple-200">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-2xl">🤖</span>
-                    <span className="font-bold text-purple-700">AI Presentation - 5 Slides</span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="bg-white/90 rounded-xl p-4 border-2 border-purple-200">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-2xl">🤖</span>
+                      <span className="font-bold text-purple-700">AI Presentation - 5 Slides</span>
+                    </div>
+                    <div className="grid grid-cols-5 gap-1 text-[10px]">
+                      <div className="bg-purple-50 p-1 rounded text-center font-bold">1. What is AI?</div>
+                      <div className="bg-purple-50 p-1 rounded text-center font-bold">2. Where is AI used?</div>
+                      <div className="bg-purple-50 p-1 rounded text-center font-bold">3. Why is AI important?</div>
+                      <div className="bg-purple-50 p-1 rounded text-center font-bold">4. Benefits of AI</div>
+                      <div className="bg-purple-50 p-1 rounded text-center font-bold">5. AI in the Future</div>
+                    </div>
+                    <button 
+                      onClick={() => downloadPPT(aiPPTContent, 'AI_5_Slides.txt')} 
+                      className="mt-3 w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-full hover:scale-105 transition font-bold text-sm"
+                    >
+                      ⬇️ Download AI PPT
+                    </button>
                   </div>
-                  <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-xs">
-                    <div className="bg-purple-50 p-2 rounded text-center">
-                      <span className="block text-lg">🤖</span>
-                      <span className="font-bold">Slide 1</span>
-                      <p className="text-[10px] text-stone-500">What is AI?</p>
-                    </div>
-                    <div className="bg-purple-50 p-2 rounded text-center">
-                      <span className="block text-lg">🌍</span>
-                      <span className="font-bold">Slide 2</span>
-                      <p className="text-[10px] text-stone-500">Where is AI used?</p>
-                    </div>
-                    <div className="bg-purple-50 p-2 rounded text-center">
-                      <span className="block text-lg">❓</span>
-                      <span className="font-bold">Slide 3</span>
-                      <p className="text-[10px] text-stone-500">Why is AI important?</p>
-                    </div>
-                    <div className="bg-purple-50 p-2 rounded text-center">
-                      <span className="block text-lg">✨</span>
-                      <span className="font-bold">Slide 4</span>
-                      <p className="text-[10px] text-stone-500">Benefits of AI</p>
-                    </div>
-                    <div className="bg-purple-50 p-2 rounded text-center">
-                      <span className="block text-lg">🚀</span>
-                      <span className="font-bold">Slide 5</span>
-                      <p className="text-[10px] text-stone-500">AI in the Future</p>
-                    </div>
-                  </div>
-                  <button 
-                    onClick={() => downloadPPT(aiPPTContent, 'AI_5_Slides_Kid_Edition.ppt')} 
-                    className="mt-3 w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-full hover:scale-105 transition flex items-center justify-center gap-2 shadow-md hover:shadow-lg text-sm font-bold"
-                  >
-                    ⬇️ Download AI PPT (5 Slides)
-                  </button>
-                </div>
 
-                {/* Finance PPT Preview */}
-                <div className="bg-white/90 rounded-xl p-4 border-2 border-green-200">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-2xl">💰</span>
-                    <span className="font-bold text-green-700">Finance Presentation - 5 Slides</span>
+                  <div className="bg-white/90 rounded-xl p-4 border-2 border-green-200">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-2xl">💰</span>
+                      <span className="font-bold text-green-700">Finance Presentation - 5 Slides</span>
+                    </div>
+                    <div className="grid grid-cols-5 gap-1 text-[10px]">
+                      <div className="bg-green-50 p-1 rounded text-center font-bold">1. What is Finance?</div>
+                      <div className="bg-green-50 p-1 rounded text-center font-bold">2. Why is Finance important?</div>
+                      <div className="bg-green-50 p-1 rounded text-center font-bold">3. How to Save Money</div>
+                      <div className="bg-green-50 p-1 rounded text-center font-bold">4. Smart Spending</div>
+                      <div className="bg-green-50 p-1 rounded text-center font-bold">5. Financial Future</div>
+                    </div>
+                    <button 
+                      onClick={() => downloadPPT(financePPTContent, 'Finance_5_Slides.txt')} 
+                      className="mt-3 w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2 rounded-full hover:scale-105 transition font-bold text-sm"
+                    >
+                      ⬇️ Download Finance PPT
+                    </button>
                   </div>
-                  <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-xs">
-                    <div className="bg-green-50 p-2 rounded text-center">
-                      <span className="block text-lg">💰</span>
-                      <span className="font-bold">Slide 1</span>
-                      <p className="text-[10px] text-stone-500">What is Finance?</p>
-                    </div>
-                    <div className="bg-green-50 p-2 rounded text-center">
-                      <span className="block text-lg">❓</span>
-                      <span className="font-bold">Slide 2</span>
-                      <p className="text-[10px] text-stone-500">Why is Finance important?</p>
-                    </div>
-                    <div className="bg-green-50 p-2 rounded text-center">
-                      <span className="block text-lg">🐷</span>
-                      <span className="font-bold">Slide 3</span>
-                      <p className="text-[10px] text-stone-500">How to Save Money</p>
-                    </div>
-                    <div className="bg-green-50 p-2 rounded text-center">
-                      <span className="block text-lg">🛒</span>
-                      <span className="font-bold">Slide 4</span>
-                      <p className="text-[10px] text-stone-500">Smart Spending</p>
-                    </div>
-                    <div className="bg-green-50 p-2 rounded text-center">
-                      <span className="block text-lg">🌟</span>
-                      <span className="font-bold">Slide 5</span>
-                      <p className="text-[10px] text-stone-500">Financial Future</p>
-                    </div>
-                  </div>
-                  <button 
-                    onClick={() => downloadPPT(financePPTContent, 'Finance_5_Slides_Kid_Edition.ppt')} 
-                    className="mt-3 w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2 rounded-full hover:scale-105 transition flex items-center justify-center gap-2 shadow-md hover:shadow-lg text-sm font-bold"
-                  >
-                    ⬇️ Download Finance PPT (5 Slides)
-                  </button>
                 </div>
               </div>
 
-              {/* ===== VIDEOS & COURSES - BEAUTIFUL ===== */}
+              {/* ===== VIDEOS & COURSES ===== */}
               <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-6 shadow-md border-2 border-blue-200">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">🎬</span>
                   <h3 className="text-2xl font-bold text-blue-700">Videos & Courses</h3>
                 </div>
                 <p className="text-stone-600 mb-4">Free video courses and educational links</p>
-                <div className="flex flex-wrap gap-3">
-                  <button 
-                    onClick={downloadVideoLinks} 
-                    className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-6 py-2.5 rounded-full hover:scale-105 transition shadow-md hover:shadow-lg text-sm font-bold"
-                  >
-                    📥 Download Videos & Courses (HTML with Blue Links)
-                  </button>
-                </div>
+                <button 
+                  onClick={downloadVideoLinks} 
+                  className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-6 py-2.5 rounded-full hover:scale-105 transition shadow-md hover:shadow-lg text-sm font-bold"
+                >
+                  📥 Download Videos & Courses (HTML with Blue Links)
+                </button>
                 <div className="mt-3 text-xs text-stone-500">
                   🔗 Includes YouTube playlists, free courses, interactive tools & more! 
                   <span className="text-blue-600 font-bold"> All links are blue and clickable!</span>
@@ -1173,8 +1134,6 @@ export default function HomePage() {
                   </button>
                 ) : (
                   <div className="bg-white rounded-xl p-6 shadow-inner">
-                    
-                    {/* RABBIT RACING TRACK */}
                     <div className="mb-6 bg-gradient-to-r from-green-100 to-yellow-100 rounded-xl p-4 border-2 border-green-300">
                       <div className="flex justify-between items-center mb-2">
                         <span className="text-sm font-bold text-green-700">🏁 Start</span>
@@ -1188,35 +1147,24 @@ export default function HomePage() {
                           <span 
                             className={`absolute text-4xl transition-all duration-700 ${showFeedback && feedbackMessage.includes('CORRECT') ? 'animate-bounce' : ''}`}
                             style={{ left: `calc(${rabbitPosition}% - 20px)` }}
-                          >
-                            🐇
-                          </span>
+                          >🐇</span>
                         </div>
                       </div>
                       <div className="flex justify-between mt-1 text-xs text-stone-500">
                         <span>0%</span>
-                        <span className="font-bold text-orange-600">
-                          {Math.round(rabbitPosition)}%
-                        </span>
+                        <span className="font-bold text-orange-600">{Math.round(rabbitPosition)}%</span>
                         <span>100%</span>
                       </div>
                       <div className="text-center mt-2">
-                        <span className="text-sm font-bold text-stone-600 bg-white px-4 py-1 rounded-full">
-                          ⭐ Score: {score} points
-                        </span>
-                        <span className="text-sm font-bold text-green-600 bg-white px-4 py-1 rounded-full ml-2">
-                          ✅ {correctAnswers}/{gameLevels.length} correct
-                        </span>
+                        <span className="text-sm font-bold text-stone-600 bg-white px-4 py-1 rounded-full">⭐ Score: {score} points</span>
+                        <span className="text-sm font-bold text-green-600 bg-white px-4 py-1 rounded-full ml-2">✅ {correctAnswers}/{gameLevels.length} correct</span>
                       </div>
                     </div>
 
-                    {/* QUESTION */}
                     {!gameFinished ? (
                       <div>
                         <div className="mb-4">
-                          <span className="text-sm font-semibold text-orange-600 bg-orange-100 px-3 py-1 rounded-full">
-                            Level {currentLevel + 1} of {gameLevels.length}
-                          </span>
+                          <span className="text-sm font-semibold text-orange-600 bg-orange-100 px-3 py-1 rounded-full">Level {currentLevel + 1} of {gameLevels.length}</span>
                           <h4 className="text-xl font-bold text-gray-800 mt-2">{gameLevels[currentLevel].question}</h4>
                           <p className="text-xs text-stone-400 mt-1">{gameLevels[currentLevel].hint}</p>
                         </div>
@@ -1226,31 +1174,21 @@ export default function HomePage() {
                               key={idx}
                               onClick={() => !showFeedback && handleAnswer(idx)}
                               className={`block w-full text-left px-4 py-3 rounded-xl border-2 transition-all ${
-                                showFeedback 
-                                  ? 'cursor-default opacity-70' 
-                                  : 'hover:bg-yellow-100 hover:border-yellow-400 bg-white hover:scale-[1.02]'
-                              } ${
-                                showFeedback && idx === gameLevels[currentLevel].correct ? 'border-green-500 bg-green-50' : ''
-                              }`}
+                                showFeedback ? 'cursor-default opacity-70' : 'hover:bg-yellow-100 hover:border-yellow-400 bg-white hover:scale-[1.02]'
+                              } ${showFeedback && idx === gameLevels[currentLevel].correct ? 'border-green-500 bg-green-50' : ''}`}
                             >
-                              <span className="font-bold">{String.fromCharCode(65 + idx)}. </span>
-                              {opt}
+                              <span className="font-bold">{String.fromCharCode(65 + idx)}. </span>{opt}
                               {showFeedback && idx === gameLevels[currentLevel].correct && ' ✅'}
                             </button>
                           ))}
                         </div>
                         {showFeedback && (
-                          <div className={`mt-4 p-4 rounded-lg border-2 ${
-                            feedbackMessage.includes('CORRECT') 
-                              ? 'bg-green-100 border-green-400 text-green-700' 
-                              : 'bg-red-100 border-red-400 text-red-700'
-                          }`}>
+                          <div className={`mt-4 p-4 rounded-lg border-2 ${feedbackMessage.includes('CORRECT') ? 'bg-green-100 border-green-400 text-green-700' : 'bg-red-100 border-red-400 text-red-700'}`}>
                             <p className="font-bold text-lg">{feedbackMessage}</p>
                           </div>
                         )}
                       </div>
                     ) : (
-                      /* COMPLETION SCREEN */
                       <div className="text-center py-6">
                         <div className="text-7xl mb-4 animate-bounce">🏆</div>
                         <h4 className="text-3xl font-bold mb-2 text-orange-600">🎉 RABBIT WINS! 🎉</h4>
@@ -1258,188 +1196,162 @@ export default function HomePage() {
                         <p className="text-lg text-gray-600">Correct Answers: {correctAnswers} / {gameLevels.length}</p>
                         <div className="mt-4 p-4 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl border-2 border-yellow-300">
                           <p className="text-lg font-bold text-gray-700">
-                            {correctAnswers === gameLevels.length ? '🌟 PERFECT! You\'re a Genius! 🧠' : 
-                             correctAnswers >= 8 ? '🌟 Excellent! Superstar Learner! ⭐' :
-                             correctAnswers >= 6 ? '💪 Great job! Keep learning! 📚' :
-                             correctAnswers >= 4 ? '📖 Good effort! Try again! 💪' :
-                             '🎯 Keep practicing! You\'ll improve! 🌱'}
+                            {correctAnswers === gameLevels.length ? '🌟 PERFECT! You\'re a Genius!' : 
+                             correctAnswers >= 8 ? '🌟 Excellent! Superstar Learner!' :
+                             correctAnswers >= 6 ? '💪 Great job! Keep learning!' :
+                             correctAnswers >= 4 ? '📖 Good effort! Try again!' :
+                             '🎯 Keep practicing! You\'ll improve!'}
                           </p>
                         </div>
                         <div className="flex flex-wrap gap-4 justify-center mt-6">
-                          <button 
-                            onClick={resetGame} 
-                            className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-8 py-3 rounded-full hover:scale-105 transition shadow-lg hover:shadow-xl font-bold"
-                          >
-                            🔄 Play Again
-                          </button>
-                          <button 
-                            onClick={() => {
-                              document.getElementById('certificateSection')?.scrollIntoView({ behavior: 'smooth' });
-                            }}
-                            className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-3 rounded-full hover:scale-105 transition shadow-lg hover:shadow-xl font-bold"
-                          >
-                            🏆 Get Certificate
-                          </button>
+                          <button onClick={resetGame} className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-8 py-3 rounded-full hover:scale-105 transition shadow-lg hover:shadow-xl font-bold">🔄 Play Again</button>
+                          <button onClick={() => document.getElementById('certificateSection')?.scrollIntoView({ behavior: 'smooth' })} className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-3 rounded-full hover:scale-105 transition shadow-lg hover:shadow-xl font-bold">🏆 Get Certificate</button>
                         </div>
                       </div>
                     )}
                   </div>
                 )}
-                <div className="mt-3 text-xs text-stone-500 text-center">
-                  🧠 10 fun levels about AI and Finance! Answer correctly to race the rabbit! 🐇
-                </div>
+                <div className="mt-3 text-xs text-stone-500 text-center">🧠 10 fun levels about AI and Finance! Answer correctly to race the rabbit! 🐇</div>
               </div>
 
-              {/* ===== ACTIVITY 2: SPIN & LEARN WHEEL ===== */}
-              <div className="bg-gradient-to-r from-red-50 via-pink-50 to-rose-50 rounded-2xl p-6 shadow-lg border-2 border-red-300">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-4xl animate-spin">🎡</span>
-                  <h3 className="text-2xl font-bold text-red-700">Activity 2: Spin & Learn! 🎯</h3>
-                </div>
-                <p className="text-stone-700 mb-4 font-medium">Spin the wheel to learn AI & Finance facts!</p>
-                
-                {!spinStarted ? (
-                  <button 
-                    onClick={startSpin} 
-                    className="bg-gradient-to-r from-red-500 to-pink-500 text-white px-8 py-3 rounded-full hover:scale-105 transition flex items-center gap-3 text-lg font-bold shadow-lg hover:shadow-xl mx-auto"
-                  >
-                    🎡 Start Spinning!
-                  </button>
-                ) : (
-                  <div className="bg-white rounded-xl p-6 shadow-inner">
-                    <div className="text-center mb-4">
-                      <span className="font-bold text-red-700">⭐ Score: {spinScore} points</span>
-                    </div>
-                    
-                    {!spinResult ? (
-                      <div className="text-center">
-                        <div className="text-6xl mb-4 animate-spin">🎡</div>
-                        <button
-                          onClick={spinWheel}
-                          disabled={isSpinning}
-                          className={`px-8 py-3 rounded-full font-bold text-white transition ${
-                            isSpinning 
-                              ? 'bg-gray-400 cursor-not-allowed' 
-                              : 'bg-gradient-to-r from-red-500 to-pink-500 hover:scale-105'
-                          }`}
-                        >
-                          {isSpinning ? '🔄 Spinning...' : '🎡 SPIN THE WHEEL!'}
-                        </button>
-                      </div>
-                    ) : (
-                      <div className="text-center animate-bounce">
-                        <div className="text-5xl mb-2">🎉</div>
-                        <div className="bg-gradient-to-r from-red-50 to-pink-50 rounded-xl p-4 border-2 border-red-200">
-                          <p className="text-xl font-bold text-red-700">{spinResult.q}</p>
-                          <p className="text-lg text-stone-700 mt-2">💡 {spinResult.a}</p>
-                        </div>
-                        <button
-                          onClick={spinWheel}
-                          className="mt-4 px-6 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-full hover:scale-105 transition font-bold"
-                        >
-                          🔄 Spin Again
-                        </button>
-                        <button
-                          onClick={resetSpin}
-                          className="mt-4 ml-2 px-6 py-2 bg-gray-300 text-stone-700 rounded-full hover:scale-105 transition font-bold"
-                        >
-                          🔄 Reset Game
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                )}
-                <div className="mt-3 text-xs text-stone-500 text-center">
-                  🎡 Spin to learn fun AI & Finance facts! Each spin teaches you something new!
-                </div>
-              </div>
-
-              {/* ===== ACTIVITY 3: FLASHCARD CHALLENGE ===== */}
+              {/* ===== ACTIVITY 2: QUIZ SHOW GAME ===== */}
               <div className="bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 rounded-2xl p-6 shadow-lg border-2 border-indigo-300">
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="text-4xl animate-bounce">🃏</span>
-                  <h3 className="text-2xl font-bold text-indigo-700">Activity 3: Flashcard Challenge! 🧠</h3>
+                  <span className="text-4xl animate-pulse">🎯</span>
+                  <h3 className="text-2xl font-bold text-indigo-700">Activity 2: Quiz Show! 🧠</h3>
                 </div>
-                <p className="text-stone-700 mb-4 font-medium">Flip cards to learn AI & Finance concepts!</p>
+                <p className="text-stone-700 mb-4 font-medium">Test your knowledge with 10 fun questions!</p>
                 
-                {!flashcardStarted ? (
-                  <button 
-                    onClick={startFlashcard} 
-                    className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-8 py-3 rounded-full hover:scale-105 transition flex items-center gap-3 text-lg font-bold shadow-lg hover:shadow-xl mx-auto"
-                  >
-                    🃏 Start Flashcards!
-                  </button>
+                {!quizShowStarted ? (
+                  <button onClick={startQuizShow} className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-8 py-3 rounded-full hover:scale-105 transition flex items-center gap-3 text-lg font-bold shadow-lg hover:shadow-xl mx-auto">🎯 Start Quiz Show!</button>
                 ) : (
                   <div className="bg-white rounded-xl p-6 shadow-inner">
-                    {!flashcardComplete ? (
+                    {!quizShowComplete ? (
                       <div>
                         <div className="flex justify-between items-center mb-4">
-                          <span className="text-sm font-bold text-indigo-700">
-                            Card {flashcardIndex + 1} of {flashcards.length}
-                          </span>
-                          <span className="text-sm font-bold text-green-700">
-                            ⭐ Score: {flashcardScore} points
-                          </span>
+                          <span className="text-sm font-bold text-indigo-700">Question {quizShowIndex + 1} of {quizShowQuestions.length}</span>
+                          <span className="text-sm font-bold text-green-700">⭐ Score: {quizShowScore} points</span>
                         </div>
-                        
-                        <div 
-                          className="relative w-full min-h-[180px] cursor-pointer"
-                          onClick={flipCard}
-                        >
-                          <div className={`w-full h-full min-h-[180px] rounded-xl p-6 flex flex-col items-center justify-center text-center transition-all duration-500 ${
-                            isFlipped 
-                              ? 'bg-gradient-to-r from-green-100 to-emerald-100 border-2 border-green-400' 
-                              : 'bg-gradient-to-r from-indigo-100 to-purple-100 border-2 border-indigo-400'
-                          }`}>
-                            {!isFlipped ? (
-                              <div>
-                                <span className="text-5xl block mb-3">{flashcards[flashcardIndex].term.split(' ')[0]}</span>
-                                <p className="text-xl font-bold text-indigo-700">{flashcards[flashcardIndex].term}</p>
-                                <p className="text-sm text-stone-500 mt-2">👆 Tap to flip</p>
-                              </div>
-                            ) : (
-                              <div>
-                                <span className="text-3xl block mb-2">💡</span>
-                                <p className="text-lg font-bold text-green-700">{flashcards[flashcardIndex].definition}</p>
-                                <p className="text-sm text-stone-500 mt-2">👆 Tap to flip back</p>
-                              </div>
-                            )}
+                        <h4 className="text-xl font-bold text-gray-800 mb-4">{quizShowQuestions[quizShowIndex].q}</h4>
+                        <div className="space-y-3">
+                          {quizShowQuestions[quizShowIndex].options.map((opt, idx) => (
+                            <button
+                              key={idx}
+                              onClick={() => handleQuizShowAnswer(idx)}
+                              disabled={quizShowSelected !== null}
+                              className={`block w-full text-left px-4 py-3 rounded-xl border-2 transition-all ${
+                                quizShowSelected !== null ? 'cursor-default opacity-70' : 'hover:bg-indigo-100 hover:border-indigo-400 bg-white hover:scale-[1.02]'
+                              } ${quizShowSelected === idx && idx === quizShowQuestions[quizShowIndex].correct ? 'border-green-500 bg-green-50' : ''}
+                                ${quizShowSelected === idx && idx !== quizShowQuestions[quizShowIndex].correct ? 'border-red-500 bg-red-50' : ''}
+                                ${quizShowSelected !== null && idx === quizShowQuestions[quizShowIndex].correct ? 'border-green-500 bg-green-50' : ''}`}
+                            >
+                              <span className="font-bold">{String.fromCharCode(65 + idx)}. </span>{opt}
+                              {quizShowSelected !== null && idx === quizShowQuestions[quizShowIndex].correct && ' ✅'}
+                              {quizShowSelected === idx && idx !== quizShowQuestions[quizShowIndex].correct && ' ❌'}
+                            </button>
+                          ))}
+                        </div>
+                        {quizShowFeedback && (
+                          <div className={`mt-4 p-4 rounded-lg border-2 ${quizShowFeedback.includes('Correct') ? 'bg-green-100 border-green-400 text-green-700' : 'bg-red-100 border-red-400 text-red-700'}`}>
+                            <p className="font-bold text-lg">{quizShowFeedback}</p>
                           </div>
-                        </div>
-                        
-                        <button
-                          onClick={nextCard}
-                          className="mt-4 w-full py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-xl font-bold hover:scale-105 transition"
-                        >
-                          {flashcardIndex + 1 < flashcards.length ? '➡️ Next Card' : '🏆 Finish Challenge!'}
-                        </button>
+                        )}
                       </div>
                     ) : (
                       <div className="text-center py-6">
                         <div className="text-6xl mb-4">🏆</div>
-                        <h4 className="text-2xl font-bold text-indigo-700">🎉 CHALLENGE COMPLETE! 🎉</h4>
-                        <p className="text-xl font-semibold text-gray-700">Final Score: {flashcardScore} points</p>
+                        <h4 className="text-2xl font-bold text-indigo-700">🎉 QUIZ COMPLETE! 🎉</h4>
+                        <p className="text-xl font-semibold text-gray-700">Final Score: {quizShowScore} points</p>
                         <div className="mt-4 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl border-2 border-indigo-300">
                           <p className="text-lg font-bold text-gray-700">
-                            {flashcardScore === flashcards.length * 10 ? '🌟 PERFECT! You\'re a Flashcard Master! 🧠' : 
-                             flashcardScore >= 50 ? '🌟 Excellent! Great learning! ⭐' :
-                             flashcardScore >= 30 ? '💪 Good job! Keep learning! 📚' :
-                             '🎯 Keep practicing! You\'ll improve! 🌱'}
+                            {quizShowScore === 100 ? '🌟 PERFECT! You\'re a Genius!' : 
+                             quizShowScore >= 80 ? '🌟 Excellent! Superstar Learner!' :
+                             quizShowScore >= 60 ? '💪 Great job! Keep learning!' :
+                             quizShowScore >= 40 ? '📖 Good effort! Try again!' :
+                             '🎯 Keep practicing! You\'ll improve!'}
                           </p>
                         </div>
-                        <button 
-                          onClick={resetFlashcard} 
-                          className="mt-4 px-8 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-full hover:scale-105 transition font-bold"
-                        >
-                          🔄 Play Again
-                        </button>
+                        <button onClick={resetQuizShow} className="mt-4 px-8 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-full hover:scale-105 transition font-bold">🔄 Play Again</button>
                       </div>
                     )}
                   </div>
                 )}
-                <div className="mt-3 text-xs text-stone-500 text-center">
-                  🧠 Learn AI & Finance terms by flipping flashcards! Click each card to reveal the definition!
+                <div className="mt-3 text-xs text-stone-500 text-center">🧠 10 questions about AI and Finance! Test your knowledge! 🎯</div>
+              </div>
+
+              {/* ===== ACTIVITY 3: DRAG & DROP MATCH ===== */}
+              <div className="bg-gradient-to-r from-teal-50 via-cyan-50 to-blue-50 rounded-2xl p-6 shadow-lg border-2 border-teal-300">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-4xl animate-bounce">🧩</span>
+                  <h3 className="text-2xl font-bold text-teal-700">Activity 3: Match It! 🎯</h3>
                 </div>
+                <p className="text-stone-700 mb-4 font-medium">Match the term with its definition!</p>
+                
+                {!dragDropStarted ? (
+                  <button onClick={startDragDrop} className="bg-gradient-to-r from-teal-500 to-cyan-500 text-white px-8 py-3 rounded-full hover:scale-105 transition flex items-center gap-3 text-lg font-bold shadow-lg hover:shadow-xl mx-auto">🧩 Start Matching!</button>
+                ) : (
+                  <div className="bg-white rounded-xl p-6 shadow-inner">
+                    <div className="flex justify-between items-center mb-4">
+                      <span className="text-sm font-bold text-teal-700">⭐ Score: {dragDropScore} points</span>
+                      <span className="text-sm text-stone-500">Matched: {matchedItems.length}/{dragDropItems.length}</span>
+                    </div>
+                    
+                    {!dragDropComplete ? (
+                      <div>
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <h5 className="text-sm font-bold text-center text-stone-500 mb-2">📝 Terms</h5>
+                            <div className="space-y-2">
+                              {dragItems.map((item) => (
+                                <div
+                                  key={item.id}
+                                  draggable={!item.matched}
+                                  onDragStart={() => handleDragStart(item)}
+                                  className={`p-3 rounded-xl border-2 text-center font-bold transition-all ${
+                                    item.matched ? 'bg-green-100 border-green-400 cursor-default opacity-60' : 
+                                    'bg-blue-50 border-blue-200 cursor-grab hover:border-blue-500 hover:scale-105'
+                                  }`}
+                                >
+                                  {item.matched ? '✅' : '🔲'} {item.emoji} {item.term}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                          <div>
+                            <h5 className="text-sm font-bold text-center text-stone-500 mb-2">📖 Definitions</h5>
+                            <div className="space-y-2">
+                              {dropTargets.map((item) => (
+                                <div
+                                  key={item.id}
+                                  onDrop={() => handleDrop(item.id)}
+                                  onDragOver={(e) => e.preventDefault()}
+                                  className={`p-3 rounded-xl border-2 text-center transition-all ${
+                                    item.matched ? 'bg-green-100 border-green-400 cursor-default opacity-60' : 
+                                    'bg-purple-50 border-purple-200'
+                                  }`}
+                                >
+                                  {item.matched ? '✅' : '🔲'} {item.definition}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                        <p className="text-xs text-stone-400 text-center mt-3">💡 Drag a term from left to its definition on the right!</p>
+                      </div>
+                    ) : (
+                      <div className="text-center py-6">
+                        <div className="text-6xl mb-4">🏆</div>
+                        <h4 className="text-2xl font-bold text-teal-700">🎉 ALL MATCHED! 🎉</h4>
+                        <p className="text-xl font-semibold text-gray-700">Final Score: {dragDropScore} points</p>
+                        <div className="mt-4 p-4 bg-gradient-to-r from-teal-50 to-cyan-50 rounded-xl border-2 border-teal-300">
+                          <p className="text-lg font-bold text-gray-700">🌟 You're a Matching Master!</p>
+                        </div>
+                        <button onClick={resetDragDrop} className="mt-4 px-8 py-3 bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-full hover:scale-105 transition font-bold">🔄 Play Again</button>
+                      </div>
+                    )}
+                  </div>
+                )}
+                <div className="mt-3 text-xs text-stone-500 text-center">🧩 Match AI & Finance terms with their definitions! Drag and drop! 🎯</div>
               </div>
 
               {/* ===== SHARE YOUR WORK ===== */}
@@ -1451,12 +1363,7 @@ export default function HomePage() {
                     <p className="text-gray-600 text-sm">Submit your projects, worksheets, or creative work and get featured on our platform!</p>
                   </div>
                 </div>
-                <button 
-                  onClick={() => document.getElementById('shareSection')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="bg-white text-indigo-600 px-8 py-3 rounded-full border-2 border-indigo-400 hover:bg-indigo-50 transition shadow-sm font-bold"
-                >
-                  ✏️ Submit Now
-                </button>
+                <button onClick={() => document.getElementById('shareSection')?.scrollIntoView({ behavior: 'smooth' })} className="bg-white text-indigo-600 px-8 py-3 rounded-full border-2 border-indigo-400 hover:bg-indigo-50 transition shadow-sm font-bold">✏️ Submit Now</button>
               </div>
             </div>
           </motion.section>
@@ -1469,52 +1376,25 @@ export default function HomePage() {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-yellow-200"
           >
-            <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-6">
-              Share Your Work ✨
-            </h2>
-            <p className="text-center text-stone-600 max-w-2xl mx-auto mb-8">
-              Submit your projects, worksheets, or creative work and get featured on our platform!
-            </p>
+            <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-6">Share Your Work ✨</h2>
+            <p className="text-center text-stone-600 max-w-2xl mx-auto mb-8">Submit your projects, worksheets, or creative work and get featured on our platform!</p>
             <form onSubmit={handleSubmitWork} className="max-w-2xl mx-auto space-y-4">
               <div>
                 <label className="block text-sm font-bold text-stone-700 mb-1">Your Name</label>
-                <input 
-                  type="text" 
-                  placeholder="Enter your name"
-                  className="w-full px-4 py-3 rounded-xl border-2 border-stone-200 focus:border-purple-400 focus:outline-none transition-all"
-                  required
-                />
+                <input type="text" placeholder="Enter your name" className="w-full px-4 py-3 rounded-xl border-2 border-stone-200 focus:border-purple-400 focus:outline-none transition-all" required />
               </div>
               <div>
                 <label className="block text-sm font-bold text-stone-700 mb-1">What did you create?</label>
-                <textarea 
-                  value={submissionText}
-                  onChange={(e) => setSubmissionText(e.target.value)}
-                  placeholder="Describe your project, worksheet, or activity..."
-                  className="w-full px-4 py-3 rounded-xl border-2 border-stone-200 focus:border-purple-400 focus:outline-none transition-all h-24"
-                  required
-                />
+                <textarea value={submissionText} onChange={(e) => setSubmissionText(e.target.value)} placeholder="Describe your project, worksheet, or activity..." className="w-full px-4 py-3 rounded-xl border-2 border-stone-200 focus:border-purple-400 focus:outline-none transition-all h-24" required />
               </div>
               <div>
                 <label className="block text-sm font-bold text-stone-700 mb-1">Upload Your Work</label>
-                <input 
-                  type="file"
-                  onChange={(e) => setSubmissionFile(e.target.files[0])}
-                  className="w-full px-4 py-3 rounded-xl border-2 border-stone-200 focus:border-purple-400 focus:outline-none transition-all bg-white"
-                  accept=".pdf,.doc,.docx,.jpg,.png,.ppt,.pptx"
-                />
+                <input type="file" onChange={(e) => setSubmissionFile(e.target.files[0])} className="w-full px-4 py-3 rounded-xl border-2 border-stone-200 focus:border-purple-400 focus:outline-none transition-all bg-white" accept=".pdf,.doc,.docx,.jpg,.png,.ppt,.pptx" />
                 <p className="text-xs text-stone-400 mt-1">Accepted: PDF, Word, Images, PowerPoint</p>
               </div>
-              <button 
-                type="submit"
-                className="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-bold hover:shadow-lg transition-all text-lg"
-              >
-                🚀 Submit Your Work
-              </button>
+              <button type="submit" className="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-bold hover:shadow-lg transition-all text-lg">🚀 Submit Your Work</button>
             </form>
-            <p className="text-center text-sm text-stone-500 mt-4">
-              💡 Your work could be featured on our platform! We'll review and post it soon.
-            </p>
+            <p className="text-center text-sm text-stone-500 mt-4">💡 Your work could be featured on our platform! We'll review and post it soon.</p>
           </motion.section>
 
           {/* ===== SECTION 9: CERTIFICATES ===== */}
@@ -1525,96 +1405,51 @@ export default function HomePage() {
             transition={{ duration: 0.6, delay: 0.9 }}
             className="bg-white rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-stone-100"
           >
-            <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-6">
-              🎓 Earn Your Certificate
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-6">🎓 Earn Your Certificate</h2>
             <div className="max-w-4xl mx-auto">
               <div className="bg-gradient-to-r from-purple-100 via-pink-100 to-rose-100 rounded-3xl p-8 text-center border-4 border-dashed border-purple-400">
                 <span className="text-7xl animate-bounce inline-block">📜</span>
                 <h3 className="text-3xl font-bold text-purple-700 mt-3">🎉 Free Certificates for Kids! 🎉</h3>
-                <p className="text-stone-700 max-w-2xl mx-auto mt-2 text-lg">
-                  Complete our courses and earn <span className="font-bold text-purple-700">super cool certificates</span> 
-                  with your name on them! Add to your portfolio, resume, or show your family! 🌟
-                </p>
+                <p className="text-stone-700 max-w-2xl mx-auto mt-2 text-lg">Complete our courses and earn <span className="font-bold text-purple-700">super cool certificates</span> with your name on them!</p>
                 
-                {/* Certificate Cards */}
                 <div className="grid md:grid-cols-3 gap-4 mt-6">
                   <div className="bg-white rounded-2xl p-5 shadow-lg border-2 border-purple-300 hover:scale-105 transition transform">
                     <div className="text-4xl">🤖</div>
                     <h4 className="font-bold text-lg text-purple-700 mt-2">AI Explorer</h4>
                     <p className="text-sm text-stone-500">Complete 5 AI lessons</p>
-                    <div className="mt-3 bg-purple-100 rounded-full px-3 py-1 text-xs font-bold text-purple-700 inline-block">
-                      🎯 5 Videos
-                    </div>
+                    <div className="mt-3 bg-purple-100 rounded-full px-3 py-1 text-xs font-bold text-purple-700 inline-block">🎯 5 Videos</div>
                   </div>
-                  
                   <div className="bg-white rounded-2xl p-5 shadow-lg border-2 border-green-300 hover:scale-105 transition transform">
                     <div className="text-4xl">💰</div>
                     <h4 className="font-bold text-lg text-green-700 mt-2">Money Master</h4>
                     <p className="text-sm text-stone-500">Complete 5 Finance lessons</p>
-                    <div className="mt-3 bg-green-100 rounded-full px-3 py-1 text-xs font-bold text-green-700 inline-block">
-                      🎯 5 Videos
-                    </div>
+                    <div className="mt-3 bg-green-100 rounded-full px-3 py-1 text-xs font-bold text-green-700 inline-block">🎯 5 Videos</div>
                   </div>
-                  
                   <div className="bg-white rounded-2xl p-5 shadow-lg border-2 border-yellow-300 hover:scale-105 transition transform">
                     <div className="text-4xl">🌟</div>
                     <h4 className="font-bold text-lg text-orange-700 mt-2">AI & Finance Pro</h4>
                     <p className="text-sm text-stone-500">Complete 10 combined lessons</p>
-                    <div className="mt-3 bg-orange-100 rounded-full px-3 py-1 text-xs font-bold text-orange-700 inline-block">
-                      🎯 10 Videos
-                    </div>
+                    <div className="mt-3 bg-orange-100 rounded-full px-3 py-1 text-xs font-bold text-orange-700 inline-block">🎯 10 Videos</div>
                   </div>
                 </div>
 
-                {/* Certificate Download Form */}
                 <div className="mt-6 p-6 bg-white/90 rounded-xl shadow-inner">
                   <p className="text-sm font-bold text-stone-700 mb-3">📝 Enter your name to download your certificate:</p>
                   <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
-                    <input
-                      type="text"
-                      value={certificateName}
-                      onChange={(e) => setCertificateName(e.target.value)}
-                      placeholder="Enter your full name"
-                      className="flex-1 px-4 py-2.5 rounded-full border-2 border-purple-300 focus:border-purple-500 focus:outline-none transition-all text-center sm:text-left"
-                    />
-                    <select
-                      value={certificateType}
-                      onChange={(e) => setCertificateType(e.target.value)}
-                      className="px-4 py-2.5 rounded-full border-2 border-purple-300 focus:border-purple-500 focus:outline-none transition-all bg-white"
-                    >
+                    <input type="text" value={certificateName} onChange={(e) => setCertificateName(e.target.value)} placeholder="Enter your full name" className="flex-1 px-4 py-2.5 rounded-full border-2 border-purple-300 focus:border-purple-500 focus:outline-none transition-all text-center sm:text-left" />
+                    <select value={certificateType} onChange={(e) => setCertificateType(e.target.value)} className="px-4 py-2.5 rounded-full border-2 border-purple-300 focus:border-purple-500 focus:outline-none transition-all bg-white">
                       <option value="AI & Finance Explorer">AI & Finance Explorer</option>
                       <option value="AI Explorer">AI Explorer</option>
                       <option value="Money Master">Money Master</option>
                       <option value="AI & Finance Pro">AI & Finance Pro</option>
                     </select>
-                    <button
-                      onClick={() => downloadCertificate(certificateName, certificateType)}
-                      className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-2.5 rounded-full font-bold hover:scale-105 transition shadow-lg hover:shadow-xl whitespace-nowrap"
-                    >
-                      📥 Download Certificate
-                    </button>
+                    <button onClick={() => downloadCertificate(certificateName, certificateType)} className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-2.5 rounded-full font-bold hover:scale-105 transition shadow-lg hover:shadow-xl whitespace-nowrap">📥 Download Certificate</button>
                   </div>
-                  <p className="text-xs text-stone-400 mt-3">
-                    💡 Tip: Complete all 10 game levels to unlock all certificates!
-                  </p>
                 </div>
 
                 <div className="mt-4 p-4 bg-green-50 rounded-xl border-2 border-green-200">
-                  <p className="text-sm text-green-700">
-                    ✅ <span className="font-bold">Your progress:</span> You have completed {correctAnswers} of {gameLevels.length} levels!
-                    {correctAnswers === gameLevels.length ? ' 🎉 You can download all certificates!' : 
-                     correctAnswers >= 5 ? ' 💪 Keep going! You\'re almost there!' :
-                     ' 🚀 Start the game above to earn your certificate!'}
-                  </p>
+                  <p className="text-sm text-green-700">✅ <span className="font-bold">Your progress:</span> You have completed {correctAnswers} of {gameLevels.length} levels!</p>
                 </div>
-
-                <button 
-                  onClick={() => startGame()}
-                  className="mt-4 px-8 py-3 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-full font-bold hover:shadow-lg transition-all text-sm hover:scale-105"
-                >
-                  🎮 Play the Game to Earn Certificate
-                </button>
               </div>
             </div>
           </motion.section>
@@ -1627,17 +1462,7 @@ export default function HomePage() {
         <div className="text-center md:text-left">
           <p className="text-[#FF6B8B]">📞 Phone: +971585417100</p>
           <p className="text-stone-400 text-[10px] mt-0.5">✉ Email: forthefuturenet@gmail.com</p>
-          <p className="text-stone-400 text-[10px] mt-0.5">
-            📸 Instagram: 
-            <a 
-              href="https://www.instagram.com/samspr1v09?igsh=ZDVjYXg0Y21vYTIw" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-[#FF6B8B] hover:underline ml-1"
-            >
-              @samspr1v09
-            </a>
-          </p>
+          <p className="text-stone-400 text-[10px] mt-0.5">📸 Instagram: <a href="https://www.instagram.com/samspr1v09?igsh=ZDVjYXg0Y21vYTIw" target="_blank" rel="noopener noreferrer" className="text-[#FF6B8B] hover:underline ml-1">@samspr1v09</a></p>
         </div>
         <p className="text-stone-500 text-[10px] font-medium">© 2026 forthefutures. All rights reserved.</p>
       </footer>
