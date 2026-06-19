@@ -752,7 +752,7 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
             
             <div className="max-w-5xl mx-auto space-y-6">
               
-              {/* ===== POWERPOINTS - DIRECT DOWNLOAD FROM PUBLIC/PPTS ===== */}
+              {/* ===== POWERPOINTS - YOUR ACTUAL PPT FILES ===== */}
               <div className="bg-gradient-to-r from-purple-100 via-pink-100 to-rose-100 rounded-2xl p-6 shadow-lg border-2 border-purple-300">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-4xl animate-bounce">📊</span>
