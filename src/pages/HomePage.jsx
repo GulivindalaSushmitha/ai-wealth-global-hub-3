@@ -22,7 +22,7 @@ export default function HomePage() {
   const [certificateName, setCertificateName] = useState('');
   const [certificateType, setCertificateType] = useState('');
 
-  // ===== MEMORY CARD GAME STATES (NEW - REPLACES QUIZ SHOW) =====
+  // ===== MEMORY CARD GAME STATES =====
   const [memoryGameStarted, setMemoryGameStarted] = useState(false);
   const [memoryGameComplete, setMemoryGameComplete] = useState(false);
   const [memoryCards, setMemoryCards] = useState([]);
@@ -427,7 +427,7 @@ Be smart with money and you'll have a bright future!
     setFeedbackMessage('');
   };
 
-  // ===== MEMORY CARD GAME FUNCTIONS (NEW) =====
+  // ===== MEMORY CARD GAME FUNCTIONS =====
   const memoryCardData = [
     { id: 1, term: 'AI', emoji: '🤖', definition: 'Artificial Intelligence' },
     { id: 2, term: 'AI', emoji: '🤖', definition: 'Artificial Intelligence' },
@@ -486,7 +486,6 @@ Be smart with money and you'll have a bright future!
       const card2 = memoryCards[newFlipped[1]];
 
       if (card1.term === card2.term && newFlipped[0] !== newFlipped[1]) {
-        // Match found
         setMemoryMatched([...memoryMatched, newFlipped[0], newFlipped[1]]);
         setMemoryPairsFound(memoryPairsFound + 1);
         setMemoryGameScore(memoryGameScore + 10);
@@ -589,14 +588,15 @@ Be smart with money and you'll have a bright future!
     setDropTargets([...dragDropItems]);
   };
 
-  // ===== CERTIFICATE DOWNLOAD =====
+  // ===== CERTIFICATE DOWNLOAD - UPDATED (REMOVED GLOBAL CITIZEN & HEALTH ADVOCATE) =====
   const downloadCertificate = (name, type) => {
     if (!name || name.trim() === '') {
       alert('Please enter your name first!');
       return;
     }
 
-    const certType = type || 'AI & Finance Explorer';
+    // Use selected type or default
+    const certType = type || 'AI Explorer';
     const date = new Date().toLocaleDateString('en-US', { 
       year: 'numeric', 
       month: 'long', 
@@ -735,7 +735,7 @@ Be smart with money and you'll have a bright future!
     <div class="stars" style="bottom:10px;right:10px;">⭐</div>
     <div class="badge">🏅</div>
     <div class="deco-top">✨🌟✨🌟✨</div>
-    <h1>🎓 AI WEALTH GLOBAL HEALTH</h1>
+    <h1>🎓 AI WEALTH HUB</h1>
     <div class="subtitle">🌟 Certificate of Achievement 🌟</div>
     <div class="seal">🏆</div>
     <div class="name">${name.toUpperCase()}</div>
@@ -747,8 +747,6 @@ Be smart with money and you'll have a bright future!
     <div class="footer">
       <span>🤖 AI Explorer</span>
       <span>💰 Money Master</span>
-      <span>🌍 Global Citizen</span>
-      <span>❤️ Health Advocate</span>
     </div>
     <div class="deco-bottom">✨🌟✨🌟✨</div>
     <div style="margin-top:10px;font-size:12px;color:#aaa;">
@@ -762,7 +760,7 @@ Be smart with money and you'll have a bright future!
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `Certificate_${name}_AI_Wealth_Global_Health.html`;
+    a.download = `Certificate_${name}_AI_Wealth_Hub.html`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -804,7 +802,7 @@ Be smart with money and you'll have a bright future!
                   <span className="text-xl">⭐</span> 1000+ Kids
                 </div>
                 <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg flex items-center gap-2 text-sm font-bold text-pink-700">
-                  <span className="text-xl">🏆</span> 5 Certificates
+                  <span className="text-xl">🏆</span> 2 Certificates
                 </div>
               </div>
               <div className="bg-white border-2 border-yellow-400 px-5 py-2 rounded-2xl -mt-2 shadow-lg flex items-center space-x-2">
@@ -850,7 +848,7 @@ Be smart with money and you'll have a bright future!
             </div>
           </motion.section>
 
-          {/* ===== SECTION 2: MEET THE FOUNDER - UNCHANGED ===== */}
+          {/* ===== SECTION 2: MEET THE FOUNDER ===== */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -1092,7 +1090,7 @@ Be smart with money and you'll have a bright future!
             
             <div className="max-w-5xl mx-auto space-y-6">
               
-              {/* ===== POWERPOINTS - UPDATED WITH CORRECT DOWNLOADS ===== */}
+              {/* ===== POWERPOINTS - WITH CORRECT DOWNLOADS ===== */}
               <div className="bg-gradient-to-r from-purple-100 via-pink-100 to-rose-100 rounded-2xl p-6 shadow-lg border-2 border-purple-300">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-4xl animate-bounce">📊</span>
@@ -1259,7 +1257,7 @@ Be smart with money and you'll have a bright future!
                 <div className="mt-3 text-xs text-stone-500 text-center">🧠 10 fun levels about AI and Finance! Answer correctly to race the rabbit! 🐇</div>
               </div>
 
-              {/* ===== ACTIVITY 2: MEMORY CARD GAME (NEW - REPLACES QUIZ SHOW) ===== */}
+              {/* ===== ACTIVITY 2: MEMORY CARD GAME ===== */}
               <div className="bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 rounded-2xl p-6 shadow-lg border-2 border-indigo-300">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-4xl animate-pulse">🧠</span>
@@ -1443,7 +1441,7 @@ Be smart with money and you'll have a bright future!
             <p className="text-center text-sm text-stone-500 mt-4">💡 Your work could be featured on our platform! We'll review and post it soon.</p>
           </motion.section>
 
-          {/* ===== SECTION 9: CERTIFICATES - UPDATED WITH AI WEALTH GLOBAL HEALTH ===== */}
+          {/* ===== SECTION 9: CERTIFICATES - UPDATED (REMOVED GLOBAL CITIZEN & HEALTH ADVOCATE) ===== */}
           <motion.section 
             id="certificateSection"
             initial={{ opacity: 0, y: 20 }}
@@ -1458,7 +1456,8 @@ Be smart with money and you'll have a bright future!
                 <h3 className="text-3xl font-bold text-purple-700 mt-3">🎉 Free Certificates for Kids! 🎉</h3>
                 <p className="text-stone-700 max-w-2xl mx-auto mt-2 text-lg">Complete our courses and earn <span className="font-bold text-purple-700">super cool certificates</span> with your name on them!</p>
                 
-                <div className="grid md:grid-cols-4 gap-4 mt-6">
+                {/* UPDATED: Only 2 certificates - AI Explorer and Money Master */}
+                <div className="grid md:grid-cols-2 gap-4 mt-6 max-w-2xl mx-auto">
                   <div className="bg-white rounded-2xl p-5 shadow-lg border-2 border-purple-300 hover:scale-105 transition transform">
                     <div className="text-4xl">🤖</div>
                     <h4 className="font-bold text-lg text-purple-700 mt-2">AI Explorer</h4>
@@ -1471,32 +1470,33 @@ Be smart with money and you'll have a bright future!
                     <p className="text-sm text-stone-500">Complete 5 Finance lessons</p>
                     <div className="mt-3 bg-green-100 rounded-full px-3 py-1 text-xs font-bold text-green-700 inline-block">🎯 5 Videos</div>
                   </div>
-                  <div className="bg-white rounded-2xl p-5 shadow-lg border-2 border-blue-300 hover:scale-105 transition transform">
-                    <div className="text-4xl">🌍</div>
-                    <h4 className="font-bold text-lg text-blue-700 mt-2">Global Citizen</h4>
-                    <p className="text-sm text-stone-500">Complete 5 Global lessons</p>
-                    <div className="mt-3 bg-blue-100 rounded-full px-3 py-1 text-xs font-bold text-blue-700 inline-block">🎯 5 Videos</div>
-                  </div>
-                  <div className="bg-white rounded-2xl p-5 shadow-lg border-2 border-rose-300 hover:scale-105 transition transform">
-                    <div className="text-4xl">❤️</div>
-                    <h4 className="font-bold text-lg text-rose-700 mt-2">Health Advocate</h4>
-                    <p className="text-sm text-stone-500">Complete 5 Health lessons</p>
-                    <div className="mt-3 bg-rose-100 rounded-full px-3 py-1 text-xs font-bold text-rose-700 inline-block">🎯 5 Videos</div>
-                  </div>
                 </div>
 
+                {/* UPDATED: Removed AI Wealth Global Health Explorer and other options */}
                 <div className="mt-6 p-6 bg-white/90 rounded-xl shadow-inner">
                   <p className="text-sm font-bold text-stone-700 mb-3">📝 Enter your name to download your certificate:</p>
                   <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
-                    <input type="text" value={certificateName} onChange={(e) => setCertificateName(e.target.value)} placeholder="Enter your full name" className="flex-1 px-4 py-2.5 rounded-full border-2 border-purple-300 focus:border-purple-500 focus:outline-none transition-all text-center sm:text-left" />
-                    <select value={certificateType} onChange={(e) => setCertificateType(e.target.value)} className="px-4 py-2.5 rounded-full border-2 border-purple-300 focus:border-purple-500 focus:outline-none transition-all bg-white">
-                      <option value="AI Wealth Global Health Explorer">AI Wealth Global Health Explorer</option>
-                      <option value="AI Explorer">AI Explorer</option>
-                      <option value="Money Master">Money Master</option>
-                      <option value="Global Citizen">Global Citizen</option>
-                      <option value="Health Advocate">Health Advocate</option>
+                    <input 
+                      type="text" 
+                      value={certificateName} 
+                      onChange={(e) => setCertificateName(e.target.value)} 
+                      placeholder="Enter your full name" 
+                      className="flex-1 px-4 py-2.5 rounded-full border-2 border-purple-300 focus:border-purple-500 focus:outline-none transition-all text-center sm:text-left" 
+                    />
+                    <select 
+                      value={certificateType} 
+                      onChange={(e) => setCertificateType(e.target.value)} 
+                      className="px-4 py-2.5 rounded-full border-2 border-purple-300 focus:border-purple-500 focus:outline-none transition-all bg-white"
+                    >
+                      <option value="AI Explorer">🤖 AI Explorer</option>
+                      <option value="Money Master">💰 Money Master</option>
                     </select>
-                    <button onClick={() => downloadCertificate(certificateName, certificateType)} className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-2.5 rounded-full font-bold hover:scale-105 transition shadow-lg hover:shadow-xl whitespace-nowrap">📥 Download Certificate</button>
+                    <button 
+                      onClick={() => downloadCertificate(certificateName, certificateType)} 
+                      className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-2.5 rounded-full font-bold hover:scale-105 transition shadow-lg hover:shadow-xl whitespace-nowrap"
+                    >
+                      📥 Download Certificate
+                    </button>
                   </div>
                 </div>
 
