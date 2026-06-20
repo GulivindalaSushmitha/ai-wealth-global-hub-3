@@ -54,6 +54,229 @@ export default function HomePage() {
     'Other': allVideos.filter(v => !['AI Basics', 'AI Course', 'Machine Learning', 'Groww', 'Pranjal Kamra', 'Finance Tips'].includes(v.category))
   };
 
+  // ===== RABBIT RACING GAME FUNCTIONS =====
+  const gameLevels = [
+    { question: "What does AI stand for?", options: ["Artificial Intelligence", "Automated Internet", "Awesome Ideas", "Advanced Integration"], correct: 0, hint: "Think about what makes computers smart!", funFact: "AI was first talked about in 1956!" },
+    { question: "Which of these is an example of AI?", options: ["ChatGPT", "A pencil", "A bicycle", "A book"], correct: 0, hint: "It's something that can talk to you!", funFact: "ChatGPT can write stories and poems!" },
+    { question: "What can AI help us with?", options: ["Solving problems", "Cooking only", "Making bed", "Watching TV"], correct: 0, hint: "AI is like a smart helper!", funFact: "AI helps doctors find diseases faster!" },
+    { question: "What is financial literacy?", options: ["Managing money wisely", "Only spending", "Only saving", "Only earning"], correct: 0, hint: "It's about being smart with money!", funFact: "People who learn finance early save more money!" },
+    { question: "What is a budget?", options: ["A plan for your money", "A type of card", "A game", "A book"], correct: 0, hint: "It's like a map for your money!", funFact: "A budget helps you buy what you really want!" },
+    { question: "Which device uses AI?", options: ["Smartphone", "Rock", "Tree", "Water bottle"], correct: 0, hint: "It's something you use every day!", funFact: "Your phone uses AI to understand your voice!" },
+    { question: "What is a bank?", options: ["A place to keep money", "A restaurant", "A school", "A park"], correct: 0, hint: "It's where money is safe!", funFact: "The first bank was in Italy in 1400s!" },
+    { question: "Self-driving cars use:", options: ["AI technology", "Magic", "Only wheels", "Only mirrors"], correct: 0, hint: "It's the same thing that makes computers smart!", funFact: "Self-driving cars can see better than humans!" },
+    { question: "Why is saving important?", options: ["For future needs", "Only for buying candy", "Only for games", "Only for fun"], correct: 0, hint: "Think about tomorrow!", funFact: "Saving just Rs 10 a day = Rs 3650 a year!" },
+    { question: "AI will help us in the future by:", options: ["Solving big problems", "Only playing games", "Only sleeping", "Only eating"], correct: 0, hint: "AI makes the world better!", funFact: "AI will help us explore space and cure diseases!" }
+  ];
+
+  const startGame = () => {
+    setGameStarted(true);
+    setCurrentLevel(0);
+    setScore(0);
+    setCorrectAnswers(0);
+    setRabbitPosition(0);
+    setGameFinished(false);
+    setShowFeedback(false);
+    setFeedbackMessage('');
+  };
+
+  const handleAnswer = (selectedIdx) => {
+    const level = gameLevels[currentLevel];
+    if (selectedIdx === level.correct) {
+      const newScore = score + 10;
+      const newCorrect = correctAnswers + 1;
+      setScore(newScore);
+      setCorrectAnswers(newCorrect);
+      setRabbitPosition(Math.min((newCorrect / gameLevels.length) * 100, 100));
+      setFeedbackMessage(`CORRECT! +10 points! ${level.funFact}`);
+      setShowFeedback(true);
+    } else {
+      setFeedbackMessage(`Not quite! The answer is: ${level.options[level.correct]}. ${level.hint}`);
+      setShowFeedback(true);
+    }
+    setTimeout(() => {
+      if (currentLevel + 1 < gameLevels.length) {
+        setCurrentLevel(currentLevel + 1);
+        setShowFeedback(false);
+        setFeedbackMessage('');
+      } else {
+        setGameFinished(true);
+        setShowFeedback(false);
+      }
+    }, 2500);
+  };
+
+  const resetGame = () => {
+    setGameStarted(false);
+    setCurrentLevel(0);
+    setScore(0);
+    setCorrectAnswers(0);
+    setRabbitPosition(0);
+    setGameFinished(false);
+    setShowFeedback(false);
+    setFeedbackMessage('');
+  };
+
+  // ===== MEMORY CARD GAME FUNCTIONS =====
+  const memoryCardData = [
+    { id: 1, term: 'AI', emoji: '🤖', definition: 'Artificial Intelligence' },
+    { id: 2, term: 'AI', emoji: '🤖', definition: 'Artificial Intelligence' },
+    { id: 3, term: 'Budget', emoji: '📊', definition: 'Money Plan' },
+    { id: 4, term: 'Budget', emoji: '📊', definition: 'Money Plan' },
+    { id: 5, term: 'Savings', emoji: '🏦', definition: 'Money Put Aside' },
+    { id: 6, term: 'Savings', emoji: '🏦', definition: 'Money Put Aside' },
+    { id: 7, term: 'Investing', emoji: '💰', definition: 'Growing Money' },
+    { id: 8, term: 'Investing', emoji: '💰', definition: 'Growing Money' },
+    { id: 9, term: 'Robot', emoji: '🤖', definition: 'Machine Helper' },
+    { id: 10, term: 'Robot', emoji: '🤖', definition: 'Machine Helper' },
+    { id: 11, term: 'Finance', emoji: '💳', definition: 'Money Management' },
+    { id: 12, term: 'Finance', emoji: '💳', definition: 'Money Management' },
+  ];
+
+  const shuffleArray = (array) => {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+  };
+
+  const startMemoryGame = () => {
+    const shuffled = shuffleArray(memoryCardData);
+    setMemoryCards(shuffled.map((card, index) => ({ ...card, index })));
+    setMemoryFlipped([]);
+    setMemoryMatched([]);
+    setMemoryMoves(0);
+    setMemoryPairsFound(0);
+    setMemoryGameScore(0);
+    setMemoryFirstCard(null);
+    setMemorySecondCard(null);
+    setMemoryLockBoard(false);
+    setMemoryGameStarted(true);
+    setMemoryGameComplete(false);
+  };
+
+  const handleMemoryCardClick = (cardIndex) => {
+    if (memoryLockBoard) return;
+    if (memoryFlipped.includes(cardIndex)) return;
+    if (memoryMatched.includes(cardIndex)) return;
+
+    const newFlipped = [...memoryFlipped, cardIndex];
+    setMemoryFlipped(newFlipped);
+
+    if (newFlipped.length === 1) {
+      setMemoryFirstCard(memoryCards[cardIndex]);
+    } else if (newFlipped.length === 2) {
+      setMemorySecondCard(memoryCards[cardIndex]);
+      setMemoryLockBoard(true);
+      setMemoryMoves(memoryMoves + 1);
+
+      const card1 = memoryCards[newFlipped[0]];
+      const card2 = memoryCards[newFlipped[1]];
+
+      if (card1.term === card2.term && newFlipped[0] !== newFlipped[1]) {
+        setMemoryMatched([...memoryMatched, newFlipped[0], newFlipped[1]]);
+        setMemoryPairsFound(memoryPairsFound + 1);
+        setMemoryGameScore(memoryGameScore + 10);
+        setMemoryFirstCard(null);
+        setMemorySecondCard(null);
+        setMemoryLockBoard(false);
+        setMemoryFlipped([]);
+
+        if (memoryPairsFound + 1 === 6) {
+          setMemoryGameComplete(true);
+        }
+      } else {
+        setTimeout(() => {
+          setMemoryFlipped([]);
+          setMemoryFirstCard(null);
+          setMemorySecondCard(null);
+          setMemoryLockBoard(false);
+        }, 1000);
+      }
+    }
+  };
+
+  const resetMemoryGame = () => {
+    setMemoryGameStarted(false);
+    setMemoryGameComplete(false);
+    setMemoryCards([]);
+    setMemoryFlipped([]);
+    setMemoryMatched([]);
+    setMemoryMoves(0);
+    setMemoryPairsFound(0);
+    setMemoryGameScore(0);
+    setMemoryFirstCard(null);
+    setMemorySecondCard(null);
+    setMemoryLockBoard(false);
+  };
+
+  // ===== DRAG & DROP MATCH GAME FUNCTIONS =====
+  const dragDropItems = [
+    { id: 1, term: 'AI', definition: 'Artificial Intelligence', emoji: '🤖', matched: false },
+    { id: 2, term: 'Budget', definition: 'Plan for your money', emoji: '📊', matched: false },
+    { id: 3, term: 'Savings', definition: 'Money put aside', emoji: '🏦', matched: false },
+    { id: 4, term: 'Investing', definition: 'Growing your money', emoji: '💰', matched: false },
+    { id: 5, term: 'Finance', definition: 'Managing money', emoji: '💳', matched: false },
+    { id: 6, term: 'Robot', definition: 'Machine that helps', emoji: '🤖', matched: false },
+  ];
+
+  const [dragItems, setDragItems] = useState([...dragDropItems]);
+  const [dropTargets, setDropTargets] = useState([...dragDropItems]);
+
+  const startDragDrop = () => {
+    setDragDropStarted(true);
+    setDragDropComplete(false);
+    setDragDropScore(0);
+    setMatchedItems([]);
+    setDraggedItem(null);
+    const shuffled = [...dragDropItems].sort(() => Math.random() - 0.5);
+    setDragItems(shuffled);
+    setDropTargets([...dragDropItems]);
+  };
+
+  const handleDragStart = (item) => {
+    if (item.matched) return;
+    setDraggedItem(item);
+  };
+
+  const handleDrop = (targetId) => {
+    if (!draggedItem) return;
+    const target = dropTargets.find(t => t.id === targetId);
+    if (!target || target.matched) return;
+
+    if (draggedItem.id === target.id) {
+      const newMatched = [...matchedItems, draggedItem.id];
+      setMatchedItems(newMatched);
+      setDragDropScore(dragDropScore + 10);
+      
+      setDragItems(dragItems.map(item => 
+        item.id === draggedItem.id ? { ...item, matched: true } : item
+      ));
+      setDropTargets(dropTargets.map(item => 
+        item.id === target.id ? { ...item, matched: true } : item
+      ));
+
+      if (newMatched.length === dragDropItems.length) {
+        setDragDropComplete(true);
+        setTimeout(() => {
+          alert('🎉 You matched ALL pairs! You\'re a Matching Master! 🏆');
+        }, 500);
+      }
+    }
+    setDraggedItem(null);
+  };
+
+  const resetDragDrop = () => {
+    setDragDropStarted(false);
+    setDragDropComplete(false);
+    setDragDropScore(0);
+    setMatchedItems([]);
+    setDraggedItem(null);
+    setDragItems([...dragDropItems]);
+    setDropTargets([...dragDropItems]);
+  };
+
   // ===== DOWNLOAD PPT FROM PUBLIC/PPTS FOLDER =====
   const downloadPPT = (filename, displayName) => {
     try {
@@ -152,7 +375,6 @@ export default function HomePage() {
       color: #0066cc; 
       font-weight: bold; 
     }
-    .emoji-big { font-size: 24px; margin-right: 6px; }
     .mobile-friendly {
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
@@ -723,7 +945,7 @@ export default function HomePage() {
             
             <div className="max-w-5xl mx-auto space-y-6">
               
-              {/* ===== POWERPOINTS - YOUR ACTUAL PPT FILES ===== */}
+              {/* ===== POWERPOINTS ===== */}
               <div className="bg-gradient-to-r from-purple-100 via-pink-100 to-rose-100 rounded-2xl p-6 shadow-lg border-2 border-purple-300">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-4xl animate-bounce">📊</span>
@@ -774,7 +996,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* ===== VIDEOS & COURSES - UPDATED WITH MOBILE FIX ===== */}
+              {/* ===== VIDEOS & COURSES - UPDATED ===== */}
               <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-6 shadow-md border-2 border-blue-200">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">🎬</span>
@@ -1077,7 +1299,7 @@ export default function HomePage() {
             <p className="text-center text-sm text-stone-500 mt-4">💡 Your work could be featured on our platform! We'll review and post it soon.</p>
           </motion.section>
 
-          {/* ===== SECTION 9: CERTIFICATES - UPDATED WITH MOBILE FIX ===== */}
+          {/* ===== SECTION 9: CERTIFICATES - UPDATED ===== */}
           <motion.section 
             id="certificateSection"
             initial={{ opacity: 0, y: 20 }}
