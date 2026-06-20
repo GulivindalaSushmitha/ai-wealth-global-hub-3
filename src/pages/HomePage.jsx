@@ -69,36 +69,118 @@ export default function HomePage() {
     }
   };
 
-  // ===== VIDEOS & COURSES DOWNLOAD =====
+  // ===== VIDEOS & COURSES DOWNLOAD - UPDATED WITH MOBILE FIX =====
   const downloadVideoLinks = () => {
     const htmlContent = `<!DOCTYPE html>
 <html>
-<head><title>🎥 AI & Finance Resources</title>
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Segoe UI', Arial, sans-serif; padding: 40px; max-width: 900px; margin: auto; background: linear-gradient(135deg, #f0f7ff, #e8f0fe); min-height: 100vh; }
-.container { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
-h1 { color: #ff6b35; text-align: center; font-size: 36px; margin-bottom: 10px; }
-.subtitle { text-align: center; color: #888; margin-bottom: 30px; font-size: 16px; }
-.section { background: #f8f9fa; padding: 20px 25px; border-radius: 15px; margin: 20px 0; border-left: 5px solid #ff6b35; }
-.section h2 { color: #2d3436; margin-bottom: 15px; font-size: 22px; }
-.section a { display: block; color: #0066cc; text-decoration: none; padding: 8px 12px; font-weight: 600; border-radius: 8px; transition: all 0.3s; }
-.section a:hover { background: #e8f0fe; text-decoration: underline; color: #ff6b35; padding-left: 18px; }
-.footer { text-align: center; margin-top: 30px; color: #888; border-top: 2px solid #eee; padding-top: 20px; font-size: 14px; }
-.blue-link { color: #0066cc; font-weight: bold; }
-</style>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>🎥 AI & Finance Resources</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: -apple-system, 'Segoe UI', Arial, sans-serif; 
+      padding: 16px; 
+      max-width: 900px; 
+      margin: auto; 
+      background: linear-gradient(135deg, #f0f7ff, #e8f0fe); 
+      min-height: 100vh;
+    }
+    .container { 
+      background: white; 
+      padding: 24px 20px; 
+      border-radius: 20px; 
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+    h1 { 
+      color: #ff6b35; 
+      text-align: center; 
+      font-size: 28px; 
+      margin-bottom: 8px; 
+    }
+    .subtitle { 
+      text-align: center; 
+      color: #888; 
+      margin-bottom: 24px; 
+      font-size: 14px; 
+    }
+    .section { 
+      background: #f8f9fa; 
+      padding: 16px 18px; 
+      border-radius: 15px; 
+      margin: 16px 0; 
+      border-left: 5px solid #ff6b35; 
+    }
+    .section h2 { 
+      color: #2d3436; 
+      margin-bottom: 12px; 
+      font-size: 20px; 
+    }
+    .section a { 
+      display: block; 
+      color: #0066cc; 
+      text-decoration: none; 
+      padding: 10px 14px; 
+      font-weight: 600; 
+      border-radius: 10px; 
+      transition: all 0.3s; 
+      background: #f0f7ff;
+      margin-bottom: 6px;
+      border: 1px solid #d0e0ff;
+      word-break: break-word;
+    }
+    .section a:hover { 
+      background: #d0e0ff; 
+      text-decoration: underline; 
+      color: #ff6b35; 
+      padding-left: 20px;
+    }
+    .section a:active {
+      background: #b0c8ff;
+      transform: scale(0.98);
+    }
+    .footer { 
+      text-align: center; 
+      margin-top: 24px; 
+      color: #888; 
+      border-top: 2px solid #eee; 
+      padding-top: 16px; 
+      font-size: 13px; 
+    }
+    .blue-link { 
+      color: #0066cc; 
+      font-weight: bold; 
+    }
+    .emoji-big { font-size: 24px; margin-right: 6px; }
+    .mobile-friendly {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    @media (max-width: 480px) {
+      body { padding: 10px; }
+      .container { padding: 16px 12px; }
+      h1 { font-size: 22px; }
+      .section { padding: 12px 12px; }
+      .section a { padding: 12px 10px; font-size: 15px; }
+    }
+  </style>
 </head>
 <body>
-<div class="container">
+<div class="container mobile-friendly">
   <h1>🎥 FREE AI & FINANCE RESOURCES</h1>
   <p class="subtitle">📌 Click any <span class="blue-link">blue link</span> below to visit the website</p>
-  <div class="section"><h2>📺 YouTube Playlists</h2>
+  
+  <div class="section">
+    <h2>📺 YouTube Playlists</h2>
     <a href="https://www.youtube.com/results?search_query=ai+for+beginners" target="_blank">🎬 AI for Beginners</a>
     <a href="https://www.youtube.com/results?search_query=finance+101" target="_blank">🎬 Finance 101</a>
     <a href="https://www.youtube.com/results?search_query=machine+learning+basics" target="_blank">🎬 Machine Learning Basics</a>
     <a href="https://www.youtube.com/results?search_query=investing+for+kids" target="_blank">🎬 Investing for Kids</a>
   </div>
-  <div class="section" style="border-left-color: #4ECDC4;"><h2>📚 Free Courses</h2>
+  
+  <div class="section" style="border-left-color: #4ECDC4;">
+    <h2>📚 Download Videos & Courses</h2>
     <a href="https://ai.google/education" target="_blank">📖 Google AI Education</a>
     <a href="https://www.khanacademy.org/college-careers-more/financial-literacy" target="_blank">📖 Khan Academy Financial Literacy</a>
     <a href="https://www.coursera.org/learn/ai-for-everyone" target="_blank">📖 Coursera AI For Everyone</a>
@@ -106,19 +188,26 @@ h1 { color: #ff6b35; text-align: center; font-size: 36px; margin-bottom: 10px; }
     <a href="https://cs50.harvard.edu/ai/" target="_blank">📖 Harvard CS50 AI</a>
     <a href="https://www.stanford.edu/" target="_blank">📖 Stanford Financial Literacy</a>
   </div>
-  <div class="section" style="border-left-color: #ffe66d;"><h2>📱 Interactive Tools</h2>
+  
+  <div class="section" style="border-left-color: #ffe66d;">
+    <h2>📱 Interactive Tools</h2>
     <a href="https://experiments.withgoogle.com/ai" target="_blank">🧪 AI Experiments</a>
     <a href="https://www.howthemarketworks.com/" target="_blank">📊 Stock Market Game</a>
     <a href="https://www.practicalmoneyskills.com/" target="_blank">💵 Practical Money Skills</a>
     <a href="https://www.tynker.com/ai" target="_blank">🤖 AI for Kids</a>
   </div>
-  <div class="section" style="border-left-color: #6c5ce7;"><h2>📖 Educational Resources</h2>
+  
+  <div class="section" style="border-left-color: #6c5ce7;">
+    <h2>📖 Educational Resources</h2>
     <a href="https://www.investopedia.com/financial-literacy-for-kids-5112941" target="_blank">📚 Investopedia for Kids</a>
     <a href="https://www.unesco.org/en/artificial-intelligence" target="_blank">🌍 AI Ethics - UNESCO</a>
     <a href="https://www.weforum.org/" target="_blank">💼 Future of Work - WEF</a>
   </div>
-  <div class="footer"><p>⭐ Bonus: Daily quizzes and interactive activities available on our platform!</p>
-  <p style="font-size:12px; margin-top:10px;">© 2026 AI Wealth Hub - All resources are free to use</p></div>
+  
+  <div class="footer">
+    <p>⭐ Bonus: Daily quizzes and interactive activities available on our platform!</p>
+    <p style="font-size:12px; margin-top:10px;">© 2026 AI Wealth Hub - All resources are free to use</p>
+  </div>
 </div>
 </body>
 </html>`;
@@ -134,230 +223,7 @@ h1 { color: #ff6b35; text-align: center; font-size: 36px; margin-bottom: 10px; }
     URL.revokeObjectURL(url);
   };
 
-  // ===== RABBIT RACING GAME FUNCTIONS =====
-  const gameLevels = [
-    { question: "What does AI stand for?", options: ["Artificial Intelligence", "Automated Internet", "Awesome Ideas", "Advanced Integration"], correct: 0, hint: "Think about what makes computers smart!", funFact: "AI was first talked about in 1956!" },
-    { question: "Which of these is an example of AI?", options: ["ChatGPT", "A pencil", "A bicycle", "A book"], correct: 0, hint: "It's something that can talk to you!", funFact: "ChatGPT can write stories and poems!" },
-    { question: "What can AI help us with?", options: ["Solving problems", "Cooking only", "Making bed", "Watching TV"], correct: 0, hint: "AI is like a smart helper!", funFact: "AI helps doctors find diseases faster!" },
-    { question: "What is financial literacy?", options: ["Managing money wisely", "Only spending", "Only saving", "Only earning"], correct: 0, hint: "It's about being smart with money!", funFact: "People who learn finance early save more money!" },
-    { question: "What is a budget?", options: ["A plan for your money", "A type of card", "A game", "A book"], correct: 0, hint: "It's like a map for your money!", funFact: "A budget helps you buy what you really want!" },
-    { question: "Which device uses AI?", options: ["Smartphone", "Rock", "Tree", "Water bottle"], correct: 0, hint: "It's something you use every day!", funFact: "Your phone uses AI to understand your voice!" },
-    { question: "What is a bank?", options: ["A place to keep money", "A restaurant", "A school", "A park"], correct: 0, hint: "It's where money is safe!", funFact: "The first bank was in Italy in 1400s!" },
-    { question: "Self-driving cars use:", options: ["AI technology", "Magic", "Only wheels", "Only mirrors"], correct: 0, hint: "It's the same thing that makes computers smart!", funFact: "Self-driving cars can see better than humans!" },
-    { question: "Why is saving important?", options: ["For future needs", "Only for buying candy", "Only for games", "Only for fun"], correct: 0, hint: "Think about tomorrow!", funFact: "Saving just Rs 10 a day = Rs 3650 a year!" },
-    { question: "AI will help us in the future by:", options: ["Solving big problems", "Only playing games", "Only sleeping", "Only eating"], correct: 0, hint: "AI makes the world better!", funFact: "AI will help us explore space and cure diseases!" }
-  ];
-
-  const startGame = () => {
-    setGameStarted(true);
-    setCurrentLevel(0);
-    setScore(0);
-    setCorrectAnswers(0);
-    setRabbitPosition(0);
-    setGameFinished(false);
-    setShowFeedback(false);
-    setFeedbackMessage('');
-  };
-
-  const handleAnswer = (selectedIdx) => {
-    const level = gameLevels[currentLevel];
-    if (selectedIdx === level.correct) {
-      const newScore = score + 10;
-      const newCorrect = correctAnswers + 1;
-      setScore(newScore);
-      setCorrectAnswers(newCorrect);
-      setRabbitPosition(Math.min((newCorrect / gameLevels.length) * 100, 100));
-      setFeedbackMessage(`CORRECT! +10 points! ${level.funFact}`);
-      setShowFeedback(true);
-    } else {
-      setFeedbackMessage(`Not quite! The answer is: ${level.options[level.correct]}. ${level.hint}`);
-      setShowFeedback(true);
-    }
-    setTimeout(() => {
-      if (currentLevel + 1 < gameLevels.length) {
-        setCurrentLevel(currentLevel + 1);
-        setShowFeedback(false);
-        setFeedbackMessage('');
-      } else {
-        setGameFinished(true);
-        setShowFeedback(false);
-      }
-    }, 2500);
-  };
-
-  const resetGame = () => {
-    setGameStarted(false);
-    setCurrentLevel(0);
-    setScore(0);
-    setCorrectAnswers(0);
-    setRabbitPosition(0);
-    setGameFinished(false);
-    setShowFeedback(false);
-    setFeedbackMessage('');
-  };
-
-  // ===== MEMORY CARD GAME FUNCTIONS =====
-  const memoryCardData = [
-    { id: 1, term: 'AI', emoji: '🤖', definition: 'Artificial Intelligence' },
-    { id: 2, term: 'AI', emoji: '🤖', definition: 'Artificial Intelligence' },
-    { id: 3, term: 'Budget', emoji: '📊', definition: 'Money Plan' },
-    { id: 4, term: 'Budget', emoji: '📊', definition: 'Money Plan' },
-    { id: 5, term: 'Savings', emoji: '🏦', definition: 'Money Put Aside' },
-    { id: 6, term: 'Savings', emoji: '🏦', definition: 'Money Put Aside' },
-    { id: 7, term: 'Investing', emoji: '💰', definition: 'Growing Money' },
-    { id: 8, term: 'Investing', emoji: '💰', definition: 'Growing Money' },
-    { id: 9, term: 'Robot', emoji: '🤖', definition: 'Machine Helper' },
-    { id: 10, term: 'Robot', emoji: '🤖', definition: 'Machine Helper' },
-    { id: 11, term: 'Finance', emoji: '💳', definition: 'Money Management' },
-    { id: 12, term: 'Finance', emoji: '💳', definition: 'Money Management' },
-  ];
-
-  const shuffleArray = (array) => {
-    const newArray = [...array];
-    for (let i = newArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-    }
-    return newArray;
-  };
-
-  const startMemoryGame = () => {
-    const shuffled = shuffleArray(memoryCardData);
-    setMemoryCards(shuffled.map((card, index) => ({ ...card, index })));
-    setMemoryFlipped([]);
-    setMemoryMatched([]);
-    setMemoryMoves(0);
-    setMemoryPairsFound(0);
-    setMemoryGameScore(0);
-    setMemoryFirstCard(null);
-    setMemorySecondCard(null);
-    setMemoryLockBoard(false);
-    setMemoryGameStarted(true);
-    setMemoryGameComplete(false);
-  };
-
-  const handleMemoryCardClick = (cardIndex) => {
-    if (memoryLockBoard) return;
-    if (memoryFlipped.includes(cardIndex)) return;
-    if (memoryMatched.includes(cardIndex)) return;
-
-    const newFlipped = [...memoryFlipped, cardIndex];
-    setMemoryFlipped(newFlipped);
-
-    if (newFlipped.length === 1) {
-      setMemoryFirstCard(memoryCards[cardIndex]);
-    } else if (newFlipped.length === 2) {
-      setMemorySecondCard(memoryCards[cardIndex]);
-      setMemoryLockBoard(true);
-      setMemoryMoves(memoryMoves + 1);
-
-      const card1 = memoryCards[newFlipped[0]];
-      const card2 = memoryCards[newFlipped[1]];
-
-      if (card1.term === card2.term && newFlipped[0] !== newFlipped[1]) {
-        setMemoryMatched([...memoryMatched, newFlipped[0], newFlipped[1]]);
-        setMemoryPairsFound(memoryPairsFound + 1);
-        setMemoryGameScore(memoryGameScore + 10);
-        setMemoryFirstCard(null);
-        setMemorySecondCard(null);
-        setMemoryLockBoard(false);
-        setMemoryFlipped([]);
-
-        if (memoryPairsFound + 1 === 6) {
-          setMemoryGameComplete(true);
-        }
-      } else {
-        setTimeout(() => {
-          setMemoryFlipped([]);
-          setMemoryFirstCard(null);
-          setMemorySecondCard(null);
-          setMemoryLockBoard(false);
-        }, 1000);
-      }
-    }
-  };
-
-  const resetMemoryGame = () => {
-    setMemoryGameStarted(false);
-    setMemoryGameComplete(false);
-    setMemoryCards([]);
-    setMemoryFlipped([]);
-    setMemoryMatched([]);
-    setMemoryMoves(0);
-    setMemoryPairsFound(0);
-    setMemoryGameScore(0);
-    setMemoryFirstCard(null);
-    setMemorySecondCard(null);
-    setMemoryLockBoard(false);
-  };
-
-  // ===== DRAG & DROP MATCH GAME FUNCTIONS =====
-  const dragDropItems = [
-    { id: 1, term: 'AI', definition: 'Artificial Intelligence', emoji: '🤖', matched: false },
-    { id: 2, term: 'Budget', definition: 'Plan for your money', emoji: '📊', matched: false },
-    { id: 3, term: 'Savings', definition: 'Money put aside', emoji: '🏦', matched: false },
-    { id: 4, term: 'Investing', definition: 'Growing your money', emoji: '💰', matched: false },
-    { id: 5, term: 'Finance', definition: 'Managing money', emoji: '💳', matched: false },
-    { id: 6, term: 'Robot', definition: 'Machine that helps', emoji: '🤖', matched: false },
-  ];
-
-  const [dragItems, setDragItems] = useState([...dragDropItems]);
-  const [dropTargets, setDropTargets] = useState([...dragDropItems]);
-
-  const startDragDrop = () => {
-    setDragDropStarted(true);
-    setDragDropComplete(false);
-    setDragDropScore(0);
-    setMatchedItems([]);
-    setDraggedItem(null);
-    const shuffled = [...dragDropItems].sort(() => Math.random() - 0.5);
-    setDragItems(shuffled);
-    setDropTargets([...dragDropItems]);
-  };
-
-  const handleDragStart = (item) => {
-    if (item.matched) return;
-    setDraggedItem(item);
-  };
-
-  const handleDrop = (targetId) => {
-    if (!draggedItem) return;
-    const target = dropTargets.find(t => t.id === targetId);
-    if (!target || target.matched) return;
-
-    if (draggedItem.id === target.id) {
-      const newMatched = [...matchedItems, draggedItem.id];
-      setMatchedItems(newMatched);
-      setDragDropScore(dragDropScore + 10);
-      
-      setDragItems(dragItems.map(item => 
-        item.id === draggedItem.id ? { ...item, matched: true } : item
-      ));
-      setDropTargets(dropTargets.map(item => 
-        item.id === target.id ? { ...item, matched: true } : item
-      ));
-
-      if (newMatched.length === dragDropItems.length) {
-        setDragDropComplete(true);
-        setTimeout(() => {
-          alert('🎉 You matched ALL pairs! You\'re a Matching Master! 🏆');
-        }, 500);
-      }
-    }
-    setDraggedItem(null);
-  };
-
-  const resetDragDrop = () => {
-    setDragDropStarted(false);
-    setDragDropComplete(false);
-    setDragDropScore(0);
-    setMatchedItems([]);
-    setDraggedItem(null);
-    setDragItems([...dragDropItems]);
-    setDropTargets([...dragDropItems]);
-  };
-
-  // ===== CERTIFICATE DOWNLOAD =====
+  // ===== CERTIFICATE DOWNLOAD - UPDATED WITH MOBILE FIX =====
   const downloadCertificate = (name, type) => {
     if (!name || name.trim() === '') {
       alert('Please enter your name first!');
@@ -369,34 +235,139 @@ h1 { color: #ff6b35; text-align: center; font-size: 36px; margin-bottom: 10px; }
 
     const certHTML = `<!DOCTYPE html>
 <html>
-<head><title>Certificate - ${name}</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;600;700&display=swap');
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { min-height: 100vh; display: flex; justify-content: center; align-items: center; background: #f0f7ff; font-family: 'Quicksand', sans-serif; padding: 20px; }
-.certificate { max-width: 850px; width: 100%; background: linear-gradient(135deg, #fff8e7, #fff3d6, #fff8e7); border: 12px double #ff6b35; border-radius: 30px; padding: 50px 40px; text-align: center; box-shadow: 0 20px 60px rgba(255,107,53,0.2); position: relative; overflow: hidden; }
-.certificate::before { content: '🌟✨🌟✨🌟✨🌟✨🌟'; position: absolute; top: 5px; left: 0; width: 100%; font-size: 20px; letter-spacing: 10px; opacity: 0.3; }
-.certificate::after { content: '🌟✨🌟✨🌟✨🌟✨🌟'; position: absolute; bottom: 5px; left: 0; width: 100%; font-size: 20px; letter-spacing: 10px; opacity: 0.3; }
-.deco-top { font-size: 35px; letter-spacing: 12px; margin-bottom: 5px; }
-.deco-bottom { font-size: 35px; letter-spacing: 12px; margin-top: 5px; }
-h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margin: 5px 0; text-shadow: 2px 2px 0 rgba(255,107,53,0.1); }
-.subtitle { font-size: 20px; color: #666; margin: 5px 0 15px; font-weight: 600; }
-.seal { font-size: 70px; margin: 5px 0; }
-.name { font-family: 'Fredoka One', cursive; font-size: 52px; font-weight: 900; color: #2d3436; background: #ffe66d; padding: 8px 40px; border-radius: 20px; display: inline-block; margin: 10px 0; border: 4px dashed #ff6b35; box-shadow: 0 5px 20px rgba(255,107,53,0.15); }
-.desc { font-size: 22px; color: #555; margin: 10px 0; font-weight: 600; }
-.date { font-size: 18px; color: #888; margin-top: 15px; font-weight: 600; }
-.footer { display: flex; justify-content: space-between; margin-top: 25px; padding-top: 20px; border-top: 3px dashed #ddd; color: #888; font-size: 16px; font-weight: 600; }
-.footer span { background: #f0f7ff; padding: 5px 15px; border-radius: 20px; }
-.badge { position: absolute; top: 20px; right: 20px; font-size: 40px; animation: spin 4s linear infinite; }
-@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-.stars { position: absolute; font-size: 30px; opacity: 0.2; }
-@media print { body { background: white; padding: 0; } .certificate { box-shadow: none; border-color: #333; } }
-</style>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Certificate - ${name}</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;600;700&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      min-height: 100vh; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      background: #f0f7ff; 
+      font-family: 'Quicksand', sans-serif; 
+      padding: 16px;
+    }
+    .certificate { 
+      max-width: 850px; 
+      width: 100%; 
+      background: linear-gradient(135deg, #fff8e7, #fff3d6, #fff8e7); 
+      border: 12px double #ff6b35; 
+      border-radius: 30px; 
+      padding: 30px 20px 24px; 
+      text-align: center; 
+      box-shadow: 0 20px 60px rgba(255,107,53,0.2); 
+      position: relative; 
+      overflow: hidden;
+    }
+    .certificate::before { 
+      content: '🌟✨🌟✨🌟✨🌟✨🌟'; 
+      position: absolute; 
+      top: 5px; 
+      left: 0; 
+      width: 100%; 
+      font-size: 16px; 
+      letter-spacing: 6px; 
+      opacity: 0.3; 
+    }
+    .certificate::after { 
+      content: '🌟✨🌟✨🌟✨🌟✨🌟'; 
+      position: absolute; 
+      bottom: 5px; 
+      left: 0; 
+      width: 100%; 
+      font-size: 16px; 
+      letter-spacing: 6px; 
+      opacity: 0.3; 
+    }
+    .deco-top { font-size: 28px; letter-spacing: 10px; margin-bottom: 4px; }
+    .deco-bottom { font-size: 28px; letter-spacing: 10px; margin-top: 4px; }
+    h1 { 
+      font-family: 'Fredoka One', cursive; 
+      font-size: 32px; 
+      color: #ff6b35; 
+      margin: 4px 0; 
+      text-shadow: 2px 2px 0 rgba(255,107,53,0.1);
+    }
+    .subtitle { 
+      font-size: 18px; 
+      color: #666; 
+      margin: 4px 0 12px; 
+      font-weight: 600; 
+    }
+    .seal { font-size: 60px; margin: 4px 0; }
+    .name { 
+      font-family: 'Fredoka One', cursive; 
+      font-size: 40px; 
+      font-weight: 900; 
+      color: #2d3436; 
+      background: #ffe66d; 
+      padding: 6px 24px; 
+      border-radius: 16px; 
+      display: inline-block; 
+      margin: 8px 0; 
+      border: 4px dashed #ff6b35; 
+      box-shadow: 0 5px 20px rgba(255,107,53,0.15);
+      word-break: break-word;
+    }
+    .desc { font-size: 20px; color: #555; margin: 8px 0; font-weight: 600; }
+    .date { font-size: 16px; color: #888; margin-top: 12px; font-weight: 600; }
+    .footer { 
+      display: flex; 
+      justify-content: center; 
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px; 
+      padding-top: 16px; 
+      border-top: 3px dashed #ddd; 
+      color: #888; 
+      font-size: 14px; 
+      font-weight: 600; 
+    }
+    .footer span { 
+      background: #f0f7ff; 
+      padding: 4px 14px; 
+      border-radius: 20px; 
+    }
+    .badge { 
+      position: absolute; 
+      top: 12px; 
+      right: 12px; 
+      font-size: 32px; 
+      animation: spin 4s linear infinite; 
+    }
+    @keyframes spin { 
+      0% { transform: rotate(0deg); } 
+      100% { transform: rotate(360deg); } 
+    }
+    .stars { position: absolute; font-size: 24px; opacity: 0.2; }
+    @media print { 
+      body { background: white; padding: 0; } 
+      .certificate { box-shadow: none; border-color: #333; } 
+    }
+    @media (max-width: 480px) {
+      .certificate { padding: 20px 14px 18px; border-width: 8px; }
+      h1 { font-size: 24px; }
+      .name { font-size: 28px; padding: 4px 14px; }
+      .desc { font-size: 16px; }
+      .subtitle { font-size: 14px; }
+      .seal { font-size: 44px; }
+      .badge { font-size: 24px; top: 8px; right: 8px; }
+      .deco-top, .deco-bottom { font-size: 20px; letter-spacing: 6px; }
+      .footer { font-size: 12px; gap: 6px; }
+      .footer span { padding: 3px 10px; }
+      .date { font-size: 13px; }
+      .certificate::before, .certificate::after { font-size: 12px; letter-spacing: 4px; }
+    }
+  </style>
 </head>
 <body>
 <div class="certificate">
-  <div class="stars" style="top:10px;left:10px;">⭐</div>
-  <div class="stars" style="bottom:10px;right:10px;">⭐</div>
+  <div class="stars" style="top:8px;left:8px;">⭐</div>
+  <div class="stars" style="bottom:8px;right:8px;">⭐</div>
   <div class="badge">🏅</div>
   <div class="deco-top">✨🌟✨🌟✨</div>
   <h1>🎓 AI WEALTH HUB</h1>
@@ -404,7 +375,7 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
   <div class="seal">🏆</div>
   <div class="name">${name.toUpperCase()}</div>
   <div class="desc">🎯 For completing the ${certType} Course!</div>
-  <div style="font-size:16px;color:#666;margin:5px 0;">
+  <div style="font-size:14px;color:#666;margin:4px 0;">
     ⭐ ${correctAnswers >= 8 ? '🌟 EXCELLENT PERFORMANCE!' : correctAnswers >= 6 ? '💪 GREAT EFFORT!' : '📚 GOOD START!'}
   </div>
   <div class="date">📅 Date: ${date}</div>
@@ -413,7 +384,7 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
     <span>💰 Money Master</span>
   </div>
   <div class="deco-bottom">✨🌟✨🌟✨</div>
-  <div style="margin-top:10px;font-size:12px;color:#aaa;">This certificate is proudly awarded by forthefutures</div>
+  <div style="margin-top:8px;font-size:11px;color:#aaa;">This certificate is proudly awarded by forthefutures</div>
 </div>
 </body>
 </html>`;
@@ -803,22 +774,25 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
                 </div>
               </div>
 
-              {/* ===== VIDEOS & COURSES ===== */}
+              {/* ===== VIDEOS & COURSES - UPDATED WITH MOBILE FIX ===== */}
               <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-6 shadow-md border-2 border-blue-200">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">🎬</span>
-                  <h3 className="text-2xl font-bold text-blue-700">Videos & Courses</h3>
+                  <h3 className="text-2xl font-bold text-blue-700">Download Videos & Courses</h3>
                 </div>
-                <p className="text-stone-600 mb-4">Free video courses and educational links</p>
+                <p className="text-stone-600 mb-4">Free video courses and educational links - <span className="text-blue-600 font-bold">All blue links are clickable!</span></p>
                 <button 
                   onClick={downloadVideoLinks} 
-                  className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-6 py-2.5 rounded-full hover:scale-105 transition shadow-md hover:shadow-lg text-sm font-bold"
+                  className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-6 py-3 rounded-full hover:scale-105 transition shadow-md hover:shadow-lg text-sm font-bold w-full sm:w-auto"
                 >
                   📥 Download Videos & Courses (HTML with Blue Links)
                 </button>
                 <div className="mt-3 text-xs text-stone-500">
                   🔗 Includes YouTube playlists, free courses, interactive tools & more! 
                   <span className="text-blue-600 font-bold"> All links are blue and clickable!</span>
+                </div>
+                <div className="mt-2 text-xs text-stone-400">
+                  📱 Mobile-optimized • Tap any blue link to visit the website
                 </div>
               </div>
 
@@ -1103,7 +1077,7 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
             <p className="text-center text-sm text-stone-500 mt-4">💡 Your work could be featured on our platform! We'll review and post it soon.</p>
           </motion.section>
 
-          {/* ===== SECTION 9: CERTIFICATES ===== */}
+          {/* ===== SECTION 9: CERTIFICATES - UPDATED WITH MOBILE FIX ===== */}
           <motion.section 
             id="certificateSection"
             initial={{ opacity: 0, y: 20 }}
@@ -1158,6 +1132,7 @@ h1 { font-family: 'Fredoka One', cursive; font-size: 38px; color: #ff6b35; margi
                       📥 Download Certificate
                     </button>
                   </div>
+                  <p className="text-xs text-stone-400 mt-2">💡 Certificate will download as an HTML file - open it in any browser to view or print!</p>
                 </div>
 
                 <div className="mt-4 p-4 bg-green-50 rounded-xl border-2 border-green-200">
