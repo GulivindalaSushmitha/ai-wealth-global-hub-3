@@ -29,7 +29,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Column 3: Contact Details - UPDATED */}
+          {/* Column 3: Contact Details - UPDATED with new Instagram */}
           <div>
             <h4 className="text-sm font-bold text-[#FF6B8B] uppercase tracking-wider mb-3">Contact Us</h4>
             <ul className="space-y-2 text-sm">
@@ -42,12 +42,12 @@ const Footer = () => {
               <li className="text-stone-400">
                 <span className="text-[#FF6B8B]">📸</span> Instagram: 
                 <a 
-                  href="https://www.instagram.com/samspr1v09?igsh=ZDVjYXg0Y21vYTIw" 
+                  href="https://www.instagram.com/financeforfutures2026?igsh=MWg2NDVkazJvbXFhbQ==" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-[#FF6B8B] hover:underline ml-1"
                 >
-                  @samspr1v09
+                  @financeforfutures2026
                 </a>
               </li>
             </ul>
