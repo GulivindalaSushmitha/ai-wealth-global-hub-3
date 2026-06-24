@@ -60,7 +60,7 @@ const ContactPage = () => {
             <p className="text-gray-400 text-sm mt-2">Send us an email</p>
           </motion.div>
 
-          {/* Instagram Card */}
+          {/* Instagram Card - UPDATED */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -72,12 +72,12 @@ const ContactPage = () => {
             </div>
             <h3 className="text-2xl font-bold text-white mb-2">📸 Instagram</h3>
             <a 
-              href="https://www.instagram.com/samspr1v09?igsh=ZDVjYXg0Y21vYTIw" 
+              href="https://www.instagram.com/financeforfutures2026?igsh=MWg2NDVkazJvbXFhbQ==" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-purple-300 text-lg font-semibold hover:text-pink-400 transition-colors"
             >
-              @samspr1v09
+              @financeforfutures2026
             </a>
             <p className="text-gray-400 text-sm mt-2">Follow us on Instagram</p>
           </motion.div>
