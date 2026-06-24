@@ -1367,12 +1367,12 @@ export default function HomePage() {
         </div>
       </main>
 
-      {/* ===== FOOTER ===== */}
+      {/* ===== FOOTER - UPDATED CONTACT DETAILS ===== */}
       <footer id="contact" className="bg-[#192428] text-white py-8 px-6 rounded-t-[2rem] flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-bold border-t-4 border-[#FF6B8B]">
         <div className="text-center md:text-left">
           <p className="text-[#FF6B8B]">📞 Phone: +971585417100</p>
           <p className="text-stone-400 text-[10px] mt-0.5">✉ Email: forthefuturenet@gmail.com</p>
-          <p className="text-stone-400 text-[10px] mt-0.5">📸 Instagram: <a href="https://www.instagram.com/samspr1v09?igsh=ZDVjYXg0Y21vYTIw" target="_blank" rel="noopener noreferrer" className="text-[#FF6B8B] hover:underline ml-1">@samspr1v09</a></p>
+          <p className="text-stone-400 text-[10px] mt-0.5">📸 Instagram: <a href="https://www.instagram.com/financeforfutures2026?igsh=MWg2NDVkazJvbXFhbQ==" target="_blank" rel="noopener noreferrer" className="text-[#FF6B8B] hover:underline ml-1">@financeforfutures2026</a></p>
         </div>
         <p className="text-stone-500 text-[10px] font-medium">© 2026 forthefutures. All rights reserved.</p>
       </footer>
