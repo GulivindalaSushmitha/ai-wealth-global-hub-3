@@ -744,37 +744,7 @@ export default function HomePage() {
             </div>
           </motion.section>
 
-          {/* ===== SECTION 3: THE TEAM ===== */}
-          <motion.section 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-purple-100"
-          >
-            <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-6">
-              The Team Behind It All 👥
-            </h2>
-            <div className="max-w-4xl mx-auto text-center">
-              <p className="text-lg text-stone-700 leading-relaxed">
-                Our team consists of <span className="font-bold text-purple-700">10 kids in the tenth grade</span> 
-                who have been trained for over <span className="font-bold text-pink-600">a year</span> to deliver 
-                quality education to these kids. Together, we are building a brighter future.
-              </p>
-              <div className="mt-6 grid grid-cols-2 md:grid-cols-5 gap-4 max-w-2xl mx-auto">
-                {['👩‍🏫', '👨‍🏫', '👩‍💻', '👨‍💻', '🧑‍🎓'].map((emoji, i) => (
-                  <div key={i} className="bg-white rounded-xl p-4 shadow-md text-center">
-                    <span className="text-3xl">{emoji}</span>
-                    <p className="text-xs text-stone-600 mt-1 font-bold">Team Member</p>
-                  </div>
-                ))}
-              </div>
-              <p className="text-sm text-stone-500 mt-4">
-                🌟 Trained for 1+ years • 📚 10 dedicated students • 💪 Making a difference
-              </p>
-            </div>
-          </motion.section>
-
-          {/* ===== SECTION 4: CHUCK GARCIA WORKSHOP ===== */}
+          {/* ===== SECTION 3: CHUCK GARCIA WORKSHOP ===== */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -825,7 +795,7 @@ export default function HomePage() {
             </div>
           </motion.section>
 
-          {/* ===== SECTION 5: IMPORTANCE OF AI & FINANCIAL LITERACY ===== */}
+          {/* ===== SECTION 4: IMPORTANCE OF AI & FINANCIAL LITERACY ===== */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -866,7 +836,7 @@ export default function HomePage() {
             </p>
           </motion.section>
 
-          {/* ===== SECTION 6: EDUCATIONAL VIDEOS ===== */}
+          {/* ===== SECTION 5: EDUCATIONAL VIDEOS ===== */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -932,7 +902,7 @@ export default function HomePage() {
             </div>
           </motion.section>
 
-          {/* ===== SECTION 7: RESOURCES & ACTIVITIES ===== */}
+          {/* ===== SECTION 6: RESOURCES & ACTIVITIES ===== */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -1270,7 +1240,7 @@ export default function HomePage() {
             </div>
           </motion.section>
 
-          {/* ===== SECTION 8: STUDENT SUBMISSION ===== */}
+          {/* ===== SECTION 7: STUDENT SUBMISSION ===== */}
           <motion.section 
             id="shareSection"
             initial={{ opacity: 0, y: 20 }}
@@ -1299,7 +1269,7 @@ export default function HomePage() {
             <p className="text-center text-sm text-stone-500 mt-4">💡 Your work could be featured on our platform! We'll review and post it soon.</p>
           </motion.section>
 
-          {/* ===== SECTION 9: CERTIFICATES - UPDATED ===== */}
+          {/* ===== SECTION 8: CERTIFICATES - UPDATED ===== */}
           <motion.section 
             id="certificateSection"
             initial={{ opacity: 0, y: 20 }}
