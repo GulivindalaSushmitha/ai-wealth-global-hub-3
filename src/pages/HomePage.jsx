@@ -744,54 +744,109 @@ export default function HomePage() {
             </div>
           </motion.section>
 
-          {/* ===== SECTION 3: CHUCK GARCIA WORKSHOP ===== */}
+          {/* ===== SECTION 3: CHUCK GARCIA WORKSHOP (UPDATED) ===== */}
           <motion.section 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             className="bg-white rounded-[2rem] p-8 md:p-12 shadow-lg border-2 border-stone-100"
           >
-            <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-6">
+            <h2 className="text-3xl md:text-4xl font-black text-stone-900 text-center mb-2">
               Chuck Garcia Workshop 🎓
             </h2>
+            <p className="text-center text-stone-500 text-sm mb-6">
+              Brought to you by <span className="font-bold text-purple-700">Samara Mahajan</span> & forthefutures
+            </p>
+
+            {/* Columbia University Logo & Professor Info */}
+            <div className="flex flex-col items-center mb-8">
+              <div className="flex items-center gap-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl px-6 py-4 border-2 border-blue-200 shadow-md">
+                <div className="w-16 h-16 bg-blue-900 rounded-full flex items-center justify-center text-white font-bold text-xs text-center leading-tight p-1 flex-shrink-0">
+                  <span>COLUMBIA<br/>UNIVERSITY</span>
+                </div>
+                <div className="text-left">
+                  <p className="font-bold text-lg text-stone-800">Prof. Chuck Garcia</p>
+                  <p className="text-sm text-stone-500">Adjunct Professor, Columbia University</p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">🏛️ Columbia University</span>
+                  </div>
+                </div>
+              </div>
+              <p className="text-sm text-stone-400 mt-2">
+                ✨ Successfully brought to the UAE to teach high school students Financial Literacy
+              </p>
+            </div>
+
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               <div className="space-y-4">
-                <div className="bg-purple-50 rounded-xl p-4">
-                  <h3 className="font-bold text-purple-700 text-lg">📊 Workshop Impact</h3>
+                <div className="bg-purple-50 rounded-xl p-4 border-2 border-purple-200">
+                  <h3 className="font-bold text-purple-700 text-lg flex items-center gap-2">
+                    <span>📊</span> Workshop Impact
+                  </h3>
                   <ul className="space-y-2 text-stone-700">
-                    <li>✅ <span className="font-bold">150+</span> students taught</li>
-                    <li>✅ <span className="font-bold">5</span> sessions conducted</li>
-                    <li>✅ <span className="font-bold">90%</span> students reported increased financial confidence</li>
-                    <li>✅ <span className="font-bold">100%</span> said they would recommend to friends</li>
+                    <li className="flex items-center gap-2">✅ <span className="font-bold">150+</span> students taught</li>
+                    <li className="flex items-center gap-2">✅ <span className="font-bold">5</span> sessions conducted</li>
+                    <li className="flex items-center gap-2">✅ <span className="font-bold">90%</span> students reported increased financial confidence</li>
+                    <li className="flex items-center gap-2">✅ <span className="font-bold">100%</span> said they would recommend to friends</li>
                   </ul>
+                  <div className="mt-3 flex gap-2 flex-wrap">
+                    <span className="text-xs bg-purple-200 text-purple-700 px-2 py-0.5 rounded-full">⭐ 4.5/5 Rating</span>
+                    <span className="text-xs bg-green-200 text-green-700 px-2 py-0.5 rounded-full">📈 High Impact</span>
+                  </div>
                 </div>
-                <div className="bg-pink-50 rounded-xl p-4">
-                  <h3 className="font-bold text-pink-700 text-lg">🌍 Expanding to MENA</h3>
+                <div className="bg-pink-50 rounded-xl p-4 border-2 border-pink-200">
+                  <h3 className="font-bold text-pink-700 text-lg flex items-center gap-2">
+                    <span>🌍</span> Expanding to MENA
+                  </h3>
                   <p className="text-stone-700 text-sm">
                     We are actively working to bring financial literacy education to schools 
-                    across the <span className="font-bold">MENA region</span>, starting with partnerships 
-                    in UAE, Saudi Arabia, and Egypt.
+                    across the <span className="font-bold">MENA region</span>.
                   </p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <span className="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full">🇦🇪 UAE</span>
+                    <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">🇸🇦 Saudi Arabia</span>
+                    <span className="text-xs bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full">🇪🇬 Egypt</span>
+                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">➕ More coming!</span>
+                  </div>
+                  <p className="text-xs text-stone-400 mt-2">🤝 Partnerships in progress</p>
                 </div>
               </div>
               <div className="space-y-4">
-                <div className="bg-blue-50 rounded-xl p-4">
-                  <h3 className="font-bold text-blue-700 text-lg">🎯 What We Achieved</h3>
+                <div className="bg-blue-50 rounded-xl p-4 border-2 border-blue-200">
+                  <h3 className="font-bold text-blue-700 text-lg flex items-center gap-2">
+                    <span>🎯</span> What We Achieved
+                  </h3>
                   <p className="text-stone-700 text-sm">
                     Students learned budgeting, saving, investing basics, and developed 
                     practical money management skills they can use for life.
                   </p>
+                  <div className="mt-3 flex gap-2 flex-wrap">
+                    <span className="text-xs bg-blue-200 text-blue-700 px-2 py-0.5 rounded-full">💰 Budgeting</span>
+                    <span className="text-xs bg-green-200 text-green-700 px-2 py-0.5 rounded-full">🏦 Saving</span>
+                    <span className="text-xs bg-purple-200 text-purple-700 px-2 py-0.5 rounded-full">📈 Investing</span>
+                  </div>
                 </div>
-                <div className="bg-green-50 rounded-xl p-4">
-                  <h3 className="font-bold text-green-700 text-lg">📚 Workshop Details</h3>
+                <div className="bg-green-50 rounded-xl p-4 border-2 border-green-200">
+                  <h3 className="font-bold text-green-700 text-lg flex items-center gap-2">
+                    <span>📚</span> Workshop Details
+                  </h3>
                   <ul className="space-y-2 text-stone-700 text-sm">
-                    <li>✅ Interactive sessions with real-life examples</li>
-                    <li>✅ Hands-on activities and group discussions</li>
-                    <li>✅ Practical financial literacy skills</li>
-                    <li>✅ Q&A sessions with industry experts</li>
+                    <li className="flex items-start gap-2">✅ Interactive sessions with real-life examples</li>
+                    <li className="flex items-start gap-2">✅ Hands-on activities and group discussions</li>
+                    <li className="flex items-start gap-2">✅ Practical financial literacy skills</li>
+                    <li className="flex items-start gap-2">✅ Q&A sessions with industry experts</li>
                   </ul>
                 </div>
               </div>
+            </div>
+
+            {/* Testimonial or extra info */}
+            <div className="mt-6 text-center bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl p-4 border-2 border-yellow-200 max-w-3xl mx-auto">
+              <p className="text-sm text-stone-600">
+                <span className="font-bold text-purple-700">🌟 "She" (Samara)</span> was responsible for bringing 
+                <span className="font-bold text-blue-700"> Prof. Chuck Garcia</span> to the UAE, 
+                making this incredible learning experience possible for 150+ students!
+              </p>
             </div>
           </motion.section>
 
